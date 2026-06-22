@@ -48,18 +48,17 @@ research/library/
 
 # Superpowers planning/specs
 docs/superpowers/
+.superpowers/
 
-# Claude Code local settings (keep skills tracked)
+# Claude Code (keep skills and settings tracked; ignore session-local state)
 .claude/*
 !.claude/skills/
+!.claude/settings.json
 
 # Local environment
 .env
 .env.local
 
-# Deliverables — only the primer and diagrams are tracked
-deliverables/*.md
-!deliverables/world-models-primer.md
-deliverables/presentations/
-deliverables/archive/
-deliverables/vendor-overlays/
+# Deliverables — work-in-progress and cloned repos
+deliverables/drafts/
+deliverables/intel/.workspace/

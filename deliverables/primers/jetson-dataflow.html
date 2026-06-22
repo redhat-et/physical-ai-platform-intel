@@ -1,0 +1,296 @@
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 16px; }
+  h2 { margin-bottom: 4px; }
+  p.subtitle { color: #666; font-size: 13px; margin-top: 0; }
+
+  svg { display: block; margin: 0 auto; }
+
+  /* Node styles */
+  .src    { fill: #e3f2fd; stroke: #1565c0; stroke-width: 1.5; rx: 6; }
+  .hw     { fill: #d4edda; stroke: #2e7d32; stroke-width: 1.5; rx: 6; }
+  .hw-inf { fill: #fff3cd; stroke: #f57f17; stroke-width: 1.5; rx: 6; }
+  .sw     { fill: #f3e5f5; stroke: #7b1fa2; stroke-width: 1.5; rx: 6; }
+  .buf    { fill: #fff8e1; stroke: #ff8f00; stroke-width: 2; rx: 10; }
+  .out    { fill: #fce4ec; stroke: #c62828; stroke-width: 1.5; rx: 6; }
+
+  .label  { font-size: 11px; font-weight: 600; fill: #222; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .sublbl { font-size: 9px; fill: #555; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .edgelbl { font-size: 8.5px; fill: #666; text-anchor: middle; dominant-baseline: central; }
+
+  .arrow { stroke: #555; stroke-width: 1.2; fill: none; marker-end: url(#arrowhead); }
+  .arrow-thick { stroke: #ff8f00; stroke-width: 2; fill: none; marker-end: url(#arrowhead-gold); }
+  .arrow-dashed { stroke: #999; stroke-width: 1; fill: none; stroke-dasharray: 4,3; marker-end: url(#arrowhead-grey); }
+
+  .legend { display: flex; gap: 16px; margin: 12px 0; font-size: 11px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-box { width: 14px; height: 14px; border-radius: 3px; }
+
+  .note {
+    background: #f0f4ff; border-left: 3px solid #4a7aff;
+    padding: 10px 14px; margin: 16px 0; font-size: 12px; color: #333; border-radius: 0 4px 4px 0;
+  }
+
+  table.paths { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 11px; }
+  table.paths th, table.paths td { border: 1px solid #ccc; padding: 5px 8px; text-align: left; vertical-align: top; }
+  table.paths th { background: #e8e8e4; }
+</style>
+
+<h2>Jetson Media & Vision Data Flow</h2>
+<p class="subtitle">How cameras, video streams, and sensor data flow through Jetson hardware accelerators via NVMM zero-copy buffers</p>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-box" style="background:#e3f2fd; border:1px solid #1565c0;"></div> Input sources</div>
+  <div class="legend-item"><div class="legend-box" style="background:#d4edda; border:1px solid #2e7d32;"></div> HW accelerator (media)</div>
+  <div class="legend-item"><div class="legend-box" style="background:#fff3cd; border:1px solid #f57f17;"></div> HW accelerator (inference)</div>
+  <div class="legend-item"><div class="legend-box" style="background:#f3e5f5; border:1px solid #7b1fa2;"></div> Software layer</div>
+  <div class="legend-item"><div class="legend-box" style="background:#fff8e1; border:2px solid #ff8f00;"></div> NVMM shared buffer pool</div>
+  <div class="legend-item"><div class="legend-box" style="background:#fce4ec; border:1px solid #c62828;"></div> Outputs</div>
+</div>
+
+<!-- ================================================================== -->
+<!-- SVG DATA FLOW DIAGRAM                                               -->
+<!-- ================================================================== -->
+
+<svg viewBox="0 0 920 680" width="920" height="680" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+    </marker>
+    <marker id="arrowhead-gold" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ff8f00"/>
+    </marker>
+    <marker id="arrowhead-grey" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- ==================== INPUT SOURCES (left column) ==================== -->
+
+  <!-- Camera (MIPI CSI-2) -->
+  <rect class="src" x="20" y="60" width="130" height="44"/>
+  <text class="label" x="85" y="75">Camera (CSI-2)</text>
+  <text class="sublbl" x="85" y="90">MIPI, Bayer RAW</text>
+
+  <!-- Camera (GigE Vision) — Thor only -->
+  <rect class="src" x="20" y="130" width="130" height="44"/>
+  <text class="label" x="85" y="145">Camera (GigE)</text>
+  <text class="sublbl" x="85" y="160">Holoscan Sensor Bridge</text>
+
+  <!-- Encoded video stream -->
+  <rect class="src" x="20" y="230" width="130" height="44"/>
+  <text class="label" x="85" y="245">Video Stream</text>
+  <text class="sublbl" x="85" y="260">H.264/H.265/AV1</text>
+
+  <!-- JPEG stream -->
+  <rect class="src" x="20" y="300" width="130" height="44"/>
+  <text class="label" x="85" y="315">JPEG / MJPEG</text>
+  <text class="sublbl" x="85" y="330">Still images, MJPEG stream</text>
+
+  <!-- IMU / other sensors -->
+  <rect class="src" x="20" y="420" width="130" height="44"/>
+  <text class="label" x="85" y="435">IMU / LiDAR</text>
+  <text class="sublbl" x="85" y="450">Non-vision sensors</text>
+
+  <!-- ==================== CAPTURE & DECODE (column 2) ==================== -->
+
+  <!-- VI -->
+  <rect class="hw" x="210" y="60" width="110" height="44"/>
+  <text class="label" x="265" y="75">VI</text>
+  <text class="sublbl" x="265" y="90">Video Input</text>
+
+  <!-- Holoscan Sensor Bridge -->
+  <rect class="hw" x="210" y="130" width="110" height="44"/>
+  <text class="label" x="265" y="145">Sensor Bridge</text>
+  <text class="sublbl" x="265" y="160">Thor only</text>
+
+  <!-- NVDEC -->
+  <rect class="hw" x="210" y="230" width="110" height="44"/>
+  <text class="label" x="265" y="245">NVDEC</text>
+  <text class="sublbl" x="265" y="260">Video Decoder</text>
+
+  <!-- NVJPG decode -->
+  <rect class="hw" x="210" y="300" width="110" height="44"/>
+  <text class="label" x="265" y="315">NVJPG</text>
+  <text class="sublbl" x="265" y="330">JPEG Decoder</text>
+
+  <!-- Arrows: sources → capture/decode -->
+  <line class="arrow" x1="150" y1="82" x2="208" y2="82"/>
+  <line class="arrow" x1="150" y1="152" x2="208" y2="152"/>
+  <line class="arrow" x1="150" y1="252" x2="208" y2="252"/>
+  <line class="arrow" x1="150" y1="322" x2="208" y2="322"/>
+
+  <!-- ==================== NVMM BUFFER POOL (central) ==================== -->
+
+  <rect class="buf" x="370" y="30" width="190" height="380"/>
+  <text class="label" x="465" y="55" style="font-size:13px; fill:#ff8f00;">NVMM Buffer Pool</text>
+  <text class="sublbl" x="465" y="72">Zero-copy DMA shared memory</text>
+
+  <!-- ISP inside NVMM zone -->
+  <rect class="hw" x="390" y="95" width="150" height="44"/>
+  <text class="label" x="465" y="110">ISP</text>
+  <text class="sublbl" x="465" y="125">Bayer → NV12</text>
+
+  <!-- VIC inside NVMM zone -->
+  <rect class="hw" x="390" y="160" width="150" height="44"/>
+  <text class="label" x="465" y="175">VIC</text>
+  <text class="sublbl" x="465" y="190">Scale, crop, convert</text>
+
+  <!-- OFA inside NVMM zone -->
+  <rect class="hw" x="390" y="225" width="150" height="44"/>
+  <text class="label" x="465" y="240">OFA</text>
+  <text class="sublbl" x="465" y="255">Optical flow vectors</text>
+
+  <!-- NV12 frames label -->
+  <text class="sublbl" x="465" y="290" style="font-size:10px; fill:#999;">NV12 / YUV frames</text>
+  <text class="sublbl" x="465" y="305" style="font-size:10px; fill:#999;">resident in NVMM</text>
+
+  <!-- NVENC inside NVMM zone -->
+  <rect class="hw" x="390" y="330" width="150" height="44"/>
+  <text class="label" x="465" y="345">NVENC</text>
+  <text class="sublbl" x="465" y="360">NV12 → H.264/H.265</text>
+
+  <!-- Arrows: capture/decode → NVMM -->
+  <!-- VI → ISP -->
+  <line class="arrow-thick" x1="320" y1="82" x2="388" y2="110"/>
+  <!-- Sensor Bridge → ISP -->
+  <line class="arrow-thick" x1="320" y1="152" x2="388" y2="120"/>
+  <!-- NVDEC → VIC (decoded frames) -->
+  <line class="arrow-thick" x1="320" y1="252" x2="388" y2="180"/>
+  <!-- NVJPG → VIC -->
+  <line class="arrow-thick" x1="320" y1="322" x2="388" y2="190"/>
+
+  <!-- Internal NVMM flows -->
+  <!-- ISP → VIC -->
+  <line class="arrow" x1="465" y1="139" x2="465" y2="158"/>
+  <text class="edgelbl" x="485" y="150">NV12</text>
+  <!-- VIC → OFA -->
+  <line class="arrow-dashed" x1="465" y1="204" x2="465" y2="223"/>
+
+  <!-- ==================== INFERENCE (right column) ==================== -->
+
+  <!-- DLA -->
+  <rect class="hw-inf" x="620" y="95" width="130" height="50"/>
+  <text class="label" x="685" y="113">DLA (×2)</text>
+  <text class="sublbl" x="685" y="130">INT8/FP16 inference</text>
+
+  <!-- PVA -->
+  <rect class="hw-inf" x="620" y="165" width="130" height="50"/>
+  <text class="label" x="685" y="183">PVA</text>
+  <text class="sublbl" x="685" y="200">Stereo, features</text>
+
+  <!-- GPU -->
+  <rect class="hw-inf" x="620" y="240" width="130" height="50"/>
+  <text class="label" x="685" y="258">GPU (CUDA)</text>
+  <text class="sublbl" x="685" y="275">DNN, compute</text>
+
+  <!-- VPI software layer -->
+  <rect class="sw" x="615" y="55" width="140" height="26"/>
+  <text class="label" x="685" y="68" style="font-size:10px; fill:#7b1fa2;">VPI (unified API)</text>
+
+  <!-- Arrows: NVMM → inference -->
+  <line class="arrow-thick" x1="540" y1="117" x2="618" y2="117"/>
+  <line class="arrow-thick" x1="540" y1="182" x2="618" y2="182"/>
+  <line class="arrow-thick" x1="540" y1="250" x2="618" y2="260"/>
+  <!-- OFA → GPU (flow vectors as features) -->
+  <line class="arrow-dashed" x1="540" y1="247" x2="618" y2="255"/>
+
+  <!-- VPI spans across DLA/PVA/GPU -->
+  <line class="arrow-dashed" x1="685" y1="81" x2="685" y2="93"/>
+
+  <!-- ==================== OUTPUTS (far right) ==================== -->
+
+  <!-- Detections / poses -->
+  <rect class="out" x="800" y="100" width="105" height="40"/>
+  <text class="label" x="852" y="114">Detections</text>
+  <text class="sublbl" x="852" y="130">BBoxes, poses</text>
+
+  <!-- Depth map -->
+  <rect class="out" x="800" y="165" width="105" height="40"/>
+  <text class="label" x="852" y="179">Depth Map</text>
+  <text class="sublbl" x="852" y="195">Stereo disparity</text>
+
+  <!-- Policy actions -->
+  <rect class="out" x="800" y="240" width="105" height="40"/>
+  <text class="label" x="852" y="254">Policy Actions</text>
+  <text class="sublbl" x="852" y="270">VLA / RL output</text>
+
+  <!-- Encoded stream out -->
+  <rect class="out" x="800" y="340" width="105" height="40"/>
+  <text class="label" x="852" y="354">Encoded Stream</text>
+  <text class="sublbl" x="852" y="370">H.264/H.265 out</text>
+
+  <!-- Arrows: inference → outputs -->
+  <line class="arrow" x1="750" y1="120" x2="798" y2="120"/>
+  <line class="arrow" x1="750" y1="190" x2="798" y2="185"/>
+  <line class="arrow" x1="750" y1="265" x2="798" y2="260"/>
+  <!-- NVENC → encoded stream -->
+  <line class="arrow" x1="540" y1="352" x2="798" y2="355"/>
+
+  <!-- ==================== SENSOR FUSION PATH ==================== -->
+
+  <!-- IMU → GPU (via CPU, dashed) -->
+  <path class="arrow-dashed" d="M 150,442 Q 460,442 460,320 Q 460,290 620,265" />
+  <text class="edgelbl" x="350" y="435">CPU memcpy (not NVMM)</text>
+
+  <!-- ==================== SOFTWARE PIPELINES (bottom) ==================== -->
+
+  <rect class="sw" x="210" y="500" width="220" height="44"/>
+  <text class="label" x="320" y="515">DeepStream (GStreamer)</text>
+  <text class="sublbl" x="320" y="530">Pipeline orchestration for above</text>
+
+  <rect class="sw" x="480" y="500" width="220" height="44"/>
+  <text class="label" x="590" y="515">Isaac ROS (NITROS + GXF)</text>
+  <text class="sublbl" x="590" y="530">ROS 2 perception nodes</text>
+
+  <!-- Dashed lines connecting software to HW -->
+  <line class="arrow-dashed" x1="320" y1="500" x2="320" y2="420"/>
+  <text class="edgelbl" x="290" y="475">manages HW</text>
+  <text class="edgelbl" x="290" y="487">elements</text>
+  <line class="arrow-dashed" x1="590" y1="500" x2="590" y2="420"/>
+  <text class="edgelbl" x="625" y="475">zero-copy</text>
+  <text class="edgelbl" x="625" y="487">GPU transport</text>
+
+  <!-- Dashed bounding box around NVMM + accelerators -->
+  <rect x="200" y="20" width="570" height="400" rx="12"
+        fill="none" stroke="#ff8f00" stroke-width="1" stroke-dasharray="6,4" opacity="0.4"/>
+
+  <!-- ==================== SECURITY / SAFETY (bottom-right) ==================== -->
+
+  <rect class="hw" x="620" y="340" width="130" height="40"/>
+  <text class="label" x="685" y="354">SE (crypto)</text>
+  <text class="sublbl" x="685" y="368">TLS, secure boot</text>
+
+  <rect class="hw" x="620" y="395" width="130" height="32"/>
+  <text class="label" x="685" y="414">FSI (safety)</text>
+
+  <!-- Arrow: SE operates independently -->
+  <text class="edgelbl" x="775" y="325" style="fill:#999;">independent</text>
+
+  <!-- ==================== TYPICAL PIPELINE ANNOTATIONS ==================== -->
+
+  <!-- Path 1 annotation -->
+  <rect x="20" y="560" width="880" height="110" rx="6" fill="#f8f9fa" stroke="#ccc"/>
+  <text class="label" x="460" y="580" style="font-size:12px;">Typical Pipeline Paths</text>
+
+  <text class="sublbl" x="30" y="600" style="text-anchor:start; font-size:10px;">
+    <tspan x="30" dy="0" font-weight="bold" fill="#1565c0">① Live camera:</tspan>
+    <tspan fill="#333"> Camera → VI → ISP (demosaic) → VIC (resize) → NVMM → DLA/GPU (inference) → detections / policy actions</tspan>
+  </text>
+  <text class="sublbl" x="30" y="618" style="text-anchor:start; font-size:10px;">
+    <tspan x="30" dy="0" font-weight="bold" fill="#1565c0">② Video stream:</tspan>
+    <tspan fill="#333"> RTSP/file → NVDEC (decode H.265) → VIC (scale) → NVMM → GPU (DNN) → NVENC (re-encode) → output stream</tspan>
+  </text>
+  <text class="sublbl" x="30" y="636" style="text-anchor:start; font-size:10px;">
+    <tspan x="30" dy="0" font-weight="bold" fill="#1565c0">③ Stereo depth:</tspan>
+    <tspan fill="#333"> 2× Camera → VI → ISP → VIC → NVMM → PVA (stereo disparity) → depth map → GPU (point cloud / obstacle grid)</tspan>
+  </text>
+  <text class="sublbl" x="30" y="654" style="text-anchor:start; font-size:10px;">
+    <tspan x="30" dy="0" font-weight="bold" fill="#1565c0">④ Motion features:</tspan>
+    <tspan fill="#333"> NVMM frames → OFA (dense optical flow) → GPU (temporal features for action recognition or VLA input)</tspan>
+  </text>
+</svg>
+
+<div class="note">
+<strong>Key architectural point:</strong> All vision accelerators share the <strong>NVMM buffer pool</strong> — frames never touch CPU memory in the hot path. This is what makes Jetson's vision pipeline fast: a frame captured by VI flows through ISP → VIC → DLA → GPU entirely in DMA buffers. <strong>DeepStream</strong> and <strong>Isaac ROS (NITROS)</strong> are two software frameworks that orchestrate these hardware elements — DeepStream for streaming analytics, Isaac ROS for robotics perception. Both use GStreamer-style pipeline composition but with GPU-accelerated plugins replacing CPU processing.<br><br>
+<strong>Non-vision sensors</strong> (IMU, LiDAR, force/torque) bypass NVMM and arrive via CPU — they're fused with vision data at the GPU or application layer. <strong>SE</strong> and <strong>FSI</strong> operate independently of the media pipeline: SE handles crypto (TLS for camera streams, secure boot), FSI monitors the SoC for safety-critical applications.
+</div>

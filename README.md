@@ -1,122 +1,116 @@
-# Physical AI & World Model Research Notebook
+# Physical AI Platform Intelligence
 
-A research notebook for understanding the Physical AI and World Model ecosystem (architectures, building blocks, players, and platforms). Tracks both foundational research and applied systems. Guided by my own interests, with no claim to be representative, state-of-the-art, or correct. Content is curated through an AI-assisted workflow: I provide URLs, search terms, or ask the AI to scan reputable sources for new content, the AI extracts information, I curate the findings, the AI fills templates and updates documents. Just markdown files and AI assistance, no external tools required.
+Actionable intelligence for building a Physical AI platform: company competitive profiles, OSS project evaluations, building-block analysis, and cross-company synthesis. Built on a research foundation that tracks the ecosystem, publications, and architectural patterns.
 
-## What Is Physical AI?
+AI-driven workflow: provide URLs or search terms, AI extracts and structures the information, you curate the findings.
 
-Physical AI refers to AI systems that perceive, reason about, and interact with the physical world — enabling robots, autonomous vehicles, industrial systems, and embodied agents to operate in unstructured, dynamic environments. Unlike purely digital AI (LLMs, recommender systems), Physical AI must:
+## Intelligence Reports
 
-- **Perceive** the world through sensors (cameras, lidar, proprioception)
-- **Build internal models** of dynamics, physics, and causality
-- **Reason and plan** about actions in a physical space
-- **Control** actuators (robot arms, wheels, drones) with precision
-- **Learn from interaction** in the real world or high-fidelity simulation
+### Platform Architecture
 
-## What Are World Models?
+- **[Platform Architecture Design](deliverables/physical-ai-platform-architecture-design.md)** -- Red Hat Physical AI platform logical architecture (referenced by company profiles for coverage mapping)
 
-World models are a **core building block** of Physical AI. They are AI systems that learn internal representations of how the world works — its dynamics, structure, and rules — enabling prediction, planning, and decision-making without exhaustive trial-and-error in the real world.
+### Competitive Analysis Reports
 
-**Why they matter**: Current AI systems (LLMs, vision models) excel at pattern recognition but lack causal understanding of physical dynamics. World models aim to close this gap — enabling robots to predict the consequences of actions before executing them, autonomous vehicles to anticipate traffic scenarios, and scientific simulations to run orders of magnitude faster than physics solvers.
+- **[2026-06-22 Synthesis](deliverables/intel/reports/2026-06-22-synthesis.md)** -- Coverage heat map across 22 platform blocks, partnership network analysis, ecosystem dynamics, 5 trend signals, 8 Red Hat strategic implications
 
-**Two broad families**:
+### Company Profiles
 
-- **Generative / pixel-space**: Predict raw observations (video frames, images). Learn to simulate what the world *looks like*. Examples: NVIDIA Cosmos, Google Genie, Wayve GAIA, OpenAI Sora. Strength: rich visual output directly usable for training downstream policies. Challenge: computationally expensive, prone to hallucinating visual details irrelevant to dynamics.
+| Company | Profile | Deep Dive |
+| --- | --- | --- |
+| NVIDIA | [nvidia.md](deliverables/intel/companies/nvidia.md) | [nvidia-deep-dive.md](deliverables/intel/companies/nvidia-deep-dive.md) |
+| Intrinsic (Google) | [intrinsic.md](deliverables/intel/companies/intrinsic.md) | [intrinsic-deep-dive.md](deliverables/intel/companies/intrinsic-deep-dive.md) |
+| Google DeepMind | [google-deepmind.md](deliverables/intel/companies/google-deepmind.md) | [google-deepmind-deep-dive.md](deliverables/intel/companies/google-deepmind-deep-dive.md) |
 
-- **Predictive / latent-space**: Predict in learned abstract representation spaces, discarding pixel-level detail. Learn to model what *will happen* without reconstructing every pixel. Examples: JEPA (I-JEPA, V-JEPA), Dreamer, Energy-Based Models. Strength: computationally efficient, focuses on task-relevant dynamics. Challenge: latent representations are harder to interpret and validate.
+### Project Comparisons
 
-Many practical systems combine both — using generative models for synthetic data and sim-to-real transfer, while using latent models for real-time planning and control.
+- **[Simulation Engines](deliverables/intel/project-comparisons/simulation-engines.md)** -- Feature matrix, lock-in assessment, production adoption, Red Hat platform fit, recommendation with tradeoffs
 
-## Research Documents
+### Project Evaluations (Simulation Engines)
+
+| Project | Report | Recommendation |
+| --- | --- | --- |
+| Newton (LF) | [newton.md](deliverables/intel/projects/newton.md) | Integrate (recommended pick) |
+| MuJoCo (DeepMind) | [mujoco.md](deliverables/intel/projects/mujoco.md) | Integrate |
+| Gazebo (OSRA) | [gazebo.md](deliverables/intel/projects/gazebo.md) | Partner (runner-up) |
+| Isaac Sim (NVIDIA) | [isaac-sim.md](deliverables/intel/projects/isaac-sim.md) | Partner |
+| Isaac Lab (NVIDIA) | [isaac-lab.md](deliverables/intel/projects/isaac-lab.md) | Partner |
+| Genesis World | [genesis-world.md](deliverables/intel/projects/genesis-world.md) | Integrate (watch) |
+
+### Primers
+
+- [World Models Primer](deliverables/primers/world-models-primer.md) -- What world models are, why they matter, architectural families
+- [World Model Lineage](deliverables/primers/model-lineage.md) -- Genealogy of world model evolution
+- [Jetson Data Flows](deliverables/primers/jetson-dataflow.html) -- Typical data processing flows on an NVIDIA Jetson platform
+
+## Research Notebook
+
+Foundation research that feeds the intelligence layer.
 
 ### Platform Intelligence Layer
 
-These documents answer **platform strategy questions**:
-
-**[building-blocks.md](research/building-blocks.md)** - Platform capability map with demand matrices (use-case × building-block), solution landscapes (vendor/OSS per block), and Build/Partner/Integrate recommendations.
-
-**[ecosystem.md](research/ecosystem.md)** - Players in Physical AI — Big Tech, startups, OSS communities, and research labs — their solutions, reference architectures, and platform relevance.
-
-**[use-cases.md](research/use-cases.md)** - Technical use cases by industry vertical with building-block requirements, regulatory constraints, and current solution providers.
-
-**[projects.md](research/projects.md)** - Open-source implementations organized by building block, with community health metrics, openness analysis, and vendor lock-in risk assessment.
+- **[building-blocks.md](research/building-blocks.md)** -- Platform capability map: demand matrices, solution landscapes, Build/Partner/Integrate recommendations
+- **[ecosystem.md](research/ecosystem.md)** -- Big Tech, startups, OSS communities, research labs with solution-level analysis
+- **[use-cases.md](research/use-cases.md)** -- Technical use cases by vertical with building-block requirements and regulatory constraints
+- **[projects.md](research/projects.md)** -- OSS implementations by building block with community health and openness analysis
 
 ### Research Depth Layer
 
-These documents provide **technical depth** and **forward-looking intelligence**:
+- **[publications.md](research/publications.md)** -- Papers, talks, videos on world models, embodied AI, simulation, robotics foundations
+- **[concepts.md](research/concepts.md)** -- Architectural patterns: JEPA, EBMs, generative vs predictive world models, VLAs
 
-**[publications.md](research/publications.md)** - Papers, talks, blog posts, and videos on Physical AI: world models, robot foundation models, sim-to-real, applications, and foundational theory.
+## Using the Notebook
 
-**[concepts.md](research/concepts.md)** - Deep dives into architectural patterns: JEPA, Energy-Based Models, generative vs. predictive world models, robot foundation models, and how they relate.
-
-## Getting Started
-
-### Slash Commands
-
-**`/add <url>`** - Add a paper, project, player, video, or other content
+### Intelligence Skills
 
 ```text
-/add https://arxiv.org/abs/2602.03604
-/add https://github.com/NVlabs/Cosmos
-/add https://www.youtube.com/watch?v=...
-/add https://www.nvidia.com/en-us/solutions/robotics/
+/company-intel <url-or-name>          Profile a company (exec + deep-dive)
+/company-intel-synthesis              Cross-company analysis
+/project-health-eval <url-or-name>    OSS community health evaluation
+/project-tech-eval <url-or-name>      Technical architecture evaluation
+/project-comparison "A" "B" "C"       Side-by-side with recommendation
 ```
 
-**`/search <topic>`** - Search for papers, projects, and players
+### Research Skills
 
 ```text
-/search robot foundation models
-/search Physical AI startups
-/search NVIDIA Omniverse
-/search world models healthcare
+/add <url>          Add a paper, project, or ecosystem entry
+/search <topic>     Find papers, projects, startups
+/sources            Scan preferred sources for new content
+/synthesize         Review recent additions, identify patterns
 ```
-
-**`/sources`** - Check preferred sources for new content (last 30 days)
-
-**`/synthesize`** - Review recent additions, identify patterns, update concepts.md and building-blocks.md
-
-**Specialist skills** available for targeted research:
-
-- Use `/add` for individual items
-- Use `/search` for broader topic exploration
-- Use natural language for synthesis, analysis, and platform strategy questions
 
 ### Natural Language
 
 ```text
-"Add this paper: https://arxiv.org/abs/2602.03604"
+"Profile Skild AI"
+"Compare vLLM, NIM, and TensorRT-LLM for the Inference Server block"
 "Find recent Physical AI startups"
-"What are the key ecosystem players in simulation?"
-"Which building blocks should we Build vs. Partner for warehouse robotics?"
-"What are the emerging trends in robot foundation models?"
+"What building blocks are needed for warehouse robotics?"
+"Add this paper: https://arxiv.org/abs/..."
 ```
 
-### Search Queries to Try
+## Repository Structure
 
-**Research & Concepts**:
-
-- "world models", "world foundation models", "physical AI"
-- "robot foundation models", "embodied AI"
-- "JEPA", "energy based models"
-- "video prediction", "Cosmos", "Genie"
-- "sim-to-real", "digital twin"
-
-**Ecosystem & Players**:
-
-- "Physical AI startups", "robotics foundation models"
-- "NVIDIA Omniverse", "AWS RoboMaker", "Microsoft AirSim"
-- "humanoid robotics", "warehouse automation"
-- Researcher names: "Yann LeCun", "Danijar Hafner", "Fei-Fei Li"
-
-**Use Cases & Applications**:
-
-- "world models robotics", "robot foundation models healthcare"
-- "autonomous vehicles world models", "industrial digital twin"
-- "warehouse robotics", "surgical robotics"
-
-### Templates
-
-All entries follow consistent templates in **[research/templates/](research/templates/)**.
-
-## License
-
-Research notes and summaries for personal/educational use. Papers and external content retain original authors' rights.
+```text
+deliverables/
+  intel/
+    companies/            Company profiles + deep dives
+    projects/             Per-project health + tech reports
+    project-comparisons/  Side-by-side comparisons per block
+    reports/              Cross-company synthesis reports
+    _templates/           Report templates + visual language
+  primers/                Educational/reference material
+  drafts/                 Work in progress (gitignored)
+research/
+  building-blocks.md      Platform capability map
+  ecosystem.md            Competitive landscape
+  use-cases.md            Use cases x verticals
+  projects.md             OSS project catalog
+  publications.md         Papers, talks, videos
+  concepts.md             Architectural patterns
+  templates/              Entry templates
+.claude/
+  skills/                 AI workflow skills (12 skills)
+  settings.json           Tool permissions
+```
