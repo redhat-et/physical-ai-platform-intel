@@ -312,6 +312,21 @@
 
 **What it does**: Infrastructure for serving AI models with the latency, throughput, and multi-modality requirements of physical AI workloads. Distinct from LLM serving — requires action I/O, stateful sessions, and real-time guarantees.
 
+This block has two sub-problems settling at different rates:
+
+- **Data format** (converging): LeRobot v2/v3 is the de facto standard. OpenPI consumes it, GR00T adopted it (with `modality.json` extension), OXE covers TensorFlow workloads. Not a competitive concern.
+- **Serving API** (fragmented): Three competing wire formats with no formal spec or open governance on any of them. This is the key risk area.
+
+**Serving API landscape**:
+
+| API | Wire Format | Owner | Governance | Adopters |
+| --- | --- | --- | --- | --- |
+| **OpenPI** | WebSocket + msgpack-numpy | Physical Intelligence | Single-vendor, no spec doc, no versioning | vLLM-Omni (clean-room reimpl, PR #2162/#3673), AgiBot GO-1-Air, DreamZero |
+| **LeRobot PolicyServer** | gRPC + protobuf | HuggingFace | HuggingFace-controlled, broader community | SmolVLA, GR00T N1.5 (ported into LeRobot) |
+| **Vendor-specific** | Various (REST, Triton) | NVIDIA, others | Vendor-controlled | GR00T native, NIM deployments |
+
+[Positronic](https://github.com/Positronic-Robotics/positronic) has emerged as a community bridge layer (unified RemotePolicy client across LeRobot, OpenPI, GR00T servers), confirming the ecosystem sees this fragmentation as a problem.
+
 **Use-case demand**:
 
 | Technical Use Case    | Demand    |
@@ -326,22 +341,23 @@
 
 **Solution landscape**:
 
-| Category               | Solutions          | Maturity         | Notes                                                     |
-| ---------------------- | ------------------ | ---------------- | --------------------------------------------------------- |
-| OSS (community-driven) | vLLM-Omni, LeRobot | Early OSS        | vLLM-Omni: omni-modality; LeRobot: gRPC robotics API      |
-| OSS (single-vendor)    | (none identified)  | —                | —                                                         |
-| Proprietary            | NVIDIA NIM, Triton | Production-ready | NVIDIA; optimized for NVIDIA hardware                     |
+| Category               | Solutions                           | Maturity         | Notes                                                                 |
+| ---------------------- | ----------------------------------- | ---------------- | --------------------------------------------------------------------- |
+| OSS (community-driven) | vLLM-Omni                           | Early OSS        | Omni-modality serving; OpenPI-compatible endpoint (v0.22.0, Jun 2026) |
+| OSS (single-vendor)    | LeRobot PolicyServer, openpi server | Early OSS        | LeRobot: gRPC; openpi: WebSocket. No open governance on either        |
+| Proprietary            | NVIDIA NIM, Triton                  | Production-ready | NVIDIA; optimized for NVIDIA hardware                                 |
 
-**Key trade-offs**: vLLM-Omni extends proven LLM serving to DiT/video/action modalities but is early. LeRobot provides a robotics-native API but limited to policy serving. NVIDIA NIM/Triton are mature but CUDA-locked.
+**Key trade-offs**: vLLM-Omni extends proven LLM serving to DiT/video/action modalities and chose OpenPI as its robotics serving protocol (clean-room reimplementation at `/v1/realtime/robot/openpi`). LeRobot provides a robotics-native gRPC API with broader model coverage but a critical unpatched RCE (CVE-2026-25874 via pickle deserialization). NVIDIA NIM/Triton are mature but CUDA-locked. The OpenPI wire format is gaining traction as the common denominator (vLLM-Omni, DreamZero, AgiBot), but PI controls it unilaterally with no formal spec — vLLM-Omni is reverse-engineering compatibility, not implementing against a stable contract.
 
 **Platform fit**: `Build`
 
-- **Rationale**: Direct extension of existing AI model serving stack (vLLM, llm-d). vLLM-Omni is already in scope for the inference server.
-- **Partnership surface**: vLLM community, HuggingFace (LeRobot).
+- **Rationale**: Direct extension of existing AI model serving stack (vLLM, llm-d). vLLM-Omni is already in scope for the inference server. The OpenPI-compatible endpoint gives Red Hat a robotics serving story through an existing investment.
+- **Risk**: OpenPI protocol has no open governance — PI can make breaking changes at any time. vLLM-Omni's parity tests (`test_openpi_e2e_source_parity.py`) mitigate but don't eliminate this. Monitor for a formal spec or foundation governance; absent that, vLLM-Omni's reimplementation may need to fork the protocol.
+- **Partnership surface**: vLLM community (primary — already building OpenPI serving), HuggingFace (LeRobot data format + PolicyServer), Positronic (bridge layer).
 
 **Related blocks**: [Robot Foundation Models](#robot-foundation-models), [Edge AI Inference Runtime](#edge-ai-inference-runtime), [Latent World Models](#latent-world-models)
-**Key ecosystem players**: vLLM community, [NVIDIA](ecosystem.md#nvidia), HuggingFace
-**Relevant research**: (to be populated)
+**Key ecosystem players**: vLLM community, [Physical Intelligence](ecosystem.md#physical-intelligence-π) (OpenPI protocol), [NVIDIA](ecosystem.md#nvidia), HuggingFace (LeRobot)
+**Relevant research**: [vLLM-Omni World Model RFC (Issue #1987)](https://github.com/vllm-project/vllm-omni/issues/1987)
 
 ---
 

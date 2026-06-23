@@ -357,6 +357,45 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 
 ---
 
+### Amazon
+
+**Type**: `Big Tech`
+**About**: Largest deployer of warehouse robots globally (1M+ robots across 300+ fulfillment centers). Robotics AI is exclusively internal — no external robotics products or services. Reverse-acquihired [Covariant](#covariant-acquired-by-amazon-2024) (RFM-1, Pieter Abbeel) in Aug 2024 for ~$400M. Deprecated AWS RoboMaker (robotics cloud service) in 2024, signaling exit from robotics-as-a-service. Validates the warehouse automation use case at unprecedented scale but does not participate as a platform vendor or partner.
+
+**Solutions**:
+
+#### DeepFleet
+
+- **What it does**: Generative AI foundation model for fleet coordination — predicts traffic patterns for mobile robot fleets, optimizes routing, reduces congestion. Trained on millions of hours of fulfillment center data.
+- **Building blocks covered**: Fleet Management (internal)
+- **Key features (functional)**: Real-time fleet coordination, traffic prediction, route optimization (~10% efficiency improvement)
+- **Key features (non-functional)**: Operates across 1M+ robots in 300+ fulfillment centers
+- **Openness**: `Proprietary`
+- **Source**: [Amazon DeepFleet announcement](https://www.aboutamazon.com/news/operations/amazon-million-robots-ai-foundation-model)
+
+#### Vulcan
+
+- **What it does**: Dual-arm manipulation robot with tactile sensing ("sense of touch") for warehouse pick/stow tasks. AI-driven force feedback for handling items in tightly packed pods.
+- **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models) (internal)
+- **Key features (functional)**: Tactile grasping, dual-arm coordination, ergonomic task offloading (top/bottom shelf access)
+- **Key features (non-functional)**: Completed pilot, entering beta testing (2026)
+- **Openness**: `Proprietary`
+- **Source**: [Amazon Vulcan](https://www.aboutamazon.com/news/operations/amazon-vulcan-robot-pick-stow-touch)
+
+**Implied reference architecture**: Captive fleet of 1M+ robots (Proteus, Hercules, Pegasus, Vulcan) coordinated by DeepFleet foundation model, with RFM-1/Covariant Brain technology for manipulation intelligence. All internal — no external platform exposure.
+
+**Platform relevance**:
+
+- **Partnership surface**: None for robotics. AWS remains relevant for general AI/ML (SageMaker, Bedrock) and as Intel Foundry customer (18A for AI Fabric chips)
+- **Competitive surface**: None — Amazon's robotics is captive. Validates warehouse automation as the largest real-world Physical AI deployment
+- **What they need from a platform**: Nothing external — Amazon builds its own infrastructure end-to-end
+
+**Collaborations**: [Covariant](#covariant-acquired-by-amazon-2024) (acquihire), Rivr (acquired Mar 2026, last-mile delivery robots)
+
+**Links**: [Amazon Robotics](https://www.aboutamazon.com/news/tag/robotics), [Amazon Science — Robotics](https://www.amazon.science/research-areas/robotics)
+
+---
+
 ## Startups
 
 *Venture-backed companies building Physical AI products*
@@ -645,11 +684,11 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 
 ---
 
-### Covariant
+### Covariant (acquired by Amazon, 2024)
 
 **Type**: `Startup`
-**Stage/Scale**: (to be researched — multiple rounds raised). Co-founded by [Pieter Abbeel](#pieter-abbeel)
-**About**: Robotics AI company building foundation models for industrial manipulation. RFM-1 is deployed on 100+ warehouse robot arms generating subscription revenue. Differentiator: years of real-world pick trajectory data from commercial deployments, enabling a data flywheel that internet-pretrained models lack.
+**Stage/Scale**: $222M raised ($625M valuation at Series C, Apr 2023). Co-founded by [Pieter Abbeel](#pieter-abbeel), Peter Chen, Rocky Duan, Tianhao Zhang. **Effectively defunct** — reverse-acquihired by Amazon in Aug 2024 for ~$400M (below last valuation).
+**About**: Was a robotics AI company building foundation models for industrial manipulation. RFM-1 was deployed on 100+ warehouse robot arms. Differentiator was years of real-world pick trajectory data from commercial deployments. In Aug 2024, Amazon hired the three co-founders (Abbeel, Chen, Duan) plus ~25% of staff and licensed RFM-1 non-exclusively for ~$400M — structured as a "reverse acquihire" to avoid antitrust scrutiny (same pattern as Microsoft/Inflection, Google/Character.AI). Remaining company (~20 people) led by COO Ted Stinson and co-founder Tianhao Zhang. No product updates since Aug 2024; described as a "zombie company" in a 2025 FTC whistleblower complaint. RFM-1 technology now powers Amazon's warehouse robotics fleet (1M+ robots).
 
 **Solutions**:
 
@@ -658,20 +697,20 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 - **What it does**: 8B-parameter multimodal any-to-any robotics foundation model. Tokenizes text, images, video, robot actions, and physical measurements into a common space for next-token prediction. Enables language-guided programming, physics world model prediction, and in-context learning.
 - **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models), [Latent World Models](building-blocks.md#latent-world-models)
 - **Key features (functional)**: Physics world model (predicts action outcomes via generated video), language-guided task specification, in-context learning (adapts grasping strategy on-the-fly from recent failures), any-to-any modality mapping
-- **Key features (non-functional)**: Deployed on 100+ warehouse arms, subscription revenue model
+- **Key features (non-functional)**: Originally deployed on 100+ warehouse arms. Now absorbed into Amazon's robotics stack
 - **Competes with**: pi0/pi0.5, GR00T N1, Gemini Robotics — on industrial manipulation (warehouse picking)
 - **Complements**: Third-party robot arms (hardware-agnostic), warehouse management systems
 - **Openness**: `Proprietary`
-- **Lock-in vectors**: Proprietary model, subscription model, proprietary pick data
+- **Lock-in vectors**: Proprietary model, now Amazon-controlled via non-exclusive license
 - **Source**: [RFM-1](https://covariant.ai/rfm/)
 
 **Platform relevance**:
 
-- **Partnership surface**: Industrial manipulation policy that upgrades existing robot arms — software subscription on commodity hardware
-- **Competitive surface**: Owns the warehouse picking niche; data moat from years of deployed trajectories
-- **What they need from a platform**: Integration with warehouse robotics middleware, edge serving for low-latency pick loops
+- **Partnership surface**: No longer relevant — technology absorbed by Amazon for internal use
+- **Competitive surface**: RFM-1 validates the robot foundation model approach for warehouse manipulation at scale
+- **What they need from a platform**: N/A (Amazon runs its own infrastructure)
 
-**Links**: [Website](https://covariant.ai/), [RFM-1](https://covariant.ai/rfm/), [IEEE Spectrum](https://spectrum.ieee.org/covariant-foundation-model)
+**Links**: [Website](https://covariant.ai/), [RFM-1](https://covariant.ai/rfm/), [IEEE Spectrum](https://spectrum.ieee.org/covariant-foundation-model), [Amazon deal announcement](https://www.aboutamazon.com/news/company-news/amazon-covariant-ai-robots), [Whistleblower report](https://www.hardresetmedia.com/p/whistleblower-ftc-complaint-about-amazon-covariant)
 
 ---
 
@@ -1497,10 +1536,10 @@ Professor and co-founder of [Physical Intelligence](#physical-intelligence-pi). 
 
 #### Pieter Abbeel
 
-Professor, co-founder of Covariant (robot learning for warehouses). Co-authored the "World Model for Robot Learning" survey (2026) unifying the fragmented world model literature for robotics.
+UC Berkeley professor, co-founder of [Covariant](#covariant-acquired-by-amazon-2024). Joined [Amazon](#amazon) in Aug 2024 as part of the Covariant reverse-acquihire; leads AI robotics work in Amazon's Fulfillment Technologies & Robotics team. Co-authored the "World Model for Robot Learning" survey (2026) unifying the fragmented world model literature for robotics.
 
 - **Focus**: Robot learning, deep RL, sim-to-real transfer, world models for robotics
-- **Key Work**: World Model for Robot Learning survey (2026, with Jitendra Malik), Covariant (co-founder)
+- **Key Work**: World Model for Robot Learning survey (2026, with Jitendra Malik), Covariant RFM-1, Amazon robotics AI
 - **Links**: [Google Scholar](https://scholar.google.com/citations?user=X4Qth8YAAAAJ), [Homepage](https://people.eecs.berkeley.edu/~pabbeel/)
 
 #### Jitendra Malik
