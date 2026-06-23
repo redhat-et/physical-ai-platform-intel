@@ -91,6 +91,16 @@ Verify both documents against their templates:
 - [ ] No marketing language — factual, measured, pattern-oriented (per CLAUDE.md style guide)
 - [ ] Sources section populated with URLs for key claims
 
+### Step 7: Update README.md
+
+If this is a **new** company (create mode), add a row to the Company Profiles table in `README.md`. Insert alphabetically by company name. The row format is:
+
+```markdown
+| {Company} | [{slug}.md](deliverables/intel/companies/{slug}.md) | [{slug}-deep-dive.md](deliverables/intel/companies/{slug}-deep-dive.md) |
+```
+
+If the company already appears in the table (update mode), no README change is needed.
+
 ## Architecture Table Rules
 
 Refer to `deliverables/intel/_templates/visual-language.md` for:

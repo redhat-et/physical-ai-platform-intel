@@ -12,15 +12,21 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 
 ### Competitive Analysis Reports
 
-- **[2026-06-22 Synthesis](deliverables/intel/reports/2026-06-22-synthesis.md)** -- Coverage heat map across 22 platform blocks, partnership network analysis, ecosystem dynamics, 5 trend signals, 8 Red Hat strategic implications
+- **[2026-06-23 Synthesis](deliverables/intel/reports/2026-06-23-synthesis.md)** -- 9-company coverage heat map across 22 platform blocks, partnership network analysis, ecosystem dynamics, 6 trend signals, 8 Red Hat strategic implications
 
 ### Company Profiles
 
 | Company | Profile | Deep Dive |
 | --- | --- | --- |
-| NVIDIA | [nvidia.md](deliverables/intel/companies/nvidia.md) | [nvidia-deep-dive.md](deliverables/intel/companies/nvidia-deep-dive.md) |
-| Intrinsic (Google) | [intrinsic.md](deliverables/intel/companies/intrinsic.md) | [intrinsic-deep-dive.md](deliverables/intel/companies/intrinsic-deep-dive.md) |
+| AMD | [amd.md](deliverables/intel/companies/amd.md) | [amd-deep-dive.md](deliverables/intel/companies/amd-deep-dive.md) |
+| Figure AI | [figure-ai.md](deliverables/intel/companies/figure-ai.md) | [figure-ai-deep-dive.md](deliverables/intel/companies/figure-ai-deep-dive.md) |
 | Google DeepMind | [google-deepmind.md](deliverables/intel/companies/google-deepmind.md) | [google-deepmind-deep-dive.md](deliverables/intel/companies/google-deepmind-deep-dive.md) |
+| Intel | [intel.md](deliverables/intel/companies/intel.md) | [intel-deep-dive.md](deliverables/intel/companies/intel-deep-dive.md) |
+| Intrinsic (Google) | [intrinsic.md](deliverables/intel/companies/intrinsic.md) | [intrinsic-deep-dive.md](deliverables/intel/companies/intrinsic-deep-dive.md) |
+| NVIDIA | [nvidia.md](deliverables/intel/companies/nvidia.md) | [nvidia-deep-dive.md](deliverables/intel/companies/nvidia-deep-dive.md) |
+| Physical Intelligence | [physical-intelligence.md](deliverables/intel/companies/physical-intelligence.md) | [physical-intelligence-deep-dive.md](deliverables/intel/companies/physical-intelligence-deep-dive.md) |
+| Qualcomm | [qualcomm.md](deliverables/intel/companies/qualcomm.md) | [qualcomm-deep-dive.md](deliverables/intel/companies/qualcomm-deep-dive.md) |
+| Skild AI | [skild-ai.md](deliverables/intel/companies/skild-ai.md) | [skild-ai-deep-dive.md](deliverables/intel/companies/skild-ai-deep-dive.md) |
 
 ### Project Comparisons
 

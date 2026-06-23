@@ -98,6 +98,16 @@ Output to `deliverables/intel/reports/YYYY-MM-DD-synthesis.md`:
 - Any company with "Last updated" older than 90 days gets flagged
 - Output a list of stale reports with recommended action (refresh or archive)
 
+### Step 6: Update README.md
+
+Update the Competitive Analysis Reports section in `README.md` to point to the newly generated synthesis report. Replace the previous synthesis link with:
+
+```markdown
+- **[YYYY-MM-DD Synthesis](deliverables/intel/reports/YYYY-MM-DD-synthesis.md)** -- {N}-company coverage heat map across {B} platform blocks, partnership network analysis, ecosystem dynamics, {T} trend signals, {I} Red Hat strategic implications
+```
+
+Use the actual counts from the report for N (companies), B (blocks), T (trend signals), and I (strategic implications).
+
 ## Style Rules
 
 - Same style principles as `company-intel` (CLAUDE.md style guide)
