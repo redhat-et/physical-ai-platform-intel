@@ -7,6 +7,7 @@
 See [deep-dive](google-deepmind-deep-dive.md) for model architecture details, RT-1/2/X lineage, and research analysis.
 See [Intrinsic profile](intrinsic.md) for industrial robotics platform (Flowstate, IVM, IntrinsicOS).
 See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -139,12 +140,21 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
   <td>⬜</td>
 </tr>
 
-<!-- === Agentic === -->
+<!-- === Agentic Framework === -->
 
 <tr>
-  <td><b>Agentic</b></td>
+  <td><b>Agentic Framework</b></td>
+  <td colspan="2">⬜</td>
+  <td colspan="2">⬜</td>
+  <td>⬜</td>
+</tr>
+
+<!-- === Models & Policies === -->
+
+<tr>
+  <td><b>Models & Policies</b></td>
   <td colspan="2">🟡 Gemini Robotics-ER 1.6<br>
-  <small>(agentic; not standalone framework)</small></td>
+  <small>(embodied reasoning model, not standalone policy)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
 </tr>

@@ -6,6 +6,7 @@
 
 See [deep-dive](physical-intelligence-deep-dive.md) for OSS foundations, technical architecture, and research timeline.
 See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -130,13 +131,22 @@ Physical Intelligence (π) is a VC-backed startup ($1.1B raised, $5.6B valuation
   <td>⬜</td>
 </tr>
 
-<!-- === Agentic === -->
+<!-- === Agentic Framework === -->
 
 <tr>
-  <td><b>Agentic</b></td>
+  <td><b>Agentic Framework</b></td>
+  <td colspan="2">⬜</td>
+  <td colspan="2">⬜</td>
+  <td>⬜</td>
+</tr>
+
+<!-- === Models & Policies === -->
+
+<tr>
+  <td><b>Models & Policies</b></td>
   <td>⬜</td>
   <td>🟡 π0.7<sup>4</sup><br>
-  <small>(embodied agent, no framework)</small></td>
+  <small>(VLA foundation model, Gemma ToU weights)</small></td>
   <td>⬜</td>
   <td>🟡 π0.7</td>
   <td>🟡 π0.7</td>

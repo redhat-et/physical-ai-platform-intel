@@ -87,7 +87,8 @@ Ordered to match the Red Hat Physical AI Platform architecture diagram (deployme
 | --- | --- |
 | **Training & Evaluation** | Training workloads, simulation, eval, data curation |
 | **AI Model & Data Lifecycle** | Model registry, pipelines, CI/CD, experiment tracking, monitoring |
-| **Agentic** | Agent frameworks, embodied agent identity, physical safety |
+| **Agentic Framework** | Agent orchestration, tools/skills, guardrails, lifecycle automation |
+| **Models & Policies** | Foundation models, VLAs, world models, robot policies, custom-trained models |
 | **MaaS** | Model-as-a-Service API access |
 | **Inference Server** | Model serving (vLLM, NIM, etc.) |
 | **llm-d** | Distributed inference routing |

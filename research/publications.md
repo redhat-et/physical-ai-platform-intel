@@ -2251,6 +2251,24 @@
 
 *Edge inference, fleet management, production deployment of physical AI*
 
+### NVIDIA Releases Major Collection of Open-Source Agent Tools and Skills for Physical AI [<img src="templates/icons/website.svg" alt="website" height="16">](https://nvidianews.nvidia.com/news/nvidia-releases-major-collection-of-open-source-agent-tools-and-skills-for-physical-ai)
+
+**Authors/Presenters**: [NVIDIA](ecosystem.md#nvidia)
+
+**Date**: 2026-05
+
+**Summary**: Announces a collection of open-source agent-executable skills and tools that repackage NVIDIA's Physical AI platforms (Cosmos, Isaac Sim, Omniverse, Metropolis) as callable tools for AI coding/lifecycle agents. Establishes "Physical AI lifecycle agent" as a concrete product category — agents that autonomously orchestrate simulation, synthetic data generation, training, and deployment pipelines.
+
+**Key Findings**:
+
+- Skills wrap existing NVIDIA platforms as structured multi-step instructions for autonomous agents: neural reconstruction (synthetic data via scene reconstruction), video augmentation, synthetic defect image generation
+- NemoClaw blueprint for building and deploying autonomous agents safely; OpenShell provides policy-based security and privacy governance
+- Announced at GTC Taipei with manufacturing adoption: Pegatron reports 67% reduction in model training/deployment time using synthetic defect generation skill
+- Industry partners span manufacturing (TSMC, Foxconn, Delta Electronics), autonomous vehicles (Li Auto, DeepRoute.ai), industrial software (Cadence, Dassault, Siemens, PTC), and robotics (1X, Agile Robots, Agility, Universal Robots)
+- Available on GitHub (github.com/NVIDIA/skills) and via skills.sh; described as open source
+
+**Relevance to World Models**: First concrete product instantiation of the "Physical AI lifecycle agent" category — agents that don't act in the physical world but orchestrate the lifecycle of models that do. Validates the actor/orchestrator distinction in the agent taxonomy: NVIDIA provides both actors (GR00T, Cosmos) and now orchestrator tools. The agentic framework layer is currently a whitespace opportunity — NVIDIA's tools are CUDA-locked and proprietary-ecosystem-bound; no dominant open-source alternative exists. This is the gap the "Agentic Framework" row in coverage tables is designed to surface.
+
 ---
 
 ## Recent Additions

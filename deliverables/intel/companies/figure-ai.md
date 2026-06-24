@@ -6,6 +6,7 @@
 
 See [deep-dive](figure-ai-deep-dive.md) for technology architecture, manufacturing details, and competitive analysis.
 See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -132,10 +133,19 @@ Figure AI is a venture-backed humanoid robotics startup building general-purpose
   <td>⬜</td>
 </tr>
 
-<!-- === Agentic === -->
+<!-- === Agentic Framework === -->
 
 <tr>
-  <td><b>Agentic</b></td>
+  <td><b>Agentic Framework</b></td>
+  <td colspan="2">⬜</td>
+  <td colspan="2">⬜</td>
+  <td>⬜</td>
+</tr>
+
+<!-- === Models & Policies === -->
+
+<tr>
+  <td><b>Models & Policies</b></td>
   <td>⬜</td>
   <td>⬜</td>
   <td>⬜</td>

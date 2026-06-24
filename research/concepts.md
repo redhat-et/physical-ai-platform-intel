@@ -295,6 +295,58 @@ Emerging paradigm with strong theoretical foundations but limited scale demonstr
 
 ---
 
+## Agent Taxonomy for Physical AI
+
+### Agent Taxonomy Overview
+
+The term "agent" is used across Physical AI literature with at least four distinct meanings. This taxonomy disambiguates them along two axes: **Role** (what the agent does) and **Domain** (where it operates).
+
+| | Actor (acts in an environment) | Orchestrator (manages the lifecycle) |
+| --- | --- | --- |
+| **Digital** | **Software agent** — LLM/VLM + tools acting in digital environments (web, APIs, databases) | **Lifecycle agent** — automates the AI model lifecycle: design, training, evaluation, deployment, monitoring, retraining |
+| **Physical** | **Embodied / simulated agent** — robot, drone, or sim entity executing learned policies in physical or simulated environments | **Physical AI lifecycle agent** — automates the Physical AI lifecycle: simulation, synthetic data generation, domain randomization, policy evaluation, fleet deployment, closed-loop refinement |
+
+### Actor vs. Orchestrator
+
+**Actors** are the systems that perceive and act — a VLA policy controlling a robotic arm, a software agent navigating a website, a simulated entity in a multi-agent training scenario. Actors consume models and policies to produce behavior.
+
+**Orchestrators** manage the lifecycle that produces, validates, and refines the actors' models. This spans the full design → develop → operate → monitor → refine cycle:
+
+- **Design**: scenario authoring, simulation configuration, domain randomization setup
+- **Develop**: data curation, synthetic data generation, training orchestration, fine-tuning
+- **Operate**: policy deployment, fleet rollout, A/B testing, canary promotion
+- **Monitor**: fleet telemetry, anomaly detection, drift detection, safety monitoring
+- **Refine**: failure analysis, targeted retraining, sim-to-real gap closure
+
+### Digital vs. Physical
+
+The digital/physical axis captures whether an agent's environment follows digital rules (API contracts, web protocols, database schemas) or physical rules (Newtonian mechanics, sensor noise, contact dynamics, real-time constraints). Physical AI lifecycle agents extend familiar digital lifecycle patterns (CI/CD, MLOps, experiment tracking) with simulation-native capabilities:
+
+| Digital lifecycle agent | Physical AI lifecycle agent (extension) |
+| --- | --- |
+| Runs test suites | Runs simulation-based evaluations (physics fidelity, domain gap) |
+| Monitors model accuracy | Monitors fleet-level policy performance, safety violations |
+| Triggers retraining on data drift | Triggers retraining on sim-to-real gap, new failure modes |
+| Deploys model to API endpoint | Deploys policy to robot fleet with staged rollout |
+| Curates training data from logs | Generates synthetic training data via Cosmos, Isaac Sim |
+
+### How It Differs from Other Taxonomies
+
+**vs. "Agentic AI" (industry usage)**: Industry typically uses "agentic" to mean software agents with tool use and planning. This taxonomy expands the frame to include physical actors and — critically — the lifecycle orchestration layer that industry often conflates with the actors themselves.
+
+**vs. Multi-agent systems (MAS)**: MAS literature focuses on agent coordination protocols. This taxonomy is orthogonal — it classifies agents by role and domain, not by coordination pattern. A multi-agent system could contain actors of any type.
+
+### Current State (as of 2026-06)
+
+- **Software agents**: Mature. LLM-based agents with tool use (MCP, function calling) are production-deployed. Frameworks: LangChain, CrewAI, AutoGen.
+- **Embodied / simulated agents**: Active research. VLA policies ([Physical Intelligence](ecosystem.md#physical-intelligence-pi) π0, [NVIDIA](ecosystem.md#nvidia) GR00T, [Skild AI](ecosystem.md#skild-ai) Skild Brain) are deployed in controlled settings but not yet at fleet scale. Simulated agents used for multi-agent training (Odyssey Agora-1).
+- **Digital lifecycle agents**: Emerging. AI coding agents (Cursor, Claude Code) automate parts of the develop cycle. Full lifecycle automation (design → monitor → refine) remains fragmented.
+- **Physical AI lifecycle agents**: Nascent. [NVIDIA](ecosystem.md#nvidia)'s agent tools and skills release (2026-05) is the first concrete product — repackages Cosmos, Isaac Sim, and Omniverse as callable tools for AI coding agents to orchestrate Physical AI pipelines. NemoClaw provides a safety blueprint. No dominant open-source framework yet — a significant whitespace opportunity.
+
+**Platform implication**: Red Hat's existing AI platform (RHOAI) covers the digital lifecycle agent quadrant — KubeFlow Pipelines, KServe, MLflow, ArgoCD. The Physical AI platform extends this to the Physical AI lifecycle agent quadrant by adding simulation gating, synthetic data pipelines, policy promotion, and fleet-level observability. The actor quadrants (software agents, embodied agents) are complements — model providers like PI and Skild build the actors; the platform manages their lifecycle.
+
+---
+
 ## Related Concepts
 
 ### Self-Supervised Learning (SSL)

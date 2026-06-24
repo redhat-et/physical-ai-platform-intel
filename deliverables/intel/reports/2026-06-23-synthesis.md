@@ -7,6 +7,7 @@
 Cross-company analysis across all 9 tracked Physical AI players. Identifies coverage patterns, partnership dynamics, ecosystem trends, and strategic implications for Red Hat.
 
 See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -187,11 +188,27 @@ See [visual language](../_templates/visual-language.md) for coverage indicator d
   <td><b>3/9</b></td>
 </tr>
 
-<!-- Agentic -->
+<!-- Agentic Framework -->
 
 <tr>
-  <td><b>Agentic</b></td>
+  <td><b>Agentic Framework</b></td>
+  <td>🟡</td>
   <td>⬜</td>
+  <td>⬜</td>
+  <td>⬜</td>
+  <td>⬜</td>
+  <td>⬜</td>
+  <td>⬜</td>
+  <td>⬜</td>
+  <td>⬜</td>
+  <td><b>1/9</b></td>
+</tr>
+
+<!-- Models & Policies -->
+
+<tr>
+  <td><b>Models & Policies</b></td>
+  <td>🟢</td>
   <td>⬜</td>
   <td>🟡</td>
   <td>⬜</td>
@@ -200,7 +217,7 @@ See [visual language](../_templates/visual-language.md) for coverage indicator d
   <td>🟡</td>
   <td>🟢</td>
   <td>🟢</td>
-  <td><b>4/9</b></td>
+  <td><b>5/9</b></td>
 </tr>
 
 <!-- Model Serving -->

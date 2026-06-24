@@ -6,6 +6,7 @@
 
 See [deep-dive](qualcomm-deep-dive.md) for OSS foundations, acquisition details, and technical architecture.
 See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -131,10 +132,19 @@ Qualcomm is a $44B-revenue semiconductor and wireless technology company pursuin
   <td>⬜</td>
 </tr>
 
-<!-- === Agentic === -->
+<!-- === Agentic Framework === -->
 
 <tr>
-  <td><b>Agentic</b></td>
+  <td><b>Agentic Framework</b></td>
+  <td colspan="2">⬜</td>
+  <td colspan="2">⬜</td>
+  <td>⬜</td>
+</tr>
+
+<!-- === Models & Policies === -->
+
+<tr>
+  <td><b>Models & Policies</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
   <td>⬜</td>

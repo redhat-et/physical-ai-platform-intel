@@ -6,6 +6,7 @@
 
 See [deep-dive]({company}-deep-dive.md) for OSS foundations, acquisition details, and technical architecture.
 See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -136,15 +137,26 @@ See [visual language](../_templates/visual-language.md) for coverage indicator d
   <td>⬜</td>
 </tr>
 
-<!-- === Agentic === -->
+<!-- === Agentic Framework === -->
 
 <tr>
-  <td><b>Agentic</b></td>
-  <td><!-- Language agents --></td>
-  <td><!-- Physical AI agents --></td>
-  <td><!-- agents --></td>
-  <td><!-- agents --></td>
-  <td><!-- Embodied agents --></td>
+  <td><b>Agentic Framework</b></td>
+  <td><!-- Language agent orchestration --></td>
+  <td><!-- Physical AI agent orchestration --></td>
+  <td><!-- agent orchestration --></td>
+  <td><!-- agent orchestration --></td>
+  <td><!-- edge agent orchestration --></td>
+</tr>
+
+<!-- === Models & Policies === -->
+
+<tr>
+  <td><b>Models & Policies</b></td>
+  <td><!-- LLMs, VLMs --></td>
+  <td><!-- VLAs, world models, robot policies --></td>
+  <td><!-- models --></td>
+  <td><!-- models, policies --></td>
+  <td><!-- on-device models, policies --></td>
 </tr>
 
 <!-- === Model Serving === -->

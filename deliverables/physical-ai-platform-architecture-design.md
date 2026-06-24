@@ -104,7 +104,7 @@ MaaS    │ Model as a Service                                                �
         │ • Expose internal: managed model endpoints (KServe API)           │
         ├────────────────────────────────┬──────────────────────────────────┤
 Agentic │ Agentic AI                     │[NEW] Physical AI Agents          │
-        │ • Agent identity & lifecycle   │ • Embodied agent identity        │
+Frmwk   │ • Agent identity & lifecycle   │ • Embodied agent identity        │
         │ • MCP interfaces, tool use     │ • Physical safety guardrails     │
         │ • Guardrails, content filters  │ • Real-time constraints          │
         │ • Agent evals & benchmarks     │ • Sim-based agent evals          │
@@ -166,7 +166,7 @@ MaaS    │ Model as a Service                                                �
         │ • Expose internal: managed model endpoints (KServe API)           │
         ├────────────────────────────────┬──────────────────────────────────┤
 Agentic │ Agentic AI                     │[NEW] Physical AI Agents          │
-        │ (local decisions, edge skills) │ (scene understanding, anomaly    │
+Frmwk   │ (local decisions, edge skills) │ (scene understanding, anomaly    │
         │                                │  detection, fleet coordination)  │
         ├────────────────────────────────┴──────────────────────────────────┤
 Model   │                                                                   │
@@ -220,7 +220,7 @@ On-device. Fast control loop — sensor in, action out. Offloads heavy inference
          Language / Agentic              │  Physical AI
         ─────────────────────────────────┼──────────────────────────────────
 Agentic │ Local agents                   │[NEW] Embodied agents             │
-        │ (edge decision-making)         │ (on-device planning,             │
+Frmwk   │ (edge decision-making)         │ (on-device planning,             │
         │                                │  human-robot interaction)        │
         ├────────────────────────────────┴──────────────────────────────────┤
 Model   │ Inference Server                                                 │
@@ -268,7 +268,8 @@ Reference table mapping every block to specific sourceable components.
 | Experiment Tracking | MLflow (TP in RHOAI 3.4) | [EXT] Sim reward curves, sim-fidelity metrics | [EXT] |
 | Observability | Prometheus, OTel, Grafana | [NEW] Foxglove + MCAP (robot fleet telemetry). [EXT] TrustyAI | [NEW]+[EXT] |
 | MaaS | KServe API (expose) + NIM, OpenAI (consume) | (same) | Existing |
-| Agentic | MCP, tool use, guardrails | [NEW] Embodied agent identity, safety guardrails, sim-based evals | [NEW] |
+| Agentic Framework | MCP, tool use, guardrails | [NEW] Embodied agent identity, safety guardrails, sim-based evals, Physical AI skills | [NEW] |
+| Models & Policies | LLMs, VLMs (via vLLM) | [NEW] VLAs, world models, robot policies, digital twin models (via vLLM-Omni) | [NEW] |
 | Inference Server | vLLM (autoregressive, multi-modal) | [EXT] vLLM-Omni (diffusion, action I/O, multi-sensor — RFC #1987) | [EXT] |
 | Distributed Inference | llm-d (KV-cache routing) | [EXT] Long-running sessions, session-aware load balancing | [EXT] |
 | Edge Inference | vLLM-Omni, llama.cpp | [NEW] RT latency, stateful sessions, sensor streaming, offload | [NEW] |

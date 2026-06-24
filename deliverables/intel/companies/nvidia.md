@@ -6,6 +6,7 @@
 
 See [deep-dive](nvidia-deep-dive.md) for OSS foundations, acquisition details, and technical architecture.
 See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -146,13 +147,27 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
   <td>⬜</td>
 </tr>
 
-<!-- === Agentic === -->
+<!-- === Agentic Framework === -->
 
 <tr>
-  <td><b>Agentic</b></td>
-  <td colspan="2">⬜</td>
+  <td><b>Agentic Framework</b></td>
+  <td colspan="2">🟡 Agent Tools & Skills<br>
+  <small>(Cosmos, Isaac Sim, Omniverse as agent-callable tools; NemoClaw safety blueprint)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
+</tr>
+
+<!-- === Models & Policies === -->
+
+<tr>
+  <td><b>Models & Policies</b></td>
+  <td>⬜</td>
+  <td>🟢 GR00T N1.7, Cosmos WFMs<br>
+  <small>(VLA + world foundation models)</small></td>
+  <td>⬜</td>
+  <td>🟢 GR00T N1.7</td>
+  <td>🟢 GR00T N1.7<br>
+  <small>(Jetson Thor)</small></td>
 </tr>
 
 <!-- === Model Serving === -->

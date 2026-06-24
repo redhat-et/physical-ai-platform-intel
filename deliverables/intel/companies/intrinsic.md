@@ -7,6 +7,7 @@
 See [deep-dive](intrinsic-deep-dive.md) for acquisition details, Flowstate architecture, ROS/Gazebo governance, and partnership analysis.
 See [Google DeepMind profile](google-deepmind.md) for foundation models (Gemini Robotics) and research.
 See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -139,10 +140,19 @@ Intrinsic is Google's industrial robotics platform division, folded into Google 
   <td>⬜</td>
 </tr>
 
-<!-- === Agentic === -->
+<!-- === Agentic Framework === -->
 
 <tr>
-  <td><b>Agentic</b></td>
+  <td><b>Agentic Framework</b></td>
+  <td colspan="2">⬜</td>
+  <td colspan="2">⬜</td>
+  <td>⬜</td>
+</tr>
+
+<!-- === Models & Policies === -->
+
+<tr>
+  <td><b>Models & Policies</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
