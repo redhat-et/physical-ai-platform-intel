@@ -48,6 +48,7 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 - [World Models Primer](deliverables/primers/world-models-primer.md) -- What world models are, why they matter, architectural families
 - [World Model Lineage](deliverables/primers/model-lineage.md) -- Genealogy of world model evolution
 - [Model Weight Licensing](deliverables/primers/licensing.md) -- Gemma ToU vs Apache 2.0: revocation risk, viral derivatives, Red Hat/OSS impact
+- [Robot Policy Serving](deliverables/primers/robot-policy-serving.md) -- LeRobot vs OpenPI protocols, data formats, ecosystem convergence, security risks
 - [Jetson Data Flows](deliverables/primers/jetson-dataflow.html) -- Typical data processing flows on an NVIDIA Jetson platform
 
 ## Research Notebook
