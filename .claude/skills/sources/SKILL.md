@@ -40,7 +40,7 @@ When this command is invoked:
    - Look for Physical AI announcements, product launches, research releases
 
    **Company Blogs — Startups & Emerging Players** (Priority 5):
-   - Figure AI, Agility, 1X, Unitree, Physical Intelligence, Covariant, Skild, Intrinsic
+   - Figure AI, Agility, 1X, Unitree, Physical Intelligence (pi.website/blog, pi.website/research), Covariant, Skild, Intrinsic
    - Foxglove, Formant, MathWorks
    - Look for funding, product launches, technical posts
 

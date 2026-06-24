@@ -757,6 +757,24 @@
 
 **Relevance to World Models**: Demonstrates RL post-training for embodied AI that parallels RLVR-World and WorldCompass. RECAP solves the credit assignment problem critical for long-horizon tasks where world model predictions must identify which past actions caused future failures. Limitation: cannot discover globally optimal policies — only improves within the behavioral distribution of training data.
 
+### RL Tokens (RLT): Precise Manipulation with Efficient Online RL [<img src="templates/icons/website.svg" alt="website" height="16">](https://www.pi.website/research/rlt)
+
+**Authors/Presenters**: Charles Xu, Jost Tobias Springenberg, Michael Equi, Ali Amin, Adnan Esmail, [Sergey Levine](ecosystem.md#sergey-levine), Liyiming Ke — [Physical Intelligence](ecosystem.md#physical-intelligence-pi)
+
+**Date**: 2026-03
+
+**Summary**: Introduces RL Tokens (RLT), a method to add real-time online RL fine-tuning to frozen VLA models for sub-millimeter precision tasks. An encoder-decoder information bottleneck compresses VLA image embeddings into a compact "RL token" that feeds a lightweight actor-critic, enabling hundreds of RL updates per second directly on the robot with as little as 15 minutes of interaction data.
+
+**Key Findings**:
+
+- Decouples foundation model from adaptation: VLA is frozen after RL token training; only a small actor-critic updates during online RL
+- Actor learns to *edit* VLA actions rather than replace them, with regularization keeping exploration close to the VLA's baseline behavior
+- Speeds up the most precise task phases by up to 3x; on Ethernet insertion, the RL policy's median episode length (66 steps) is 2.2x faster than teleoperation (146 steps)
+- Requires only 15 minutes of robot data (2 hours wall-clock including resets) for Ethernet insertion — order-of-magnitude more sample-efficient than typical online RL
+- Evaluated on four contact-rich tasks requiring sub-millimeter precision: M3 screw driving, zip tie fastening, Ethernet cable insertion, power cord insertion
+
+**Relevance to World Models**: Complements RECAP — where RECAP improves long-horizon task reliability through offline RL, RLT targets real-time precision refinement through online RL. The information-bottleneck architecture (compressing VLA representations into RL tokens) parallels latent world model approaches but for action adaptation rather than state prediction. The "freeze backbone, adapt lightweight head" pattern mirrors LoRA-style adaptation but operates in the physical control loop at hundreds of Hz, demonstrating that VLA post-training can be split by timescale: slow offline improvement (RECAP) for coarse planning and fast online adaptation (RLT) for fine-grained dexterity.
+
 ### GEN-1: Scaling Embodied Foundation Models to Mastery [<img src="templates/icons/website.svg" alt="website" height="16">](https://generalistai.com/blog/apr-02-2026-GEN-1)
 
 **Authors/Presenters**: [Generalist AI](ecosystem.md#generalist-ai)
