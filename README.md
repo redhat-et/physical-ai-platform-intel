@@ -32,6 +32,13 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 
 - **[Simulation Engines](deliverables/intel/project-comparisons/simulation-engines.md)** -- Feature matrix, lock-in assessment, production adoption, Red Hat platform fit, recommendation with tradeoffs
 
+### Project Evaluations (Robotics Frameworks)
+
+| Project | Report | Red Hat Fit |
+| --- | --- | --- |
+| ROS 2 (OSRA) | [ros2.md](deliverables/intel/projects/ros2.md) | Align |
+| Isaac ROS (NVIDIA) | [isaac-ros.md](deliverables/intel/projects/isaac-ros.md) | Misalign |
+
 ### Project Evaluations (Simulation Engines)
 
 | Project | Report | Recommendation |

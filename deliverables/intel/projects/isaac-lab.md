@@ -13,7 +13,7 @@
 | **Building block** | Robot Learning Frameworks |
 | **Competes with** | dm_control (Google DeepMind), MuJoCo Playground (Google DeepMind), robosuite (Stanford), Gymnasium (Farama Foundation), LeRobot (Hugging Face) |
 | **Depends on** | [Isaac Sim](isaac-sim.md) — required simulation runtime |
-| **Depended on by** | — |
+| **Depended on by** | [Isaac ROS](isaac-ros.md) — policies trained in Isaac Lab deploy via isaac_ros_deploy |
 
 ### Repo Scope
 
