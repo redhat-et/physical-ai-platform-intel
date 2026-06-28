@@ -39,6 +39,12 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 | ROS 2 (OSRA) | [ros2.md](deliverables/intel/projects/ros2.md) | Align |
 | Isaac ROS (NVIDIA) | [isaac-ros.md](deliverables/intel/projects/isaac-ros.md) | Misalign |
 
+### Project Evaluations (Agent Runtimes)
+
+| Project | Report | Red Hat Fit |
+| --- | --- | --- |
+| OpenShell (NVIDIA) | [openshell.md](deliverables/intel/projects/openshell.md) | Align |
+
 ### Project Evaluations (Simulation Engines)
 
 | Project | Report | Recommendation |
