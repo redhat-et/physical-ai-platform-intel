@@ -2,8 +2,8 @@
 
 > Deep dives into fundamental concepts underlying AI world models
 
-**Last Updated**: 2026-06-02
-**Last Synthesized**: 2026-05-18
+**Last Updated**: 2026-07-01
+**Last Synthesized**: 2026-07-01
 
 ---
 
@@ -30,6 +30,7 @@ Joint-Embedding Predictive Architecture is Yann LeCun's framework for self-super
 - **SIGReg**: Modality-agnostic shared target distribution. Used in Le MuMo JEPA for cross-modal alignment
 - **Gaussian regularization**: Enforces Gaussian-distributed latent embeddings. LeWorldModel achieves stability with only this + prediction loss (2 terms vs. 6)
 - **Barlow Twins-style redundancy reduction**: Used in R2-Dreamer; conceptually parallel to VICReg
+- **Variational formulation (Var-JEPA)**: Derives JEPA as a variational latent-variable model — collapse prevention emerges naturally from the ELBO objective rather than ad-hoc regularizers. Subsumes VICReg and Gaussian regularization as special cases
 
 **JEPA Variant Lineage**:
 
@@ -39,6 +40,7 @@ Joint-Embedding Predictive Architecture is Yann LeCun's framework for self-super
 - Causal-JEPA (object-centric masking for causal reasoning)
 - LeWorldModel (stable end-to-end from pixels, 2 loss terms, ~15M params)
 - VJEPA/BJEPA (probabilistic/Bayesian extensions for uncertainty quantification)
+- Var-JEPA (variational formulation — derives JEPA from latent-variable model, principled uncertainty quantification without ad-hoc regularizers)
 - ACT-JEPA (unified policy + world model learning)
 - Domain-specific: WirelessJEPA, JEPA-MSAC, EchoJEPA, 3D-JEPA
 
@@ -52,7 +54,7 @@ Joint-Embedding Predictive Architecture is Yann LeCun's framework for self-super
 
 **vs. Diffusion/Flow Models** (Cosmos, Genie): Diffusion/flow models generate in pixel space — producing inspectable video outputs. JEPA operates in latent space — more efficient for planning (48x faster, per LeWorldModel) but outputs are not directly visualizable. Historically complementary (Cosmos for synthetic data, JEPA for planning), though Cosmos 3's dual-tower MoT architecture now integrates autoregressive latent reasoning alongside diffusion-based generation, blurring the boundary.
 
-### JEPA Current State (as of 2026-04)
+### JEPA Current State (as of 2026-07)
 
 **Maturation signals**:
 
@@ -60,6 +62,7 @@ Joint-Embedding Predictive Architecture is Yann LeCun's framework for self-super
 - Systematic engineering guidance available: JEPA-WMs ablation study identifies critical design choices
 - Accessible tooling: EB-JEPA library, stable-worldmodel framework, LeWM implementation
 - AMI Labs ($1.03B seed) commercializing JEPA-based world models
+- Var-JEPA derives JEPA from variational principles — collapse prevention emerges naturally from ELBO rather than requiring hand-crafted regularization
 
 **Active frontiers**:
 
@@ -67,6 +70,7 @@ Joint-Embedding Predictive Architecture is Yann LeCun's framework for self-super
 - Causal reasoning (Causal-JEPA): Object-level masking for counterfactual understanding; 100x reduction in required latent features
 - Probabilistic extensions (VJEPA/BJEPA): Uncertainty quantification for planning under stochastic dynamics
 - Multi-modal fusion (Le MuMo JEPA, VL-JEPA): Integrating heterogeneous sensor inputs and language
+- Cross-embodiment imitation (Demo-JEPA): One-shot transfer across robot embodiments via goal inference in V-JEPA 2.1 latent space
 - Domain expansion: Telecommunications (3 papers), healthcare (EchoJEPA), autonomous driving (Le MuMo JEPA on Waymo/nuScenes)
 
 **Open questions**:
@@ -171,6 +175,8 @@ World models are internal representations of environment dynamics that enable ag
    - *Global (Diffusion/Flow)*: Predict distribution of possible futures in one or more steps, better global structural stability. Examples: Sora, GAIA-2, Cosmos-Predict2.5
    - *Hybrid (AR + Diffusion)*: Dual-tower architectures that use autoregressive decoding for reasoning/language and diffusion for continuous modalities (video, audio, action) within shared attention. Examples: Cosmos 3 MoT
 
+**Five representation families** (Wang et al. 2026 manipulation survey, arXiv:2606.00113): Organizes manipulation world models by predicted output type, with a functional taxonomy separating integrated prediction-action models (world model embedded in policy) from explicit predictive planners (world model as separate planning module). Reviews 34 manipulation datasets. Complements the four-branch taxonomy above with a manipulation-specific lens.
+
 ### World Model Technical Details
 
 **Five functional roles** (Abbeel & Malik et al. 2026 survey): World models serve robotics across policy learning, planning, simulation, evaluation, and data generation. This taxonomy clarifies that world models are not monolithic — a single model may serve multiple roles, and different architectures suit different roles. JEPA excels at planning; pixel-space models (Cosmos) excel at data generation. Ctrl-World (Finn et al. 2026) demonstrates the evaluation role: ranking policy performance via imagined rollouts without real-world testing, with synthetic trajectories improving policy success by 44.7%.
@@ -183,7 +189,7 @@ World models are internal representations of environment dynamics that enable ag
 
 **Physical reasoning**: Cosmos-Reason1 adds explicit physical common sense via hierarchical ontology (space, time, physics). Complementary to JEPA's implicit physics learning — explicit ontologies can guide and constrain predictions. The proposed MLLM-WM fusion architecture (Feng et al. 2025) combines language grounding with physics simulation.
 
-### World Models Current State (as of 2026-05)
+### World Models Current State (as of 2026-07)
 
 **Three paradigms crystallizing**:
 
@@ -236,6 +242,7 @@ The a16z "Frontier Systems for the Physical World" essay proposes a three-way cl
 - Chinese Big Tech entering Physical AI: [Alibaba](ecosystem.md#alibaba-tongyi-lab) Qwen-Robot suite introduces language-as-action-interface paradigm (composable tool-use rather than monolithic VLA/WAM), trained on 8.6M video-text pairs across 20+ embodiments
 - VLA field exploding: 18x growth in ICLR submissions (9 at ICLR 2025 → 164 at ICLR 2026), but frontier gap persists between closed-weight (Gemini, Pi-0.5) and open-weight VLAs on zero-shot open-world behavior
 - Counterfactual reasoning emerging as new frontier (CWMDT combines digital twins + diffusion + LLM causal reasoning)
+- "Robots Need More Than VLAs & World Models" (Karcini et al. 2026) identifies four missing interfaces (data, embodiment, world-model, reward) — argues the bottleneck is converting unstructured behavioral data into grounded robot supervision, not model scale. Counterpoint to the scaling narrative
 
 **Domain expansion beyond vision/robotics**:
 
@@ -260,7 +267,7 @@ The a16z "Frontier Systems for the Physical World" essay proposes a three-way cl
 - Long-horizon consistency: video-based models limited to minutes; latent-space models accumulate prediction error
 - Causal understanding: Causal-JEPA is a step, but systematic causal reasoning remains nascent
 - Sim-to-real transfer: Cosmos addresses with Transfer2.5; JEPA approaches lack equivalent
-- Evaluation standards: No consensus benchmarks for world model quality across domains
+- Evaluation standards: WorldOlympiad (2026-06) introduces physics/geometry/interaction tripartite evaluation for video-based world models, but no consensus cross-domain standard yet. Manipulation-specific surveys (Wang et al. 2026) review 34 datasets but identify gaps in contact modeling and closed-loop benchmarking
 - Scaling laws: Established for LLMs but not for world models of either paradigm
 
 ---
@@ -384,6 +391,12 @@ Umbrella term for AI systems that interact with the physical world — robotics,
 ### Scientist AI
 
 Yoshua Bengio's proposal (2025) for non-agentic AI built around a world model that explains observations and answers questions rather than autonomously pursuing goals. Deliberately avoids agency — focuses on accurate world representation with uncertainty quantification. Safety-motivated alternative to the autonomous agent paradigm.
+
+### Sim-to-Real Transfer
+
+**Definition**: Methods for deploying simulation-trained robot policies in the real world, bridging the gap between simulated and physical environments. Three main approaches: domain randomization (train across varied sim parameters), domain adaptation (style transfer between domains), and co-training (joint training on sim + real data).
+
+**Connection to World Models**: World models can serve as sim-to-real bridges in two ways: (1) video generation (Cosmos-Transfer) translates sim scenes to photorealistic visuals, (2) latent-space models (JEPA) learn representations invariant to the sim-real gap. HyperSim (2026) demonstrates co-training achieving 95% sim-to-real success with pi0. Real-is-Sim (2025) inverts the paradigm — a 60Hz dynamic digital twin via Gaussian splatting makes simulation the control authority, eliminating the transfer gap entirely.
 
 ---
 

@@ -2,7 +2,7 @@
 
 > Players in Physical AI — their solutions, reference architectures, and platform relevance
 
-**Last Updated**: 2026-06-18
+**Last Updated**: 2026-07-01
 
 ---
 
@@ -58,12 +58,12 @@
 - **What it does**: Open VLA foundation model for humanoid robots with dual-system architecture — System 1 (fast reactive control) + System 2 (deliberative reasoning via VLM).
 - **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
 - **Key features (functional)**: Cross-embodiment transfer, bimanual manipulation, dual-system architecture, pre-trained on diverse robot data
-- **Key features (non-functional)**: Adopted by 1X, Agility, Figure AI, Boston Dynamics, Unitree, Sanctuary AI
+- **Key features (non-functional)**: Adopted by 1X, Agility, Figure AI, Boston Dynamics, Unitree, Sanctuary AI. Isaac GR00T Reference Humanoid Robot (GTC Taipei, Jun 2026): first open humanoid reference design combining Unitree H2 Plus + Sharpa Wave tactile hands + Jetson AGX Thor T5000 (Blackwell, 2070 FP4 TFLOPS). Partners: Ai2, ETH Zurich, Stanford, UCSD. Available from Unitree late 2026
 - **Competes with**: pi0/pi0.5, Gemini Robotics, GEN-1 — on generalist robot control
 - **Complements**: Isaac Sim (training), Cosmos (synthetic data), Jetson (deployment)
 - **Openness**: `OSS-single-vendor`
 - **Lock-in vectors**: Optimized for Jetson deployment, NVIDIA training infrastructure
-- **Source**: [GR00T](https://developer.nvidia.com/groot)
+- **Source**: [GR00T](https://developer.nvidia.com/groot), [Reference Robot](https://nvidianews.nvidia.com/news/nvidia-open-humanoid-robot-reference-design)
 
 #### Omniverse
 
@@ -427,8 +427,8 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 ### Physical Intelligence (pi)
 
 **Type**: `Startup`
-**Stage/Scale**: $400M+ raised. Investors: Bezos Expeditions, Khosla Ventures, OpenAI Fund
-**About**: Robotics foundation model company building vision-language-action (VLA) models for general-purpose robot manipulation. Co-founded by [Sergey Levine](#sergey-levine) and [Chelsea Finn](#chelsea-finn). pi0/pi0.5 are policy models (not dynamics predictors) that represent a key consumer of world model outputs. pi0.5 (Apr 2026) claims first cross-embodiment generalization without per-robot fine-tuning.
+**Stage/Scale**: $400M+ raised (reportedly seeking $1B round in 2026). Investors: Bezos Expeditions, Khosla Ventures, OpenAI Fund
+**About**: Robotics foundation model company building vision-language-action (VLA) models for general-purpose robot manipulation. Co-founded by [Sergey Levine](#sergey-levine) and [Chelsea Finn](#chelsea-finn). ~80 employees; reportedly blown through their 5-10 year roadmap in 18 months. pi0/pi0.5 are policy models (not dynamics predictors) that represent a key consumer of world model outputs. pi0.5 (Apr 2026) claims first cross-embodiment generalization without per-robot fine-tuning. pi0.7 enables zero-shot task generalization to untrained tasks.
 
 **Solutions**:
 
@@ -509,8 +509,8 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 ### Figure AI
 
 **Type**: `Startup`
-**Stage/Scale**: $2.6B+ raised across three rounds. Valuation $39B (Sep 2025). Investors: Brookfield, Intel, NVIDIA, Qualcomm, Salesforce, T-Mobile, Microsoft, OpenAI
-**About**: Humanoid robotics company building general-purpose humanoid robots (Figure 02, Figure 03) with in-house VLA models (Helix). Developing dedicated manufacturing facility (BotQ) targeting 100K robots over four years. Figure 03 ($20K, Oct 2025) designed for home and enterprise deployment.
+**Stage/Scale**: $2.6B+ raised across three rounds. Valuation $39B (Sep 2025, IPO rumored at similar valuation). Investors: Brookfield, Intel, NVIDIA, Qualcomm, Salesforce, T-Mobile, Microsoft, OpenAI
+**About**: Humanoid robotics company building general-purpose humanoid robots (Figure 02, Figure 03) with in-house VLA models (Helix). BotQ factory now producing 1 robot/hour (55+ Figure 03/week, 12K annual capacity). F.02 retired after BMW Spartanburg deployment (30K+ BMW X3s, 90K+ sheet metal parts with 5mm precision). 350+ units produced with Helix AI. Figure 03 ($20K, Oct 2025) designed for home and enterprise deployment.
 
 **Solutions**:
 
@@ -672,6 +672,8 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 - **Lock-in vectors**: Proprietary model, NVIDIA infrastructure dependency
 - **Source**: [Skild Brain Blog](https://www.skild.ai/blogs/building-the-general-purpose-robotic-brain)
 
+Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU servers in Houston, TX. Partnership accelerates data flywheel — more tasks, more real-world data, smarter model. Revenue ~$30M in first months of commercial deployment across warehousing, construction, and inspections.
+
 **Implied reference architecture**: Software-only play — Skild Brain as a universal policy layer deployed on third-party robot hardware. Pre-training loop: simulation (Isaac Lab) + internet video → omni-bodied foundation model → post-training with customer-specific real-world data → deployment on customer robots.
 
 **Platform relevance**:
@@ -680,7 +682,67 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 - **Competitive surface**: Minimal — focuses on brain, not platform or hardware
 - **What they need from a platform**: Model hosting, edge deployment on diverse robot compute (not just Jetson), data pipelines for post-training
 
-**Links**: [Website](https://www.skild.ai/), [NVIDIA Case Study](https://www.nvidia.com/en-us/case-studies/skild-ai/)
+**Links**: [Website](https://www.skild.ai/), [NVIDIA Case Study](https://www.nvidia.com/en-us/case-studies/skild-ai/), [Foxconn deployment](https://technical.ly/entrepreneurship/pittsburgh-skild-ai-nvidia-foxconn-robotics-deployment/)
+
+---
+
+### 1X Technologies
+
+**Type**: `Startup`
+**Stage/Scale**: Series B — raised $125M (Jan 2025). Investors: EQT Ventures, Samsung Next, NVIDIA NVentures
+**About**: Norwegian humanoid robotics company building household humanoid robots (NEO). Launched World Model Lab (June 2026) led by Sam Sinha (ex-Luma AI founding researcher). Distinctive approach: insists on force/action-consequence data paired with human-like embodiment rather than internet-pretrained VLAs. 20K pre-ordered NEO robots, shipping in 2026. NEO priced at $20K upfront or $499/month.
+
+**Solutions**:
+
+#### NEO
+
+- **What it does**: Humanoid robot designed for household tasks (cleaning, laundry, basic meal prep) with full autonomy target.
+- **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
+- **Key features (functional)**: World-model-driven control (via World Model Lab), force/action-consequence learning, household task autonomy
+- **Key features (non-functional)**: $20K price point, 4-week CAD-to-production iteration cycle, 20K pre-orders
+- **Competes with**: Figure AI, Apptronik Apollo, Tesla Optimus, Unitree G1 — on household humanoid robotics
+- **Complements**: NVIDIA GR00T N1 (adopter)
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Vertically integrated hardware + software
+- **Source**: [Website](https://www.1x.tech/)
+
+**Platform relevance**:
+
+- **Partnership surface**: World Model Lab may produce open research; robot hardware as deployment target
+- **Competitive surface**: Vertically integrated — limited platform play
+- **What they need from a platform**: Sim-to-real pipelines, world model training infrastructure, edge deployment
+
+**Links**: [Website](https://www.1x.tech/), [Forbes (World Model Lab)](https://www.forbes.com/sites/johnkoetsier/2026/06/04/1x-launches-humanoid-robot-world-model-lab-you-cant-fine-tune-your-way-to-agi/)
+
+---
+
+### Unitree Robotics
+
+**Type**: `Startup`
+**Stage/Scale**: Filing $610M Shanghai A-share IPO (mid-2026). 335% revenue growth in 2025. Chinese firms led by Unitree account for >80% of global humanoid installations
+**About**: Chinese robotics company building affordable quadruped and humanoid robots. G1 humanoid ($16K) and H2 Plus are volume leaders in humanoid production. 5,500+ units shipped in 2025 with 10K-20K+ targets for 2026. Selected by NVIDIA as hardware partner for Isaac GR00T Reference Humanoid Robot. Televised autonomous kung fu routine (Feb 2026) and -47°C arctic endurance test demonstrated platform maturity.
+
+**Solutions**:
+
+#### G1 / H2 Plus
+
+- **What it does**: Affordable humanoid robot platforms for research, education, and enterprise deployment.
+- **Building blocks covered**: [Robot Hardware Platforms](building-blocks.md#robot-hardware-platforms)
+- **Key features (functional)**: Full-body locomotion, standing jump 1.4m (exceeds own height), cold-weather autonomy (-47°C tested), kung fu-level dynamic motion
+- **Key features (non-functional)**: G1 at $16K price point (130cm tall), H2 Plus as NVIDIA reference robot base, 5500+ shipped in 2025
+- **Competes with**: Figure AI Figure 03, Tesla Optimus, Agility Digit — on volume humanoid production
+- **Complements**: NVIDIA Isaac GR00T (reference robot), LeRobot (supported hardware), third-party VLA models
+- **Openness**: `Proprietary` (hardware), SDK available
+- **Lock-in vectors**: Proprietary hardware, Chinese supply chain
+- **Source**: [Website](https://www.unitree.com/)
+
+**Platform relevance**:
+
+- **Partnership surface**: Volume hardware platform for third-party software stacks; NVIDIA reference robot partnership; LeRobot integration
+- **Competitive surface**: Hardware-focused — complementary to software platforms
+- **What they need from a platform**: Robot middleware, fleet management, edge deployment infrastructure
+
+**Links**: [Website](https://www.unitree.com/), [NVIDIA Reference Robot](https://nvidianews.nvidia.com/news/nvidia-open-humanoid-robot-reference-design), [Forbes](https://www.forbes.com/sites/jonmarkman/2026/04/27/unitree-g1-humanoid-robots-are-reshaping-the-robotics-investment-stack/)
 
 ---
 

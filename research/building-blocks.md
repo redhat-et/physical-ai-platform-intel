@@ -2,7 +2,7 @@
 
 > Platform capability map for Physical AI — the building blocks a platform needs to support
 
-**Last Updated**: 2026-06-16
+**Last Updated**: 2026-07-01
 
 ---
 
@@ -98,11 +98,11 @@
 
 **Solution landscape**:
 
-| Category               | Solutions                                                          | Maturity  | Notes                                                |
-| ---------------------- | ------------------------------------------------------------------ | --------- | ---------------------------------------------------- |
-| OSS (community-driven) | OpenVLA, SmolVLA                                                   | Early OSS | Community-driven open VLA baselines                  |
-| OSS (single-vendor)    | GR00T N1.7, OpenPI (pi0/pi0.5/pi0.7), DreamZero, LingBot-VA        | Early OSS | NVIDIA, Physical Intelligence, Ant Group             |
-| Proprietary            | Gemini Robotics, GEN-1, Qwen-RobotManip, Being-H0.7, Cortex 2.0    | Early OSS | Google, Generalist AI, Alibaba, BeingBeyond, Sereact |
+| Category               | Solutions                                                          | Maturity  | Notes                                                                        |
+| ---------------------- | ------------------------------------------------------------------ | --------- | ---------------------------------------------------------------------------- |
+| OSS (community-driven) | OpenVLA, SmolVLA, Spirit-v1.5                                      | Early OSS | Community-driven open VLA baselines; Spirit-v1.5 #1 on RoboChallenge Table30 |
+| OSS (single-vendor)    | GR00T N1.7, OpenPI (pi0/pi0.5/pi0.7), DreamZero, LingBot-VA        | Early OSS | NVIDIA, Physical Intelligence, Ant Group                                     |
+| Proprietary            | Gemini Robotics, GEN-1, Qwen-RobotManip, Being-H0.7, Cortex 2.0    | Early OSS | Google, Generalist AI, Alibaba, BeingBeyond, Sereact                         |
 
 **Key trade-offs**: VLAs (pi0) leverage internet-scale pretraining but lack physics understanding. WAMs (DreamZero) learn dynamics from video but cost ~7.4x more to train. MoT emerging as dominant architecture for both VLAs and WAMs. VLA+WAM hybrids (Being-H0.7, Cortex 2.0, Pi-0.7) converging. Frontier gap: closed-weight VLAs (Gemini, Pi-0.5) exhibit zero-shot open-world behavior that open-weight models cannot yet match.
 
@@ -112,7 +112,7 @@
 - **Partnership surface**: NVIDIA (GR00T), Physical Intelligence (OpenPI), Alibaba (Qwen-Robot suite); LeRobot as integration framework.
 
 **Related blocks**: [Latent World Models](#latent-world-models), [Model Serving for Physical AI](#model-serving-for-physical-ai), [Edge AI Inference Runtime](#edge-ai-inference-runtime)
-**Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia), [Physical Intelligence](ecosystem.md#physical-intelligence-π), [Google DeepMind](ecosystem.md#google-deepmind), [Alibaba](ecosystem.md#alibaba-tongyi-lab), [BeingBeyond](ecosystem.md#beingbeyond)
+**Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia), [Physical Intelligence](ecosystem.md#physical-intelligence-π), [Google DeepMind](ecosystem.md#google-deepmind), [Alibaba](ecosystem.md#alibaba-tongyi-lab), [BeingBeyond](ecosystem.md#beingbeyond), Spirit AI
 **Relevant research**: [publications](publications.md#robot-foundation-models)
 
 ---
@@ -223,13 +223,13 @@
 
 **Solution landscape**:
 
-| Category               | Solutions              | Maturity         | Notes                               |
-| ---------------------- | ---------------------- | ---------------- | ----------------------------------- |
-| OSS (community-driven) | (none identified)      | —                | —                                   |
-| OSS (single-vendor)    | Cosmos-Transfer2.5     | Early OSS        | NVIDIA; multi-controlnet approach   |
-| Proprietary            | Isaac Sim domain rand. | Production-ready | NVIDIA; built into simulation stack |
+| Category               | Solutions              | Maturity         | Notes                                                                                        |
+| ---------------------- | ---------------------- | ---------------- | -------------------------------------------------------------------------------------------- |
+| OSS (community-driven) | HyperSim, Real-is-Sim  | Early OSS        | Holistic co-training (HyperSim); dynamic digital twin via Gaussian splatting (Real-is-Sim)   |
+| OSS (single-vendor)    | Cosmos-Transfer2.5     | Early OSS        | NVIDIA; multi-controlnet approach                                                            |
+| Proprietary            | Isaac Sim domain rand. | Production-ready | NVIDIA; built into simulation stack                                                          |
 
-**Key trade-offs**: Style transfer (Cosmos-Transfer) produces visually realistic rollouts but may not preserve physics fidelity. Domain randomization is simple but requires careful parameter tuning. Validation of transfer quality lacks standardized metrics.
+**Key trade-offs**: Style transfer (Cosmos-Transfer) produces visually realistic rollouts but may not preserve physics fidelity. Domain randomization is simple but requires careful parameter tuning. HyperSim's co-training approach (sim + real jointly) achieves 95% success with pi0 but requires real data. Real-is-Sim inverts the paradigm entirely — policies run on a 60Hz dynamic digital twin, making simulation the ground truth. Validation of transfer quality lacks standardized metrics.
 
 **Platform fit**: `Partner`
 
@@ -237,8 +237,8 @@
 - **Partnership surface**: NVIDIA (Cosmos-Transfer), simulation engine providers.
 
 **Related blocks**: [Simulation Engines](#simulation-engines), [Video Generation Models](#video-generation--prediction-models), [Post-Training Pipeline](#post-training--fine-tuning-pipeline)
-**Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia)
-**Relevant research**: (to be populated)
+**Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia), HyperSim (multi-institutional), Real-is-Sim (Stanford/Princeton)
+**Relevant research**: [publications](publications.md#sim-to-real-transfer)
 
 ---
 
@@ -295,7 +295,7 @@
 
 (to be populated — research needed on NVIDIA TensorRT, ONNX Runtime, OpenVINO, Qualcomm AI Engine)
 
-**Key trade-offs**: Hardware-specific acceleration (TensorRT) delivers best performance but locks to vendor. Cross-platform runtimes (ONNX) are portable but slower. Real-time guarantees require OS-level support (PREEMPT_RT).
+**Key trade-offs**: Hardware-specific acceleration (TensorRT) delivers best performance but locks to vendor. Cross-platform runtimes (ONNX) are portable but slower. Real-time guarantees require OS-level support (PREEMPT_RT). The AI+HW 2035 roadmap projects a 1000x efficiency target for edge AI hardware, implying current edge inference runtimes are early-stage compromises — platform abstractions should anticipate rapid hardware churn.
 
 **Platform fit**: `Build`
 
@@ -304,7 +304,7 @@
 
 **Related blocks**: [Model Serving for Physical AI](#model-serving-for-physical-ai), [Robot Middleware](#robot-middleware), [Sensor Data Ingestion](#sensor-data-ingestion)
 **Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia)
-**Relevant research**: (to be populated)
+**Relevant research**: [publications](publications.md#edge-ai--hardware-co-design)
 
 ---
 
@@ -556,15 +556,15 @@ This block has two sub-problems settling at different rates:
 
 **Solution landscape**:
 
-| Category               | Solutions                               | Maturity  | Notes                                                 |
-| ---------------------- | --------------------------------------- | --------- | ----------------------------------------------------- |
-| OSS (community-driven) | MolmoSpaces-Bench, RoboArena, RoboVerse | Early OSS | Ai2, CoRL community, multi-institutional              |
-| OSS (single-vendor)    | Isaac Lab-Arena, LeRobot eval harness   | Early OSS | NVIDIA + Lightwheel; HuggingFace emerging std APIs    |
-| Proprietary            | (none identified as standalone)         | -         | Evaluation typically bundled with sim platforms       |
+| Category               | Solutions                                                | Maturity  | Notes                                              |
+| ---------------------- | -------------------------------------------------------- | --------- | -------------------------------------------------- |
+| OSS (community-driven) | MolmoSpaces-Bench, RoboArena, RoboVerse, WorldOlympiad   | Early OSS | Ai2, CoRL community, multi-institutional           |
+| OSS (single-vendor)    | Isaac Lab-Arena, LeRobot eval harness                    | Early OSS | NVIDIA + Lightwheel; HuggingFace emerging std APIs |
+| Proprietary            | (none identified as standalone)                          | -         | Evaluation typically bundled with sim platforms    |
 
 **Dependency on simulation stack**: Evaluation frameworks inherit the physics engine and rendering engine of their underlying simulator. A benchmark running on Isaac Lab (PhysX/OptiX) tests different physics than one on MuJoCo — results are not directly comparable across simulators. RoboVerse and MolmoSpaces address this by supporting multiple backends.
 
-**Key trade-offs**: Sim-based eval scales but recent audits ([arxiv.org/html/2606.04233](https://arxiv.org/html/2606.04233)) expose shortcut solvability and overfitting in popular benchmarks (LIBERO, CALVIN) — both are "basically solved" with marginal differences (98% vs 99%) uninformative (Reuss 2025). Real-world eval (RoboArena, RoboChallenge Table30) captures deployment-relevant failures but is expensive and slow to scale. World model evaluation is fragmenting across domain-specific benchmarks (EWMBench, DreamGen Bench, WorldModelBench, PBench) with no cross-domain standard. The field is converging on a layered approach: fast sim screening → selective real-world validation.
+**Key trade-offs**: Sim-based eval scales but recent audits ([arxiv.org/html/2606.04233](https://arxiv.org/html/2606.04233)) expose shortcut solvability and overfitting in popular benchmarks (LIBERO, CALVIN) — both are "basically solved" with marginal differences (98% vs 99%) uninformative (Reuss 2025). Real-world eval (RoboArena, RoboChallenge Table30) captures deployment-relevant failures but is expensive and slow to scale. World model evaluation is fragmenting across domain-specific benchmarks (EWMBench, DreamGen Bench, WorldModelBench, PBench) with no cross-domain standard. The field is converging on a layered approach: fast sim screening → selective real-world validation. WorldOlympiad introduces a tripartite evaluation (physics, geometry, interaction) specifically for video-based world models, addressing the gap between video quality metrics and physical fidelity.
 
 **Platform fit**: `Build`
 

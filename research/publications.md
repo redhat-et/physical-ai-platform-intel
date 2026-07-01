@@ -2203,9 +2203,83 @@
 
 ---
 
+### World Models for Robotic Manipulation: A Survey [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.00113)
+
+**Authors**: Fangyuan Wang, Ziyuan Wang, Guorui Pei, Mengshi Zhang, Canxi Liang, Jun Hu, Zhongxuan Li, Jinsong Wu, Ning Han, Zeqing Zhang, Jiaming Qi, Hongmin Wu, Shiyao Zhang, Pai Zheng, Jia Pan, David Navarro-Alarcon, Sichao Liu, Peng Zhou
+
+**Date**: 2026-05
+
+**Summary**: Comprehensive survey organizing world models for robotic manipulation into 5 representation families. Develops a functional taxonomy separating integrated prediction-action models from explicit predictive planners. Reviews 34 manipulation datasets and synthesizes evaluation protocols.
+
+**Key Findings**:
+
+- Defines world model as "action-conditioned predictive system" distinct from perception/policies/value functions; 5 representation families by predicted output type
+- Distinguishes integrated prediction-action models from explicit predictive planners
+- Maps world model roles across training stages (pretraining, post-training, inference adaptation)
+- Identifies open challenges in contact modeling, hallucination control, action alignment, closed-loop benchmarking
+
+**Relevance to World Models**: Most comprehensive manipulation-specific world model survey. The 5-family taxonomy and functional distinction (integrated vs explicit planners) provide a structured framework for comparing robot foundation model approaches (pi0 vs DreamZero vs GR00T). The 34-dataset review informs evaluation infrastructure decisions.
+
+---
+
+### Robots Need More Than VLAs & World Models [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.06556)
+
+**Authors**: Elis Karcini, Faisal Mehrban, Quang Nguyen, Mac Schwager, Arash Ajoudani, Cesar Cadena, Jan Peters, Marco Hutter, Haitham Bou-Ammar
+
+**Date**: 2026-06
+
+**Summary**: Position paper arguing that generalist robot intelligence is not primarily a policy-scaling problem. Identifies four missing interface components — data interfaces for autolabelling, embodiment interfaces for cross-embodiment retargeting, world-model interfaces for physics-grounded 3D reasoning, and reward interfaces for task progress inference. Proposes a research agenda for robots to learn from unstructured behavioral data.
+
+**Key Findings**:
+
+- The bottleneck is converting unstructured behavioral data (human motion, internet video, simulation rollouts) into grounded robot supervision, not model scale
+- Identifies 4 missing interface types: data, embodiment, world-model, reward
+- Discusses World-Action Models (DreamZero, UVA) as emerging paradigm
+- Notes 3DGS simulators enable zero-shot sim-to-real for navigation
+
+**Relevance to World Models**: Critical counterpoint to the "scale solves everything" narrative in robot foundation models. The four-interface framework identifies concrete platform capabilities needed beyond model training — data autolabelling, embodiment retargeting, physics-grounded reasoning, reward inference. Directly informs building-block requirements.
+
+---
+
 ## Sim-to-Real Transfer
 
 *Domain adaptation, style transfer, sim-to-real pipelines*
+
+### HyperSim: A Holistic Sim-To-Real Framework For Robust Robotic Manipulation [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2605.26638)
+
+**Authors**: Junyi Dong, Haotian Luo, Ziwei Xu, Shengwei Bian, Heng Zhang, Sitong Mao, Jingyi Guo, Yang Xu, Wenhao Chen, Qiuyu Feng, Yao Mu, Ping Luo, Shunbo Zhou, Xiaodong Wu
+
+**Date**: 2026-05
+
+**Summary**: End-to-end sim-to-real framework spanning synthetic data generation through policy deployment. Three pillars: high-fidelity environment synthesis, adversarial trajectory generation, and sim-and-real co-training. Achieves 80% (ACT) and 95% (pi0) sim-to-real success rates across 400 real-world task executions, with 35% higher completion under physical perturbations for adversarially trained policies.
+
+**Key Findings**:
+
+- Three-pillar framework: high-fidelity environment synthesis + adversarial trajectory generation + sim-and-real co-training
+- Achieves 80% (ACT) and 95% (pi0) sim-to-real success across 400 real-world trials
+- Adversarial training yields 35% higher completion under physical perturbations
+- Validates that co-training enforces domain-invariant representations bridging sim-real gap
+
+**Relevance to World Models**: Demonstrates a production-viable sim-to-real pipeline achieving >90% success with pi0. The co-training approach (jointly training on sim + real data) is a concrete pattern for platform sim-to-real infrastructure. The adversarial trajectory generation is a form of automated curriculum — a capability the Training Infrastructure building block should support.
+
+---
+
+### Real-is-Sim: Bridging the Sim-to-Real Gap with a Dynamic Digital Twin for Real-World Robot Policy Evaluation [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2504.03597)
+
+**Authors**: Jad Abou-Chakra, Lingfeng Sun, Krishan Rana, Brandon May, Karl Schmeckpeper, Niko Suenderhauf, Maria Vittoria Minniti, Laura Herlant
+
+**Date**: 2025-04 (revised 2025-07)
+
+**Summary**: Inverts the sim-to-real paradigm: instead of training in sim and transferring to real, builds a dynamic digital twin (powered by Embodied Gaussian simulator) that synchronizes with reality at 60Hz. Policies always act on the simulated robot; the physical robot follows simulated joint states. Virtual evaluations shown to be consistent with real-world results.
+
+**Key Findings**:
+
+- Digital twin powered by Embodied Gaussian simulator synchronizing at 60Hz
+- Policies operate on simulated robot — real robot tracks simulated joint states, moving sim-to-real responsibility to twin synchronization
+- Virtual evaluations consistent with real-world results on PushT manipulation task
+- Real-world data can be augmented with virtual rollouts using multiple representation types
+
+**Relevance to World Models**: Paradigm-shifting approach to sim-to-real: rather than bridging a gap, eliminates it by making simulation the ground truth that reality follows. The 60Hz synchronization requirement is a concrete infrastructure spec for the Digital Twin Runtime building block. Gaussian splatting as the simulation substrate connects to the Simulation Engines building block and complements traditional physics engines.
 
 ---
 
@@ -2224,6 +2298,24 @@
 ## Evaluation & Benchmarking
 
 *Benchmark validity, evaluation methodology, sim-to-real correlation*
+
+### WorldOlympiad: Can Your World Model Survive a Triathlon? [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.11129)
+
+**Authors**: Yuke Zhao, Wangbo Zhao, Weijie Wang, Zeyu Zhang, Dakai An, Akide Liu, Yinghao Yu, Jiasheng Tang, Fan Wang, Wei Wang, Bohan Zhuang
+
+**Date**: 2026-06
+
+**Summary**: Unified benchmark evaluating video-based world models across three dimensions: physical faithfulness (physics rule adherence), geometric consistency (3D structure preservation), and interaction fidelity (controllable interactions). Covers gaming, robotics, and real-world scenarios using 1,000 high-quality long videos.
+
+**Key Findings**:
+
+- Tripartite evaluation: physical (MLLM-as-judge for mechanics/thermal/material rules), geometry (Gaussian splatting reconstruction for 3D consistency), interaction (action-prompted rollout coherence)
+- Reveals substantial gaps in SOTA models on physical reasoning, 3D consistency, long-horizon interaction
+- Scalable interpretable evaluation exposing failure modes beyond generic video quality
+
+**Relevance to World Models**: Addresses a critical gap in world model evaluation — most benchmarks assess visual quality rather than physical fidelity. The physics/geometry/interaction decomposition maps directly to the requirements of sim-to-real transfer (physics), digital twins (geometry), and robot manipulation (interaction). Complements the manipulation-specific benchmarks (RoboWM-Bench) with a broader evaluation framework.
+
+---
 
 ### What Are We Actually Benchmarking in Robot Manipulation? [![arXiv](templates/icons/arxiv.svg)](https://arxiv.org/abs/2606.04233)
 
@@ -2271,20 +2363,36 @@
 
 ---
 
+### AI+HW 2035: Shaping the Next Decade [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2603.05225)
+
+**Authors**: Deming Chen, Jason Cong, Azalia Mirhoseini, Christos Kozyrakis, Subhasish Mitra, Jinjun Xiong, Cliff Young, Anima Anandkumar, Michael Littman, Aron Kirschen, Sophia Shao, Serge Leef, Naresh Shanbhag, Dejan Milojicic, Michael Schulte, Gert Cauwenberghs, Jerry M. Chow, Tri Dao, Kailash Gopalakrishnan, Richard Ho, Hoshik Kim, Kunle Olukotun, David Z. Pan, Mark Ren, Dan Roth, Aarti Singh, Yizhou Sun, Yusu Wang, Yann LeCun, Ruchir Puri
+
+**Date**: 2026-03
+
+**Summary**: Vision paper from 30 leading researchers (including Yann LeCun, Tri Dao, Anima Anandkumar) presenting a 10-year roadmap for AI+hardware co-design. Argues the future of AI depends on "scaling intelligence per joule" rather than unbounded compute. Targets 1000x efficiency improvement for training and inference through cross-layer optimization from algorithms to silicon.
+
+**Key Findings**:
+
+- Redefines AI scaling around energy efficiency and system-level integration, not raw compute
+- Targets 1000x efficiency improvement via cross-layer co-design
+- Physical AI applications require end-to-end co-design across models, runtimes, and platforms as prerequisite
+- Envisions platforms re-specializable through software without silicon redesign
+- Recommends coordinated national initiatives and shared infrastructure
+
+**Relevance to World Models**: Sets hardware context for physical AI platform decisions over the next decade. The "intelligence per joule" framing directly impacts edge deployment strategy — physical AI robots cannot scale with datacenter-class power budgets. The 1000x efficiency target implies current robot inference infrastructure (Jetson, etc.) is an early-stage compromise. The cross-layer co-design vision supports platform investments in hardware abstraction and runtime optimization.
+
+---
+
 ## Recent Additions
 
-*Last synthesized: 2026-06-16*
+*Last synthesized: 2026-07-01*
 
-- Cosmos 3: Omnimodal World Models for Physical AI (World Models)
-- Develop Physical AI with NVIDIA Cosmos 3 (World Models)
-- DLLM-JEPA (JEPA)
-- Demo-JEPA (JEPA)
-- Amortizing Planning in World Models (World Models & Model-Based RL)
-- The State of AI in the Enterprise — Deloitte 2026 (Strategy)
-- Goal-VLA (Applications & Use Cases)
-- Do LLMs Build Spatial World Models? (Foundational / Theory)
-- GENE-26.5: Advancing Robotic Manipulation to Human Level (World Models & Model-Based RL)
-- Genesis AI has gone full stack (Strategy)
+- World Models for Robotic Manipulation: A Survey (Robot Foundation Models)
+- Robots Need More Than VLAs & World Models (Robot Foundation Models)
+- WorldOlympiad: Can Your World Model Survive a Triathlon? (Evaluation & Benchmarking)
+- HyperSim: Holistic Sim-to-Real Framework (Sim-to-Real Transfer)
+- Real-is-Sim: Dynamic Digital Twin (Sim-to-Real Transfer)
+- AI+HW 2035: Shaping the Next Decade (Physical AI Deployment)
 
 ---
 

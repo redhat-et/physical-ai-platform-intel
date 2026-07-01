@@ -696,6 +696,35 @@
 
 **Openness assessment**: (to be assessed by oss-health skill)
 
+### Spirit-v1.5: Open Robot Foundation Model
+
+**URL**: [spirit-ai.com](https://www.spirit-ai.com/en/blog/spirit-v1-5)
+
+**Description**: Open robot foundation model ranking #1 on the RoboChallenge Table30 benchmark, outperforming pi0.5 with statistical significance. Weights and codebase open-sourced on GitHub and Hugging Face. Emphasizes that clean, curated data matters more than model scale for real-world robot performance.
+
+**Tech Stack**: Python, PyTorch
+
+**Key Features**:
+
+- #1 on RoboChallenge Table30 benchmark (as of Jan 2026)
+- Open weights and code (GitHub + HuggingFace)
+- Outperforms pi0.5 with statistical significance
+- "Clean data > model scale" design philosophy
+
+**Status**: Active
+
+**Last Updated**: 2026-01
+
+**Building block(s)**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
+
+**Category**: `OSS (single-vendor)`
+
+**Competes with**: OpenPI, Isaac-GR00T, SmolVLA
+
+**Complements**: LeRobot (evaluation/deployment), simulation platforms (training)
+
+**Openness assessment**: (to be assessed by oss-health skill)
+
 ### Cosmos-RL: Reinforcement Learning Framework for Physical AI
 
 **URL**: [github.com/nvidia-cosmos/cosmos-rl](https://github.com/nvidia-cosmos/cosmos-rl)
@@ -1476,7 +1505,9 @@
 - PolicyServer/RobotClient gRPC architecture (~5x faster than REST)
 - Asynchronous inference: robot acts while next chunk computes (~2x task completion speedup)
 - Multiple policy architectures: ACT, Diffusion, VQ-BeT, TDMPC, π0, GR00T N1.5
-- Hardware-agnostic interface from low-cost arms (SO-100) to humanoids
+- Python 3.12+ minimum, transformers v5, `torch.compile` for DiffusionPolicy inference
+- Hardware encoder streaming for video encoding, Slurm compute scripts
+- Supported hardware: SO100, LeKiwi, Koch, HopeJR, OMX, EarthRover, Reachy2, Gamepads, Keyboards, Phones, OpenARM, Unitree G1, reBot B601
 - Dataset ecosystem on HuggingFace Hub
 - vLLM-Omni targeting LeRobot API compatibility
 
