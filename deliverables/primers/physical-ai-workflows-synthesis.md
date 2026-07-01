@@ -35,7 +35,7 @@ Every Physical AI workflow we analyzed — across robotics, video analytics, ind
 Each layer has distinct compute characteristics:
 
 | Layer | Compute Profile | Latency Tolerance | Data Volume |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Data | Batch, GPU-heavy (rendering, generation) | Hours–days | TB-scale (video, synthetic imagery) |
 | Model | Batch, GPU-heavy (training, RL) | Hours–days | GB-scale (curated datasets, checkpoints) |
 | Serving | Dual-mode: batch (throughput) + streaming (latency) | ms–seconds (streaming), minutes (batch) | Continuous streams or batch archives |
@@ -219,7 +219,7 @@ OPERATIONS LAYER
 Mapping which pipeline stages appear across the five workflows:
 
 | Pipeline Stage | Robotics | Video Analytics (RT) | Video/Image (Batch) | Inspection | AV |
-|---|:---:|:---:|:---:|:---:|:---:|
+| --- | :---: | :---: | :---: | :---: | :---: |
 | **DATA LAYER** | | | | | |
 | Video/sensor ingest | ● | ● | ● | ● | ● |
 | Data curation | ● | ○ | ● | ○ | ● |
@@ -264,7 +264,7 @@ Mapping which pipeline stages appear across the five workflows:
 A fundamental architectural pattern emerged: every workflow that involves video/sensor data needs **both** batch and streaming processing, but for different stages.
 
 | Mode | Where It Appears | Characteristics |
-|---|---|---|
+| --- | --- | --- |
 | **Batch / Throughput-Optimized** | Data curation, augmentation, synthetic generation, auto-labeling, model training, video archive search, report generation | GPU-heavy, hours to days, TB-scale, fault-tolerant (restart on failure) |
 | **Streaming / Latency-Optimized** | Live video analytics, robot control loops, AV perception, real-time alerts, edge inference | GPU-efficient, ms latency, continuous, must not drop frames |
 
@@ -294,7 +294,7 @@ Both definitions are useful but for different purposes. This primer adopts the *
 Data maturity describes *what data is available*, independent of where a workflow sits in its lifecycle:
 
 | Data Maturity | Available Data | Typical Techniques | When It Occurs |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Synthetic-only** | CAD models, simulated environments, generated imagery | Domain randomization, style transfer, physics simulation | First deployment of a new use case (any lifecycle phase) |
 | **Synthetic + collected** | Synthetic data plus teleoperation demos, initial field recordings | Mixed training sets, sim-to-real transfer | After initial data collection campaigns |
 | **Operational** | Production sensor data, real-world failure cases, fleet telemetry | Fine-tuning on real data, continuous learning | Established deployments with production feedback loops |
@@ -304,7 +304,7 @@ A workflow can be in Day 2 (Operate) while still at synthetic-only data maturity
 #### The Standard Lifecycle Applied to Physical AI
 
 | Phase | What Happens | Compute Profile | Data Source |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Day 0 (Design/Build)** | Bootstrap from synthetic or collected data. Full pipeline: generate scenes, render data, augment, train from scratch. Validate in simulation. | Heavy GPU (simulation + training), days–weeks | CAD models, synthetic scenes, collected demos, or prior operational data |
 | **Day 1 (Deploy)** | Deploy trained models to staging/production. Package as containerized microservice. Configure behavior rules and inference pipelines. | Light (packaging, config), hours | Model artifacts, deployment configs |
 | **Day 2 (Operate)** | Monitor production performance. Detect accuracy degradation. Collect in-operation data. Trigger incremental retraining. Redeploy improved models. | Event-driven monitoring + occasional GPU (retraining), continuous | Production telemetry, real-world sensor data |
@@ -388,6 +388,7 @@ Based on the workflow patterns identified in Part 1, a Red Hat Physical AI platf
 ├──────────────────────────────────────────────────────────────────┤
 │  AGENTIC SKILLS (Red Hat builds, agentskills.io format)          │
 │  Vendor-agnostic skill interfaces wrapping partner tools         │
+│  Platform: Kagenti (lifecycle, A2A, MCP, AuthBridge)             │
 │  Agent: OpenClaw/Hermes  |  Security: OpenShell                  │
 │  Each skill: SKILL.md + skill-card + evals + signature           │
 ├────────────────────────┬─────────────────────────────────────────┤
@@ -419,7 +420,7 @@ Based on the workflow patterns identified in Part 1, a Red Hat Physical AI platf
 **Red Hat Builds** — components where Red Hat has existing technology, strategic interest, or where vendor neutrality is the value:
 
 | Component | Why Red Hat Builds | Existing Foundation |
-|---|---|---|
+| --- | --- | --- |
 | **Video processing pipeline framework** | Cross-cutting infrastructure needed by all video-related workflows; vendor neutrality (not locked to NVIDIA GPUs); integrates with VLMs and agents | GStreamer is open source; Red Hat has media pipeline expertise from RHEL |
 | **Model serving** | Already invested, core AI platform capability | vLLM, KServe, RHOAI |
 | **Workflow orchestration** | Core platform capability; Kubernetes-native is Red Hat's strength | Tekton, KubeFlow Pipelines, RHOAI Pipelines |
@@ -432,7 +433,7 @@ Based on the workflow patterns identified in Part 1, a Red Hat Physical AI platf
 **Partner Provides** — components where deep domain expertise, model training, or hardware-specific optimization is the value:
 
 | Component | Why Partner | Initial Partner | Swap Candidates |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Data curation** | Evolving rapidly; specialized tooling | NVIDIA Cosmos Curator | Lilac, Argilla, Scale AI |
 | **Data augmentation** | World model expertise, compute-intensive | NVIDIA Cosmos Transfer | Open-source diffusion models |
 | **Synthetic data generation** | Physics simulation, domain-specific | NVIDIA Isaac Sim | Genesis World, MuJoCo MJX |
@@ -446,7 +447,7 @@ Based on the workflow patterns identified in Part 1, a Red Hat Physical AI platf
 Mapping NVIDIA components to Red Hat equivalents for the two priority workflows:
 
 | Function | NVIDIA Component | Red Hat Equivalent | Status |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Workflow orchestration** | OSMO | Tekton Pipelines / KubeFlow Pipelines | Exists, needs Physical AI pipeline templates |
 | **Model serving** | NIM microservices | vLLM + KServe (RHOAI) | Exists |
 | **Model registry** | (none standard) | KubeFlow Model Registry | Exists, needs policy/embodiment metadata |
@@ -458,6 +459,7 @@ Mapping NVIDIA components to Red Hat equivalents for the two priority workflows:
 | **Video processing** | DeepStream SDK 9 | **GStreamer + plugins (NEW)** | Needs building |
 | **VLM integration in pipelines** | RT-VLM (in VSS) | **vLLM pipeline integration (NEW)** | Needs building |
 | **Agentic skills** | NVIDIA Skills (224) | **Red Hat skills (NEW)** | Needs building |
+| **Agent platform** | NemoClaw | Kagenti (K8s-native lifecycle, A2A/MCP, AuthBridge) | Adopt/extend |
 | **Agent runtime** | NemoClaw | OpenClaw / Hermes | Adopt/extend |
 | **Agent security** | OpenShell | OpenShell | Adopt |
 | **Blueprints** | AI Blueprints | **Pipeline templates (NEW)** | Needs building |

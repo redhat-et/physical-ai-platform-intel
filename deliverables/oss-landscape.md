@@ -152,12 +152,20 @@ Candidate open-source projects for each block in the Physical AI Platform archit
 | --- | --- | --- | --- |
 | [KServe](https://github.com/kserve/kserve) | Apache-2.0 | ~3.5K | K8s model serving with autoscaling, canary, multi-model serving; CNCF |
 
-### Agentic Frameworks (Embodied)
+### Agentic Frameworks
 
 | Project | License | Stars | Description |
 | --- | --- | --- | --- |
-| [EmbodiedAgents (EMOS)](https://github.com/automatika-robotics/embodied-agents) | MIT | ~200 | ROS 2 native; LLM/VLM/VLA integration; edge-optimized (Jetson); most mature option |
+| [Kagenti](https://github.com/kagenti/kagenti) | Apache-2.0 | ~110 | Red Hat-backed K8s-native agent platform; A2A protocol, MCP Gateway, AuthBridge zero-trust (SPIFFE/SPIRE + Keycloak); framework-neutral (LangGraph, CrewAI, AG2); AgentCard CRDs for lifecycle |
+| [kagent](https://github.com/kagent-dev/kagent) | Apache-2.0 | ~3K | Solo.io/Istio-founders' K8s-native agent runtime; CNCF Sandbox; CRD-based lifecycle, long-term memory, human-in-the-loop |
+| [EmbodiedAgents (EMOS)](https://github.com/automatika-robotics/embodied-agents) | MIT | ~200 | ROS 2 native; LLM/VLM/VLA integration; edge-optimized (Jetson); most mature embodied option |
 | [mbodied](https://github.com/mbodiai/embodied-agents) | Apache-2.0 | ~285 | Multi-modal model integration into robot stacks; experimental |
+
+### Agent Security & Sandboxing
+
+| Project | License | Stars | Description |
+| --- | --- | --- | --- |
+| [OpenShell](https://github.com/NVIDIA/OpenShell) | Apache-2.0 | — | Secure agent sandbox runtime; used by both NVIDIA NemoClaw and Red Hat Kagenti; managed inference, policy management, sandbox monitoring |
 
 ---
 
@@ -214,7 +222,7 @@ Candidate open-source projects for each block in the Physical AI Platform archit
 | **Physical AI pipeline orchestration** | No OSS sim→train→eval→deploy orchestrator | OSMO (Apache-2.0, custom engine); or compose KubeFlow Pipelines + Argo |
 | **Robot safety guardrails** | No production-grade safety framework for robot policy deployment | RoboGuard (research prototype) |
 | **Robot fleet observability** | No fully OSS equivalent to Foxglove's fleet-level platform | MCAP (format only) + Prometheus + custom dashboards |
-| **Embodied agentic framework** | No dominant OSS framework for physical AI agents | EmbodiedAgents/EMOS (~200 stars, early) |
+| **Embodied agentic framework** | Kagenti (Red Hat) + kagent (CNCF Sandbox) address K8s-native agent lifecycle; OpenShell provides sandboxing. Gap narrows to Physical AI-specific extensions (embodied identity, physical safety) | Kagenti + OpenShell (platform); EmbodiedAgents/EMOS (embodied-specific) |
 
 ---
 
@@ -235,5 +243,7 @@ Candidate open-source projects for each block in the Physical AI Platform archit
 7. **OpenPI weights are NOT Apache-2.0** — model weights are under Google's Gemma Terms of Use, a restrictive non-OSI-approved license. The code is Apache-2.0 but enterprise deployment of weights requires legal review. See [deep dive](oss-landscape-deep-dive.md#openpi-physical-intelligence).
 
 8. **KubeFlow Pipelines is Red Hat's strongest governance position** — Red Hat holds 2 of 5 Steering Committee seats; Google holds zero. This is the natural foundation for Physical AI pipeline orchestration. See [deep dive](oss-landscape-deep-dive.md#kubeflow-pipelines).
+
+9. **Agentic framework gap is closing** — Kagenti (Red Hat-backed, Apache 2.0) provides K8s-native agent lifecycle, A2A/MCP networking, and zero-trust security (SPIFFE/SPIRE + AuthBridge). OpenShell (NVIDIA, Apache 2.0) provides agent sandboxing and is used by both NVIDIA (NemoClaw) and Red Hat (Kagenti). kagent (Solo.io, CNCF Sandbox) is a parallel effort. The remaining gap is Physical AI-specific extensions: embodied agent identity, physical safety guardrails, and real-time constraints.
 
 For detailed project profiles (contributors, governance, lock-in, dependencies, differentiators): see [oss-landscape-deep-dive.md](oss-landscape-deep-dive.md).
