@@ -48,294 +48,7 @@ The repo is organized in three layers:
 
 This notebook is **AI-driven**: the user provides URLs or search terms, and AI assistants extract information, fill templates, and update documents. The goal is minimal manual intervention while maintaining high quality and consistency.
 
-## AI Workflow for Adding Content
-
-### Adding a Publication
-
-When the user provides a publication URL (paper, blog post, video, etc.):
-
-1. **Fetch Content**: Use WebFetch tool to retrieve the content
-2. **Extract Information**:
-   - Title
-   - Authors/Presenter
-   - Publication date (YYYY-MM format)
-   - URL
-   - Type (Paper | Talk | Blog Post | Video)
-   - Duration (for videos, format: MM:SS or HH:MM:SS)
-   - 2-3 sentence summary (following style guide)
-   - 3-5 key points (technical contributions, methods, results, key insights)
-   - Relevance to Physical AI and platform strategy
-3. **For YouTube Videos**:
-   - Only include videos from well-known players/institutions
-   - Types: talks, interviews, news about key players, tutorials
-   - Include key timestamps if valuable sections are identified
-4. **Fill Template**: Use `research/templates/publication-entry.md` as structure
-   - Add a 32x32 icon behind the title that links to the source. Pick the icon from `research/templates/icons/` depending on the source type.
-5. **Add to publications.md**: Insert under appropriate section (see Content Organization below)
-6. **Cross-link**:
-   - If paper mentions new researchers/institutions/companies with significant contributions, add to ecosystem.md
-   - If paper describes new use cases, add to use-cases.md
-   - If paper presents new concept, note in concepts.md
-   - If paper reveals a new building-block requirement, note in building-blocks.md
-   - If any authors/presenters already exist in ecosystem.md, link their names: `[Name](ecosystem.md#anchor)`
-7. **Archive Source**: Save PDF to `research/library/papers/` (see Source Archiving section)
-
-### Adding an Ecosystem Entry
-
-Add organizations and key researchers that are **significant players** in the Physical AI ecosystem. This includes Big Tech divisions, funded startups, active OSS communities, and leading research labs. Do not add authors merely because they co-authored a tracked paper.
-
-When extracting ecosystem information:
-
-1. **Assess Inclusion**: Only add if the person/organization meets at least one criterion:
-   - Originated or significantly advanced a key concept or architecture
-   - Leads a major research group, company, or product in the field
-   - Has a body of highly-cited, influential work in the area
-   - Is a funded startup building Physical AI products
-   - Maintains a significant open-source project in scope
-2. **Extract Information**: Follow fields in `research/templates/ecosystem-entry.md` and `research/templates/solution-entry.md`
-3. **Fill Template**: Use `research/templates/ecosystem-entry.md` for the organization; add `research/templates/solution-entry.md` sub-entries for each notable product/solution
-4. **Add to ecosystem.md**: Insert under appropriate section (Big Tech | Startups | OSS Communities | Research Labs)
-5. **Avoid Duplicates**: Check if entry already exists before adding
-
-### Adding a Project
-
-When the user provides a GitHub URL or project website:
-
-1. **Fetch Information**: Use WebFetch or Bash to get repo/project details
-2. **Extract Information**:
-   - Project name
-   - URL (GitHub or website)
-   - Description (what it does, 1-2 sentences)
-   - Building block(s) it maps to
-   - Tech Stack (which technologies does it use or depend on)
-   - Key features (what makes it notable)
-   - Category: `OSS (community-driven)` | `OSS (single-vendor)` | `Source-available` | `Proprietary`
-   - Status (Active | Maintained | Archived) -- check last commit/release date
-   - Stats (stars, forks, number of recent contributors, key contributing companies -- to understand community health and controlling companies)
-   - Last updated date
-3. **Fill Template**: Use `research/templates/project-entry.md`
-4. **Add to projects.md**: Insert under appropriate building-block category
-5. **OSS Health Assessment**: For GitHub projects, invoke the `oss-health` specialist skill to generate a detailed community health report
-
-### Adding a Use Case
-
-When identifying an application or industry use of Physical AI:
-
-1. **Structure Information**:
-   - Use case name
-   - Vertical tags (Manufacturing, Transport&Logistics, Energy&Utilities, Healthcare, Telecommunications, Retail, FSI, etc.)
-   - Description
-   - Technical requirements (functionality it requires, quantitative performance objectives or constraints, etc.)
-   - Building-block mapping (which building blocks from building-blocks.md are required, with demand level)
-   - Regulatory requirements (safety certifications, data residency, compliance frameworks)
-   - Current solutions (companies/projects working on this)
-   - Research gaps (what's missing or needs improvement)
-2. **Fill Template**: Use `research/templates/use-case-entry.md`
-3. **Add to use-cases.md**: Insert under appropriate use-case section
-4. **Cross-reference**: Update building-blocks.md demand matrices if the use case reveals new requirements
-
-### Adding a Building Block
-
-Building blocks represent platform capabilities that multiple use cases require. Only add a new building block when a capability pattern emerges that does not fit existing blocks.
-
-1. **Assess Need**: A new building block is warranted when:
-   - Multiple use cases require the same underlying capability
-   - No existing block covers the functionality
-   - The capability is platform-level (not application-specific)
-2. **Structure Information**:
-   - Block name and description
-   - Demand matrix (which use cases need it, at what level)
-   - Solution landscape (existing tools/frameworks/services that provide it)
-   - Maturity assessment using controlled vocabulary
-   - Platform fit recommendation (`Build` | `Partner` | `Integrate`)
-3. **Fill Template**: Use `research/templates/building-block-entry.md`
-4. **Add to building-blocks.md**: Insert in appropriate position
-5. **Back-link**: Update use-cases.md entries that map to this block
-
-## Search Strategy
-
-When the user asks to find content on a topic (e.g., "find recent papers on JEPA" or "find startups doing sim-to-real"):
-
-1. **Use WebSearch** for:
-   - Recent papers and preprints
-   - Blog posts and articles
-   - News and announcements
-   - Industry developments
-   - Startup funding rounds and product launches
-
-2. **Search GitHub** (via WebSearch or direct queries) for:
-   - Open-source implementations
-   - Research code releases
-   - Popular frameworks
-
-3. **Search arXiv** specifically:
-   - Use search terms like: `"joint embedding predictive architecture"`, `"energy based models"`, `"world models"`, `"physical AI"`, `"embodied AI"`
-   - Filter by recent submissions (last 3-6 months)
-   - Look for papers from key researchers
-
-4. **Present Findings**: Show user a list of top 5-10 results with titles and brief descriptions, ask which to add
-
-## Content Organization
-
-### building-blocks.md Structure
-
-Platform capability map organized by functional area:
-
-```markdown
-# Building Blocks
-
-## Simulation & Synthetic Data
-[Physics engines, renderers, scene generators, domain randomization]
-
-## World Model Architectures
-[JEPA, generative models, model-based RL, latent dynamics]
-
-## Training Infrastructure
-[Distributed training, data pipelines, experiment tracking]
-
-## Data Management
-[Datasets, data formats, annotation tools, data versioning]
-
-## Deployment & Inference
-[Model serving, edge deployment, real-time inference]
-
-## Evaluation & Benchmarking
-[Benchmarks, metrics, evaluation frameworks]
-
-## Safety & Alignment
-[Safety verification, sim-to-real validation, uncertainty quantification]
-```
-
-Each block includes a demand matrix (use-case requirements), solution landscape, maturity assessment, and platform fit recommendation.
-
-### ecosystem.md Structure
-
-Organized by **player type** with solution-level competitive analysis:
-
-```markdown
-# Ecosystem
-
-## Big Tech
-[Established tech companies with Physical AI initiatives -- with solution sub-entries]
-
-## Startups
-[Venture-backed companies building Physical AI products]
-
-## OSS Communities
-[Open-source communities and foundations]
-
-## Research Labs
-[Universities and research institutions -- with key researchers grouped under their labs]
-```
-
-Each entry includes solutions/products with competitive positioning, not just organizational profiles.
-
-### use-cases.md Structure
-
-Organized by **technical use case** (primary hierarchy) with vertical tags:
-
-```markdown
-# Use Cases
-
-## Robotic Manipulation
-[Pick-and-place, assembly, dexterous manipulation -- tagged: Manufacturing, Logistics]
-
-## Autonomous Navigation
-[Mobile robots, AGVs, drones -- tagged: Logistics, Agriculture, Mining]
-
-## Autonomous Vehicles
-[Self-driving, path planning, sim-to-real -- tagged: Transport]
-
-## Predictive Maintenance
-[Anomaly detection, remaining useful life, condition monitoring -- tagged: Manufacturing, Energy]
-
-## Digital Twins
-[Process simulation, facility modeling, what-if analysis -- tagged: Manufacturing, Energy, Telecom]
-
-## Medical Imaging & Diagnostics
-[Diagnostics, clinical decision support, surgical planning -- tagged: Healthcare]
-
-## Network Optimization
-[Wireless channel modeling, beam prediction, RAN optimization -- tagged: Telecommunications]
-
-## Scientific Simulation
-[Physics simulation, molecular modeling, materials design -- tagged: Research, Pharma]
-
-## Agentic AI
-[Autonomous agents, web agents, tool use, planning with world models -- tagged: Cross-vertical]
-```
-
-Each use case maps to required building blocks and lists regulatory requirements.
-
-### projects.md Structure
-
-Organized by **building block**:
-
-```markdown
-# Projects
-
-## Simulation & Synthetic Data
-[Isaac Sim, Habitat, MuJoCo, etc.]
-
-## World Model Implementations
-[JEPA implementations, DreamerV3, etc.]
-
-## Training Frameworks
-[Distributed training tools, data loaders]
-
-## Datasets & Benchmarks
-[Relevant datasets and evaluation suites]
-
-## Robotics Frameworks
-[ROS 2, manipulation libraries, planning tools]
-
-## Utilities & Tools
-[Supporting tools, visualization, debugging]
-```
-
-Each project includes openness assessment (category, license, governance model).
-
-### publications.md Structure
-
-Organize by **topic**, not chronologically:
-
-```markdown
-# Publications: Papers, Talks, Videos, and Blog Posts
-
-## JEPA (Joint-Embedding Predictive Architecture)
-[Papers, talks, videos related to JEPA]
-
-## Energy-Based Models
-[Papers, talks, videos on EBMs]
-
-## World Models & Model-Based RL
-[Papers on world models, DreamerV3, etc.]
-
-## Simulation & Synthetic Data
-[Papers on sim-to-real, synthetic data generation, domain randomization]
-
-## Robotics & Embodied AI
-[Papers on robot learning, manipulation, navigation]
-
-## Physical AI Platforms & Infrastructure
-[Papers on training infrastructure, deployment, MLOps for Physical AI]
-
-## Foundational / Theory
-[Theoretical foundations, surveys, position papers]
-
-## Recent Additions
-[Last 30 days - move to topic sections after monthly review]
-```
-
-**Video Guidelines**:
-
-- Only include videos from well-known researchers, institutions, or reputable channels
-- Types: conference talks, interviews, news coverage, technical tutorials
-- Include duration and key timestamps if applicable
-
-### concepts.md Structure
-
-Key concepts and architectural patterns across Physical AI scope, not limited to world models.
+Workflows are implemented as skills in `.claude/skills/`. See the Skills section below for the full list. Each skill file contains detailed step-by-step instructions; this file covers only cross-cutting concerns (style, quality, vocabulary).
 
 ## Style Guide
 
@@ -367,7 +80,7 @@ All content must follow these principles:
 
 ### 4. Assume Experience
 
-**Audience**: Decades of research/engineering experience, new to AI
+**Audience**: Decades of research/engineering experience, fairly new to AI
 
 **Do explain**:
 
@@ -451,9 +164,7 @@ Before adding content, verify:
 
 ## Source Archiving
 
-To ensure long-term availability of referenced materials, archive sources locally.
-
-### Library Structure
+Archive sources locally for long-term availability. Library structure:
 
 ```text
 research/library/
@@ -463,27 +174,9 @@ research/library/
   videos/          # Video bookmarks (index only; large files not stored)
 ```
 
-### Naming Convention
+**Naming convention**: `YYYY-MM-DD-descriptive-name.ext` (e.g., `2025-03-15-v-jepa-2.pdf`)
 
-Use the format: `YYYY-MM-DD-descriptive-name.ext`
-
-Examples:
-
-- `2025-03-15-v-jepa-2.pdf`
-- `2026-01-10-nvidia-isaac-sim-pricing-page.png`
-- `2025-11-20-dreamerv3-architecture.svg`
-
-### Size Policy
-
-- **PDFs and images**: Store directly in the appropriate directory
-- **Videos > 100 MB**: Do not store the file; instead add a bookmark entry to `research/library/videos/index.md` with URL, title, date, and duration
-
-### When to Archive
-
-- PDF of every tracked paper (when freely available)
-- Screenshots of vendor product pages that inform competitive analysis
-- Architecture diagrams referenced in building-blocks.md or concepts.md
-- Key figures or tables from papers that are frequently referenced
+**Size policy**: PDFs and images stored directly. Videos > 100 MB: bookmark only in `research/library/videos/index.md`.
 
 ## When to Update vs. Add
 
@@ -502,50 +195,30 @@ Examples:
 - Building-block maturity or platform fit assessment changes
 - Correcting errors or adding missing information
 
-## Maintenance Tasks
-
-### Weekly (If Active)
-
-- Review recent additions for quality
-- Move items from "Recent Additions" to topic sections
-- Check for broken links
-
-### Monthly
-
-- Synthesize new insights into concepts.md
-- Update ecosystem affiliations and recent work
-- Archive or update stale use cases
-- Review building-block demand matrices for accuracy
-
-### As Needed
-
-- Reorganize sections if structure becomes unwieldy
-- Add new categories as research expands
-
 ## Skills
 
-The user interacts with this repo through slash commands backed by skill files in `.claude/skills/`.
+The user interacts with this repo through slash commands backed by skill files in `.claude/skills/`. Each skill contains its own detailed workflow instructions.
 
 ### Intelligence Skills
 
-- **`/company-intel <url-or-name>`** -- Profile a company (exec summary + analyst deep-dive)
-- **`/company-intel-synthesis`** -- Cross-company analysis (coverage heat map, partnership network, trend signals)
-- **`/project-health-eval <url-or-name>`** -- OSS project community health evaluation (CHAOSS metrics, governance, funding)
-- **`/project-tech-eval <url-or-name>`** -- Technical architecture evaluation (dependencies, security, platform fit)
-- **`/project-comparison "A" "B" "C"`** -- Side-by-side comparison per building block with Red Hat recommendation
+- `/company-intel` -- Profile a company
+- `/company-intel-synthesis` -- Cross-company analysis
+- `/project-health-eval` -- OSS project community health evaluation
+- `/project-tech-eval` -- Technical architecture evaluation
+- `/project-comparison` -- Side-by-side comparison with Red Hat recommendation
 
 ### Research Skills
 
-- **`/add <url>`** -- Add a paper, project, ecosystem entry, or other content from a URL
-- **`/search <topic>`** -- Search for papers, projects, startups, or OSS tools on a topic; present results; ask which to add
-- **`/sources`** -- Check preferred sources (arXiv, GitHub, blogs, VC trackers) for new content in last 30 days
-- **`/synthesize`** -- Review recent additions, identify patterns, update concepts.md, organize entries
+- `/add` -- Add content from a URL (paper, project, ecosystem entry, etc.)
+- `/search` -- Search for content on a topic
+- `/sources` -- Check preferred sources for new content (last 30 days)
+- `/synthesize` -- Review recent additions, identify patterns, organize entries
 
-### Specialist Skills (invoked automatically or on request)
+### Specialist Skills (invoked automatically by other skills)
 
-- **`oss-health`** -- Assess open-source project community health (contributors, governance, bus factor)
-- **`solution-analyzer`** -- Compare solutions within a building block on feature dimensions
-- **`block-mapper`** -- Derive building-block requirements from a set of use cases
+- `oss-health` -- OSS project community health assessment
+- `solution-analyzer` -- Solution competitive analysis
+- `block-mapper` -- Building-block cross-reference updates
 
 ### Natural Language
 
@@ -554,16 +227,3 @@ The user interacts with this repo through slash commands backed by skill files i
 3. **Comparing solutions**: "Compare vLLM, NIM, and TensorRT-LLM for the Inference Server block"
 4. **Requesting searches**: "Find startups doing sim-to-real transfer"
 5. **Asking for synthesis**: "What building blocks are needed for robotic manipulation use cases?"
-
-## AI Assistant Role
-
-As AI assistant, your role is to:
-
-- Fetch and extract information accurately
-- Apply templates consistently
-- Maintain style guide standards (including controlled vocabulary)
-- Cross-link related content across all three layers (intelligence reports, platform intelligence, research depth)
-- Keep documents organized and scannable
-- Flag when new building blocks or ecosystem entries may be warranted
-
-When using slash commands, follow the detailed instructions in the skill files (`.claude/skills/`).
