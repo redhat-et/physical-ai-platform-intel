@@ -20,6 +20,7 @@
 3. **NVIDIA as reference architecture**: NVIDIA's Physical AI stack is the most complete reference — use it to validate completeness
 4. **Red Hat existing choices as anchors**: vLLM, KServe, Tekton, KubeFlow, etc. are decided — extend rather than replace
 5. **Pick winners**: Where multiple options exist, name the primary candidate rather than listing all alternatives
+6. **Name Red Hat projects, describe functions for gaps**: Blocks where Red Hat has downstreamed a project (Prometheus, OTel, Perses, Docling, TrustyAI, etc.) name that project — it IS the architecture. Blocks marked [NEW] or [EXT] where no Red Hat choice exists yet describe the logical function only (e.g., "multimodal sensor data ingestion" not "Rerun SDK"). External project-to-block mappings live in `research/building-blocks.md` and `deliverables/intel/projects/`
 
 ## Architecture Structure
 
@@ -57,16 +58,22 @@ Work-   │ (SFT, RLHF, DPO               │ (Imitation Learning, RL,         �
 loads   │  via example AI pipelines)    │  Sim-to-Real Transfer)           │
         ├───────────────────────────────┼──────────────────────────────────┤
         │                               │[NEW] Simulation Engines          │
-        │                               │ (Genesis World, Isaac Lab,       │
-        │                               │  MuJoCo MJX — in-process on GPU) │
+        │                               │ (physics sim, rendering,         │
+        │                               │  scene generation — on GPU)      │
         ├───────────────────────────────┼──────────────────────────────────┤
 Eval    │ LLM Eval & Benchmarks         │[NEW] Policy Eval & Benchmarks    │
-        │ (lm-eval-harness)             │ (LeRobot eval harness,           │
-        │                               │  RoboVerse, RoboArena)           │
+        │ (lm-eval-harness)             │ (sim-based eval, real-world      │
+        │                               │  eval, standardized tasks)       │
         ├───────────────────────────────┼──────────────────────────────────┤
-Data    │ Data Curation                 │[NEW] Physical AI Data            │
-        │ (Docling, example AI          │ (Open X-Embodiment, LeRobot      │
-        │  pipelines)                   │  datasets, Cosmos-Curator)       │
+Data    │ Data Ingestion & Curation     │[NEW] Multimodal sensor data      │
+        │ (Docling, dataset mgmt,       │ ingestion (video, LiDAR, IMU,    │
+        │  example AI pipelines)        │ point clouds, joint states)      │
+        │                               │[NEW] Temporal data visualization │
+        │                               │ & debugging (multi-sensor sync)  │
+        │                               │[EXT] Dataset management          │
+        │                               │ (embodied demos, sim rollouts)   │
+        │                               │[EXT] Data curation & annotation  │
+        │                               │ (trajectory filtering, labeling) │
         ├───────────────────────────────┴──────────────────────────────────┤
 Train   │ Training Frameworks — unchanged for Physical AI                  │
 Infra   │ (KubeFlow Trainer v2 / KFTO, DeepSpeed, PyTorch, Ray/KubeRay)    │
@@ -89,8 +96,8 @@ Infra   │ (KubeFlow Trainer v2 / KFTO, DeepSpeed, PyTorch, Ray/KubeRay)    │
         │ Experiment Tracking (MLflow — Tech Preview in RHOAI 3.4)         │
         │ [EXT] Sim reward curves, sim-fidelity metrics                    │
         ├──────────────────────────────────────────────────────────────────┤
-        │ Observability: Prometheus, OTel, Grafana                         │
-        │ [NEW] Robot fleet telemetry (Foxglove, MCAP format)              │
+        │ Observability: Prometheus, OTel, Perses                          │
+        │ [NEW] Robot/device fleet telemetry                               │
         │ [EXT] Physical safety dashboards, TrustyAI for policy fairness   │
 
 ═══════════════════════════════════════════════════════════════════════════
@@ -258,15 +265,15 @@ Reference table mapping every block to specific sourceable components.
 | Block | Existing (Language AI) | New / Extended (Physical AI) | Status |
 | --- | --- | --- | --- |
 | Training Workloads | SFT, RLHF, DPO pipelines | Imitation Learning, RL, Sim-to-Real Transfer | [NEW] |
-| Simulation Engines | — | Genesis World (Apache 2.0, 29K★, multi-backend), Isaac Lab (NVIDIA), MuJoCo MJX (Apache 2.0) | [NEW] |
-| Policy Eval | lm-eval-harness | LeRobot eval harness (Apache 2.0), RoboVerse (Early OSS), RoboArena (real-world) | [NEW] |
-| Data Curation | Docling | Open X-Embodiment (970K demos), LeRobot datasets, Cosmos-Curator | [NEW] |
+| Simulation Engines | — | [NEW] Physics simulation, rendering, scene generation (run in-process on GPU as training workloads) | [NEW] |
+| Policy Eval | lm-eval-harness | [NEW] Sim-based policy evaluation, real-world evaluation, standardized task benchmarks | [NEW] |
+| Data Ingestion & Curation | Docling, dataset management, example AI pipelines | [NEW] Multimodal sensor data ingestion, temporal data visualization & debugging. [EXT] Dataset management for embodied data, robotics data curation & annotation. Platform stores/manages datasets; datasets themselves are content, not platform components | [NEW]+[EXT] |
 | Training Infra | KFTO / KubeFlow Trainer v2, DeepSpeed, PyTorch, Ray/KubeRay — unchanged | (same) | Existing |
 | Model Registry | KubeFlow Model Registry | [EXT] Policy versioning, multi-embodiment metadata | [EXT] |
 | ML Pipelines | KubeFlow Pipelines, Argo Workflows | [EXT] Sim-eval gating. [GAP] OSMO-like orchestrator (proprietary) | [EXT]+[GAP] |
 | CI/CD + GitOps | Tekton, ArgoCD | [EXT] Policy promotion pipeline | [EXT] |
 | Experiment Tracking | MLflow (TP in RHOAI 3.4) | [EXT] Sim reward curves, sim-fidelity metrics | [EXT] |
-| Observability | Prometheus, OTel, Grafana | [NEW] Foxglove + MCAP (robot fleet telemetry). [EXT] TrustyAI | [NEW]+[EXT] |
+| Observability | Prometheus, OTel, Perses | [NEW] Robot/device fleet telemetry. [EXT] Physical safety dashboards, TrustyAI for policy fairness | [NEW]+[EXT] |
 | MaaS | KServe API (expose) + NIM, OpenAI (consume) | (same) | Existing |
 | Agentic Framework | Kagenti (K8s-native agent lifecycle, A2A/MCP, AuthBridge zero-trust), OpenShell (agent sandboxing) | [EXT] Embodied agent identity, physical safety guardrails, sim-based evals, Physical AI skills | [EXT] |
 | Models & Policies | LLMs, VLMs (via vLLM) | [NEW] VLAs, world models, robot policies, digital twin models (via vLLM-Omni) | [NEW] |

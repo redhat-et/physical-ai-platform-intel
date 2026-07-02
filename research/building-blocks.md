@@ -260,17 +260,22 @@
 
 **Solution landscape**:
 
-(to be populated — research needed on streaming frameworks, ROS2 middleware, industrial IoT gateways)
+| Category               | Solutions                | Maturity         | Notes                                                        |
+| ---------------------- | ------------------------ | ---------------- | ------------------------------------------------------------ |
+| OSS (community-driven) | MCAP                     | Production-ready | Open format adopted by ROS 2, NVIDIA Isaac                   |
+| OSS (single-vendor)    | Rerun SDK                | Production-ready | Multi-rate multimodal logging + visualization; .rrd format   |
+| OSS (single-vendor)    | Foxglove                 | Production-ready | Browser-first observability; MCAP native                     |
+| Proprietary            | Rerun Hub                | Early OSS        | GPU-direct dataloader, SQL catalog (commercial)              |
 
-**Key trade-offs**: (to be populated)
+**Key trade-offs**: Format war between MCAP (open standard, adopted by ROS 2 and NVIDIA) and .rrd (optimized for ML training random access). Rerun differentiates on code-first SDK and training pipeline integration; Foxglove on native ROS integration and fleet observability. Both are single-vendor OSS with proprietary cloud tiers.
 
 **Platform fit**: `Build`
 
 - **Rationale**: Core data infrastructure capability — extends existing OpenShift data pipeline tooling to physical-world data streams. High overlap with existing middleware expertise.
-- **Partnership surface**: Sensor hardware vendors, ROS2 ecosystem.
+- **Partnership surface**: Rerun (SDK visualization), Foxglove (fleet observability), sensor hardware vendors, ROS 2 ecosystem.
 
 **Related blocks**: [Robot Middleware](#robot-middleware), [Digital Twin Runtime](#digital-twin-runtime), [Edge AI Inference Runtime](#edge-ai-inference-runtime)
-**Key ecosystem players**: (to be populated)
+**Key ecosystem players**: Rerun, Foxglove
 **Relevant research**: (to be populated)
 
 ---
@@ -459,15 +464,15 @@ This block has two sub-problems settling at different rates:
 | OSS (single-vendor)    | Foxglove, Formant    | Production-ready | Robot-specific observability/fleet mgmt |
 | Proprietary            | AWS IoT RoboRunner   | Production-ready | AWS; cloud-locked                       |
 
-**Key trade-offs**: Cloud-native fleet management (AWS) scales but creates cloud lock-in. Robot-specific tools (Foxglove, Formant) have better UX for robotics but limited enterprise integration.
+**Key trade-offs**: Cloud-native fleet management (AWS) scales but creates cloud lock-in. Robot-specific tools (Foxglove, Formant) have better UX for robotics but limited enterprise integration. Rerun SDK provides developer-level data visualization and debugging (code-first, multi-rate sensor data) but lacks fleet-level features in OSS tier.
 
 **Platform fit**: `Build`
 
 - **Rationale**: Direct extension of Edge Manager and Advanced Cluster Manager to robot fleets. Observability stack already exists.
-- **Partnership surface**: Foxglove (visualization), robot OEMs.
+- **Partnership surface**: Foxglove (fleet observability), Rerun (data visualization), robot OEMs.
 
 **Related blocks**: [Robot Middleware](#robot-middleware), [Edge AI Inference Runtime](#edge-ai-inference-runtime)
-**Key ecosystem players**: Foxglove, Formant
+**Key ecosystem players**: Foxglove, Formant, Rerun
 **Relevant research**: (to be populated)
 
 ---

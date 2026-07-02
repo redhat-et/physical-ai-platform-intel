@@ -1167,7 +1167,7 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 
 **Type**: `Startup`
 **Stage/Scale**: $58.7M total (Series B $40M, Nov 2025, led by Bessemer). 88 employees. San Francisco
-**About**: Multimodal data and observability platform for robotics — the "Datadog for robots." Co-founded by Adrian Macneil and Roman Shtylman (both ex-Cruise). MCAP open-source logging format adopted as standard in ROS 2 and NVIDIA Isaac. Customers include NVIDIA, Amazon, Anduril, Wayve, Dexterity.
+**About**: Multimodal data and observability platform for robotics — the "Datadog for robots." Co-founded by Adrian Macneil and Roman Shtylman (both ex-Cruise). MCAP open-source logging format adopted as standard in ROS 2 and NVIDIA Isaac. Closed-sourced the viewer in March 2024 (Foxglove 2.0), triggering community forks (Flora, AD-EYE). Customers include NVIDIA, Amazon, Anduril, Wayve, Dexterity.
 
 **Solutions**:
 
@@ -1201,6 +1201,47 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 - **What they need from a platform**: Integration with model training pipelines, fleet management, deployment infrastructure
 
 **Links**: [Website](https://foxglove.dev/), [Funding](https://www.therobotreport.com/foxglove-raises-40m-scale-data-platform-roboticists/), [Foxglove 2.0](https://foxglove.dev/blog/foxglove-2-0-unifying-robotics-observability)
+
+---
+
+### Rerun
+
+**Type**: `Startup`
+**Stage/Scale**: $20.2M total (Seed $17M, Mar 2025, led by Point Nine). ~78 employees. Stockholm, Sweden
+**About**: "The Data Layer for Physical AI" — multimodal data infrastructure for logging, visualizing, querying, and training on sensor data from robots, drones, and autonomous vehicles. Founded 2022 by Nikolaus West (CEO, ex-Volumental), Emil Ernerfeldt (CTO, creator of egui — largest Rust GUI framework), and Moritz Schiebold (COO, ex-Volumental CEO). Chief Architect Jeremy Leibs (ex-Willow Garage, created rosbag format). Team from Apple, AWS, Meta, Unity, Zipline. Open-core model: SDK is OSS (Apache-2.0 + MIT), commercial Rerun Hub for team-scale data catalog + GPU-direct training. Angel investors include Eric Jang (1X VP AI), Wes McKinney (pandas/Arrow creator). Adopted by LeRobot (Hugging Face), NVIDIA PyCuVSLAM, Meta Reality Labs (Project Aria), Google DeepMind (Brush), Unitree.
+
+**Solutions**:
+
+#### Rerun SDK
+
+- **What it does**: Open-source SDK for logging, storing, querying, and visualizing multi-rate, multimodal Physical AI data. Column-chunk .rrd storage format. Built-in viewer (native + WASM browser). SDKs in Python, Rust, C++.
+- **Building blocks covered**: [Sensor Data Ingestion](building-blocks.md#sensor-data-ingestion), [Robot Fleet Management & Observability](building-blocks.md#robot-fleet-management--observability)
+- **Key features (functional)**: Logs images, point clouds, transforms, time series, joint states, video; timeline scrubbing with multi-view synchronization; dataframe/SQL queries; reads MCAP, LeRobot, .rrd formats; Blueprint APIs for programmatic layout; plugin system for custom views
+- **Key features (non-functional)**: 11K GitHub stars, 781 forks, 78 releases. Rust-first (83.6%) for performance. WebAssembly browser viewer. Column-chunk storage 20-30x faster than naive time-series approaches
+- **Competes with**: Foxglove, RViz — on robotics data visualization and debugging
+- **Complements**: LeRobot, ROS 2, any robot middleware; ML training frameworks (PyTorch)
+- **Openness**: `OSS-community` (Apache-2.0 + MIT dual license; no CLA required)
+- **Lock-in vectors**: .rrd format is Rerun-specific (not an industry standard like MCAP)
+- **Source**: [Website](https://rerun.io/), [GitHub](https://github.com/rerun-io/rerun)
+
+#### Rerun Hub
+
+- **What it does**: Commercial data catalog and training platform for Physical AI data. SQL-based querying across recordings, transformation layer (derived columns without copying raw data), GPU-direct dataloader for training (column-aware, codec-aware streaming).
+- **Building blocks covered**: [Data Annotation & Curation for Physical AI](building-blocks.md#data-annotation--curation-for-physical-ai)
+- **Key features (functional)**: SQL queries across recordings (down to columns, time ranges, values), transformations without duplicating raw data, GPU-direct training dataloader, shared viewer and recordings
+- **Key features (non-functional)**: Cloud-hosted; early-access product (GA timing uncertain)
+- **Competes with**: Foxglove Cloud, Scale AI — on robotics data management and curation
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Proprietary transformation engine, cloud-hosted catalog, .rrd format
+- **Source**: [Website](https://rerun.io/)
+
+**Platform relevance**:
+
+- **Partnership surface**: Data visualization and management layer for any Physical AI platform; SDK integrates with LeRobot, ROS 2, PyTorch. Natural complement to OpenShift-based ML pipelines
+- **Competitive surface**: None — Rerun has no platform components
+- **What they need from a platform**: Container runtime for SDK/Viewer deployment, GPU infrastructure for Hub training features, fleet management for edge data collection
+
+**Links**: [Website](https://rerun.io/), [GitHub](https://github.com/rerun-io/rerun), [Blog](https://rerun.io/blog), [$17M Seed announcement](https://techcrunch.com/2025/03/20/reruns-open-source-ai-platform-for-robots-drones-and-cars-revs-up-with-17m-seed/)
 
 ---
 

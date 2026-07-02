@@ -1575,6 +1575,42 @@
 
 ---
 
+## Data Infrastructure
+
+*Tools for logging, storing, visualizing, and querying multimodal sensor data from robots, vehicles, and physical AI systems.*
+
+### Rerun: The Data Layer for Physical AI
+
+**URL**: [github.com/rerun-io/rerun](https://github.com/rerun-io/rerun)
+
+**Description**: Open-source SDK for logging, storing, querying, and visualizing multi-rate, multimodal Physical AI data. Column-chunk .rrd storage format optimized for temporal data with multi-rate sensors. Built-in viewer runs native (desktop) and in-browser (WebAssembly). Positioned as "the missing data infrastructure" between robotics hardware and ML training pipelines.
+
+**Tech Stack**: Rust (83.6%), Python (12.3%), C++ (2.5%), egui (immediate-mode GUI), wgpu (WebGPU/WebGL2 renderer), Apache Arrow (columnar data)
+
+**Key Features**:
+
+- SDKs in Python, Rust, and C++ for logging images, point clouds, transforms, time series, joint states, video
+- Column-chunk .rrd storage with 20-30x time-series speedup over naive approaches
+- Synchronized multi-view visualization with timeline scrubbing and sensor comparison
+- Dataframe and SQL query APIs; reads MCAP, LeRobot, and .rrd formats
+- Blueprint APIs for programmatic layout control; plugin system for custom file types and views
+- WebAssembly browser viewer (no install required for review/sharing)
+- GPU-direct dataloader via commercial Rerun Hub (PyTorch integration, codec-aware streaming)
+
+**Status**: Active
+**Category**: `OSS (single-vendor)` — Rerun Technologies AB controls development; Hub is proprietary
+**License**: Apache-2.0 + MIT (dual license)
+**Stars**: 11,000 | **Forks**: 781 | **Recent Contributors**: ~78 (mostly Rerun employees)
+**Last Updated**: 2026-06-22 (v0.33.1; 78 total releases)
+
+**Building block mapping**: [Sensor Data Ingestion](building-blocks.md#sensor-data-ingestion), [Robot Fleet Management & Observability](building-blocks.md#robot-fleet-management--observability)
+
+**Notable integrations**: LeRobot (Hugging Face), NVIDIA PyCuVSLAM, Meta Reality Labs (Project Aria), Google DeepMind (Brush), Unitree
+
+**Sibling projects**: egui (24K+ stars, MIT, Rust GUI framework — created by Rerun CTO), egui_tiles (543 stars, tiling layout engine), ewebsock (296 stars, Rust WebSocket client)
+
+---
+
 ## Datasets & Benchmarks
 
 *Training datasets, evaluation benchmarks, and data collection tools for world models and robot policies.*

@@ -20,12 +20,14 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 | --- | --- | --- |
 | AMD | [amd.md](deliverables/intel/companies/amd.md) | [amd-deep-dive.md](deliverables/intel/companies/amd-deep-dive.md) |
 | Figure AI | [figure-ai.md](deliverables/intel/companies/figure-ai.md) | [figure-ai-deep-dive.md](deliverables/intel/companies/figure-ai-deep-dive.md) |
+| Foxglove | [foxglove.md](deliverables/intel/companies/foxglove.md) | [foxglove-deep-dive.md](deliverables/intel/companies/foxglove-deep-dive.md) |
 | Google DeepMind | [google-deepmind.md](deliverables/intel/companies/google-deepmind.md) | [google-deepmind-deep-dive.md](deliverables/intel/companies/google-deepmind-deep-dive.md) |
 | Intel | [intel.md](deliverables/intel/companies/intel.md) | [intel-deep-dive.md](deliverables/intel/companies/intel-deep-dive.md) |
 | Intrinsic (Google) | [intrinsic.md](deliverables/intel/companies/intrinsic.md) | [intrinsic-deep-dive.md](deliverables/intel/companies/intrinsic-deep-dive.md) |
 | NVIDIA | [nvidia.md](deliverables/intel/companies/nvidia.md) | [nvidia-deep-dive.md](deliverables/intel/companies/nvidia-deep-dive.md) |
 | Physical Intelligence | [physical-intelligence.md](deliverables/intel/companies/physical-intelligence.md) | [physical-intelligence-deep-dive.md](deliverables/intel/companies/physical-intelligence-deep-dive.md) |
 | Qualcomm | [qualcomm.md](deliverables/intel/companies/qualcomm.md) | [qualcomm-deep-dive.md](deliverables/intel/companies/qualcomm-deep-dive.md) |
+| Rerun | [rerun.md](deliverables/intel/companies/rerun.md) | [rerun-deep-dive.md](deliverables/intel/companies/rerun-deep-dive.md) |
 | Skild AI | [skild-ai.md](deliverables/intel/companies/skild-ai.md) | [skild-ai-deep-dive.md](deliverables/intel/companies/skild-ai-deep-dive.md) |
 
 ### Project Comparisons
@@ -44,6 +46,13 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 | Project | Report | Red Hat Fit |
 | --- | --- | --- |
 | OpenShell (NVIDIA) | [openshell.md](deliverables/intel/projects/openshell.md) | Align |
+
+### Project Evaluations (Data Infrastructure)
+
+| Project | Report | Red Hat Fit |
+| --- | --- | --- |
+| MCAP (Foxglove Technologies) | [mcap.md](deliverables/intel/projects/mcap.md) | Align |
+| Rerun (Rerun Technologies) | [rerun.md](deliverables/intel/projects/rerun.md) | Watch |
 
 ### Project Evaluations (Simulation Engines)
 
