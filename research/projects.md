@@ -2,7 +2,7 @@
 
 > Open-source and proprietary implementations organized by building block
 
-**Last Updated**: 2026-06-15
+**Last Updated**: 2026-07-07
 
 ---
 
@@ -777,11 +777,11 @@
 
 #### Genesis World: Multi-Physics Simulation Platform
 
-**URL**: [github.com/Genesis-Embodied-AI/genesis-world](https://github.com/Genesis-Embodied-AI/genesis-world)
+**URL**: [github.com/Genesis-Embodied-AI/Genesis](https://github.com/Genesis-Embodied-AI/Genesis)
 
-**Description**: Open-source simulation platform for physical AI combining a unified multi-physics engine, photo-realistic renderer (Nyx), and cross-platform compiler (Quadrants) behind a Pythonic API. Started as an academic project (Dec 2024), now backed by [Genesis AI](../research/ecosystem.md#genesis-ai). Sim-to-real correlation of 0.90 Pearson across 14 tasks.
+**Description**: Open-source simulation platform for physical AI combining a unified multi-physics engine, photo-realistic renderer (Nyx), and cross-platform compiler (Quadrants) behind a Pythonic API. Started as an academic project (Dec 2024), now backed by [Genesis AI](../research/ecosystem.md#genesis-ai). Sim-to-real correlation of 0.90 Pearson across 14 tasks. v1.2.1 (July 2026) delivers real-time CPU performance for large scenes (120 FPS with 100 entities / 1,000 geometries) via sparse incremental Hessian updates, adds JointTorqueSensor, and fixes composite-link center-of-mass alignment.
 
-**Tech Stack**: Python, Quadrants compiler (CUDA, ROCm, Metal, Vulkan, x86/ARM64), Nyx renderer
+**Tech Stack**: Python, Quadrants compiler (CUDA, ROCm, Metal, Vulkan, x86/ARM64), Nyx renderer, Luisa (ray tracer), Pyrender (rasterizer)
 
 **Dependencies**:
 
@@ -794,15 +794,18 @@
 
 - Unified multi-physics: Rigid, FEM, MPM, Particle (PBD/SPH), uipc, explicit coupler, SAP — all sharing one scene and state
 - Quadrants compiler: Python kernels JIT-compiled to CUDA, AMD ROCm, Apple Metal, Vulkan, x86/ARM64 via LLVM (forked from Taichi, June 2025)
-- Nyx renderer: real-time path-traced, noise-free 1080p in <4ms; 45% smaller reality gap (FID) than next-best simulator
-- Up to 4.6x runtime speedup and 10x startup speedup vs. initial release
-- Scales from laptop to datacenter GPUs
+- Three rendering paths: Nyx (real-time path-traced, noise-free 1080p in <4ms, 45% lower FID), Luisa (ray tracer), Pyrender (rasterizer)
+- v1.2.x: CPU rigid solver scaling — 120 FPS at 100 entities / 1,000 geometries via sparsity and incremental Hessian updates
+- JointTorqueSensor for measuring joint torques
+- Rich sensor suite: depth cameras, IMU, lidar, tactile, contact force, surface distance, temperature grids
+- Parses URDF, MJCF, OBJ, GLB, USD asset formats
+- Docker support for NVIDIA and AMD GPUs; scales from laptop to datacenter
 
 **Status**: Active
 
-**Stats**: 29.2K stars, 2.8K forks, multi-contributor ([Genesis AI](../research/ecosystem.md#genesis-ai) + community)
+**Stats**: 29.5K stars, 2.8K forks, multi-contributor ([Genesis AI](../research/ecosystem.md#genesis-ai) + community)
 
-**Last Updated**: 2026-06
+**Last Updated**: 2026-07 (v1.2.1)
 
 **Building block(s)**: [Simulation Engines](building-blocks.md#simulation-engines)
 
@@ -961,6 +964,51 @@
 **Competes with**: Isaac Lab, Robosuite, RLBench
 
 **Complements**: MolmoSpaces (as backend), SimplerEnv, PhysX 5
+
+**Openness assessment**: (to be assessed by oss-health skill)
+
+#### Isaac Sim: GPU-Accelerated Robot Simulation Platform
+
+**URL**: [github.com/isaac-sim/IsaacSim](https://github.com/isaac-sim/IsaacSim)
+
+**Description**: NVIDIA's simulation platform on Omniverse for building, testing, training, and deploying AI-powered robots using physically accurate virtual worlds. Open-sourced under Apache 2.0 (previously proprietary). Supports URDF, MJCF, and CAD asset import with GPU-accelerated physics (PhysX 5) and multi-sensor RTX rendering. v6.0.0 (June 2026) adds experimental Newton physics engine support, OpenUSD robot/sensor schemas (engine-agnostic articulation via `NewtonArticulationRootAPI`), MJCF-OpenUSD interop with bidirectional conversion rules, multitick rendering, and NuRec neural rendering. v6.0.1 (June 2026) adds NuRec utilities extension (`isaacsim.replicator.nurec_utils`) with Sparse Pixel Gaussian (SPG) teleoperation support.
+
+**Tech Stack**: Python 3.12 (85%), C++ (12%), CUDA, Kit SDK, OpenUSD, PhysX 5
+
+**Dependencies**:
+
+| Layer            | Engine                    | Acceleration              |
+| ---------------- | ------------------------- | ------------------------- |
+| Physics backend  | PhysX 5, Newton (exp.)    | CUDA (GPU), CPU           |
+| Rendering engine | OptiX / RTX, NuRec (SPG)  | CUDA + RT cores           |
+
+**Key Features**:
+
+- GPU-accelerated physics via PhysX 5 with experimental Newton engine support (engine-agnostic tensor APIs)
+- RTX ray-traced sensor simulation: cameras, depth, LiDAR, radar, ultrasonic (acoustic)
+- v6.0: OpenUSD robot/sensor schemas — `NewtonArticulationRootAPI`, `NewtonMimicAPI` replace PhysX-specific schemas
+- v6.0: MJCF-OpenUSD interop — `MjcToPhysxConversionRule`, `UrdfToMjcPhysxConversionRule`, MuJoCo Menagerie robot assets
+- v6.0: Multitick rendering — cameras and RTX LiDARs scheduled at physics-driven rates and offsets
+- v6.0.1: NuRec neural rendering via SPG graphs with teleoperation support
+- Synthetic data generation: Replicator functional API, episode recorder (HDF5), AI behavior tree generation from natural language
+- Isaac Lab: GPU-accelerated RL, imitation learning, and motion planning framework
+- ROS 2 Bridge with full Windows support; Docker Compose deployment with WebRTC viewer
+- SimReady assets: FANUC (84+ models), Comau robots; Luxonis, SICK, TI sensor assets
+- Apache 2.0 licensed (open-sourced; previously proprietary NVIDIA license)
+
+**Status**: Active
+
+**Stats**: ~3,600 stars, ~497 forks (NVIDIA)
+
+**Last Updated**: 2026-06 (v6.0.1)
+
+**Building block(s)**: [Simulation Engines](building-blocks.md#simulation-engines), [Sim-to-Real Transfer Pipeline](building-blocks.md#sim-to-real-transfer-pipeline)
+
+**Maturity**: Production-ready
+
+**Competes with**: Genesis World, MuJoCo Playground, Gazebo
+
+**Complements**: Isaac Lab, Isaac-GR00T, Newton, PhysX 5, OpenUSD ecosystem, LeRobot
 
 **Openness assessment**: (to be assessed by oss-health skill)
 
@@ -1496,7 +1544,7 @@
 
 **URL**: [github.com/huggingface/lerobot](https://github.com/huggingface/lerobot)
 
-**Description**: HuggingFace's framework for making AI for robotics more accessible with end-to-end learning. Provides models, datasets, and tools including a gRPC-based PolicyServer/RobotClient architecture for distributed inference. Supports imitation learning (ACT, Diffusion, VQ-BeT), RL (HIL-SERL, TDMPC), and VLA models (π0-FAST, π0.5, GR00T N1.5, SmolVLA). Emerging as a de facto standard API for robotics model serving.
+**Description**: HuggingFace's framework for making AI for robotics more accessible with end-to-end learning. Provides models, datasets, and tools including a gRPC-based PolicyServer/RobotClient architecture for distributed inference. Supports imitation learning (ACT, Diffusion, VQ-BeT), RL (gaussian_actor), and VLA/WAM models (π0-FAST, π0.5, GR00T N1.7, SmolVLA, VLA-JEPA, EVO1, MolmoAct2, FastWAM, LingBot-VA). v0.6.0 (July 2026) adds 6 new policy types, 6 new benchmarks, 2x faster dataloading, FSDP checkpointing, depth map support, reward models (SARM), and a rebuilt RL stack.
 
 **Tech Stack**: Python, PyTorch, gRPC, HuggingFace Hub
 
@@ -1504,20 +1552,26 @@
 
 - PolicyServer/RobotClient gRPC architecture (~5x faster than REST)
 - Asynchronous inference: robot acts while next chunk computes (~2x task completion speedup)
-- Multiple policy architectures: ACT, Diffusion, VQ-BeT, TDMPC, π0, GR00T N1.5
-- Python 3.12+ minimum, transformers v5, `torch.compile` for DiffusionPolicy inference
-- Hardware encoder streaming for video encoding, Slurm compute scripts
-- Supported hardware: SO100, LeKiwi, Koch, HopeJR, OMX, EarthRover, Reachy2, Gamepads, Keyboards, Phones, OpenARM, Unitree G1, reBot B601
-- Dataset ecosystem on HuggingFace Hub
+- v0.6.0 policies: ACT, Diffusion, VQ-BeT, TDMPC, π0-FAST, π0.5, GR00T N1.7, SmolVLA, VLA-JEPA, EVO1, MolmoAct2, FastWAM, LingBot-VA
+- v0.6.0 benchmarks: RoboCasa365, RoboTwin 2.0, RoboCerebra, RoboMME, LIBERO-plus, VLABench (plus third-party env plugin discovery via entry points)
+- 2x faster dataloader via parallel decode, uint8 transport, and persistent workers
+- Depth map support with depth unit metadata; language annotation pipeline
+- FSDP checkpoint saving; inline offline validation with train/eval split
+- Reward models (SARM): TOPReward, ROBOMETER with zero-shot configs
+- `lerobot-rollout` CLI decouples policy deployment from data recording
+- Rebuilt RL stack: modular `gaussian_actor` API replacing legacy `sac`
+- Remote training on HF Jobs via `--job.target`; Foxglove visualization support
+- Supported hardware: SO100, SO101, LeKiwi, Koch, HopeJR, OMX, EarthRover, Reachy2, Gamepads, Keyboards, Phones, OpenARM, Unitree G1, reBot B601
+- Dataset ecosystem on HuggingFace Hub; libaom-av1 codec support
 - vLLM-Omni targeting LeRobot API compatibility
 
 **Status**: Active
 
 **Stats**: 23,488 stars, 4,328 forks (HuggingFace)
 
-**Last Updated**: 2026-04
+**Last Updated**: 2026-07 (v0.6.0)
 
-**Building block(s)**: [Model Serving for Physical AI](building-blocks.md#model-serving-for-physical-ai)
+**Building block(s)**: [Model Serving for Physical AI](building-blocks.md#model-serving-for-physical-ai), [Evaluation & Benchmarking](building-blocks.md#evaluation--benchmarking)
 
 **Maturity**: Production-ready
 

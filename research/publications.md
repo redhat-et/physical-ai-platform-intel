@@ -2,7 +2,7 @@
 
 > Papers, talks, videos, and blog posts on Physical AI — world models, robot learning, sim-to-real, and related topics
 
-**Last Updated**: 2026-06-09
+**Last Updated**: 2026-07-07
 
 ---
 
@@ -141,6 +141,23 @@
 - Code and weights available via [HWM_PLDM](https://github.com/kevinghst/HWM_PLDM)
 
 **Relevance to World Models**: Direct follow-up to the JEPA-WMs ablation by the same research group. Validates that hierarchical planning — decomposing long tasks into short sub-goals — is the practical path to L4 closed-loop planning with JEPA world models, rather than extending single-level rollout horizons. The model-agnostic design suggests this is a general solution for latent-space planners, not architecture-specific.
+
+### AdaJEPA: An Adaptive Latent World Model [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.32026)
+
+**Authors/Presenters**: Ying Wang, Oumayma Bounou, [Yann LeCun](ecosystem.md#yann-lecun), Mengye Ren
+
+**Date**: 2026-07
+
+**Summary**: Introduces test-time adaptation for JEPA-based latent world models within an MPC planning loop. After executing each action chunk, uses the observed next-state transition as a self-supervised signal to update the world model before replanning — enabling continuous recalibration under distribution shift with as few as one gradient step per replanning cycle.
+
+**Key Findings**:
+
+- Substantially improves planning success across goal-reaching tasks compared to frozen-model baselines (TD-MPC2, DinoWM, AdaWM)
+- Achieves meaningful adaptation with a single gradient step per MPC replanning cycle, adding negligible computational overhead
+- Addresses a fundamental deployment limitation: frozen latent world models degrade under distribution shift, but continuous self-supervised updates close the prediction-reality gap without extra demonstrations
+- Bridges test-time training literature (TTT, Tent, EATA, CoTTA) with latent world model planning — first to integrate online adaptation directly into the MPC closed loop
+
+**Relevance to World Models**: Tackles the critical gap between training and deployment for JEPA world models. Where LeWorldModel and the JEPA-WMs ablation study optimized the training recipe, and Hierarchical Planning extended the planning horizon, AdaJEPA addresses what happens when the deployed environment diverges from training data. The one-gradient-step adaptation makes it practical for real-time robotics — a necessary ingredient for sim-to-real transfer with latent world models.
 
 ### ACT-JEPA: Novel Joint-Embedding Predictive Architecture for Efficient Policy Representation Learning [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2501.14622)
 
@@ -1196,6 +1213,23 @@
 
 **Relevance to World Models**: Foundational building block for object-centric world models. SlotFormer extends slots to video prediction, Causal-JEPA applies object-level masking using slot-based decomposition, and AXIOM builds hierarchical world models with object-centric representations. The core insight — that scenes should be modeled as compositions of objects rather than monolithic feature vectors — is increasingly central to world models that require causal reasoning and compositional understanding.
 
+### PhysMani: Physics-principled 3D World Model for Dynamic Object Manipulation [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2607.01938)
+
+**Authors/Presenters**: Peng Yun, Shouwang Huang, Hao Li, Jinxi Li, Jianan Wang, Bo Yang
+
+**Date**: 2026-07 (ECCV 2026)
+
+**Summary**: Couples a physics-principled 3D Gaussian world model with a future-aware action policy for manipulating fast, dynamically moving objects in unstructured 3D environments. The world model learns a divergence-free Gaussian velocity field via online optimization for physically grounded future dynamics prediction, while the policy integrates predicted 3D scene dynamics through learnable token-based cross-attention.
+
+**Key Findings**:
+
+- Divergence-free velocity field constraint enforces physical plausibility (mass conservation) in 3D Gaussian dynamics prediction, unlike unconstrained neural velocity estimators
+- Future-aware policy uses cross-attention over predicted 3D scene states, enabling anticipatory actions for fast-moving targets rather than purely reactive control
+- Introduces PhysMani-Bench: 16 dynamic manipulation tasks requiring prediction of object trajectories under gravity, collisions, and deformable contact
+- Superior success rate over strong baselines in both simulation and real-world robot experiments
+
+**Relevance to World Models**: Addresses a gap in current world models for manipulation: most operate in 2D image/video space (Cosmos, DreamZero) or unstructured latent space (JEPA, Dreamer), losing explicit 3D geometry. PhysMani's physics-principled 3D Gaussian approach occupies similar ground to TesserAct but adds explicit physical constraints (divergence-free flow) rather than relying on the model to learn physics implicitly. The online optimization of the velocity field parallels AdaJEPA's test-time adaptation but in 3D scene space. [Local copy](library/papers/2607.01938-physmani.pdf).
+
 ### TesserAct: Learning 4D Embodied World Models [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2504.20995)
 
 **Authors/Presenters**: Haoyu Zhen, Qiao Sun, Hongxin Zhang, Junyan Li, Siyuan Zhou, Yilun Du, Chuang Gan
@@ -1723,6 +1757,23 @@
 
 **Relevance to World Models**: Provides theoretical critique of current world model paradigms from a physics perspective. The argument that "futures must be physically meaningful, not just visually plausible" challenges the video-generation-first approach of Cosmos/Genie. Complements JEPA's latent-space efficiency with explicit physics structure. Early-stage but may influence future architectures.
 
+### Towards Trustworthy Agentic AI: A Comprehensive Survey of Safety, Robustness, Privacy, and System Security [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2605.23989)
+
+**Authors/Presenters**: Jinhu Qi, Muzhi Li, Jiahong Liu, Yuqin Shu, Dianzhi Yu, Shengwei Ma, Wenqian Cui, Yiyang Zhao, Yiyi Chen, Ruoxi Jiang, Irwin King, Zenglin Xu
+
+**Date**: 2026-05
+
+**Summary**: Surveys trustworthiness of agentic AI systems -- LLMs augmented with planning, tool use, memory, and long-horizon interactions -- across two dimensions: safety/robustness and privacy/system security. Maps where risks emerge along the agent workflow (perception, planning, tool execution, memory retrieval) and summarizes stage-targeted mitigation strategies.
+
+**Key Findings**:
+
+- Identifies failure modes specific to multi-step agent trajectories: constraint violations propagate across planning horizons, tool-use amplifies attack surfaces, and memory persistence creates novel privacy risks
+- Consolidates evaluation into a unified metrics-and-benchmarks hub emphasizing both outcome signals (task success) and process signals (constraint violations, trace completeness, adversarial success rates)
+- Open challenges include self-evolving agents, runtime monitoring and verification, privacy-preserving personalization, and the trust-utility trade-off
+- Includes case study of real-world security failures in open-source agentic systems
+
+**Relevance to World Models**: Directly relevant to world model-based planning systems where multi-step rollouts introduce compounding trust risks. The stage-targeted mitigation framework maps to world model deployment: perception risks affect state estimation, planning risks affect trajectory optimization, and tool-use risks affect sim-to-real execution. Complements the "Safety, Security, and Cognitive Risks in World Models" paper (2604.01346) which focuses on world model-specific attacks, while this survey covers the broader agentic context in which world models operate. [Local copy](library/papers/2605.23989-trustworthy-agentic-ai.pdf).
+
 ### Safety, Security, and Cognitive Risks in World Models [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2604.01346)
 
 **Authors/Presenters**: Manoj Parmar
@@ -2126,6 +2177,23 @@
 
 **Relevance to World Models**: The three-tier architecture (System 0/1/2) extends the dual-system pattern seen in GR00T N1 and Gemini Robotics by adding a dedicated sub-neural motor layer (System 0) for balance — functionally similar to the cerebellum vs. cortex separation in biological systems. System 0 can be seen as an implicit dynamics model: it predicts the body's response to actions and corrects in real-time. Tightly coupled to Figure hardware, limiting platform generality.
 
+### ABot-M0: VLA Foundation Model for Robotic Manipulation with Action Manifold Learning [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2602.11236)
+
+**Authors/Presenters**: Yandan Yang, Shuang Zeng, Tong Lin, Xinyuan Chang, Dekang Qi, Junjin Xiao, Haoyun Liu, Ronghan Chen, Yuzhi Chen, Dongjie Huo, Feng Xiong, Xing Wei, Zhiheng Ma, Mu Xu (Alibaba)
+
+**Date**: 2026-02 (revised 2026-04)
+
+**Summary**: Open VLA foundation model from Alibaba targeting the "one-brain, many-forms" paradigm across diverse robot morphologies. Introduces the Action Manifold Hypothesis -- effective robot actions lie on a low-dimensional, smooth manifold -- and proposes Action Manifold Learning (AML) using a DiT backbone to predict clean, continuous action sequences directly, reframing action learning from denoising to projection onto feasible manifolds.
+
+**Key Findings**:
+
+- UniACT-dataset: 6M+ trajectories across 9,500+ hours spanning 20+ embodiments from six public datasets, with systematic curation for cross-morphology training
+- Action Manifold Learning uses DiT to project directly onto feasible action manifolds rather than iterative denoising, improving decoding speed and policy stability over diffusion-based alternatives
+- Dual-stream perception integrates VLM semantics with geometric priors via plug-and-play 3D modules (VGGT, Qwen-Image-Edit) for multi-view spatial reasoning
+- Components operate independently with additive benefits; code and data pipelines to be publicly released
+
+**Relevance to World Models**: First major Chinese Big Tech open VLA, complementing Alibaba's Qwen-RobotWorld world model and Qwen-Robot ecosystem. The Action Manifold Hypothesis offers a distinct alternative to both autoregressive action tokenization (OpenVLA, GR00T) and flow matching (pi0, SmolVLA) -- projecting onto learned manifolds rather than denoising or decoding tokens. The 6M-trajectory UniACT-dataset is a significant open data asset for cross-embodiment research, comparable in scale to Open X-Embodiment but with broader morphology coverage. [Local copy](library/papers/2602.11236-abot-m0.pdf).
+
 ### SmolVLA: A Vision-Language-Action Model for Affordable and Efficient Robotics [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2506.01844)
 
 **Authors/Presenters**: Mustafa Shukor, Dana Aubakirova, Francesco Capuano, Pepijn Kooijmans, Steven Palma, Adil Zouitine, Michel Aractingi, Caroline Pascal, Martino Russi, Andres Marafioti, Simon Alibert, Matthieu Cord, Thomas Wolf, Remi Cadene ([HuggingFace](ecosystem.md#huggingface))
@@ -2244,6 +2312,23 @@
 ## Sim-to-Real Transfer
 
 *Domain adaptation, style transfer, sim-to-real pipelines*
+
+### TwinRL: Digital Twin-Driven Reinforcement Learning for Real-World Robotic Manipulation [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2602.09023)
+
+**Authors/Presenters**: Qinwen Xu, Jiaming Liu, Rui Zhou, Shaojun Shi, Nuowei Han, Zhuoyang Liu, Chenyang Gu, Shuo Gu, Yang Yue, Gao Huang, Wenzhao Zheng, Sirui Han, Peng Jia, Shanghang Zhang
+
+**Date**: 2026-02 (revised 2026-05)
+
+**Summary**: Three-stage post-training framework for VLA manipulation policies using digital twins as exploration guides rather than data sources. Reconstructs high-fidelity digital twins from smartphone-captured scenes, performs parallel RL exploration in the twin to identify informative configurations, then transfers targeted rollouts to the real robot. Achieves near-100% success with only 20 minutes of on-robot interaction.
+
+**Key Findings**:
+
+- Near-100% success on both in-distribution and out-of-distribution configurations across 4 manipulation tasks, with over 30% faster convergence than prior real-world RL methods
+- Digital twin serves as exploration guide, not data augmentation -- identifies failure-prone configurations for targeted human-in-the-loop real-world rollouts
+- Exploration space expansion strategy broadens VLA trajectory distributions beyond what SFT demonstrations cover, addressing the key limitation that SFT constrains exploration
+- Requires only 20 minutes of on-robot interaction data, reconstructing digital twins from smartphone captures rather than CAD models
+
+**Relevance to World Models**: Demonstrates a practical digital twin-to-real pipeline where the twin's primary value is directing exploration rather than replacing real-world data. Contrasts with HyperSim's sim-and-real co-training and Real-is-Sim's 60Hz synchronization -- TwinRL uses the twin episodically for planning exploration, not continuously for data generation. The smartphone-based twin reconstruction lowers the barrier compared to CAD-dependent digital twins (Isaac Sim, Omniverse), making the approach accessible for labs without simulation infrastructure. [Local copy](library/papers/2602.09023-twinrl-vla.pdf).
 
 ### HyperSim: A Holistic Sim-To-Real Framework For Robust Robotic Manipulation [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2605.26638)
 
@@ -2387,6 +2472,10 @@
 
 *Last synthesized: 2026-07-01*
 
+- PhysMani: Physics-principled 3D World Model for Dynamic Object Manipulation (World Models & Model-Based RL)
+- Towards Trustworthy Agentic AI: Safety, Robustness, Privacy, and System Security (Foundational / Theory)
+- TwinRL: Digital Twin-Driven Reinforcement Learning for Real-World Robotic Manipulation (Sim-to-Real Transfer)
+- ABot-M0: VLA Foundation Model with Action Manifold Learning (Robot Foundation Models)
 - World Models for Robotic Manipulation: A Survey (Robot Foundation Models)
 - Robots Need More Than VLAs & World Models (Robot Foundation Models)
 - WorldOlympiad: Can Your World Model Survive a Triathlon? (Evaluation & Benchmarking)

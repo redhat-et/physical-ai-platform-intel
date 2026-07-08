@@ -2,7 +2,7 @@
 
 > Players in Physical AI — their solutions, reference architectures, and platform relevance
 
-**Last Updated**: 2026-07-01
+**Last Updated**: 2026-07-07
 
 ---
 
@@ -13,7 +13,7 @@
 ### NVIDIA
 
 **Type**: `Big Tech`
-**About**: Largest industrial investor in world foundation models via the Cosmos platform. Frames world models as "the ChatGPT moment for robotics." Building a full-stack Physical AI platform spanning world models, simulation, robot foundation models, physics ML, edge inference, and digital twins. An investor in SSI and AMI Labs.
+**About**: Largest industrial investor in world foundation models via the Cosmos platform. Frames world models as "the ChatGPT moment for robotics." Building a full-stack Physical AI platform spanning world models, simulation, robot foundation models, physics ML, edge inference, and digital twins. An investor in SSI and AMI Labs. Released open-source Physical AI agent skills and tools (May 2026, [github.com/NVIDIA/skills](https://github.com/NVIDIA/skills)) covering robotics, AV, vision AI, industrial digital twins, and healthcare — adopted by Pegatron (67% training time reduction), Delta Electronics, Foxconn, and Li Auto.
 
 **Solutions**:
 
@@ -21,8 +21,8 @@
 
 - **What it does**: World foundation models for Physical AI — general-purpose video prediction models trained on 20M hours of real-world data for generating synthetic training data, sim-to-real transfer, and world simulation.
 - **Building blocks covered**: [Latent World Models](building-blocks.md#latent-world-models), [Video Generation / Prediction Models](building-blocks.md#video-generation--prediction-models), [Sim-to-Real Transfer Pipeline](building-blocks.md#sim-to-real-transfer-pipeline)
-- **Key features (functional)**: Cosmos-Predict2.5 (world simulation), Cosmos-Transfer2.5 (sim2real), Cosmos-Reason2 (physical common sense), Cosmos-Tokenizer
-- **Key features (non-functional)**: Trained on 20M hours of video; open-weight models under permissive licensing
+- **Key features (functional)**: Cosmos-Predict2.5 (world simulation), Cosmos-Transfer2 / Transfer2.5 (sim2real from depth/segmentation/edge/HD map inputs), Cosmos-Reason2 (7B physical reasoning VLM, #1 on Hugging Face Physical Reasoning Leaderboard), Cosmos-Tokenizer. Distilled Cosmos Transfer collapses 70-step generation to 1 step for RTX PRO Server deployment
+- **Key features (non-functional)**: Trained on 20M hours of video; open-weight models under permissive licensing; 2M+ total downloads. Adopters include Lightwheel, Moon Surgical, Skild AI, Uber (AV data annotation), Magna (autonomous delivery)
 - **Competes with**: Genie 3, Sora, GAIA series — on synthetic data generation and world simulation
 - **Complements**: Isaac Sim (simulation source), GR00T (policy consumer), Omniverse (rendering)
 - **Openness**: `OSS-single-vendor`
@@ -69,8 +69,8 @@
 
 - **What it does**: Platform for building and operating digital twins — connects 3D design tools, simulation, and AI in a shared virtual environment using USD (Universal Scene Description).
 - **Building blocks covered**: [Digital Twin Runtime](building-blocks.md#digital-twin-runtime), [Simulation Engines](building-blocks.md#simulation-engines)
-- **Key features (functional)**: USD-based interoperability, real-time collaboration, physically accurate rendering, digital twin orchestration, connector ecosystem
-- **Key features (non-functional)**: Cloud and on-prem deployment, multi-GPU scaling
+- **Key features (functional)**: USD-based interoperability, real-time collaboration, physically accurate rendering, digital twin orchestration, connector ecosystem. NuRec libraries add RTX ray-traced 3D Gaussian splatting for large-scale world reconstruction from sensor data. New MJCF-to-OpenUSD SDKs enable interop for 250K+ MuJoCo developers. NuRec integrated into CARLA (150K+ developers), Foretellix AV toolchain, and Isaac Sim 5.0
+- **Key features (non-functional)**: Cloud and on-prem deployment, multi-GPU scaling. DGX Cloud on Azure Marketplace for streaming OpenUSD/RTX at scale
 - **Competes with**: Siemens Xcelerator, Eclipse Ditto — on industrial digital twin capability
 - **Complements**: Isaac Sim (robot simulation layer), Cosmos (world model integration), PhysicsNeMo (physics ML)
 - **Openness**: `Proprietary` (free tier available)
@@ -166,7 +166,7 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 ### Google DeepMind
 
 **Type**: `Big Tech`
-**About**: Leading AI research lab (Alphabet) with multiple world-model-adjacent efforts spanning interactive world models, robotics foundation models, and physics engines. Gemini Omni (May 2026) fuses reasoning, video generation, and world simulation into a unified multimodal model explicitly positioned as a world model.
+**About**: Leading AI research lab (Alphabet) with multiple world-model-adjacent efforts spanning interactive world models, robotics foundation models, and physics engines. Gemini Omni (May 2026) fuses reasoning, video generation, and world simulation into a unified multimodal model explicitly positioned as a world model. Launched the Robotics Accelerator for EMEA (Jun-Sep 2026) — equity-free program for 15 early-stage European robotics startups with access to Gemini Robotics models, up to $350K in Google Cloud credits, and mentorship. Signals intent to build a robotics startup ecosystem around Gemini.
 
 **Solutions**:
 
@@ -510,7 +510,7 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 
 **Type**: `Startup`
 **Stage/Scale**: $2.6B+ raised across three rounds. Valuation $39B (Sep 2025, IPO rumored at similar valuation). Investors: Brookfield, Intel, NVIDIA, Qualcomm, Salesforce, T-Mobile, Microsoft, OpenAI
-**About**: Humanoid robotics company building general-purpose humanoid robots (Figure 02, Figure 03) with in-house VLA models (Helix). BotQ factory now producing 1 robot/hour (55+ Figure 03/week, 12K annual capacity). F.02 retired after BMW Spartanburg deployment (30K+ BMW X3s, 90K+ sheet metal parts with 5mm precision). 350+ units produced with Helix AI. Figure 03 ($20K, Oct 2025) designed for home and enterprise deployment.
+**About**: Humanoid robotics company building general-purpose humanoid robots (Figure 02, Figure 03) with in-house VLA models (Helix). BotQ factory now producing 1 robot/hour (55+ Figure 03/week, 12K annual capacity). F.02 retired after BMW Spartanburg deployment (30K+ BMW X3s, 90K+ sheet metal parts with 5mm precision). 350+ units produced with Helix AI. Figure 03 ($20K, Oct 2025) designed for home and enterprise deployment. BMW expanding deployment from Figure 02 to Figure 03 at Spartanburg plant (Jun 2026), validating the humanoid-in-manufacturing use case at scale.
 
 **Solutions**:
 
@@ -1414,6 +1414,38 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 **Collaborations**: AWS (preferred cloud, Trainium compute), AMD Ventures (GPU alternative), IQT (defense applications)
 
 **Links**: [Website](https://odyssey.ml), [Agora-1](https://odyssey.ml/introducing-agora-1), [Series B coverage](https://techfundingnews.com/odyssey-310m-series-b-nvidia-amazon-amd-ai-world-models/)
+
+---
+
+### NEURA Robotics
+
+**Type**: `Startup`
+**Stage/Scale**: Series C — up to $1.4B raised (Jun 2026, milestone-contingent) at $7B valuation. Largest private financing round by a German company. Investors: Tether (lead), Amazon, NVIDIA, Qualcomm, Bosch, Schaeffler, European Investment Bank. ~1,200 employees
+**About**: German humanoid robotics company building "cognitive robots" with integrated perception and AI. Flagship 4NE-1 humanoid priced at ~$98K. Orderbook and deployment pipeline exceed $1B. Partnership with AWS for global rollout of Neuraverse training platform. Plans to scale to multi-million unit production by 2030 via "Neura Gyms" training environments. Large-scale shipments expected late 2026.
+
+**Solutions**:
+
+#### 4NE-1
+
+- **What it does**: Humanoid robot with integrated cognitive capabilities for industrial and commercial deployment.
+- **Building blocks covered**: [Robot Hardware Platforms](building-blocks.md#robot-hardware-platforms), [Robot Foundation Models](building-blocks.md#robot-foundation-models)
+- **Key features (functional)**: Integrated perception and AI, cognitive robot control
+- **Key features (non-functional)**: ~$98K price point, serial production scaling to multi-million units by 2030
+- **Competes with**: Figure AI Figure 03, Unitree G1/H2, Agility Digit, 1X NEO — on humanoid robots for industrial deployment
+- **Complements**: NVIDIA (investor, simulation/training), AWS (Neuraverse deployment)
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Vertically integrated hardware + software, proprietary Neuraverse platform
+- **Source**: [Website](https://neura-robotics.com/)
+
+**Platform relevance**:
+
+- **Partnership surface**: Humanoid hardware platform for third-party software; AWS/NVIDIA ecosystem alignment
+- **Competitive surface**: Vertically integrated — limited platform interop
+- **What they need from a platform**: Fleet management, sim-to-real training infrastructure, edge deployment, safety certification
+
+**Collaborations**: Amazon (investor + AWS partnership), NVIDIA (investor), Bosch (investor), Schaeffler (investor)
+
+**Links**: [Website](https://neura-robotics.com/), [Series C announcement](https://neura-robotics.com/record-series-c/), [Sifted coverage](https://sifted.eu/articles/neura-robotics-1-4bn-series-c)
 
 ---
 
