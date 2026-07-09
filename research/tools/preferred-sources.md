@@ -171,6 +171,7 @@ Tier 3 — niche, useful for specific building blocks:
 - **Intrinsic (Alphabet)**: https://intrinsic.ai/blog — industrial robotics software
 - **Foxglove**: https://foxglove.dev/blog — robot observability
 - **Formant**: https://formant.io/resources/ — robot fleet management
+- **Mistral AI**: https://mistral.ai/news/ — embodied AI models (Robostral), European LLM company entering robotics
 - **MathWorks**: https://www.mathworks.com/company/newsletters/articles.html — Simulink, digital twins
 
 ### VC & Investor Perspectives

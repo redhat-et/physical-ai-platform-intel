@@ -2,7 +2,7 @@
 
 > Platform capability map for Physical AI — the building blocks a platform needs to support
 
-**Last Updated**: 2026-07-01
+**Last Updated**: 2026-07-09
 
 ---
 
@@ -39,7 +39,7 @@
 
 **Related blocks**: [Video Generation Models](#video-generation--prediction-models), [Robot Foundation Models](#robot-foundation-models), [Simulation Engines](#simulation-engines)
 **Key ecosystem players**: [Meta AI](ecosystem.md#meta-ai-fair), [AMI Labs](ecosystem.md#ami-labs), [BeingBeyond](ecosystem.md#beingbeyond), [Sereact](ecosystem.md#sereact)
-**Relevant research**: [JEPA concepts](concepts.md#jepa-joint-embedding-predictive-architecture), [publications](publications.md#jepa-joint-embedding-predictive-architecture)
+**Relevant research**: [JEPA concepts](concepts.md#jepa-joint-embedding-predictive-architecture), [publications](publications.md#jepa-joint-embedding-predictive-architecture), [Active Inference concepts](concepts.md#active-inference)
 
 ---
 
@@ -61,11 +61,11 @@
 
 **Solution landscape**:
 
-| Category               | Solutions                             | Maturity         | Notes                                       |
-| ---------------------- | ------------------------------------- | ---------------- | ------------------------------------------- |
-| OSS (community-driven) | (none identified)                     | -                | -                                           |
-| OSS (single-vendor)    | Cosmos-Predict2.5, Cosmos-Transfer2.5 | Production-ready | NVIDIA controls; open weights, permissive   |
-| Proprietary            | Qwen-RobotWorld, GAIA-3, Genie 3      | Early OSS        | Alibaba, Wayve, Google DeepMind             |
+| Category               | Solutions                                             | Maturity         | Notes                                     |
+| ---------------------- | ----------------------------------------------------- | ---------------- | ----------------------------------------- |
+| OSS (community-driven) | (none identified)                                     | -                | -                                         |
+| OSS (single-vendor)    | Cosmos-Predict2.5, Cosmos-Transfer2.5                 | Production-ready | NVIDIA controls; open weights, permissive |
+| Proprietary            | Qwen-RobotWorld, GAIA-3, Genie 3, RynnWorld-Teleop    | Early OSS        | Alibaba, Wayve, Google DeepMind           |
 
 **Key trade-offs**: High visual fidelity enables downstream policy training but at significant compute cost (~51 ZFLOPs for full WAM stack vs ~6.9 ZFLOPs for VLA stack). Autoregressive generation drifts over long horizons. Hardware acceleration (CUDA) creates vendor lock-in. Fast-WAM finding suggests video generation may be skippable at inference — pending real-robot validation.
 
@@ -98,11 +98,11 @@
 
 **Solution landscape**:
 
-| Category               | Solutions                                                          | Maturity  | Notes                                                                        |
-| ---------------------- | ------------------------------------------------------------------ | --------- | ---------------------------------------------------------------------------- |
-| OSS (community-driven) | OpenVLA, SmolVLA, Spirit-v1.5                                      | Early OSS | Community-driven open VLA baselines; Spirit-v1.5 #1 on RoboChallenge Table30 |
-| OSS (single-vendor)    | GR00T N1.7, OpenPI (pi0/pi0.5/pi0.7), DreamZero, LingBot-VA        | Early OSS | NVIDIA, Physical Intelligence, Ant Group                                     |
-| Proprietary            | Gemini Robotics, GEN-1, Qwen-RobotManip, Being-H0.7, Cortex 2.0    | Early OSS | Google, Generalist AI, Alibaba, BeingBeyond, Sereact                         |
+| Category               | Solutions                                                                             | Maturity  | Notes                                                                        |
+| ---------------------- | ------------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------------------- |
+| OSS (community-driven) | OpenVLA, SmolVLA, Spirit-v1.5                                                         | Early OSS | Community-driven open VLA baselines; Spirit-v1.5 #1 on RoboChallenge Table30 |
+| OSS (single-vendor)    | GR00T N1.7, OpenPI (pi0/pi0.5/pi0.7), DreamZero, LingBot-VA                           | Early OSS | NVIDIA, Physical Intelligence, Ant Group                                     |
+| Proprietary            | Gemini Robotics, GEN-1, Qwen-RobotManip, Being-H0.7, Cortex 2.0, Robostral Navigate   | Early OSS | Google, Generalist AI, Alibaba, BeingBeyond, Sereact, Mistral AI (nav-only)  |
 
 **Key trade-offs**: VLAs (pi0) leverage internet-scale pretraining but lack physics understanding. WAMs (DreamZero) learn dynamics from video but cost ~7.4x more to train. MoT emerging as dominant architecture for both VLAs and WAMs. VLA+WAM hybrids (Being-H0.7, Cortex 2.0, Pi-0.7) converging. Frontier gap: closed-weight VLAs (Gemini, Pi-0.5) exhibit zero-shot open-world behavior that open-weight models cannot yet match.
 
@@ -112,7 +112,7 @@
 - **Partnership surface**: NVIDIA (GR00T), Physical Intelligence (OpenPI), Alibaba (Qwen-Robot suite); LeRobot as integration framework.
 
 **Related blocks**: [Latent World Models](#latent-world-models), [Model Serving for Physical AI](#model-serving-for-physical-ai), [Edge AI Inference Runtime](#edge-ai-inference-runtime)
-**Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia), [Physical Intelligence](ecosystem.md#physical-intelligence-π), [Google DeepMind](ecosystem.md#google-deepmind), [Alibaba](ecosystem.md#alibaba-tongyi-lab), [BeingBeyond](ecosystem.md#beingbeyond), Spirit AI
+**Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia), [Physical Intelligence](ecosystem.md#physical-intelligence-π), [Google DeepMind](ecosystem.md#google-deepmind), [Alibaba](ecosystem.md#alibaba-tongyi-lab), [BeingBeyond](ecosystem.md#beingbeyond), [Mistral AI](ecosystem.md#mistral-ai), Spirit AI
 **Relevant research**: [publications](publications.md#robot-foundation-models)
 
 ---

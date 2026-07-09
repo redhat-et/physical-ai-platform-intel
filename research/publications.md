@@ -2,7 +2,7 @@
 
 > Papers, talks, videos, and blog posts on Physical AI — world models, robot learning, sim-to-real, and related topics
 
-**Last Updated**: 2026-07-07
+**Last Updated**: 2026-07-09
 
 ---
 
@@ -1230,6 +1230,23 @@
 
 **Relevance to World Models**: Addresses a gap in current world models for manipulation: most operate in 2D image/video space (Cosmos, DreamZero) or unstructured latent space (JEPA, Dreamer), losing explicit 3D geometry. PhysMani's physics-principled 3D Gaussian approach occupies similar ground to TesserAct but adds explicit physical constraints (divergence-free flow) rather than relying on the model to learn physics implicitly. The online optimization of the velocity field parallels AdaJEPA's test-time adaptation but in 3D scene space. [Local copy](library/papers/2607.01938-physmani.pdf).
 
+### Bridge-WA: Predicting Where and How the World Changes for Robotic Action [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2607.02195)
+
+**Authors/Presenters**: Yongjie Bai, Hanting Wang, Mingtong Dai, Qijun Zhong, Yang Liu, Liang Lin
+
+**Date**: 2026-07
+
+**Summary**: Lightweight world-action framework that distills a frozen future-change teacher into three compact priors — future tokens (intended outcomes), change maps (where to intervene), and motion-flow maps (local transition direction) — then discards the teacher at inference. A WorldBridge module integrates these priors into the action transformer via multi-source attention memories and spatial-temporal biases.
+
+**Key Findings**:
+
+- Distillation-based approach avoids dense future-image generation at deployment; the frozen teacher is training-only, keeping inference lightweight
+- Three complementary priors decompose "what changes" into semantic (future tokens), spatial (change maps), and dynamic (motion-flow) components
+- Evaluated on VLABench, RoboTwin2.0, LIBERO-Plus, and real-robot settings; improves task success rate and progress across all benchmarks
+- Particularly strong under out-of-distribution visual shifts (background, lighting, distractors) — change/flow maps suppress nuisance appearance factors
+
+**Relevance to World Models**: Occupies a middle ground between full world-action models (DreamZero's 14B joint video-action diffusion) and lightweight VLAs: instead of generating dense future frames, Bridge-WA distills world knowledge into compact spatial-temporal priors that condition the action policy. This parallels the trend toward efficient world-model integration seen in VLA-MBPO and Goal-VLA, but uses explicit change-map and flow-map representations rather than latent rollouts or goal images. The nuisance-suppression property (focusing on scene changes rather than full reconstruction) echoes DINO-WM's approach to zero-shot planning through feature-space prediction. [Local copy](library/papers/2607.02195-bridge-wa.pdf).
+
 ### TesserAct: Learning 4D Embodied World Models [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2504.20995)
 
 **Authors/Presenters**: Haoyu Zhen, Qiao Sun, Hongxin Zhang, Junyan Li, Siyuan Zhou, Yilun Du, Chuang Gan
@@ -1263,6 +1280,23 @@
 - Epistemic foraging drives exploration: agents seek states that maximize information gain, not just reward
 
 **Relevance to World Models**: Represents a fundamentally different paradigm from both JEPA (energy-based SSL) and Dreamer (RSSM-based RL). Active Inference treats perception and action as two sides of the same coin — both minimize free energy. The object-centric structure parallels Causal-JEPA but from Bayesian rather than SSL foundations. If validated at real-world scale, could complement JEPA for representation learning and Cosmos for synthetic data as a third paradigm for embodied AI.
+
+### What Type of Inference is Active Inference? [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.04935)
+
+**Authors/Presenters**: Wouter W. L. Nuijten, Mykola Lukashchuk, Thijs van de Laar, Bert de Vries
+
+**Date**: 2026-06
+
+**Summary**: Proves that Variational Free Energy (VFE) of the augmented generative model decomposes into the VFE of the predictive model plus explicit entropy-correction terms, making the Expected Free Energy (EFE) contribution transparent. Derives a message-passing algorithm for EFE-based planning and validates on grid-world environments that both planning and epistemic corrections are necessary for full performance.
+
+**Key Findings**:
+
+- Formal decomposition: VFE of the augmented model = VFE of the predictive model + entropy-correction terms, rendering EFE's role in planning analytically transparent
+- Full EFE-based planning requires two distinct corrections: a planning correction (turning marginal inference into policy optimization) and epistemic corrections (information-seeking behavior)
+- Message-passing implementation enables tractable EFE-based planning with well-defined ablations — removing either correction type degrades performance
+- Grid-world experiments confirm that full EFE planning outperforms ablations omitting planning or epistemic corrections, empirically validating the theoretical decomposition
+
+**Relevance to World Models**: Provides theoretical clarity for [Active Inference](concepts.md#active-inference) planning — the EFE objective that unifies goal-directed and exploratory behavior is formally shown to be variational inference with specific corrections. The decomposition into planning vs. epistemic corrections parallels the exploration-exploitation tradeoff in model-based RL (DreamerV3, TD-MPC) but derived from first principles rather than engineered. The message-passing formulation offers a path toward scalable Active Inference planning, addressing the key open question of whether the framework can move beyond small-scale demonstrations (cf. AXIOM).
 
 ### Agent World Model: Infinity Synthetic Environments for Agentic Reinforcement Learning [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2602.10090)
 
@@ -1317,6 +1351,23 @@
 - No independent benchmarks or paper published — demos are impressive but unverified
 
 **Relevance to World Models**: GENE-26.5 represents a third architectural paradigm for robotics (flow matching) alongside VLAs (π0, GR00T) and WAMs (DreamZero). Its tight coupling with Genesis World simulation creates a sim-to-real pipeline similar to NVIDIA's but with a cross-platform compiler (Quadrants) targeting AMD ROCm and Apple Metal in addition to CUDA — a concrete example of hardware-neutral simulation. The full-stack approach (model + hardware + simulation + data) raises the same vertical integration questions as NVIDIA's stack.
+
+### RynnWorld-Teleop: An Action-Conditioned World Model for Digital Teleoperation [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2607.06558)
+
+**Authors/Presenters**: Haoyu Zhao, Xingyue Zhao, Hangyu Li, Biao Gong, Kehan Li, Siteng Huang, Xin Li, Deli Zhao, Zhongyu Li ([Alibaba](ecosystem.md#alibaba-tongyi-lab) DAMO Academy)
+
+**Date**: 2026-07
+
+**Summary**: Introduces "digital teleoperation" — replaces the physical robot during data collection with a generative world model driven by an operator's hand-pose stream. A video Diffusion Transformer synthesizes egocentric robot video from a single reference image, conditioned on depth-aware skeletal hand poses. Recorded poses serve as embodiment-agnostic action labels transferable to any target robot via retargeting, producing complete state-action trajectories for imitation learning.
+
+**Key Findings**:
+
+- Depth-aware skeletal conditioning + progressive human-to-robot training on a video DiT, with streaming autoregressive distillation compressing generation to single-pass inference at 40+ FPS on a single H100
+- Policies trained exclusively on RynnWorld-Teleop-generated data achieve zero-shot sim-to-real transfer across dexterous and bimanual manipulation tasks — no real-world demonstrations required
+- Mixing digitally teleoperated data with real-world datasets consistently improves success rates, validating the approach as both standalone and augmentation
+- Embodiment-agnostic action representation: hand poses retarget to arbitrary robot morphologies, decoupling data collection from specific hardware
+
+**Relevance to World Models**: Proposes a fundamentally different data collection paradigm — rather than teleoperating a physical robot or training in simulation, the world model itself becomes the environment. Architecturally related to Qwen-RobotWorld (language-conditioned video generation for cross-embodiment transfer) but uses hand-pose conditioning instead of language, enabling real-time interactive control. The zero-shot sim-to-real results without any real-world data parallel HyperSim's co-training approach but eliminate the real-world data requirement entirely. Practical implications for the Data Collection & Curation building block: lowers hardware barriers to demonstration collection and enables scalable data generation from human operators without robots. [Local copy](library/papers/2607.06558-rynnworld-teleop.pdf).
 
 ---
 
@@ -2472,6 +2523,8 @@
 
 *Last synthesized: 2026-07-01*
 
+- Bridge-WA: Predicting Where and How the World Changes for Robotic Action (World Models & Model-Based RL)
+- RynnWorld-Teleop: Action-Conditioned World Model for Digital Teleoperation (World Models & Model-Based RL)
 - PhysMani: Physics-principled 3D World Model for Dynamic Object Manipulation (World Models & Model-Based RL)
 - Towards Trustworthy Agentic AI: Safety, Robustness, Privacy, and System Security (Foundational / Theory)
 - TwinRL: Digital Twin-Driven Reinforcement Learning for Real-World Robotic Manipulation (Sim-to-Real Transfer)

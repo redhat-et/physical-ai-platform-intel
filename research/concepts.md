@@ -296,9 +296,11 @@ Active Inference is a biology-inspired framework for world models based on Karl 
 
 **vs. LLM-based planning**: LLMs plan via token generation; Active Inference plans via variational inference over future trajectories. Active Inference has principled uncertainty quantification built in; LLMs do not.
 
-### Active Inference Current State (as of 2026-04)
+### Active Inference Current State (as of 2026-07)
 
 Emerging paradigm with strong theoretical foundations but limited scale demonstrations. [Verses AI](ecosystem.md#verses-ai) reported AXIOM outperforming [Google DeepMind](ecosystem.md#google-deepmind) on Atari "Gameworld 10k" challenge. The hierarchical agent architecture is a fundamentally different approach to robot control — if validated at scale, it could complement JEPA (for representation learning) and Cosmos (for synthetic data) as a third paradigm for embodied AI. Karl Friston's involvement provides deep neuroscience grounding. Key open question: whether the framework can scale to complex, high-dimensional real-world tasks beyond arcade games and simple robotics.
+
+Recent theoretical progress: [Nuijten et al. (2026)](publications.md#what-type-of-inference-is-active-inference-) formally proved that EFE-based planning decomposes into standard variational inference plus explicit planning and epistemic correction terms, yielding a tractable message-passing algorithm. This decomposition clarifies which components of Active Inference are essential — both planning corrections (policy optimization) and epistemic corrections (information-seeking) are required for full performance.
 
 ---
 

@@ -2,7 +2,7 @@
 
 > Open-source and proprietary implementations organized by building block
 
-**Last Updated**: 2026-07-07
+**Last Updated**: 2026-07-09
 
 ---
 
@@ -366,17 +366,18 @@
 
 **URL**: [github.com/nvidia/Cosmos](https://github.com/nvidia/Cosmos)
 
-**Description**: NVIDIA's unified omnimodal world model platform combining vision-language reasoning, video/audio generation, and action prediction in a single Mixture-of-Transformers architecture. Supersedes the separate Predict/Transfer/Reason model repos with a unified framework supporting text, image, video, audio, and action modalities.
+**Description**: NVIDIA's unified omnimodal world model platform combining vision-language reasoning, video/audio generation, and action prediction in a single Mixture-of-Transformers architecture. Released May 31, 2026 at GTC Taipei. Supersedes the separate Predict/Transfer/Reason model repos with a unified framework supporting text, image, video, audio, and action modalities.
 
 **Tech Stack**: Python, PyTorch, Hugging Face Diffusers, vLLM, vLLM-Omni, Qwen3-VL (base for Nano/Super)
 
 **Key Features**:
 
-- Three model scales: Edge (4B), Nano (16B), Super (64B) with dual-tower MoT architecture
+- Three model scales: Nano (16B: 8B reasoner + 8B generator), Super (64B: 32B reasoner + 32B generator), Edge (2B, announced for later release)
 - Five open model checkpoints: Super, Nano, Super-Text2Image, Super-Image2Video, Nano-Policy-DROID
 - Five curated synthetic datasets (PhyxSim, RobotSim, DriveSim, SynHuman, Warehouse) on HuggingFace
+- Available on Hugging Face under OpenMDW 1.1 license (commercial use permitted)
 - Cosmos-HUE evaluation benchmark for Physical AI video generation
-- OpenMDW-1.1 License (open weights, commercial use permitted)
+- ABB Robotics, FANUC, KUKA, Yaskawa (2M+ combined robot install base) using Omniverse + Isaac with Cosmos
 
 **Status**: Active
 
@@ -498,18 +499,19 @@
 
 **URL**: [github.com/NVIDIA/Isaac-GR00T](https://github.com/NVIDIA/Isaac-GR00T)
 
-**Description**: NVIDIA's open foundation model for generalist humanoid robot skills. VLA model taking multimodal input (language instructions + camera images) and outputting manipulation actions. Dual-system architecture with fast reactive control and slow deliberative planning. Latest version N1.7 (April 2026) built on Cosmos-Reason2-2B backbone with 32-layer DiT for low-level motor control. GR00T N2 (previewed GTC 2026, coming end 2026) will be built on DreamZero WAM architecture with 2x generalization improvement.
+**Description**: NVIDIA's open foundation model for generalist humanoid robot skills. VLA model taking multimodal input (language instructions + camera images) and outputting manipulation actions. Dual-system architecture with fast reactive control and slow deliberative planning. Latest version N1.7 (April 2026) built on Cosmos-Reason2-2B backbone (Qwen3-VL architecture, replacing Eagle) with 32-layer DiT for low-level motor control. GR00T N2 (previewed GTC 2026, coming end 2026) will be built on DreamZero WAM architecture with 2x generalization improvement.
 
-**Tech Stack**: Python, PyTorch, CUDA, Isaac Lab, LeRobot integration
+**Tech Stack**: Python, PyTorch, CUDA, Isaac Lab, LeRobot integration, ONNX, TensorRT
 
 **Key Features**:
 
 - Open VLA foundation model for humanoid manipulation with dual-system (reactive + deliberative) architecture
-- N1.7 (April 2026): 3B parameters, Cosmos-Reason2-2B backbone, 32-layer DiT for motor control
+- N1.7 (April 2026): 3B parameters, Cosmos-Reason2-2B backbone (Qwen3-VL architecture), 32-layer DiT for motor control
+- N1.7 expanded capabilities: state/action dimensions from 29 to 132, action_horizon from 16 to 40; full ONNX and TensorRT export support
 - N2 Preview (GTC 2026): Based on DreamZero WAM architecture; 2x generalization vs VLAs; #1 on MolmoSpaces and RoboArena
 - 40% task success boost from synthetic data (Isaac Lab, MimicGen)
 - Adopted by 1X, Agility, Figure AI, Boston Dynamics, Unitree, Sanctuary AI, Humanoid, LG Electronics, NEURA, Noble Machines
-- LeRobot integration: NVIDIA + HuggingFace collaboration integrating Isaac/GR00T into LeRobot framework
+- LeRobot integration (July 6, 2026): NVIDIA + HuggingFace collaboration — Isaac Teleop for demo data collection, LeRobot as common library, GR00T N1.7 as humanoid VLA policy
 - Big 4 industrial robotics (ABB, FANUC, YASKAWA, KUKA) integrating Omniverse + Isaac for virtual commissioning
 - N1.7 (April 2026): Apache 2.0 licensed — fully commercially licensable
 - Prior versions: NVIDIA Open Model License (commercial use permitted)
@@ -518,7 +520,7 @@
 
 **Stats**: 6,568 stars, 1,095 forks, 34 contributors (NVIDIA)
 
-**Last Updated**: 2026-05
+**Last Updated**: 2026-07 (N1.7 + LeRobot integration)
 
 **Building block(s)**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
 
@@ -529,6 +531,39 @@
 **Complements**: Isaac Lab simulation, LeRobot serving framework, vLLM-Omni
 
 **Openness assessment**: (to be assessed by oss-health skill)
+
+### Isaac GR00T Reference Humanoid Robot
+
+**URL**: [nvidianews.nvidia.com/news/nvidia-open-humanoid-robot-reference-design](https://nvidianews.nvidia.com/news/nvidia-open-humanoid-robot-reference-design)
+
+**Description**: First open humanoid robot reference design, announced June 1, 2026 at GTC Taipei. Combines Unitree H2 Plus chassis with Sharpa Wave five-finger tactile hands and NVIDIA Jetson AGX Thor T5000 onboard compute. Ships the full Isaac stack: Isaac Sim, Isaac Lab, Cosmos, ROS middleware, and CUDA-X libraries. Intended as a research platform for academic and industry partners.
+
+**Tech Stack**: Unitree H2 Plus chassis, Sharpa Wave tactile hands, NVIDIA Jetson AGX Thor T5000, Isaac Sim, Isaac Lab, Cosmos, ROS, CUDA-X
+
+**Key Features**:
+
+- Open reference design: ~6ft, ~150 lbs, 75 DOF
+- Sharpa Wave five-finger tactile hands for dexterous manipulation
+- Jetson AGX Thor T5000 onboard compute (Blackwell, 2070 FP4 TFLOPS)
+- Full Isaac software stack pre-integrated
+- Research partners: Ai2, ETH Zurich, Stanford, UCSD
+- Available from Unitree late 2026
+
+**Status**: Announced
+
+**Stats**: NVIDIA + Unitree + Sharpa Wave
+
+**Last Updated**: 2026-06
+
+**Building block(s)**: [Robot Foundation Models](building-blocks.md#robot-foundation-models), [Simulation Engines](building-blocks.md#simulation-engines)
+
+**Maturity**: Early OSS
+
+**Competes with**: Figure 03, Unitree G1 (standalone), 1X NEO — as research humanoid platform
+
+**Complements**: Isaac-GR00T (VLA policy), Isaac Sim (simulation), LeRobot (training framework)
+
+**Openness assessment**: Open reference design; hardware proprietary (Unitree, Sharpa Wave); software stack mixed (Isaac Sim Apache 2.0, GR00T Apache 2.0)
 
 ### OpenPI: Open-Source π0 VLA Foundation Models
 
@@ -756,6 +791,39 @@
 **Complements**: OpenVLA, OpenPI, Isaac-GR00T, LIBERO/BEHAVIOR-1K simulators
 
 **Openness assessment**: (to be assessed by oss-health skill)
+
+### Robostral Navigate: Single-Camera Robot Navigation
+
+**URL**: [mistral.ai/news/robostral-navigate](https://mistral.ai/news/robostral-navigate/)
+
+**Description**: Mistral AI's 8B-parameter VLM for embodied navigation using a single RGB camera. Pointing-based approach predicts target image coordinates and orientation from natural-language instructions. Trained entirely in simulation (~400K trajectories across 6K scenes) with prefix-caching (22x token reduction) and CISPO online RL.
+
+**Tech Stack**: Mistral proprietary VLM backbone (built in-house), simulation-based training, online RL (CISPO algorithm)
+
+**Key Features**:
+
+- 76.6% success on unseen R2R-CE benchmark — beats multi-sensor systems by 4.5 pts, best single-camera by 9.7 pts
+- Hardware-agnostic: deploys on wheeled, legged, and flying robots
+- Pointing-based navigation robust to camera intrinsics and world scale
+- Prefix-caching with tree-based attention masking reduces training tokens by 22x
+- CISPO online RL for failure recovery and exploratory behavior (+3.2% success rate)
+- Navigation only — no manipulation capability
+
+**Status**: Active
+
+**Stats**: Mistral AI, AI Science Robotics group
+
+**Last Updated**: 2026-07
+
+**Building block(s)**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
+
+**Maturity**: Research
+
+**Competes with**: GR00T N1, OpenPI, Gemini Robotics — on robot foundation models (navigation scope only)
+
+**Complements**: Robot middleware (ROS2), simulation platforms, fleet management systems
+
+**Openness assessment**: Proprietary — no open-source release or open weights announced. Built fully in-house without existing open-source VLMs.
 
 ---
 

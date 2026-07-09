@@ -2,7 +2,9 @@
 
 > Players in Physical AI — their solutions, reference architectures, and platform relevance
 
-**Last Updated**: 2026-07-07
+**Last Updated**: 2026-07-09
+
+**Market context**: Robotics VC funding reached $18.8B globally in H1 2026, already exceeding full-year 2025 ($15B) and the 2021 peak ($14.1B). Physical AI dominates deal flow. Funding is top-heavy: top 3 deals account for 60.5% of capital. Humanoid robotics is the breakout category.
 
 ---
 
@@ -357,6 +359,34 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 
 ---
 
+### Cognizant
+
+**Type**: `Big Tech`
+**About**: Major IT services company that launched a "Sovereign Physical AI Platform" targeting industrial OT/IT convergence. The platform introduces an "Intelligence Spine" connecting physical edge systems to an agentic reasoning layer, addressing the bottleneck where separate equipment makers lack shared operational context.
+
+**Solutions**:
+
+#### Sovereign Physical AI Platform
+
+- **What it does**: Connects physical edge equipment to an agentic reasoning layer via an "Intelligence Spine" — provides shared operational context across disparate industrial equipment from different manufacturers.
+- **Building blocks covered**: [Digital Twin Runtime](building-blocks.md#digital-twin-runtime), [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime)
+- **Key features (functional)**: Intelligence Spine bridging physical edge to agentic reasoning, cross-equipment shared operational context, industrial OT/IT convergence
+- **Key features (non-functional)**: Enterprise IT services integration, targets multi-vendor industrial environments
+- **Competes with**: Siemens Xcelerator, Schneider EcoStruxure — on industrial AI platforms; differentiates on vendor-neutral OT/IT convergence
+- **Complements**: Industrial equipment OEMs (provides the missing shared context layer)
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Cognizant services dependency, proprietary Intelligence Spine architecture
+
+**Implied reference architecture**: Intelligence Spine as middleware between heterogeneous physical edge equipment and cloud-based agentic AI. Eliminates the need for each equipment maker to build its own AI stack by providing shared operational context and reasoning across the factory floor.
+
+**Platform relevance**:
+
+- **Partnership surface**: OT/IT convergence layer could complement or compete with platform edge management; IT services channel for enterprise deployment
+- **Competitive surface**: Industrial AI platform positioning overlaps with enterprise Physical AI platform ambitions
+- **What they need from a platform**: Edge runtime for Intelligence Spine deployment, AI model management, integration with diverse industrial protocols
+
+---
+
 ### Amazon
 
 **Type**: `Big Tech`
@@ -509,8 +539,8 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 ### Figure AI
 
 **Type**: `Startup`
-**Stage/Scale**: $2.6B+ raised across three rounds. Valuation $39B (Sep 2025, IPO rumored at similar valuation). Investors: Brookfield, Intel, NVIDIA, Qualcomm, Salesforce, T-Mobile, Microsoft, OpenAI
-**About**: Humanoid robotics company building general-purpose humanoid robots (Figure 02, Figure 03) with in-house VLA models (Helix). BotQ factory now producing 1 robot/hour (55+ Figure 03/week, 12K annual capacity). F.02 retired after BMW Spartanburg deployment (30K+ BMW X3s, 90K+ sheet metal parts with 5mm precision). 350+ units produced with Helix AI. Figure 03 ($20K, Oct 2025) designed for home and enterprise deployment. BMW expanding deployment from Figure 02 to Figure 03 at Spartanburg plant (Jun 2026), validating the humanoid-in-manufacturing use case at scale.
+**Stage/Scale**: $2.6B+ raised across three rounds. Valuation $39B (15x jump from $2.6B). Investors: Brookfield, Intel, NVIDIA, Qualcomm, Salesforce, T-Mobile, Microsoft, OpenAI
+**About**: Humanoid robotics company building general-purpose humanoid robots (Figure 02, Figure 03) with in-house VLA models (Helix). BotQ factory producing 55 robots/week (Figure 03), 12K annual capacity. F.02 retired after BMW Spartanburg deployment (~1 year, 30K+ vehicles, 90K+ sheet metal parts loaded, 5mm precision, <2s cycle time). 350+ units produced with Helix AI. Figure 03 ($20K, Oct 2025) designed for home and enterprise deployment. BMW expanding deployment from Figure 02 to Figure 03 at Spartanburg plant (Jun 2026), validating the humanoid-in-manufacturing use case at scale.
 
 **Solutions**:
 
@@ -690,7 +720,7 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 
 **Type**: `Startup`
 **Stage/Scale**: Series B — raised $125M (Jan 2025). Investors: EQT Ventures, Samsung Next, NVIDIA NVentures
-**About**: Norwegian humanoid robotics company building household humanoid robots (NEO). Launched World Model Lab (June 2026) led by Sam Sinha (ex-Luma AI founding researcher). Distinctive approach: insists on force/action-consequence data paired with human-like embodiment rather than internet-pretrained VLAs. 20K pre-ordered NEO robots, shipping in 2026. NEO priced at $20K upfront or $499/month.
+**About**: Norwegian humanoid robotics company building household humanoid robots (NEO). Launched World Model Lab (June 2026) led by Sam Sinha (ex-Luma AI founding researcher). Distinctive approach: insists on force/action-consequence data paired with human-like embodiment rather than internet-pretrained VLAs. NEO factory opened in Hayward, CA — 58K sq ft, 200+ team, vertically integrated manufacturing. 10K+ home pre-orders for NEO; $20K outright or $499/month subscription. Deliveries expected end of 2026.
 
 **Solutions**:
 
@@ -699,7 +729,7 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 - **What it does**: Humanoid robot designed for household tasks (cleaning, laundry, basic meal prep) with full autonomy target.
 - **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
 - **Key features (functional)**: World-model-driven control (via World Model Lab), force/action-consequence learning, household task autonomy
-- **Key features (non-functional)**: $20K price point, 4-week CAD-to-production iteration cycle, 20K pre-orders
+- **Key features (non-functional)**: $20K price point (or $499/month subscription), NEO factory in Hayward CA (58K sq ft, 200+ team), 10K+ home pre-orders, deliveries expected end of 2026
 - **Competes with**: Figure AI, Apptronik Apollo, Tesla Optimus, Unitree G1 — on household humanoid robotics
 - **Complements**: NVIDIA GR00T N1 (adopter)
 - **Openness**: `Proprietary`
@@ -719,8 +749,8 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 ### Unitree Robotics
 
 **Type**: `Startup`
-**Stage/Scale**: Filing $610M Shanghai A-share IPO (mid-2026). 335% revenue growth in 2025. Chinese firms led by Unitree account for >80% of global humanoid installations
-**About**: Chinese robotics company building affordable quadruped and humanoid robots. G1 humanoid ($16K) and H2 Plus are volume leaders in humanoid production. 5,500+ units shipped in 2025 with 10K-20K+ targets for 2026. Selected by NVIDIA as hardware partner for Isaac GR00T Reference Humanoid Robot. Televised autonomous kung fu routine (Feb 2026) and -47°C arctic endurance test demonstrated platform maturity.
+**Stage/Scale**: Shanghai STAR Market IPO approved (Jul 2026) — targeting 4.2B yuan (~$620M), estimated $6.2B valuation. FY2025: CNY 1.7B (~$251M) revenue, ~CNY 591M adjusted profit, 335% revenue growth. Chinese firms led by Unitree account for >80% of global humanoid installations
+**About**: Chinese robotics company building affordable quadruped and humanoid robots. G1 humanoid ($16K) and H2 Plus are volume leaders in humanoid production. 30K+ quadrupeds and 4K+ humanoids shipped since 2022; 5,500 humanoid units in 2025, targeting 10K-20K in 2026. Over 40% revenue from outside China. G1 robots deployed at OpenAI, NVIDIA, Stanford, ETH Zurich, and top US academic institutions. Selected by NVIDIA as hardware partner for Isaac GR00T Reference Humanoid Robot — first open humanoid reference design combining H2 Plus + Sharpa tactile hands + Jetson AGX Thor. IPO earmarks ~$300M for AI model training over three years (VLA and WMA architectures). IPO review completed in 73 days — fastest since STAR Market pre-review mechanism. Televised autonomous kung fu routine (Feb 2026) and -47°C arctic endurance test demonstrated platform maturity.
 
 **Solutions**:
 
@@ -729,7 +759,7 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 - **What it does**: Affordable humanoid robot platforms for research, education, and enterprise deployment.
 - **Building blocks covered**: [Robot Hardware Platforms](building-blocks.md#robot-hardware-platforms)
 - **Key features (functional)**: Full-body locomotion, standing jump 1.4m (exceeds own height), cold-weather autonomy (-47°C tested), kung fu-level dynamic motion
-- **Key features (non-functional)**: G1 at $16K price point (130cm tall), H2 Plus as NVIDIA reference robot base, 5500+ shipped in 2025
+- **Key features (non-functional)**: G1 at $16K price point (130cm tall), H2 Plus as NVIDIA Isaac GR00T Reference Humanoid Robot base (available Oct 2026), 30K+ quadrupeds and 4K+ humanoids shipped since 2022. G1 deployed at OpenAI, NVIDIA, Stanford, ETH Zurich, UC San Diego
 - **Competes with**: Figure AI Figure 03, Tesla Optimus, Agility Digit — on volume humanoid production
 - **Complements**: NVIDIA Isaac GR00T (reference robot), LeRobot (supported hardware), third-party VLA models
 - **Openness**: `Proprietary` (hardware), SDK available
@@ -738,11 +768,11 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 
 **Platform relevance**:
 
-- **Partnership surface**: Volume hardware platform for third-party software stacks; NVIDIA reference robot partnership; LeRobot integration
-- **Competitive surface**: Hardware-focused — complementary to software platforms
+- **Partnership surface**: Volume hardware platform for third-party software stacks; NVIDIA reference robot partnership; LeRobot integration; >40% international revenue signals global market reach
+- **Competitive surface**: Hardware-focused — complementary to software platforms. IPO investment in VLA and WMA models could expand into software competition
 - **What they need from a platform**: Robot middleware, fleet management, edge deployment infrastructure
 
-**Links**: [Website](https://www.unitree.com/), [NVIDIA Reference Robot](https://nvidianews.nvidia.com/news/nvidia-open-humanoid-robot-reference-design), [Forbes](https://www.forbes.com/sites/jonmarkman/2026/04/27/unitree-g1-humanoid-robots-are-reshaping-the-robotics-investment-stack/)
+**Links**: [Website](https://www.unitree.com/), [NVIDIA Reference Robot](https://nvidianews.nvidia.com/news/nvidia-open-humanoid-robot-reference-design), [Forbes](https://www.forbes.com/sites/jonmarkman/2026/04/27/unitree-g1-humanoid-robots-are-reshaping-the-robotics-investment-stack/), [IPO analysis](https://www.tanayj.com/p/unitrees-ipo-filing-the-state-of)
 
 ---
 
@@ -1446,6 +1476,95 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 **Collaborations**: Amazon (investor + AWS partnership), NVIDIA (investor), Bosch (investor), Schaeffler (investor)
 
 **Links**: [Website](https://neura-robotics.com/), [Series C announcement](https://neura-robotics.com/record-series-c/), [Sifted coverage](https://sifted.eu/articles/neura-robotics-1-4bn-series-c)
+
+---
+
+### Prometheus
+
+**Type**: `Startup`
+**Stage/Scale**: Series B — $12B raised (Jun 2026) at $41B valuation. Total funding >$18B (including $6.2B Series A, late 2025). Investors: JPMorgan, BlackRock, Goldman Sachs, DST Global, Arch Venture Partners, Jeff Bezos. ~150 employees across San Francisco, London, and Zurich
+**About**: Building an "artificial general engineer" — AI that compresses the full design-to-manufacturing cycle for complex physical products (jet engines, drug compounds, chip designs). Co-led by Jeff Bezos (co-CEO) and Vik Bajaj (co-CEO, Stanford professor, co-founder of Alphabet's Verily). Team recruited from xAI, Meta, OpenAI, and DeepMind. Treats the entire design-to-manufacturing pipeline as an end-to-end AI problem rather than augmenting individual steps. Also raising "tens of billions" for a holding company to acquire businesses disrupted by industrial AI. Technical details remain undisclosed; emphasis on large compute budgets implies large-scale model training over physical/engineering data.
+
+**Focus Areas**: AI-driven physical product design and manufacturing, generative engineering, industrial AI
+
+**Platform relevance**:
+
+- **Partnership surface**: If successful, Prometheus's AI-designed physical products would need manufacturing infrastructure, digital twins, and simulation validation
+- **Competitive surface**: Targets industrial design/manufacturing AI — distinct from robotics platforms but overlaps on simulation and physics-informed ML
+- **What they need from a platform**: Simulation infrastructure for design validation, physics-informed ML frameworks, manufacturing digital twins
+
+**Links**: [TechCrunch](https://techcrunch.com/2026/06/11/jeff-bezoss-prometheus-raises-12b-to-build-an-artificial-general-engineer-for-the-physical-world/), [GeekWire](https://www.geekwire.com/2026/bezos-ai-startup-prometheus-raises-12b-at-41b-valuation-and-the-ceos-explain-what-theyre-doing/), [Axios](https://www.axios.com/2026/06/11/prometheus-bezos-industrial-ai)
+
+---
+
+### Tripo AI
+
+**Type**: `Startup`
+**Stage/Scale**: ~$200M raised across consecutive Series A rounds. Latest: $150M Series A3 (Jul 2026). Previous: $50M (Mar 2026, led by Alibaba, Baidu Ventures). Investors: Geely Capital, INCE Capital, Genesis Capital, CoStone Capital, 4399 Network, Giant Network. Beijing, China
+**About**: 3D foundation model company building text/image-to-3D generation and interactive world models. Platform serves 6.5M+ creators, 90K+ developers, with ~100M 3D assets generated. Key differentiator: generates production-ready 3D with usable geometry, topology, and export formats — not just visual output. Project Eden world model research preview decouples state simulation from rendering, enabling persistent physics-aware environments for robotics simulation and digital twins.
+
+**Solutions**:
+
+#### Tripo 3D Foundation Models
+
+- **What it does**: AI-powered 3D asset generation from text, images, or sketches — produces production-ready meshes with proper topology, texturing, rigging, and export formats for game engines, simulation, and manufacturing.
+- **Building blocks covered**: [Simulation Engines](building-blocks.md#simulation-engines), [Data Annotation & Curation for Physical AI](building-blocks.md#data-annotation--curation-for-physical-ai)
+- **Key features (functional)**: Tripo H3.1 (high-detail generation), Tripo P1.0 (polygon mesh trained on native mesh data for game engines and robotics simulation), 8K Texture Generation, Segmentation V2, auto rigging and animation
+- **Key features (non-functional)**: 6.5M+ creators, 90K+ developers, ~100M assets generated. Integrates with Blender, Unity, Unreal Engine, ComfyUI, Godot
+- **Competes with**: Marble (World Labs), Meshy, Luma AI — on AI 3D generation; differentiates on production-ready mesh quality
+- **Complements**: Simulation engines (3D asset pipeline), robot training pipelines (synthetic 3D environments)
+- **Openness**: `Proprietary` (API available)
+- **Lock-in vectors**: Proprietary models, API-based access
+- **Source**: [Website](https://www.tripo3d.ai/)
+
+#### Project Eden
+
+- **What it does**: World model research preview generating persistent, editable 3D environments with decoupled state simulation and rendering — environments maintain state over time with physics, memory, and multi-agent interaction support.
+- **Building blocks covered**: [Simulation Engines](building-blocks.md#simulation-engines), [Latent World Models](building-blocks.md#latent-world-models)
+- **Key features (functional)**: Persistent worlds with physics, decoupled state/rendering architecture, multi-agent interaction, editable environments
+- **Competes with**: Genie 3, Marble, Agora-1 (Odyssey) — on interactive world generation for simulation
+- **Openness**: `Proprietary` (research preview)
+- **Source**: [Unite.AI coverage](https://www.unite.ai/tripo-ai-raises-150m-series-a3-as-3d-foundation-models-move-toward-interactive-worlds/)
+
+**Platform relevance**:
+
+- **Partnership surface**: 3D asset generation pipeline for simulation and digital twin construction; Project Eden as simulation environment for robot training
+- **Competitive surface**: Overlaps with simulation asset generation and synthetic data pipelines
+- **What they need from a platform**: Integration with robot simulation environments (Isaac Sim, Genesis World), physics validation, deployment infrastructure for 3D generation at scale
+
+**Links**: [Website](https://www.tripo3d.ai/), [GlobeNewswire ($200M raise)](https://www.globenewswire.com/news-release/2026/06/01/3304603/0/en/tripo-ai-raises-nearly-200-million-in-series-a-and-series-a-financing-to-advance-ai-3d-and-world-model-roadmap.html), [SiliconANGLE ($150M A3)](https://siliconangle.com/2026/07/02/tripo-ai-secures-additional-150m-funding-enhance-3d-world-models/)
+
+---
+
+### Mistral AI
+
+**Type**: `Startup`
+**Stage/Scale**: Raising ~EUR 3B at ~EUR 20B valuation (2026). Paris, France
+**About**: European LLM company now entering embodied AI. Acquired Emmi AI (Austria, May 2026) to build its AI Science Robotics group. Robostral Navigate (July 2026) is first robotics product: 8B-parameter VLM for single-RGB-camera robot navigation. Partnerships with Airbus and BMW signal industrial focus.
+
+**Solutions**:
+
+#### Robostral Navigate
+
+- **What it does**: 8B-parameter VLM for embodied navigation from a single RGB camera. Accepts natural-language instructions and image history, outputs pointing-based waypoints (image coordinates + orientation) for hardware-agnostic deployment on wheeled, legged, and flying robots.
+- **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
+- **Key features (functional)**: Pointing-based navigation robust to camera intrinsics and world scale; fallback to displacement commands when target is outside field of view; trained entirely in simulation (~400K trajectories across 6K scenes); prefix-caching with tree-based attention masking reduces training tokens by 22x; CISPO online RL algorithm for failure recovery (+3.2% success rate)
+- **Key features (non-functional)**: 76.6% success on unseen R2R-CE benchmark (beats multi-sensor systems by 4.5 pts, best single-camera by 9.7 pts); hardware-agnostic across wheeled, legged, and flying platforms; built fully in-house (no existing open-source VLMs)
+- **Competes with**: GR00T N1, pi0, Gemini Robotics — on robot foundation models; differentiates on navigation-only scope with single-camera simplicity
+- **Complements**: Robot middleware (ROS2), simulation platforms (training pipeline), fleet management systems
+- **Openness**: `Proprietary` (no open release announced)
+- **Lock-in vectors**: Proprietary model, potential Mistral API dependency
+- **Source**: [Announcement](https://mistral.ai/news/robostral-navigate/)
+
+**Platform relevance**:
+
+- **Partnership surface**: Navigation model as a building block for mobile robot platforms; single-camera approach lowers hardware barrier for fleet deployment
+- **Competitive surface**: Minimal — navigation-only scope, no platform ambitions yet
+- **What they need from a platform**: Edge deployment infrastructure, robot middleware integration, fleet management, model serving for real-time inference
+
+**Collaborations**: Airbus, BMW (industrial partnerships), Emmi AI (acquired May 2026)
+
+**Links**: [Website](https://mistral.ai/), [Robostral Navigate](https://mistral.ai/news/robostral-navigate/)
 
 ---
 
