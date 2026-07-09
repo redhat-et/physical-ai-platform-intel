@@ -24,6 +24,8 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 | Google DeepMind | [google-deepmind.md](deliverables/intel/companies/google-deepmind.md) | [google-deepmind-deep-dive.md](deliverables/intel/companies/google-deepmind-deep-dive.md) |
 | Intel | [intel.md](deliverables/intel/companies/intel.md) | [intel-deep-dive.md](deliverables/intel/companies/intel-deep-dive.md) |
 | Intrinsic (Google) | [intrinsic.md](deliverables/intel/companies/intrinsic.md) | [intrinsic-deep-dive.md](deliverables/intel/companies/intrinsic-deep-dive.md) |
+| Mistral AI | [mistral-ai.md](deliverables/intel/companies/mistral-ai.md) | [mistral-ai-deep-dive.md](deliverables/intel/companies/mistral-ai-deep-dive.md) |
+| NEURA Robotics | [neura-robotics.md](deliverables/intel/companies/neura-robotics.md) | [neura-robotics-deep-dive.md](deliverables/intel/companies/neura-robotics-deep-dive.md) |
 | NVIDIA | [nvidia.md](deliverables/intel/companies/nvidia.md) | [nvidia-deep-dive.md](deliverables/intel/companies/nvidia-deep-dive.md) |
 | Physical Intelligence | [physical-intelligence.md](deliverables/intel/companies/physical-intelligence.md) | [physical-intelligence-deep-dive.md](deliverables/intel/companies/physical-intelligence-deep-dive.md) |
 | Prometheus | [prometheus.md](deliverables/intel/companies/prometheus.md) | [prometheus-deep-dive.md](deliverables/intel/companies/prometheus-deep-dive.md) |
