@@ -26,6 +26,7 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 | Intrinsic (Google) | [intrinsic.md](deliverables/intel/companies/intrinsic.md) | [intrinsic-deep-dive.md](deliverables/intel/companies/intrinsic-deep-dive.md) |
 | NVIDIA | [nvidia.md](deliverables/intel/companies/nvidia.md) | [nvidia-deep-dive.md](deliverables/intel/companies/nvidia-deep-dive.md) |
 | Physical Intelligence | [physical-intelligence.md](deliverables/intel/companies/physical-intelligence.md) | [physical-intelligence-deep-dive.md](deliverables/intel/companies/physical-intelligence-deep-dive.md) |
+| Prometheus | [prometheus.md](deliverables/intel/companies/prometheus.md) | [prometheus-deep-dive.md](deliverables/intel/companies/prometheus-deep-dive.md) |
 | Qualcomm | [qualcomm.md](deliverables/intel/companies/qualcomm.md) | [qualcomm-deep-dive.md](deliverables/intel/companies/qualcomm-deep-dive.md) |
 | Rerun | [rerun.md](deliverables/intel/companies/rerun.md) | [rerun-deep-dive.md](deliverables/intel/companies/rerun-deep-dive.md) |
 | Skild AI | [skild-ai.md](deliverables/intel/companies/skild-ai.md) | [skild-ai-deep-dive.md](deliverables/intel/companies/skild-ai-deep-dive.md) |
