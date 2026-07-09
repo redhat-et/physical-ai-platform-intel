@@ -5,8 +5,6 @@
 **Classification**: Internal analysis
 
 See [deep-dive](skild-ai-deep-dive.md) for OSS foundations, acquisition details, and technical architecture.
-See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
-🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -235,6 +233,8 @@ Skild AI is a $14B-valued robotics foundation model startup building the **Skild
   <td>⬜</td>
 </tr>
 </table>
+
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware — See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
 
 ### OSS Foundations
 

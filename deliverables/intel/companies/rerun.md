@@ -5,8 +5,6 @@
 **Classification**: Internal analysis
 
 See [deep-dive](rerun-deep-dive.md) for OSS foundations, acquisition details, and technical architecture.
-See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
-🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -228,6 +226,8 @@ Rerun is a Swedish startup building **"The Data Layer for Physical AI"** — a m
   <td>⬜</td>
 </tr>
 </table>
+
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware — See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
 
 ### OSS Foundations
 

@@ -6,8 +6,6 @@
 
 See [deep-dive](intrinsic-deep-dive.md) for acquisition details, Flowstate architecture, ROS/Gazebo governance, and partnership analysis.
 See [Google DeepMind profile](google-deepmind.md) for foundation models (Gemini Robotics) and research.
-See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
-🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -239,6 +237,8 @@ Intrinsic is Google's industrial robotics platform division, folded into Google 
   <small>(custom Linux; proprietary)</small></td>
 </tr>
 </table>
+
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware — See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
 
 ### OSS Foundations
 

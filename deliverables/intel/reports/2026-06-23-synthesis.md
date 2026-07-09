@@ -6,8 +6,6 @@
 
 Cross-company analysis across all 9 tracked Physical AI players. Identifies coverage patterns, partnership dynamics, ecosystem trends, and strategic implications for Red Hat.
 
-See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
-🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -366,6 +364,8 @@ See [visual language](../_templates/visual-language.md) for coverage indicator d
   <td><b>4/9</b></td>
 </tr>
 </table>
+
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware — See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
 
 ### Coverage Patterns
 

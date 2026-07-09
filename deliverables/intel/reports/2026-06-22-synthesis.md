@@ -5,7 +5,6 @@
 
 Cross-company analysis across all tracked Physical AI players. Identifies coverage patterns, partnership dynamics, ecosystem trends, and strategic implications for Red Hat.
 
-See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
 
 ---
 
@@ -212,6 +211,8 @@ Which platform blocks are covered by each vendor, and where are the gaps?
   <td><b>2/3</b> (both edge-only)</td>
 </tr>
 </table>
+
+See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
 
 ### Coverage Patterns
 

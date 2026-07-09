@@ -5,8 +5,6 @@
 **Classification**: Internal analysis — not for public repo
 
 See [deep-dive](qualcomm-deep-dive.md) for OSS foundations, acquisition details, and technical architecture.
-See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
-🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -235,6 +233,8 @@ Qualcomm is a $44B-revenue semiconductor and wireless technology company pursuin
   <small>(ships with RB/IQ10; no own OS)</small></td>
 </tr>
 </table>
+
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware — See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
 
 ### OSS Foundations
 

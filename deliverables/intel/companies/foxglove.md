@@ -5,8 +5,6 @@
 **Classification**: Internal analysis
 
 See [deep-dive](foxglove-deep-dive.md) for OSS foundations, product architecture, and competitive analysis details.
-See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
-🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -233,6 +231,8 @@ Foxglove is a San Francisco-based startup building a **multimodal data and obser
   <td>⬜</td>
 </tr>
 </table>
+
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware — See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
 
 ### OSS Foundations
 

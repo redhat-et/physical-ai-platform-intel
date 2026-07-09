@@ -5,8 +5,6 @@
 **Classification**: Internal analysis — not for public repo
 
 See [deep-dive](prometheus-deep-dive.md) for acquisition details, technical architecture, and competitive analysis.
-See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
-🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -229,6 +227,8 @@ Prometheus (formerly Project Prometheus) is a VC-backed startup ($18B+ raised, $
   <td>⬜</td>
 </tr>
 </table>
+
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware — See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
 
 ### OSS Foundations
 

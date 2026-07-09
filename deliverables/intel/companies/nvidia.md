@@ -5,8 +5,6 @@
 **Classification**: Internal analysis
 
 See [deep-dive](nvidia-deep-dive.md) for OSS foundations, acquisition details, and technical architecture.
-See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
-🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -255,6 +253,8 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
   <small>(Ubuntu-based, NVIDIA-controlled)</small></td>
 </tr>
 </table>
+
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware — See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
 
 ### OSS Foundations
 

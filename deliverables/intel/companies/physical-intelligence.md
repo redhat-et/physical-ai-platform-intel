@@ -5,8 +5,6 @@
 **Classification**: Internal analysis — not for public repo
 
 See [deep-dive](physical-intelligence-deep-dive.md) for OSS foundations, technical architecture, and research timeline.
-See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
-🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -229,6 +227,8 @@ Physical Intelligence (π) is a VC-backed startup ($1.1B raised, $5.6B valuation
   <td>⬜</td>
 </tr>
 </table>
+
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware — See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
 
 ### OSS Foundations
 

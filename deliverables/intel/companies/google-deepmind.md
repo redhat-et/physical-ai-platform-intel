@@ -6,8 +6,6 @@
 
 See [deep-dive](google-deepmind-deep-dive.md) for model architecture details, RT-1/2/X lineage, and research analysis.
 See [Intrinsic profile](intrinsic.md) for industrial robotics platform (Flowstate, IVM, IntrinsicOS).
-See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
-🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -232,6 +230,8 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
   <td>⬜</td>
 </tr>
 </table>
+
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware — See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
 
 ### OSS Foundations
 

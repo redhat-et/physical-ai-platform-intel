@@ -5,8 +5,6 @@
 **Classification**: Internal analysis
 
 See [deep-dive](amd-deep-dive.md) for OSS foundations, acquisition details, and technical architecture.
-See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
-🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware
 
 ---
 
@@ -242,6 +240,8 @@ AMD is a $200B+ semiconductor company pursuing a **hardware-first, open-ecosyste
   <small>(no proprietary edge OS)</small></td>
 </tr>
 </table>
+
+🟢 Covered  🟡 Partial  🔵 OSS-stewarded  ⬜ No offering  🔴 Conflict  🟣 Hardware — See [visual language](../_templates/visual-language.md) for coverage indicator definitions.
 
 ### OSS Foundations
 
