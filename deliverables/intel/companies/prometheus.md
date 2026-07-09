@@ -257,7 +257,7 @@ Prometheus (formerly Project Prometheus) is a VC-backed startup ($18B+ raised, $
 | vs | They have | They lack |
 | --- | --- | --- |
 | **Autodesk / Dassault / PTC / Siemens** | $18B+ funding, greenfield AI-native architecture, Transformer co-authors as advisors, ability to rethink CAD from scratch without legacy constraints | Shipping products, paying customers, decades of domain-specific IP, established enterprise sales channels, certified engineering workflows, regulatory compliance track record |
-| **PhysicsX** | Far larger funding ($18B vs. ~$100M), Bezos brand/network, broader scope (design + manufacturing), potential captive demand via $100B fund | PhysicsX has shipping AI products for engineering simulation, established customer relationships in automotive/aerospace, domain-specific physics models already validated |
+| **PhysicsX** | Far larger funding ($18B vs. $489M), Bezos brand/network, broader scope (design + manufacturing), potential captive demand via $100B fund | PhysicsX shipping "Large Physics Models" to automotive/aerospace/semiconductor customers, 2x YoY revenue, backed by Siemens + NVIDIA, integrating with Siemens Xcelerator digital twin platform |
 | **AI incumbents (OpenAI, Anthropic, Google)** | Dedicated focus on physical-world engineering (not general-purpose LLMs), specialized data pipelines for manufacturing/materials, vertical integration thesis via fund | General-purpose AI capabilities, broader model ecosystems, existing enterprise relationships, developer platforms, established inference infrastructure |
 
 ---
