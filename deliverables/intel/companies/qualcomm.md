@@ -96,7 +96,7 @@ Qualcomm is a $44B-revenue semiconductor and wireless technology company pursuin
 
 <tr>
   <td><b>Model Registry</b></td>
-  <td colspan="2">🟡 AI Hub<sup>1</sup><br>
+  <td colspan="2">🟡 AI Hub<br>
   <small>(model catalog, not K8s-native registry)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -159,11 +159,11 @@ Qualcomm is a $44B-revenue semiconductor and wireless technology company pursuin
 
 <tr>
   <td><b>Inference Server</b></td>
-  <td colspan="2">🟡 Cloud AI 100/Ultra<sup>2</sup><br>
+  <td colspan="2">🟡 Cloud AI 100/Ultra<br>
   <small>(HW + runtime, limited SW ecosystem)</small></td>
   <td colspan="2">🟡 AI On-Prem Appliance<br>
   <small>(up to 120B models)</small></td>
-  <td>🟢 QAIRT<sup>3</sup><br>
+  <td>🟢 QAIRT<br>
   <small>(Hexagon NPU, Adreno GPU)</small></td>
 </tr>
 
@@ -187,7 +187,7 @@ Qualcomm is a $44B-revenue semiconductor and wireless technology company pursuin
   <td><b>App Libs (Math/AI)</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
-  <td>🟣 Hexagon SDK, QNN<sup>4</sup><br>
+  <td>🟣 Hexagon SDK, QNN<br>
   <small>(NPU + GPU compute)</small></td>
 </tr>
 
@@ -195,7 +195,7 @@ Qualcomm is a $44B-revenue semiconductor and wireless technology company pursuin
   <td><b>App Libs (Media)</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
-  <td>🟣 Qualcomm Multimedia<sup>5</sup><br>
+  <td>🟣 Qualcomm Multimedia<br>
   <small>(ISP, video encode/decode)</small></td>
 </tr>
 
@@ -203,7 +203,7 @@ Qualcomm is a $44B-revenue semiconductor and wireless technology company pursuin
   <td><b>App Libs (Robotics)</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
-  <td>🟢 ROS 2 + Nav/SLAM<sup>6</sup><br>
+  <td>🟢 ROS 2 + Nav/SLAM<br>
   <small>(RB series, IQ10)</small></td>
 </tr>
 
@@ -221,7 +221,7 @@ Qualcomm is a $44B-revenue semiconductor and wireless technology company pursuin
   <td><b>Drivers</b></td>
   <td colspan="2">🟣 Cloud AI 100 drivers</td>
   <td colspan="2">⬜</td>
-  <td>🟣 Dragonwing BSP<sup>7</sup><br>
+  <td>🟣 Dragonwing BSP<br>
   <small>(NPU, GPU, ISP, 5G, Wi-Fi)</small></td>
 </tr>
 
@@ -229,7 +229,7 @@ Qualcomm is a $44B-revenue semiconductor and wireless technology company pursuin
   <td><b>OS</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
-  <td>🟡 Ubuntu Linux<sup>8</sup><br>
+  <td>🟡 Ubuntu Linux<br>
   <small>(ships with RB/IQ10; no own OS)</small></td>
 </tr>
 </table>
@@ -238,16 +238,16 @@ Qualcomm is a $44B-revenue semiconductor and wireless technology company pursuin
 
 ### OSS Foundations
 
-| # | Product | OSS Foundation |
-| --- | --- | --- |
-| 1 | **AI Hub** | Model catalog; integrates ONNX Runtime (Apache 2.0) + LiteRT (Apache 2.0). Optimization tooling proprietary |
-| 2 | **Cloud AI 100** | Hardware + proprietary firmware/compiler. No OSS inference engine equivalent to vLLM |
-| 3 | **QAIRT** | Proprietary unified runtime (SNPE + QNN). AIMET quantization toolkit is BSD-3 |
-| 4 | **Hexagon SDK / QNN** | Proprietary SDK targeting Hexagon DSP/NPU. ONNX Runtime QNN EP is open-source bridge |
-| 5 | **Multimedia** | Proprietary ISP/codec stack. GStreamer plugins for integration |
-| 6 | **ROS 2 support** | ROS 2 (Apache 2.0) runs on Qualcomm platforms; Qualcomm contributes Hexagon transport layer |
-| 7 | **Dragonwing BSP** | Qualcomm-controlled board support package; ships Ubuntu Linux (Canonical) |
-| 8 | **AIMET** | AI Model Efficiency Toolkit: quantization/compression. BSD-3 on GitHub |
+| Product | OSS Foundation |
+| --- | --- |
+| **AI Hub** | Model catalog; integrates ONNX Runtime (Apache 2.0) + LiteRT (Apache 2.0). Optimization tooling proprietary |
+| **Cloud AI 100** | Hardware + proprietary firmware/compiler. No OSS inference engine equivalent to vLLM |
+| **QAIRT** | Proprietary unified runtime (SNPE + QNN). AIMET quantization toolkit is BSD-3 |
+| **Hexagon SDK / QNN** | Proprietary SDK targeting Hexagon DSP/NPU. ONNX Runtime QNN EP is open-source bridge |
+| **Multimedia** | Proprietary ISP/codec stack. GStreamer plugins for integration |
+| **ROS 2 support** | ROS 2 (Apache 2.0) runs on Qualcomm platforms; Qualcomm contributes Hexagon transport layer |
+| **Dragonwing BSP** | Qualcomm-controlled board support package; ships Ubuntu Linux (Canonical) |
+| **AIMET** | AI Model Efficiency Toolkit: quantization/compression. BSD-3 on GitHub |
 
 ---
 

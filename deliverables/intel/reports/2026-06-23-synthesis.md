@@ -6,7 +6,6 @@
 
 Cross-company analysis across all 9 tracked Physical AI players. Identifies coverage patterns, partnership dynamics, ecosystem trends, and strategic implications for Red Hat.
 
-
 ---
 
 ## Companies Analyzed

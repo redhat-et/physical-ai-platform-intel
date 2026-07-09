@@ -52,7 +52,7 @@ Figure AI is a venture-backed humanoid robotics startup building general-purpose
 <tr>
   <td><b>Train Workloads</b></td>
   <td>⬜</td>
-  <td>🟢 Helix VLA training<sup>1</sup><br>
+  <td>🟢 Helix VLA training<br>
   <small>(proprietary, in-house)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -61,7 +61,7 @@ Figure AI is a venture-backed humanoid robotics startup building general-purpose
 <tr>
   <td><b>Simulation Engine</b></td>
   <td>⬜</td>
-  <td>🟡 NVIDIA ecosystem<sup>2</sup><br>
+  <td>🟡 NVIDIA ecosystem<br>
   <small>(Cosmos for synthetic data)</small></td>
   <td>⬜</td>
   <td>⬜</td>
@@ -80,7 +80,7 @@ Figure AI is a venture-backed humanoid robotics startup building general-purpose
 <tr>
   <td><b>Data</b></td>
   <td>⬜</td>
-  <td>🟢 Proprietary<sup>3</sup><br>
+  <td>🟢 Proprietary<br>
   <small>(1,000+ hrs human motion, BMW telemetry)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -148,7 +148,7 @@ Figure AI is a venture-backed humanoid robotics startup building general-purpose
   <td>⬜</td>
   <td>⬜</td>
   <td>⬜</td>
-  <td>🟢 Helix multi-robot<sup>4</sup><br>
+  <td>🟢 Helix multi-robot<br>
   <small>(dual-robot collaboration)</small></td>
 </tr>
 
@@ -165,7 +165,7 @@ Figure AI is a venture-backed humanoid robotics startup building general-purpose
   <td><b>Inference Server</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
-  <td>🟢 Helix onboard<sup>5</sup><br>
+  <td>🟢 Helix onboard<br>
   <small>(dual GPU, fully onboard)</small></td>
 </tr>
 
@@ -205,7 +205,7 @@ Figure AI is a venture-backed humanoid robotics startup building general-purpose
   <td><b>App Libs (Robotics)</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
-  <td>🟢 Proprietary stack<sup>6</sup><br>
+  <td>🟢 Proprietary stack<br>
   <small>(end-to-end neural, no ROS)</small></td>
 </tr>
 
@@ -230,7 +230,7 @@ Figure AI is a venture-backed humanoid robotics startup building general-purpose
   <td><b>OS</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
-  <td>🟢 Ubuntu Linux<sup>7</sup></td>
+  <td>🟢 Ubuntu Linux</td>
 </tr>
 </table>
 
@@ -238,15 +238,15 @@ Figure AI is a venture-backed humanoid robotics startup building general-purpose
 
 ### OSS Foundations
 
-| # | Product | OSS Foundation |
-| --- | --- | --- |
-| 1 | **Helix VLA** | Proprietary end-to-end neural network. S0 trained on 1,000+ hrs human motion data. No public OSS dependencies disclosed |
-| 2 | **Simulation** | Uses NVIDIA Cosmos for synthetic data generation; NVIDIA Isaac ecosystem for simulation |
-| 3 | **Training data** | Proprietary datasets from BMW deployment telemetry and in-house data collection |
-| 4 | **Multi-robot** | Helix operates two robots simultaneously from single VLA — proprietary coordination |
-| 5 | **Edge inference** | Runs onboard dual embedded GPUs. Fully self-contained — no cloud dependency for inference |
-| 6 | **Robotics stack** | End-to-end neural control replaces traditional robotics stack (100K+ lines of C++ replaced by System 0 learned model) |
-| 7 | **OS** | Ubuntu Linux on dual embedded GPUs |
+| Product | OSS Foundation |
+| --- | --- |
+| **Helix VLA** | Proprietary end-to-end neural network. S0 trained on 1,000+ hrs human motion data. No public OSS dependencies disclosed |
+| **Simulation** | Uses NVIDIA Cosmos for synthetic data generation; NVIDIA Isaac ecosystem for simulation |
+| **Training data** | Proprietary datasets from BMW deployment telemetry and in-house data collection |
+| **Multi-robot** | Helix operates two robots simultaneously from single VLA — proprietary coordination |
+| **Edge inference** | Runs onboard dual embedded GPUs. Fully self-contained — no cloud dependency for inference |
+| **Robotics stack** | End-to-end neural control replaces traditional robotics stack (100K+ lines of C++ replaced by System 0 learned model) |
+| **OS** | Ubuntu Linux on dual embedded GPUs |
 
 ---
 

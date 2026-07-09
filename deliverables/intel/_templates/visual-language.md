@@ -75,7 +75,9 @@ Use a two-row header with merged cells for tier names:
 
 ### Footnotes
 
-Use `<sup>N</sup>` superscripts in cell content, with a footnotes section below the table. Footnotes provide OSS foundations, licensing, and technical detail that would clutter the table.
+Use `<sup>N</sup>` superscripts sparingly — only when a cell's classification is non-obvious and needs explanation (e.g., why 🟡 instead of 🟢, a scope caveat, a conflict rationale). Place a numbered footnote list directly below the table.
+
+Do NOT use superscripts as cross-references to the OSS Foundations table — that table is keyed by product name and stands on its own.
 
 ## Architecture Block Rows
 

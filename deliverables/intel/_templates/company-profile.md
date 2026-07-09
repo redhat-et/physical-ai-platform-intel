@@ -238,12 +238,12 @@ See [deep-dive]({company}-deep-dive.md) for OSS foundations, acquisition details
 
 ### OSS Foundations
 
-<!-- Compact footnote table: one row per product in the coverage table above. -->
+<!-- One row per product in the coverage table above, keyed by product name. -->
 <!-- Keep to 1 line each. Full OSS analysis lives in the deep-dive. -->
 
-| # | Product | OSS Foundation |
-| --- | --- | --- |
-| 1 | **{Product}** | {OSS engine + license, 1 line} |
+| Product | OSS Foundation |
+| --- | --- |
+| **{Product}** | {OSS engine + license, 1 line} |
 
 ---
 

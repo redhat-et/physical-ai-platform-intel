@@ -67,7 +67,7 @@ Rerun is a Swedish startup building **"The Data Layer for Physical AI"** — a m
 <tr>
   <td><b>Eval</b></td>
   <td>⬜</td>
-  <td>🟡 Rerun Viewer<sup>1</sup><br>
+  <td>🟡 Rerun Viewer<br>
   <small>(visual debugging, not automated eval)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -76,7 +76,7 @@ Rerun is a Swedish startup building **"The Data Layer for Physical AI"** — a m
 <tr>
   <td><b>Data</b></td>
   <td>⬜</td>
-  <td>🟢 Rerun SDK + Hub<sup>2</sup><br>
+  <td>🟢 Rerun SDK + Hub<br>
   <small>(log, store, query, transform multimodal data)</small></td>
   <td>⬜</td>
   <td>🟡 Rerun SDK<br>
@@ -88,7 +88,7 @@ Rerun is a Swedish startup building **"The Data Layer for Physical AI"** — a m
 <tr>
   <td><b>Train Infra</b></td>
   <td>⬜</td>
-  <td>🟡 Rerun Hub<sup>3</sup><br>
+  <td>🟡 Rerun Hub<br>
   <small>(GPU-direct dataloader only)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -119,7 +119,7 @@ Rerun is a Swedish startup building **"The Data Layer for Physical AI"** — a m
 
 <tr>
   <td><b>Experiment Tracking</b></td>
-  <td colspan="2">🟡 Rerun SDK<sup>4</sup><br>
+  <td colspan="2">🟡 Rerun SDK<br>
   <small>(visual experiment logging, not W&B-class tracking)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -231,12 +231,12 @@ Rerun is a Swedish startup building **"The Data Layer for Physical AI"** — a m
 
 ### OSS Foundations
 
-| # | Product | OSS Foundation |
-| --- | --- | --- |
-| 1 | **Rerun Viewer** | Visual debugging for Physical AI data — not automated eval. Built on egui (MIT) + wgpu (Apache-2.0/MIT) |
-| 2 | **Rerun SDK + Hub** | SDK is OSS (Apache-2.0 + MIT). Hub is proprietary. Column-chunk .rrd storage. Reads MCAP, LeRobot formats |
-| 3 | **Rerun Hub (Train Infra)** | Proprietary GPU-direct dataloader. Codec-aware, column-aware streaming to GPUs without export step |
-| 4 | **Rerun SDK (Experiment Tracking)** | Temporal multimodal logging usable for experiment visualization. Not a replacement for W&B/MLflow |
+| Product | OSS Foundation |
+| --- | --- |
+| **Rerun Viewer** | Visual debugging for Physical AI data — not automated eval. Built on egui (MIT) + wgpu (Apache-2.0/MIT) |
+| **Rerun SDK + Hub** | SDK is OSS (Apache-2.0 + MIT). Hub is proprietary. Column-chunk .rrd storage. Reads MCAP, LeRobot formats |
+| **Rerun Hub (Train Infra)** | Proprietary GPU-direct dataloader. Codec-aware, column-aware streaming to GPUs without export step |
+| **Rerun SDK (Experiment Tracking)** | Temporal multimodal logging usable for experiment visualization. Not a replacement for W&B/MLflow |
 
 ---
 

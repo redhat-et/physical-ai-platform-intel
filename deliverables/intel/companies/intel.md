@@ -58,7 +58,7 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
 
 <tr>
   <td><b>Train Workloads</b></td>
-  <td>🟡 Gaudi 3<sup>1</sup><br>
+  <td>🟡 Gaudi 3<br>
   <small>(limited adoption)</small></td>
   <td>⬜</td>
   <td colspan="2">⬜</td>
@@ -90,7 +90,7 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
 
 <tr>
   <td><b>Train Infra</b></td>
-  <td colspan="2">🟡 Gaudi 3 + Ethernet<sup>2</sup><br>
+  <td colspan="2">🟡 Gaudi 3 + Ethernet<br>
   <small>(cost-optimized, limited scale-out)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -107,7 +107,7 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
 
 <tr>
   <td><b>Model Pipelines</b></td>
-  <td colspan="2">🟡 Tiber AI Studio<sup>3</sup><br>
+  <td colspan="2">🟡 Tiber AI Studio<br>
   <small>(MLOps, not Physical AI pipeline)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -122,14 +122,14 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
 
 <tr>
   <td><b>Experiment Tracking</b></td>
-  <td colspan="2">🟡 Tiber AI Studio<sup>3</sup></td>
+  <td colspan="2">🟡 Tiber AI Studio</td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
 </tr>
 
 <tr>
   <td><b>Model Monitoring</b></td>
-  <td colspan="2">🟡 Tiber AI Studio<sup>3</sup></td>
+  <td colspan="2">🟡 Tiber AI Studio</td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
 </tr>
@@ -156,7 +156,7 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
 
 <tr>
   <td><b>MaaS</b></td>
-  <td colspan="2">🟡 Tiber AI Cloud<sup>4</sup><br>
+  <td colspan="2">🟡 Tiber AI Cloud<br>
   <small>(developer access, not enterprise MaaS)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -164,10 +164,10 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
 
 <tr>
   <td><b>Inference Server</b></td>
-  <td colspan="2">🟡 OpenVINO Model Server<sup>5</sup><br>
+  <td colspan="2">🟡 OpenVINO Model Server<br>
   <small>(Xeon/Gaudi optimized)</small></td>
   <td colspan="2">🟡 OpenVINO Model Server</td>
-  <td>🟢 OpenVINO Physical AI<sup>6</sup><br>
+  <td>🟢 OpenVINO Physical AI<br>
   <small>(silicon-optimized VLA runtime)</small></td>
 </tr>
 
@@ -189,7 +189,7 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
 
 <tr>
   <td><b>App Libs (Math/AI)</b></td>
-  <td colspan="2">🔵 oneAPI, oneMKL, oneDNN<sup>7</sup><br>
+  <td colspan="2">🔵 oneAPI, oneMKL, oneDNN<br>
   <small>(UXL Foundation, SYCL-based)</small></td>
   <td colspan="2">🔵 oneAPI, oneMKL, oneDNN</td>
   <td>🟢 OpenVINO, oneDNN</td>
@@ -197,7 +197,7 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
 
 <tr>
   <td><b>App Libs (Media)</b></td>
-  <td colspan="2">🔵 oneVPL<sup>8</sup><br>
+  <td colspan="2">🔵 oneVPL<br>
   <small>(video processing)</small></td>
   <td colspan="2">🔵 oneVPL</td>
   <td>🟢 Intel Media SDK</td>
@@ -207,7 +207,7 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
   <td><b>App Libs (Robotics)</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
-  <td>🟢 Robotics AI Suite<sup>9</sup><br>
+  <td>🟢 Robotics AI Suite<br>
   <small>(OpenVINO Physical AI + ROS 2)</small></td>
 </tr>
 
@@ -223,7 +223,7 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
 
 <tr>
   <td><b>Drivers</b></td>
-  <td colspan="2">🟢 Gaudi Operator, GPU Operator<sup>10</sup><br>
+  <td colspan="2">🟢 Gaudi Operator, GPU Operator<br>
   <small>(OpenShift certified)</small></td>
   <td colspan="2">🟢 Gaudi/GPU Operators</td>
   <td>🟣 Core Ultra NPU driver</td>
@@ -243,18 +243,18 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
 
 ### OSS Foundations
 
-| # | Product | OSS Foundation |
-| --- | --- | --- |
-| 1 | **Gaudi 3** | Habana SynapseAI (proprietary runtime); PyTorch + Hugging Face integration. OpenShift AI certified |
-| 2 | **Train Infra** | Ethernet-based scaling (no InfiniBand/NVLink). Intel Gaudi Base Operator for K8s |
-| 3 | **Tiber AI Studio** | Proprietary MLOps platform; available on AWS Marketplace. Not OSS |
-| 4 | **Tiber AI Cloud** | Proprietary cloud service; Jupyter notebooks + CLI. Developer access to Gaudi, Max GPUs, Xeon |
-| 5 | **OpenVINO Model Server** | Apache 2.0; Python + C++ inference serving. OVMS is fully open-source |
-| 6 | **OpenVINO Physical AI** | Preview on GitHub (Apache 2.0 expected). Integrates with HuggingFace LeRobot |
-| 7 | **oneAPI** | DPC++ compiler (Apache 2.0, LLVM-based); oneMKL, oneDNN (Apache 2.0); UXL Foundation governance |
-| 8 | **oneVPL** | Apache 2.0; video processing library. Part of oneAPI |
-| 9 | **Robotics AI Suite** | Physical AI Studio (proprietary); OpenVINO Physical AI (OSS); ROS 2 integration |
-| 10 | **Gaudi/GPU Operators** | Intel Technology Enabling for OpenShift (Apache 2.0). One-click Ansible deployment |
+| Product | OSS Foundation |
+| --- | --- |
+| **Gaudi 3** | Habana SynapseAI (proprietary runtime); PyTorch + Hugging Face integration. OpenShift AI certified |
+| **Train Infra** | Ethernet-based scaling (no InfiniBand/NVLink). Intel Gaudi Base Operator for K8s |
+| **Tiber AI Studio** | Proprietary MLOps platform; available on AWS Marketplace. Not OSS |
+| **Tiber AI Cloud** | Proprietary cloud service; Jupyter notebooks + CLI. Developer access to Gaudi, Max GPUs, Xeon |
+| **OpenVINO Model Server** | Apache 2.0; Python + C++ inference serving. OVMS is fully open-source |
+| **OpenVINO Physical AI** | Preview on GitHub (Apache 2.0 expected). Integrates with HuggingFace LeRobot |
+| **oneAPI** | DPC++ compiler (Apache 2.0, LLVM-based); oneMKL, oneDNN (Apache 2.0); UXL Foundation governance |
+| **oneVPL** | Apache 2.0; video processing library. Part of oneAPI |
+| **Robotics AI Suite** | Physical AI Studio (proprietary); OpenVINO Physical AI (OSS); ROS 2 integration |
+| **Gaudi/GPU Operators** | Intel Technology Enabling for OpenShift (Apache 2.0). One-click Ansible deployment |
 
 ---
 

@@ -52,7 +52,7 @@ Skild AI is a $14B-valued robotics foundation model startup building the **Skild
 <tr>
   <td><b>Train Workloads</b></td>
   <td>⬜</td>
-  <td>🟢 Skild Brain training<sup>1</sup><br>
+  <td>🟢 Skild Brain training<br>
   <small>(omni-bodied policy training)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -61,7 +61,7 @@ Skild AI is a $14B-valued robotics foundation model startup building the **Skild
 <tr>
   <td><b>Simulation Engine</b></td>
   <td>⬜</td>
-  <td>🟡 Via NVIDIA<sup>2</sup><br>
+  <td>🟡 Via NVIDIA<br>
   <small>(Isaac Lab + Cosmos, not owned)</small></td>
   <td>⬜</td>
   <td>⬜</td>
@@ -80,7 +80,7 @@ Skild AI is a $14B-valued robotics foundation model startup building the **Skild
 <tr>
   <td><b>Data</b></td>
   <td>⬜</td>
-  <td>🟢 Synthetic data generation<sup>3</sup><br>
+  <td>🟢 Synthetic data generation<br>
   <small>(trillions of sim episodes)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -145,7 +145,7 @@ Skild AI is a $14B-valued robotics foundation model startup building the **Skild
 <tr>
   <td><b>Models & Policies</b></td>
   <td>⬜</td>
-  <td>🟢 Skild Brain<sup>4</sup><br>
+  <td>🟢 Skild Brain<br>
   <small>(hierarchical VLA foundation model)</small></td>
   <td>⬜</td>
   <td>🟢 Skild Brain</td>
@@ -206,7 +206,7 @@ Skild AI is a $14B-valued robotics foundation model startup building the **Skild
   <td><b>App Libs (Robotics)</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
-  <td>🟢 Symmetry + Fetch<sup>5</sup><br>
+  <td>🟢 Symmetry + Fetch<br>
   <small>(fleet orchestration + AMR)</small></td>
 </tr>
 
@@ -238,13 +238,13 @@ Skild AI is a $14B-valued robotics foundation model startup building the **Skild
 
 ### OSS Foundations
 
-| # | Product | OSS Foundation |
-| --- | --- | --- |
-| 1 | **Skild Brain training** | Uses NVIDIA Isaac Lab (BSD-3) for RL training. PyTorch-based. Proprietary model architecture |
-| 2 | **Simulation** | NVIDIA Isaac Lab + Omniverse (open data layer, proprietary Kit SDK) + Cosmos (open-weight) |
-| 3 | **Synthetic data** | Cosmos Transfer for data augmentation. Proprietary data pipeline |
-| 4 | **Skild Brain (inference)** | Proprietary model. Hierarchical VLA — high-level policy + low-level motor control |
-| 5 | **Symmetry / Fetch** | Proprietary fleet orchestration. Fetch AMRs are proprietary hardware |
+| Product | OSS Foundation |
+| --- | --- |
+| **Skild Brain training** | Uses NVIDIA Isaac Lab (BSD-3) for RL training. PyTorch-based. Proprietary model architecture |
+| **Simulation** | NVIDIA Isaac Lab + Omniverse (open data layer, proprietary Kit SDK) + Cosmos (open-weight) |
+| **Synthetic data** | Cosmos Transfer for data augmentation. Proprietary data pipeline |
+| **Skild Brain (inference)** | Proprietary model. Hierarchical VLA — high-level policy + low-level motor control |
+| **Symmetry / Fetch** | Proprietary fleet orchestration. Fetch AMRs are proprietary hardware |
 
 ---
 

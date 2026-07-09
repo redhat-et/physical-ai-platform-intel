@@ -57,7 +57,7 @@ Intrinsic is Google's industrial robotics platform division, folded into Google 
 <tr>
   <td><b>Train Workloads</b></td>
   <td>⬜</td>
-  <td>🟡 Gemini Robotics<sup>1</sup><br>
+  <td>🟡 Gemini Robotics<br>
   <small>(cloud API; see <a href="google-deepmind.md">DeepMind</a>)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -66,7 +66,7 @@ Intrinsic is Google's industrial robotics platform division, folded into Google 
 <tr>
   <td><b>Simulation Engine</b></td>
   <td>⬜</td>
-  <td>🟢 Gazebo<sup>2</sup><br>
+  <td>🟢 Gazebo<br>
   <small>(OSS, hardware-portable)</small></td>
   <td>⬜</td>
   <td>⬜</td>
@@ -76,7 +76,7 @@ Intrinsic is Google's industrial robotics platform division, folded into Google 
 <tr>
   <td><b>Eval</b></td>
   <td>⬜</td>
-  <td>🟡 BOP benchmark<sup>3</sup>, Gazebo eval<br>
+  <td>🟡 BOP benchmark, Gazebo eval<br>
   <small>(partial: 6D pose only)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -85,7 +85,7 @@ Intrinsic is Google's industrial robotics platform division, folded into Google 
 <tr>
   <td><b>Data</b></td>
   <td>⬜</td>
-  <td>🟡 IPD<sup>4</sup><br>
+  <td>🟡 IPD<br>
   <small>(niche: 6DoF pose data only)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -160,7 +160,7 @@ Intrinsic is Google's industrial robotics platform division, folded into Google 
 
 <tr>
   <td><b>MaaS</b></td>
-  <td colspan="2">🟢 Gemini API, Vertex AI<sup>5</sup></td>
+  <td colspan="2">🟢 Gemini API, Vertex AI</td>
   <td colspan="2">🟢 Gemini API</td>
   <td>⬜</td>
 </tr>
@@ -170,7 +170,7 @@ Intrinsic is Google's industrial robotics platform division, folded into Google 
   <td colspan="2">🟡 Vertex AI Prediction<br>
   <small>(cloud-only)</small></td>
   <td colspan="2">⬜</td>
-  <td>🟢 Gemini On-Device<sup>6</sup><br>
+  <td>🟢 Gemini On-Device<br>
   <small>(&lt;10ms, offline capable)</small></td>
 </tr>
 
@@ -202,12 +202,12 @@ Intrinsic is Google's industrial robotics platform division, folded into Google 
 <tr>
   <td><b>App Libs (Robotics)</b></td>
   <td>⬜</td>
-  <td>🟢 ROS 2<sup>7</sup><br>
+  <td>🟢 ROS 2<br>
   <small>(stewarded via OSRF/OSRA)</small></td>
   <td>⬜</td>
-  <td>🟢 ROS 2, Flowstate<sup>8</sup><br>
+  <td>🟢 ROS 2, Flowstate<br>
   <small>(skills, motion planning, IVM)</small></td>
-  <td>🟢 ROS 2, Flowstate, IVM<sup>9</sup></td>
+  <td>🟢 ROS 2, Flowstate, IVM</td>
 </tr>
 
 <!-- === Platform === -->
@@ -217,7 +217,7 @@ Intrinsic is Google's industrial robotics platform division, folded into Google 
   <td colspan="2">🟡 GKE<br>
   <small>(cloud-only; competes with OpenShift)</small></td>
   <td colspan="2">⬜</td>
-  <td>🟢 IntrinsicOS<sup>10</sup><br>
+  <td>🟢 IntrinsicOS<br>
   <small>(proprietary Linux + K8s on IPC)</small></td>
 </tr>
 
@@ -233,7 +233,7 @@ Intrinsic is Google's industrial robotics platform division, folded into Google 
   <td><b>OS</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
-  <td>🟢 IntrinsicOS<sup>10</sup><br>
+  <td>🟢 IntrinsicOS<br>
   <small>(custom Linux; proprietary)</small></td>
 </tr>
 </table>
@@ -242,18 +242,18 @@ Intrinsic is Google's industrial robotics platform division, folded into Google 
 
 ### OSS Foundations
 
-| # | Product | OSS Foundation |
-| --- | --- | --- |
-| 1 | **Gemini Robotics** | Built on Gemini 2.0 (proprietary). Training uses JAX + TPU. No OSS deps disclosed. See [DeepMind](google-deepmind.md) |
-| 2 | **Gazebo** | Apache 2.0. OSRF governance, OSRA oversight. Physics: ODE, Bullet, DART, TPE. Rendering: OGRE 2 |
-| 3 | **BOP benchmark** | MIT. Intrinsic contributes IPD dataset and co-organizes |
-| 4 | **IPD** | Open dataset. GitHub: `intrinsic-ai/ipd` |
-| 5 | **Gemini API** | Proprietary API. Client: `google-genai` Python SDK (Apache 2.0) |
-| 6 | **Gemini On-Device** | Proprietary model. Safari SDK. Runs on-device, fine-tunable with 50-100 demos |
-| 7 | **ROS 2** | Apache 2.0. LTS: Jazzy Jalisco (→ 2029). OSRF holds IP; Google/Intrinsic employs most core maintainers |
-| 8 | **Flowstate** | Proprietary platform. SDK: `intrinsic-ai/sdk` (Apache 2.0, Copybara sync). Uses Gazebo, Zenoh |
-| 9 | **IVM** | Proprietary. 3PT architecture (CVPR 2026 Highlight). No OSS deps disclosed |
-| 10 | **IntrinsicOS** | Custom Linux + K8s. Copybara sync from Google monorepo. OSS (single-vendor) pattern |
+| Product | OSS Foundation |
+| --- | --- |
+| **Gemini Robotics** | Built on Gemini 2.0 (proprietary). Training uses JAX + TPU. No OSS deps disclosed. See [DeepMind](google-deepmind.md) |
+| **Gazebo** | Apache 2.0. OSRF governance, OSRA oversight. Physics: ODE, Bullet, DART, TPE. Rendering: OGRE 2 |
+| **BOP benchmark** | MIT. Intrinsic contributes IPD dataset and co-organizes |
+| **IPD** | Open dataset. GitHub: `intrinsic-ai/ipd` |
+| **Gemini API** | Proprietary API. Client: `google-genai` Python SDK (Apache 2.0) |
+| **Gemini On-Device** | Proprietary model. Safari SDK. Runs on-device, fine-tunable with 50-100 demos |
+| **ROS 2** | Apache 2.0. LTS: Jazzy Jalisco (→ 2029). OSRF holds IP; Google/Intrinsic employs most core maintainers |
+| **Flowstate** | Proprietary platform. SDK: `intrinsic-ai/sdk` (Apache 2.0, Copybara sync). Uses Gazebo, Zenoh |
+| **IVM** | Proprietary. 3PT architecture (CVPR 2026 Highlight). No OSS deps disclosed |
+| **IntrinsicOS** | Custom Linux + K8s. Copybara sync from Google monorepo. OSS (single-vendor) pattern |
 
 ---
 

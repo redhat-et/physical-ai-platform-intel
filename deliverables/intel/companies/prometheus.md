@@ -51,7 +51,7 @@ Prometheus (formerly Project Prometheus) is a VC-backed startup ($18B+ raised, $
 <tr>
   <td><b>Train Workloads</b></td>
   <td>⬜</td>
-  <td>🟡 AGE<sup>1</sup><br>
+  <td>🟡 AGE<br>
   <small>(pre-product; training on engineering/physics data)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -60,7 +60,7 @@ Prometheus (formerly Project Prometheus) is a VC-backed startup ($18B+ raised, $
 <tr>
   <td><b>Simulation Engine</b></td>
   <td>⬜</td>
-  <td>🟡 AGE<sup>2</sup><br>
+  <td>🟡 AGE<br>
   <small>(multi-physics reasoning, not standalone sim)</small></td>
   <td>⬜</td>
   <td>⬜</td>
@@ -77,7 +77,7 @@ Prometheus (formerly Project Prometheus) is a VC-backed startup ($18B+ raised, $
 <tr>
   <td><b>Data</b></td>
   <td>⬜</td>
-  <td>🟡 Proprietary<sup>3</sup><br>
+  <td>🟡 Proprietary<br>
   <small>(engineering/manufacturing data pipelines)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -85,7 +85,7 @@ Prometheus (formerly Project Prometheus) is a VC-backed startup ($18B+ raised, $
 
 <tr>
   <td><b>Train Infra</b></td>
-  <td colspan="2">🟡 Internal<sup>4</sup><br>
+  <td colspan="2">🟡 Internal<br>
   <small>(multi-hyperscaler compute; $12B allocated)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -133,7 +133,7 @@ Prometheus (formerly Project Prometheus) is a VC-backed startup ($18B+ raised, $
 <tr>
   <td><b>Agentic Framework</b></td>
   <td>⬜</td>
-  <td>🟡 Ace<sup>5</sup><br>
+  <td>🟡 Ace<br>
   <small>(agentic computer use via VLA)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -155,7 +155,7 @@ Prometheus (formerly Project Prometheus) is a VC-backed startup ($18B+ raised, $
 
 <tr>
   <td><b>MaaS</b></td>
-  <td colspan="2">⬜<sup>6</sup></td>
+  <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
 </tr>
@@ -232,11 +232,11 @@ Prometheus (formerly Project Prometheus) is a VC-backed startup ($18B+ raised, $
 
 ### OSS Foundations
 
-| # | Product | OSS Foundation |
-| --- | --- | --- |
-| 1 | **AGE (training)** | No public information; "very compute-intensive" synthetic data generation for engineering/physics domains; multi-hyperscaler compute (incl. AWS) |
-| 2 | **Ace (agentic)** | Built on General Agents' VLA architecture; no open-source release; pre-acquisition codebase included video-language-action model for computer use |
-| 3 | **Overall** | Fully proprietary; no open-source releases, no public API, no weights. Stealth-mode operation |
+| Product | OSS Foundation |
+| --- | --- |
+| **AGE (training)** | No public information; "very compute-intensive" synthetic data generation for engineering/physics domains; multi-hyperscaler compute (incl. AWS) |
+| **Ace (agentic)** | Built on General Agents' VLA architecture; no open-source release; pre-acquisition codebase included video-language-action model for computer use |
+| **Overall** | Fully proprietary; no open-source releases, no public API, no weights. Stealth-mode operation |
 
 ---
 

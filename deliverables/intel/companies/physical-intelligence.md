@@ -52,7 +52,7 @@ Physical Intelligence (π) is a VC-backed startup ($1.1B raised, $5.6B valuation
 <tr>
   <td><b>Train Workloads</b></td>
   <td>⬜</td>
-  <td>🟢 π0.7, openpi<sup>1</sup><br>
+  <td>🟢 π0.7, openpi<br>
   <small>(VLA fine-tuning pipeline)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -70,7 +70,7 @@ Physical Intelligence (π) is a VC-backed startup ($1.1B raised, $5.6B valuation
 <tr>
   <td><b>Eval</b></td>
   <td>⬜</td>
-  <td>🟡 π\*0.6 RECAP<sup>2</sup><br>
+  <td>🟡 π\*0.6 RECAP<br>
   <small>(self-eval via RL, not standalone)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -79,7 +79,7 @@ Physical Intelligence (π) is a VC-backed startup ($1.1B raised, $5.6B valuation
 <tr>
   <td><b>Data</b></td>
   <td>⬜</td>
-  <td>🟡 pi-data-sharing<sup>3</sup><br>
+  <td>🟡 pi-data-sharing<br>
   <small>(data utilities, not full pipeline)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -143,7 +143,7 @@ Physical Intelligence (π) is a VC-backed startup ($1.1B raised, $5.6B valuation
 <tr>
   <td><b>Models & Policies</b></td>
   <td>⬜</td>
-  <td>🟡 π0.7<sup>4</sup><br>
+  <td>🟡 π0.7<br>
   <small>(VLA foundation model, Gemma ToU weights)</small></td>
   <td>⬜</td>
   <td>🟡 π0.7</td>
@@ -154,7 +154,7 @@ Physical Intelligence (π) is a VC-backed startup ($1.1B raised, $5.6B valuation
 
 <tr>
   <td><b>MaaS</b></td>
-  <td colspan="2">🟡 Fine-tuning API<sup>5</sup><br>
+  <td colspan="2">🟡 Fine-tuning API<br>
   <small>(private beta)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -232,13 +232,13 @@ Physical Intelligence (π) is a VC-backed startup ($1.1B raised, $5.6B valuation
 
 ### OSS Foundations
 
-| # | Product | OSS Foundation |
-| --- | --- | --- |
-| 1 | **openpi (code)** | PyTorch + JAX; WebSocket server/client; Apache 2.0 |
-| 2 | **openpi (weights)** | PaliGemma 3B (Google) as VLM backbone; **Gemma Terms of Use** (not Apache 2.0 — includes revocation clause) |
-| 3 | **π\*0.6** | Not open-sourced; community requests ignored (GitHub issue #789) |
-| 4 | **π0.7** | Gemma 3-4B backbone (Google) + BAGEL 14B (community) for world model; not open-sourced |
-| 5 | **Fine-tuning API** | Proprietary; wraps openpi fine-tuning pipeline |
+| Product | OSS Foundation |
+| --- | --- |
+| **openpi (code)** | PyTorch + JAX; WebSocket server/client; Apache 2.0 |
+| **openpi (weights)** | PaliGemma 3B (Google) as VLM backbone; **Gemma Terms of Use** (not Apache 2.0 — includes revocation clause) |
+| **π\*0.6** | Not open-sourced; community requests ignored (GitHub issue #789) |
+| **π0.7** | Gemma 3-4B backbone (Google) + BAGEL 14B (community) for world model; not open-sourced |
+| **Fine-tuning API** | Proprietary; wraps openpi fine-tuning pipeline |
 
 ---
 

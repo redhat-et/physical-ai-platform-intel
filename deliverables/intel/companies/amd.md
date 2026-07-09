@@ -68,7 +68,7 @@ AMD is a $200B+ semiconductor company pursuing a **hardware-first, open-ecosyste
 <tr>
   <td><b>Simulation Engine</b></td>
   <td>⬜</td>
-  <td>🟡 Schola + MuJoCo<sup>1</sup><br>
+  <td>🟡 Schola + MuJoCo<br>
   <small>(early-stage, no integrated sim platform)</small></td>
   <td>⬜</td>
   <td>⬜</td>
@@ -86,7 +86,7 @@ AMD is a $200B+ semiconductor company pursuing a **hardware-first, open-ecosyste
 <tr>
   <td><b>Data</b></td>
   <td>⬜</td>
-  <td>🟡 Genesis SDG pipeline<sup>2</sup><br>
+  <td>🟡 Genesis SDG pipeline<br>
   <small>(demo-stage, Silo AI + partners)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -166,10 +166,10 @@ AMD is a $200B+ semiconductor company pursuing a **hardware-first, open-ecosyste
 
 <tr>
   <td><b>Inference Server</b></td>
-  <td colspan="2">🔵 vLLM + AITER/ATOM<sup>3</sup><br>
+  <td colspan="2">🔵 vLLM + AITER/ATOM<br>
   <small>(upstream contributor, not owner)</small></td>
   <td colspan="2">🔵 vLLM + AITER/ATOM</td>
-  <td>🟡 ROCm on Ryzen AI<sup>4</sup><br>
+  <td>🟡 ROCm on Ryzen AI<br>
   <small>(consumer/embedded inference)</small></td>
 </tr>
 
@@ -209,7 +209,7 @@ AMD is a $200B+ semiconductor company pursuing a **hardware-first, open-ecosyste
   <td><b>App Libs (Robotics)</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
-  <td>🟡 Kria + ROS 2<sup>5</sup><br>
+  <td>🟡 Kria + ROS 2<br>
   <small>(reference designs, not GPU-accel)</small></td>
 </tr>
 
@@ -225,7 +225,7 @@ AMD is a $200B+ semiconductor company pursuing a **hardware-first, open-ecosyste
 
 <tr>
   <td><b>Drivers</b></td>
-  <td colspan="2">🟢 AMD GPU Operator<sup>6</sup>, ROCm drivers</td>
+  <td colspan="2">🟢 AMD GPU Operator, ROCm drivers</td>
   <td colspan="2">🟢 AMD GPU Operator, ROCm drivers</td>
   <td>🟣 XDNA drivers, Versal drivers<br>
   <small>(Ryzen AI + FPGA)</small></td>
@@ -245,14 +245,14 @@ AMD is a $200B+ semiconductor company pursuing a **hardware-first, open-ecosyste
 
 ### OSS Foundations
 
-| # | Product | OSS Foundation |
-| --- | --- | --- |
-| 1 | **Schola** | Unreal Engine plugin (MIT). MuJoCo + Gymnasium. Stable Baselines 3 / Ray RLlib for training |
-| 2 | **Genesis SDG** | Silo AI demo pipeline using Genesis (open-source physics engine) for synthetic data on ROCm |
-| 3 | **vLLM (AMD)** | AMD is a top-3 contributor to vLLM. AITER/ATOM provide ROCm-optimized kernels as vLLM/SGLang plugins |
-| 4 | **Ryzen AI inference** | ROCm 7.2 on consumer/embedded GPUs. vLLM/SGLang supported on MI-series; XDNA NPU via separate runtime |
-| 5 | **Kria + ROS 2** | KR260 Starter Kit with ROS 2 reference designs. Vitis AI for FPGA-accelerated inference |
-| 6 | **AMD GPU Operator** | K8s operator for Instinct GPUs on OpenShift. ROCm drivers + device plugin. Apache 2.0 |
+| Product | OSS Foundation |
+| --- | --- |
+| **Schola** | Unreal Engine plugin (MIT). MuJoCo + Gymnasium. Stable Baselines 3 / Ray RLlib for training |
+| **Genesis SDG** | Silo AI demo pipeline using Genesis (open-source physics engine) for synthetic data on ROCm |
+| **vLLM (AMD)** | AMD is a top-3 contributor to vLLM. AITER/ATOM provide ROCm-optimized kernels as vLLM/SGLang plugins |
+| **Ryzen AI inference** | ROCm 7.2 on consumer/embedded GPUs. vLLM/SGLang supported on MI-series; XDNA NPU via separate runtime |
+| **Kria + ROS 2** | KR260 Starter Kit with ROS 2 reference designs. Vitis AI for FPGA-accelerated inference |
+| **AMD GPU Operator** | K8s operator for Instinct GPUs on OpenShift. ROCm drivers + device plugin. Apache 2.0 |
 
 ---
 

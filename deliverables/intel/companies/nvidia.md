@@ -61,9 +61,9 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
 
 <tr>
   <td><b>Train Workloads</b></td>
-  <td>🔴 NeMo Customizer<sup>1</sup><br>
+  <td>🔴 NeMo Customizer<br>
   <small>(overlaps KFTO)</small></td>
-  <td>🟢 GR00T N1, Cosmos<sup>11,12</sup><br>
+  <td>🟢 GR00T N1, Cosmos<br>
   <small>(models as content)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -72,7 +72,7 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
 <tr>
   <td><b>Simulation Engine</b></td>
   <td>⬜</td>
-  <td>🟢 Isaac Sim, Newton<sup>2,3</sup><br>
+  <td>🟢 Isaac Sim, Newton<br>
   <small>(RTX rendering, multi-physics)</small></td>
   <td>⬜</td>
   <td>⬜</td>
@@ -81,7 +81,7 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
 
 <tr>
   <td><b>Eval</b></td>
-  <td>🔴 NeMo Evaluator<sup>4</sup><br>
+  <td>🔴 NeMo Evaluator<br>
   <small>(wraps lm-eval-harness)</small></td>
   <td>🟢 Isaac Lab-Arena<br>
   <small>(policy eval)</small></td>
@@ -99,7 +99,7 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
 
 <tr>
   <td><b>Train Infra</b></td>
-  <td colspan="2">🔴 KAI Scheduler<sup>13</sup><br>
+  <td colspan="2">🔴 KAI Scheduler<br>
   <small>(conflicts with Kueue)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -117,7 +117,7 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
 
 <tr>
   <td><b>Model Pipelines</b></td>
-  <td colspan="2">🟢 OSMO<sup>5</sup><br>
+  <td colspan="2">🟢 OSMO<br>
   <small>(fills platform [GAP])</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -139,7 +139,7 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
 
 <tr>
   <td><b>Model Monitoring</b></td>
-  <td colspan="2">🟢 DCGM<sup>6</sup>, NeMo Guardrails<sup>7</sup><br>
+  <td colspan="2">🟢 DCGM, NeMo Guardrails<br>
   <small>(GPU metrics + content safety)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -172,14 +172,14 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
 
 <tr>
   <td><b>MaaS</b></td>
-  <td colspan="2">🟢 NIM (as API)<sup>8</sup></td>
+  <td colspan="2">🟢 NIM (as API)</td>
   <td colspan="2">🟢 NIM</td>
   <td>⬜</td>
 </tr>
 
 <tr>
   <td><b>Inference Server</b></td>
-  <td colspan="2">🔴 NIM<sup>8</sup><br>
+  <td colspan="2">🔴 NIM<br>
   <small>(vLLM + enterprise packaging)</small></td>
   <td colspan="2">🔴 NIM</td>
   <td>🟢 TensorRT<br>
@@ -195,7 +195,7 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
 
 <tr>
   <td><b>KServe</b></td>
-  <td colspan="2">🔴 NIM Operator<sup>9</sup><br>
+  <td colspan="2">🔴 NIM Operator<br>
   <small>(converging with KServe)</small></td>
   <td colspan="2">🔴 NIM Operator</td>
   <td>⬜</td>
@@ -212,7 +212,7 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
 
 <tr>
   <td><b>App Libs (Media)</b></td>
-  <td colspan="2">🟢 DeepStream SDK<sup>14</sup><br>
+  <td colspan="2">🟢 DeepStream SDK<br>
   <small>(GStreamer + GPU plugins)</small></td>
   <td colspan="2">🟢 DeepStream SDK</td>
   <td>🟢 DeepStream SDK</td>
@@ -222,7 +222,7 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
   <td><b>App Libs (Robotics)</b></td>
   <td colspan="2">⬜</td>
   <td colspan="2">⬜</td>
-  <td>🟢 Isaac ROS<sup>10</sup><br>
+  <td>🟢 Isaac ROS<br>
   <small>(CUDA-accel ROS 2)</small></td>
 </tr>
 
@@ -238,9 +238,9 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
 
 <tr>
   <td><b>Drivers</b></td>
-  <td colspan="2">🟢 GPU Operator<sup>6</sup>, drivers</td>
   <td colspan="2">🟢 GPU Operator, drivers</td>
-  <td>🟣 JetPack<sup>16</sup><br>
+  <td colspan="2">🟢 GPU Operator, drivers</td>
+  <td>🟣 JetPack<br>
   <small>(GPU, DLA, PVA, ISP, SE, FSI, MGBE)</small></td>
 </tr>
 
@@ -258,24 +258,24 @@ NVIDIA is a $3T+ semiconductor company that controls the dominant AI infrastruct
 
 ### OSS Foundations
 
-| # | Product | OSS Foundation |
-| --- | --- | --- |
-| 1 | **NeMo Customizer** | PyTorch + Megatron-Core (Apache 2.0); AutoModel path uses HF Transformers v5 |
-| 2 | **Isaac Sim** | OpenUSD + PhysX (BSD-3) + Newton (Apache 2.0). Proprietary Kit SDK runtime |
-| 3 | **Newton** | MuJoCo-Warp (DeepMind) + NVIDIA Warp; Apache 2.0, Linux Foundation. CUDA-only |
-| 4 | **NeMo Evaluator** | Wraps lm-eval-harness, VLMEvalKit, BigCode harness; uses Argo Workflows |
-| 5 | **OSMO** | Custom engine (TS/Python/Go). NOT based on Argo/Airflow/KubeFlow. Apache 2.0 |
-| 6 | **GPU Operator / DCGM** | ~15 OSS components: NFD, Device Plugin, DCGM Exporter, Container Toolkit; all Apache 2.0 |
-| 7 | **NeMo Guardrails** | Hard dependency on LangChain; works with any LLM. Apache 2.0 |
-| 8 | **NIM (LLM/VLM)** | **vLLM as sole backend** (upstream-first). Embedding NIMs use TensorRT + Triton |
-| 9 | **NIM Operator** | K8s CRDs for NIM deployment; v3.0 adds KServe interop |
-| 10 | **Isaac ROS** | ~60 ROS 2 wrappers (Apache 2.0) over proprietary NITROS/GXF/cuVSLAM/nvblox |
-| 11 | **GR00T N1** | VLM: SmolLM2 (HF) + SigLIP-2 (Google) → Qwen3-VL (Alibaba). LeRobot v2 data format |
-| 12 | **Cosmos** | Cosmos 3 from Qwen3-VL. Tokenizer from MAGVIT-2/StableDiffusion. Inference via vLLM |
-| 13 | **KAI Scheduler** | Forked from kube-batch (2019) + Volcano/Kueue code; CNCF Sandbox; Apache 2.0 |
-| 14 | **DeepStream SDK** | GStreamer + GPU plugins; CV-CUDA (Apache 2.0) for vision preprocessing |
-| 15 | **Omniverse** | OpenUSD, PhysX (BSD-3), Warp, MDL (BSD-3). Kit SDK, RTX, Nucleus, OptiX proprietary |
-| 16 | **JetPack** | L4T (Ubuntu-based) + CUDA + cuDNN + TensorRT + all accelerator drivers |
+| Product | OSS Foundation |
+| --- | --- |
+| **NeMo Customizer** | PyTorch + Megatron-Core (Apache 2.0); AutoModel path uses HF Transformers v5 |
+| **Isaac Sim** | OpenUSD + PhysX (BSD-3) + Newton (Apache 2.0). Proprietary Kit SDK runtime |
+| **Newton** | MuJoCo-Warp (DeepMind) + NVIDIA Warp; Apache 2.0, Linux Foundation. CUDA-only |
+| **NeMo Evaluator** | Wraps lm-eval-harness, VLMEvalKit, BigCode harness; uses Argo Workflows |
+| **OSMO** | Custom engine (TS/Python/Go). NOT based on Argo/Airflow/KubeFlow. Apache 2.0 |
+| **GPU Operator / DCGM** | ~15 OSS components: NFD, Device Plugin, DCGM Exporter, Container Toolkit; all Apache 2.0 |
+| **NeMo Guardrails** | Hard dependency on LangChain; works with any LLM. Apache 2.0 |
+| **NIM (LLM/VLM)** | **vLLM as sole backend** (upstream-first). Embedding NIMs use TensorRT + Triton |
+| **NIM Operator** | K8s CRDs for NIM deployment; v3.0 adds KServe interop |
+| **Isaac ROS** | ~60 ROS 2 wrappers (Apache 2.0) over proprietary NITROS/GXF/cuVSLAM/nvblox |
+| **GR00T N1** | VLM: SmolLM2 (HF) + SigLIP-2 (Google) → Qwen3-VL (Alibaba). LeRobot v2 data format |
+| **Cosmos** | Cosmos 3 from Qwen3-VL. Tokenizer from MAGVIT-2/StableDiffusion. Inference via vLLM |
+| **KAI Scheduler** | Forked from kube-batch (2019) + Volcano/Kueue code; CNCF Sandbox; Apache 2.0 |
+| **DeepStream SDK** | GStreamer + GPU plugins; CV-CUDA (Apache 2.0) for vision preprocessing |
+| **Omniverse** | OpenUSD, PhysX (BSD-3), Warp, MDL (BSD-3). Kit SDK, RTX, Nucleus, OptiX proprietary |
+| **JetPack** | L4T (Ubuntu-based) + CUDA + cuDNN + TensorRT + all accelerator drivers |
 
 ---
 

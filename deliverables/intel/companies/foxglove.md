@@ -69,7 +69,7 @@ Foxglove is a San Francisco-based startup building a **multimodal data and obser
 <tr>
   <td><b>Eval</b></td>
   <td>⬜</td>
-  <td>🟡 Foxglove Platform<sup>1</sup><br>
+  <td>🟡 Foxglove Platform<br>
   <small>(visual debugging + event annotation, not automated eval)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -78,7 +78,7 @@ Foxglove is a San Francisco-based startup building a **multimodal data and obser
 <tr>
   <td><b>Data</b></td>
   <td>⬜</td>
-  <td>🟢 Foxglove Platform<sup>2</sup><br>
+  <td>🟢 Foxglove Platform<br>
   <small>(log, store, search, curate multimodal data)</small></td>
   <td>⬜</td>
   <td>🟢 Foxglove Platform<br>
@@ -112,7 +112,7 @@ Foxglove is a San Francisco-based startup building a **multimodal data and obser
 
 <tr>
   <td><b>CI/CD &amp; GitOps</b></td>
-  <td colspan="2">🟡 Foxglove Platform<sup>3</sup><br>
+  <td colspan="2">🟡 Foxglove Platform<br>
   <small>(webhooks trigger CI on recording arrival)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -128,7 +128,7 @@ Foxglove is a San Francisco-based startup building a **multimodal data and obser
 <tr>
   <td><b>Model Monitoring</b></td>
   <td>⬜</td>
-  <td>🟢 Foxglove Platform<sup>4</sup><br>
+  <td>🟢 Foxglove Platform<br>
   <small>(fleet-level observability, events, anomaly search)</small></td>
   <td>⬜</td>
   <td>🟡 Foxglove Platform<br>
@@ -236,12 +236,12 @@ Foxglove is a San Francisco-based startup building a **multimodal data and obser
 
 ### OSS Foundations
 
-| # | Product | OSS Foundation |
-| --- | --- | --- |
-| 1 | **Foxglove Platform (Eval)** | Visual debugging via event annotation and timeline review. Not automated eval. Platform is proprietary |
-| 2 | **Foxglove Platform (Data)** | MCAP (MIT) as storage format. Platform proprietary. BYOS keeps data in customer buckets. SDK (MIT) for logging |
-| 3 | **Foxglove Platform (CI/CD)** | Webhook-based triggers only -- not a CI/CD system. Integrates with external pipelines |
-| 4 | **Foxglove Platform (Monitoring)** | Fleet observability with events, search, remote viz. Remote teleop in private beta (enterprise only) |
+| Product | OSS Foundation |
+| --- | --- |
+| **Foxglove Platform (Eval)** | Visual debugging via event annotation and timeline review. Not automated eval. Platform is proprietary |
+| **Foxglove Platform (Data)** | MCAP (MIT) as storage format. Platform proprietary. BYOS keeps data in customer buckets. SDK (MIT) for logging |
+| **Foxglove Platform (CI/CD)** | Webhook-based triggers only -- not a CI/CD system. Integrates with external pipelines |
+| **Foxglove Platform (Monitoring)** | Fleet observability with events, search, remote viz. Remote teleop in private beta (enterprise only) |
 
 ---
 

@@ -66,7 +66,7 @@ Fill the template at `deliverables/intel/_templates/company-profile.md`:
 - **At a Glance**: 1-paragraph positioning + summary table
 - **Key Products**: One-line per product table
 - **Architecture Coverage**: HTML table with emoji indicators (see visual-language.md)
-- **OSS Foundations**: Compact footnote table (1 line per product)
+- **OSS Foundations**: Product-keyed reference table (1 line per product, no `#` column)
 - **Hardware & Ecosystem Partnerships**: If applicable
 - **Competitive Positioning**: Factual "they have / they lack" table
 - **Coverage Summary**: Bullet list

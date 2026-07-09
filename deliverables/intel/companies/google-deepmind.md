@@ -59,7 +59,7 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
 <tr>
   <td><b>Train Workloads</b></td>
   <td>⬜</td>
-  <td>🟢 Gemini Robotics<sup>1</sup><br>
+  <td>🟢 Gemini Robotics<br>
   <small>(proprietary VLAs; most capable)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -68,7 +68,7 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
 <tr>
   <td><b>Simulation Engine</b></td>
   <td>⬜</td>
-  <td>🟢 MuJoCo<sup>2</sup>, Newton<sup>3</sup><br>
+  <td>🟢 MuJoCo, Newton<br>
   <small>(physics; OSS)</small></td>
   <td>⬜</td>
   <td>⬜</td>
@@ -87,7 +87,7 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
 <tr>
   <td><b>Data</b></td>
   <td>⬜</td>
-  <td>🟢 Open X-Embodiment<sup>4</sup><br>
+  <td>🟢 Open X-Embodiment<br>
   <small>(33 labs, 22 robot types)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
@@ -161,7 +161,7 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
 
 <tr>
   <td><b>MaaS</b></td>
-  <td colspan="2">🟢 Gemini API, Vertex AI<sup>5</sup></td>
+  <td colspan="2">🟢 Gemini API, Vertex AI</td>
   <td colspan="2">🟢 Gemini API</td>
   <td>⬜</td>
 </tr>
@@ -171,7 +171,7 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
   <td colspan="2">🟡 Vertex AI Prediction<br>
   <small>(cloud-only)</small></td>
   <td colspan="2">⬜</td>
-  <td>🟢 Gemini On-Device<sup>6</sup><br>
+  <td>🟢 Gemini On-Device<br>
   <small>(&lt;10ms, offline)</small></td>
 </tr>
 
@@ -235,14 +235,14 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
 
 ### OSS Foundations
 
-| # | Product | OSS Foundation |
-| --- | --- | --- |
-| 1 | **Gemini Robotics** | Built on Gemini 2.0 (proprietary). Training uses JAX + TPU. Open-weight alternative: Gemma 4 (Apache 2.0, not robotics-specific) |
-| 2 | **MuJoCo** | Apache 2.0 (since 2022). CPU + GPU (MJX via JAX). DeepMind-stewarded. 18K+ stars |
-| 3 | **Newton** | Apache 2.0, Linux Foundation. DeepMind contributed MuJoCo Warp as primary backend. Co-founded with NVIDIA, Disney Research |
-| 4 | **Open X-Embodiment** | Open dataset from 33 research labs, 22 robot types. Foundation for RT-X and cross-embodiment research |
-| 5 | **Gemini API** | Proprietary API. Client: `google-genai` Python SDK (Apache 2.0) |
-| 6 | **Gemini On-Device** | Proprietary model. Safari SDK for deployment. Fine-tunable with 50-100 demos |
+| Product | OSS Foundation |
+| --- | --- |
+| **Gemini Robotics** | Built on Gemini 2.0 (proprietary). Training uses JAX + TPU. Open-weight alternative: Gemma 4 (Apache 2.0, not robotics-specific) |
+| **MuJoCo** | Apache 2.0 (since 2022). CPU + GPU (MJX via JAX). DeepMind-stewarded. 18K+ stars |
+| **Newton** | Apache 2.0, Linux Foundation. DeepMind contributed MuJoCo Warp as primary backend. Co-founded with NVIDIA, Disney Research |
+| **Open X-Embodiment** | Open dataset from 33 research labs, 22 robot types. Foundation for RT-X and cross-embodiment research |
+| **Gemini API** | Proprietary API. Client: `google-genai` Python SDK (Apache 2.0) |
+| **Gemini On-Device** | Proprietary model. Safari SDK for deployment. Fine-tunable with 50-100 demos |
 
 ---
 
