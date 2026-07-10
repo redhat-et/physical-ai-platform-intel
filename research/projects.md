@@ -918,6 +918,99 @@
 
 **Openness assessment**: (to be assessed by oss-health skill)
 
+#### NeuralOperator: PyTorch Library for Neural Operators
+
+**URL**: [github.com/neuraloperator/neuraloperator](https://github.com/neuraloperator/neuraloperator)
+
+**Description**: Official PyTorch Ecosystem library for learning neural operators — function-to-function mappings that generalize across PDE instances. Implements FNO, TFNO, GINO, UNO, SFNO, FNOGNO, and other architectures. Co-developed by NVIDIA Research and Caltech. Provides clean API for training, evaluating, and deploying neural operator surrogates. Complements DeepXDE (which covers DeepONet but not FNO).
+
+**Tech Stack**: Python, PyTorch
+
+**Key Features**:
+
+- FNO family: FNO, TFNO (tensor-factorized), SFNO (spherical), GINO (geometry-informed), UNO (U-shaped)
+- Official PyTorch Ecosystem member (Dec 2025)
+- Training utilities, data loaders for standard PDE benchmarks
+- Apache 2.0 licensed (inferred from PyTorch Ecosystem standards)
+
+**Status**: Active
+
+**Stats**: PyTorch Ecosystem member; actively maintained by NVIDIA Research + Caltech
+
+**Last Updated**: 2026-07
+
+**Building block(s)**: [Physics-Informed ML Frameworks](building-blocks.md#physics-informed-ml-frameworks)
+
+**Maturity**: Production-ready
+
+**Competes with**: DeepXDE (complementary — NeuralOperator covers FNO family; DeepXDE covers DeepONet + PINNs)
+
+**Complements**: PhysicsNeMo (higher-level framework that includes FNO implementations)
+
+**Openness assessment**: (to be assessed by oss-health skill)
+
+#### DeepXDE: Multi-Backend PINNs and DeepONet Library
+
+**URL**: [github.com/lululxvi/deepxde](https://github.com/lululxvi/deepxde)
+
+**Description**: Library for scientific machine learning and physics-informed learning. Supports PINNs (physics-informed neural networks) and multiple DeepONet variants for operator learning. Key differentiator: supports 5 deep learning backends (TensorFlow 1.x, TensorFlow 2.x, PyTorch, JAX, PaddlePaddle), making it the most hardware-portable framework in this space. Does not implement standalone FNO — complementary to NeuralOperator.
+
+**Tech Stack**: Python, PyTorch / TensorFlow / JAX / PaddlePaddle
+
+**Key Features**:
+
+- PINNs for forward and inverse PDE problems
+- DeepONet variants: vanilla, multi-fidelity, physics-informed
+- 5 backend support — most portable physics-ML library
+- Extensive documentation and tutorial ecosystem
+- MIT licensed
+
+**Status**: Active
+
+**Stats**: 4,300+ stars, 72 releases
+
+**Last Updated**: 2026-07
+
+**Building block(s)**: [Physics-Informed ML Frameworks](building-blocks.md#physics-informed-ml-frameworks)
+
+**Maturity**: Production-ready
+
+**Competes with**: PhysicsNeMo (NVIDIA-locked), NeuralOperator (FNO-focused)
+
+**Complements**: NeuralOperator (DeepXDE handles DeepONet/PINNs; NeuralOperator handles FNO family)
+
+**Openness assessment**: (to be assessed by oss-health skill)
+
+#### PDEBench: Standardized Benchmarks for Neural PDE Solvers
+
+**URL**: [github.com/pdebench/PDEBench](https://github.com/pdebench/PDEBench)
+
+**Description**: Standardized benchmark suite comparing FNO, U-Net, and PINN architectures across 9+ PDE problems (1D advection, Burgers, diffusion-reaction, 2D Darcy flow, shallow-water, compressible and incompressible Navier-Stokes). Published at NeurIPS 2022 with follow-on work at ICML, ICLR, TMLR. Datasets hosted on DaRUS in HDF5 format. Enables reproducible comparison of neural surrogate architectures.
+
+**Tech Stack**: Python, PyTorch, HDF5
+
+**Key Features**:
+
+- 9+ PDE benchmark problems with pre-generated datasets
+- Baseline implementations of FNO, U-Net, PINN
+- HDF5 datasets on DaRUS for reproducibility
+- Widely adopted evaluation standard at top ML venues
+- MIT licensed
+
+**Status**: Active
+
+**Last Updated**: 2026-07
+
+**Building block(s)**: [Physics-Informed ML Frameworks](building-blocks.md#physics-informed-ml-frameworks)
+
+**Maturity**: Production-ready (as benchmark tooling)
+
+**Competes with**: Ad-hoc benchmark practices (provides standardization)
+
+**Complements**: NeuralOperator, DeepXDE, PhysicsNeMo (evaluation target for all three)
+
+**Openness assessment**: (to be assessed by oss-health skill)
+
 #### Newton: GPU-Accelerated Physics Engine for Robotics
 
 **URL**: [github.com/newton-physics/newton](https://github.com/newton-physics/newton)

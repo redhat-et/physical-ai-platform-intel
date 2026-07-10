@@ -2421,7 +2421,34 @@
 
 ## Digital Twins & Simulation
 
-*Digital twin architectures, simulation methods, synthetic data generation*
+*Digital twin architectures, simulation methods, synthetic data generation, neural surrogate models*
+
+### Neural Surrogate Models for Engineering Simulation
+
+#### Lu et al. — Comprehensive Comparison of DeepONet and FNO (2022)
+
+- **Source**: [arXiv:2111.05512](https://arxiv.org/abs/2111.05512) — Computer Methods in Applied Mechanics and Engineering, Vol. 393
+- **Key finding**: Across 16 benchmarks, FNO and DeepONet achieve comparable accuracy on simple regular-grid problems. FNO degrades catastrophically on complex geometries and noisy data — 10,000x error increase with just 0.1% input noise on instability wave analysis, while DeepONet is unaffected. FNO relies on FFT requiring uniform Cartesian grids; DeepONet handles irregular domains natively.
+- **Relevance**: Critical architecture selection guidance. For Physical AI edge applications with noisy sensor data, DeepONet-family architectures are safer. FNO is best suited to well-structured datacenter workloads on clean simulation outputs.
+- **Caveat**: Lead author (Lu) invented DeepONet — potential conflict of interest, though results are independently corroborated by 2024-2025 follow-up studies.
+
+#### MARIO — Modulated Aerodynamic Resolution Invariant Operator (2025)
+
+- **Source**: [arXiv:2505.14704](https://arxiv.org/abs/2505.14704) — Computers and Fluids (peer-reviewed). ISAE-SUPAERO + Airbus. 3rd place NeurIPS 2024 ML4CFD Challenge.
+- **Key finding**: Exploits neural field discretization-invariance to train on ~2% of mesh points (~10,000 of 454,404 nodes) while maintaining full-resolution inference accuracy. Order-of-magnitude improvement over prior methods on AirfRANS airfoil dataset for velocity and pressure fields (~10-14x). Uses tree-based attention masking to compress an entire episode into one forward pass, reducing training tokens by 22x.
+- **Relevance**: Demonstrates that training cost — the main barrier to neural surrogate adoption — can be drastically reduced. Airbus co-authorship signals production interest. Later model GLOBE (late 2025) surpasses MARIO by 7x on some splits, confirming rapid progress.
+
+#### Neural Operators Survey — PINNs vs Neural Operators Decision Framework (2025)
+
+- **Source**: [arXiv:2511.04576](https://arxiv.org/abs/2511.04576)
+- **Key finding**: PINNs and neural operators represent two distinct paradigms. Neural operators (FNO, DeepONet) learn mappings between function spaces — train once, evaluate for any new input (amortized). PINNs embed physics as soft constraints in the loss function — excel at inverse problems with sparse data but require per-instance retraining. Practical decision: data abundance (>1000 samples) favors FNO/GNO; moderate data (100-1000) favors hybrid physics+data approaches; sparse data favors PINNs.
+- **Relevance**: Architecture selection matrix for platform builders. Different building blocks need different surrogate architectures depending on available simulation data volume.
+
+#### HPC-DL Coupling Architectures for Surrogates (2022)
+
+- **Source**: [OSTI:1885297](https://www.osti.gov/servlets/purl/1885297) — ORNL, IEEE IPDPS Workshop
+- **Key finding**: Defines three deployment architectures for integrating neural surrogates with HPC simulations: (1) tightly coupled (single executable, 1:1 GPU mapping, best latency), (2) semi-tightly coupled (separate executables on same node, flexible mapping), (3) loosely coupled (separate nodes, many-to-many via network). Tightly-coupled MLP surrogates (5K-2M parameters) achieve linear throughput scaling to 1,000 GPUs. Weak scaling efficiency 70-90%.
+- **Relevance**: Directly informs how OpenShift should orchestrate surrogate workloads. Loosely coupled is most K8s-friendly; tightly coupled requires MPI-style pod placement. The 5K-2M parameter range means surrogates are far smaller than LLMs — different serving infrastructure than vLLM.
 
 ---
 

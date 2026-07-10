@@ -600,22 +600,27 @@ This block has two sub-problems settling at different rates:
 
 **Solution landscape**:
 
-| Category               | Solutions         | Maturity          | Notes                             |
-| ---------------------- | ----------------- | ----------------- | --------------------------------- |
-| OSS (community-driven) | (none identified) | —                 | —                                 |
-| OSS (single-vendor)    | PhysicsNeMo       | Production-ready  | NVIDIA; Apache 2.0, 2.6K stars    |
-| Proprietary            | Simulink          | Industry standard | MathWorks; deep industry adoption |
+| Category | Solutions | Maturity | Notes |
+| --- | --- | --- | --- |
+| OSS (community-driven) | NeuralOperator | Production-ready | PyTorch Ecosystem; FNO/TFNO/GINO/UNO. NVIDIA + Caltech |
+| OSS (community-driven) | DeepXDE | Production-ready | PINNs + DeepONet; 5 backends (PyTorch, JAX, TF, PaddlePaddle). MIT, 4.3K stars |
+| OSS (community-driven) | PDEBench | Production-ready | Benchmark suite; 9+ PDE problems; NeurIPS 2022. MIT |
+| OSS (single-vendor) | PhysicsNeMo | Production-ready | NVIDIA; Apache 2.0, 3K stars. FNO+DeepONet+MeshGraphNet+PINNs+diffusion |
+| Proprietary | Simulink | Industry standard | MathWorks; deep industry adoption |
+| Proprietary | Emmi AI (Mistral) | Early OSS | Acquired by Mistral AI May 2026 (~€300M); CFD/FEA/thermal neural surrogates |
+| Proprietary | SimAI | Early OSS | Ansys; cloud-based, trained on Ansys solver data |
+| Proprietary | PhysicsX | Early OSS | UK startup; $489M raised, $2.4B valuation; neural surrogates for auto/aero |
 
-**Key trade-offs**: Learned surrogates (PhysicsNeMo) are orders of magnitude faster than traditional solvers but sacrifice guaranteed accuracy. Traditional tools (Simulink) have regulatory acceptance but don't scale to AI-driven optimization loops.
+**Key trade-offs**: Learned surrogates (PhysicsNeMo, Emmi AI) achieve 10³-10⁵x amortized inference speedups vs traditional solvers but sacrifice guaranteed accuracy — not yet accepted for certification-grade analysis (GM engineers confirm physical wind tunnel testing still required). Architecture choice matters: FNO excels on regular grids but degrades catastrophically with noisy inputs (10,000x error increase with 0.1% noise); DeepONet handles irregular domains and noise robustly; PINNs excel at inverse problems with sparse data but require per-instance retraining. Traditional tools (Simulink, Ansys) have regulatory acceptance but don't scale to AI-driven optimization loops. Open-source options are NVIDIA-locked (PhysicsNeMo requires CUDA); DeepXDE (5 backends incl. PyTorch, JAX) is the most hardware-portable alternative but focuses on PINNs/DeepONet only. Surrogates are currently used to augment, not replace, traditional solvers in production — design exploration (100s of variants in seconds) followed by solver validation of final designs.
 
 **Platform fit**: `Partner`
 
-- **Rationale**: Highly specialized; platform provides compute infrastructure for training and inference.
-- **Partnership surface**: NVIDIA (PhysicsNeMo), MathWorks, domain-specific simulation companies.
+- **Rationale**: Highly specialized; platform provides compute infrastructure for training and inference. Surrogate models are small (5K-2M parameters) compared to LLMs — different serving profile (latency-sensitive, tightly coupled to HPC, not vLLM-shaped). Three deployment coupling modes: tightly coupled (MPI-style), semi-tightly coupled (same node), loosely coupled (K8s-friendly).
+- **Partnership surface**: NVIDIA (PhysicsNeMo), MathWorks, Mistral AI (Emmi), PhysicsX, Ansys (SimAI), Pasteur Labs, domain-specific simulation companies.
 
 **Related blocks**: [Simulation Engines](#simulation-engines), [Digital Twin Runtime](#digital-twin-runtime)
-**Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia)
-**Relevant research**: (to be populated)
+**Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia), [Mistral AI](ecosystem.md#mistral-ai), [PhysicsX](ecosystem.md#physicsx), [Pasteur Labs](ecosystem.md#pasteur-labs)
+**Relevant research**: [Lu et al. 2022 — FNO vs DeepONet comparison](publications.md#lu-et-al--comprehensive-comparison-of-deeponet-and-fno-2022), [MARIO — training cost reduction](publications.md#mario--modulated-aerodynamic-resolution-invariant-operator-2025), [HPC-DL coupling architectures](publications.md#hpc-dl-coupling-architectures-for-surrogates-2022)
 
 ---
 

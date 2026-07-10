@@ -1568,6 +1568,63 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 
 ---
 
+### PhysicsX
+
+**Type**: `Startup`
+**Stage/Scale**: Series C — $489M cumulative funding, $2.4B valuation (mid-2026). London, UK
+**About**: Trains deep learning surrogate models ("Large Physics Models") on high-fidelity simulation data to predict aerodynamics, thermal behavior, and structural stress in seconds vs hours/days for traditional simulation. Strategic investors include Siemens, Applied Materials, NVIDIA NVentures, and Temasek (Series C lead). Production deployments at General Motors (aero cycle cut from 2 weeks to minutes) and Jaguar Land Rover.
+
+**Focus Areas**: Neural surrogates for CFD/FEA, automotive aerodynamics, thermal simulation, structural analysis
+
+**Physical AI Relevance**:
+
+- Directly competes with Emmi AI (Mistral) and Ansys SimAI on neural surrogate models for industrial simulation
+- Siemens partnership provides integration path into industrial digital twin workflows
+- NVIDIA investment suggests potential PhysicsNeMo integration
+
+**Products/Solutions**:
+
+- Neural surrogate training platform — proprietary. Trains on customer's existing simulation data
+- Forward-deployed engineering team model (similar to Mistral Forge)
+
+- **Building blocks covered**: [Physics-Informed ML Frameworks](building-blocks.md#physics-informed-ml-frameworks)
+- **Competes with**: Emmi AI (Mistral), Ansys SimAI, Altair PhysicsAI — on industrial neural surrogates
+- **Complements**: NVIDIA PhysicsNeMo (compute substrate), Siemens SimCenter (upstream simulation data)
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Proprietary models, proprietary training platform
+- **Source**: [PhysicsX](https://www.physicsx.ai/)
+
+**Links**: [Website](https://www.physicsx.ai/), [Series C announcement](https://www.techtimes.com/articles/318582/20260617/physics-ai-slashes-engineering-simulation-days-seconds-physicsx-raises-300m.htm)
+
+---
+
+### Pasteur Labs
+
+**Type**: `Startup`
+**Stage/Scale**: Early-stage. Paris / New York
+**About**: Building a "Simulation Intelligence Platform" for AI-driven physics simulation. Acquired AI startup FOSAI (2026) to expand into space and defense applications. Deploying pre-release platform to dual-use (civil/defense) customers. Less public information available than PhysicsX; watch for further announcements.
+
+**Focus Areas**: AI-driven physics simulation, space and defense applications, simulation intelligence
+
+**Physical AI Relevance**:
+
+- Emerging competitor in neural surrogate space alongside PhysicsX and Emmi AI (Mistral)
+- FOSAI acquisition signals defense/aerospace focus — potential overlap with Mistral's Airbus deals
+- Pre-release stage — limited public evidence of production deployments
+
+**Products/Solutions**:
+
+- Simulation Intelligence Platform — proprietary, pre-release
+
+- **Building blocks covered**: [Physics-Informed ML Frameworks](building-blocks.md#physics-informed-ml-frameworks)
+- **Competes with**: PhysicsX, Emmi AI (Mistral), Ansys SimAI — on AI-driven physics simulation
+- **Openness**: `Proprietary`
+- **Source**: [Pasteur Labs FOSAI acquisition](https://www.prnewswire.com/news-releases/pasteur-labs-acquires-ai-startup-fosai-to-accelerate-adoption-of-ai-driven-physics-simulation-for-space--defense-applications-302535200.html)
+
+**Links**: [FOSAI acquisition PR](https://www.prnewswire.com/news-releases/pasteur-labs-acquires-ai-startup-fosai-to-accelerate-adoption-of-ai-driven-physics-simulation-for-space--defense-applications-302535200.html)
+
+---
+
 ## OSS Communities
 
 *Open-source communities and foundations governing key Physical AI infrastructure*
