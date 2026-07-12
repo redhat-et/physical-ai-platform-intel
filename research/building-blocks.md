@@ -2,7 +2,7 @@
 
 > Platform capability map for Physical AI — the building blocks a platform needs to support
 
-**Last Updated**: 2026-07-09
+**Last Updated**: 2026-07-12
 
 ---
 
@@ -10,17 +10,18 @@
 
 **What it does**: Models that predict future states in learned abstract representation spaces (not pixel space), enabling planning and decision-making. Includes JEPA variants, Dreamer, TD-MPC, and similar architectures.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand    |
+| Domain | Demand |
 | --------------------- | --------- |
-| Robotics              | required  |
-| Digital Twins         | important |
-| Autonomous Vehicles   | important |
-| Quality Control       | optional  |
-| Medical Diagnostics   | optional  |
-| Scientific Simulation | important |
-| Autonomous Agents     | important |
+| Robotics | required |
+| Industrial Digital Twins | important |
+| Autonomous Vehicles | important |
+| Visual AI / Inspection | optional |
+| Medical AI | optional |
+| Scientific Discovery | important |
+| Product Design & Engineering | not needed |
+| Molecular Design & Engineering | optional |
 
 **Solution landscape**:
 
@@ -47,17 +48,18 @@
 
 **What it does**: Models that generate or predict video frames conditioned on text, images, or actions. Produce raw visual observations for training data generation, sim-to-real transfer, and scenario simulation.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand     |
+| Domain | Demand |
 | --------------------- | ---------- |
-| Robotics              | required   |
-| Digital Twins         | important  |
-| Autonomous Vehicles   | required   |
-| Quality Control       | optional   |
-| Medical Diagnostics   | not needed |
-| Scientific Simulation | optional   |
-| Autonomous Agents     | optional   |
+| Robotics | required |
+| Industrial Digital Twins | important |
+| Autonomous Vehicles | required |
+| Visual AI / Inspection | optional |
+| Medical AI | not needed |
+| Scientific Discovery | optional |
+| Product Design & Engineering | not needed |
+| Molecular Design & Engineering | not needed |
 
 **Solution landscape**:
 
@@ -84,17 +86,18 @@
 
 **What it does**: Vision-language-action (VLA) and world-action (WAM) models that translate perception into robot actions. The "brains" of robot manipulation and navigation.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand     |
+| Domain | Demand |
 | --------------------- | ---------- |
-| Robotics              | required   |
-| Digital Twins         | not needed |
-| Autonomous Vehicles   | important  |
-| Quality Control       | optional   |
-| Medical Diagnostics   | not needed |
-| Scientific Simulation | not needed |
-| Autonomous Agents     | important  |
+| Robotics | required |
+| Industrial Digital Twins | not needed |
+| Autonomous Vehicles | important |
+| Visual AI / Inspection | optional |
+| Medical AI | not needed |
+| Scientific Discovery | not needed |
+| Product Design & Engineering | not needed |
+| Molecular Design & Engineering | not needed |
 
 **Solution landscape**:
 
@@ -121,17 +124,18 @@
 
 **What it does**: Communication, hardware abstraction, and coordination framework for robot software components. Manages message passing between perception, planning, and control nodes.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand     |
+| Domain | Demand |
 | --------------------- | ---------- |
-| Robotics              | required   |
-| Digital Twins         | important  |
-| Autonomous Vehicles   | required   |
-| Quality Control       | important  |
-| Medical Diagnostics   | optional   |
-| Scientific Simulation | optional   |
-| Autonomous Agents     | not needed |
+| Robotics | required |
+| Industrial Digital Twins | important |
+| Autonomous Vehicles | required |
+| Visual AI / Inspection | important |
+| Medical AI | optional |
+| Scientific Discovery | optional |
+| Product Design & Engineering | not needed |
+| Molecular Design & Engineering | optional |
 
 **Solution landscape**:
 
@@ -171,17 +175,18 @@
 | MuJoCo Playground   | MuJoCo / MJX       | MuJoCo built-in  | CUDA (via JAX), CPU            |
 | Genie 3             | Learned            | Learned          | Google TPU/GPU (proprietary)   |
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand    |
+| Domain | Demand |
 | --------------------- | --------- |
-| Robotics              | required  |
-| Digital Twins         | required  |
-| Autonomous Vehicles   | required  |
-| Quality Control       | important |
-| Medical Diagnostics   | optional  |
-| Scientific Simulation | required  |
-| Autonomous Agents     | optional  |
+| Robotics | required |
+| Industrial Digital Twins | required |
+| Autonomous Vehicles | required |
+| Visual AI / Inspection | important |
+| Medical AI | optional |
+| Scientific Discovery | required |
+| Product Design & Engineering | required |
+| Molecular Design & Engineering | required |
 
 **Solution landscape**:
 
@@ -209,17 +214,18 @@
 
 **What it does**: Bridges the gap between simulation-trained models and real-world deployment. Includes domain randomization, style transfer, and validation workflows.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand     |
+| Domain | Demand |
 | --------------------- | ---------- |
-| Robotics              | required   |
-| Digital Twins         | important  |
-| Autonomous Vehicles   | required   |
-| Quality Control       | important  |
-| Medical Diagnostics   | optional   |
-| Scientific Simulation | optional   |
-| Autonomous Agents     | not needed |
+| Robotics | required |
+| Industrial Digital Twins | important |
+| Autonomous Vehicles | required |
+| Visual AI / Inspection | important |
+| Medical AI | optional |
+| Scientific Discovery | optional |
+| Product Design & Engineering | not needed |
+| Molecular Design & Engineering | not needed |
 
 **Solution landscape**:
 
@@ -246,17 +252,18 @@
 
 **What it does**: High-throughput, low-latency pipelines for ingesting video, LiDAR, IMU, and other sensor streams from robots, vehicles, and industrial equipment.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand    |
+| Domain | Demand |
 | --------------------- | --------- |
-| Robotics              | required  |
-| Digital Twins         | required  |
-| Autonomous Vehicles   | required  |
-| Quality Control       | required  |
-| Medical Diagnostics   | important |
-| Scientific Simulation | optional  |
-| Autonomous Agents     | optional  |
+| Robotics | required |
+| Industrial Digital Twins | required |
+| Autonomous Vehicles | required |
+| Visual AI / Inspection | required |
+| Medical AI | important |
+| Scientific Discovery | optional |
+| Product Design & Engineering | optional |
+| Molecular Design & Engineering | important |
 
 **Solution landscape**:
 
@@ -284,17 +291,18 @@
 
 **What it does**: Optimized runtime for running AI models on edge/robot hardware with real-time latency constraints. Includes model compilation, quantization, and hardware-specific acceleration.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand     |
+| Domain | Demand |
 | --------------------- | ---------- |
-| Robotics              | required   |
-| Digital Twins         | optional   |
-| Autonomous Vehicles   | required   |
-| Quality Control       | required   |
-| Medical Diagnostics   | important  |
-| Scientific Simulation | not needed |
-| Autonomous Agents     | important  |
+| Robotics | required |
+| Industrial Digital Twins | optional |
+| Autonomous Vehicles | required |
+| Visual AI / Inspection | required |
+| Medical AI | important |
+| Scientific Discovery | not needed |
+| Product Design & Engineering | not needed |
+| Molecular Design & Engineering | not needed |
 
 **Solution landscape**:
 
@@ -332,17 +340,18 @@ This block has two sub-problems settling at different rates:
 
 [Positronic](https://github.com/Positronic-Robotics/positronic) has emerged as a community bridge layer (unified RemotePolicy client across LeRobot, OpenPI, GR00T servers), confirming the ecosystem sees this fragmentation as a problem.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand    |
+| Domain | Demand |
 | --------------------- | --------- |
-| Robotics              | required  |
-| Digital Twins         | important |
-| Autonomous Vehicles   | required  |
-| Quality Control       | important |
-| Medical Diagnostics   | important |
-| Scientific Simulation | important |
-| Autonomous Agents     | required  |
+| Robotics | required |
+| Industrial Digital Twins | important |
+| Autonomous Vehicles | required |
+| Visual AI / Inspection | important |
+| Medical AI | important |
+| Scientific Discovery | important |
+| Product Design & Engineering | optional |
+| Molecular Design & Engineering | important |
 
 **Solution landscape**:
 
@@ -370,17 +379,18 @@ This block has two sub-problems settling at different rates:
 
 **What it does**: Workflows for adapting foundation models to specific robots, tasks, or environments using simulation data, real-world demonstrations, or reinforcement learning.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand    |
+| Domain | Demand |
 | --------------------- | --------- |
-| Robotics              | required  |
-| Digital Twins         | important |
-| Autonomous Vehicles   | required  |
-| Quality Control       | important |
-| Medical Diagnostics   | important |
-| Scientific Simulation | important |
-| Autonomous Agents     | important |
+| Robotics | required |
+| Industrial Digital Twins | important |
+| Autonomous Vehicles | required |
+| Visual AI / Inspection | important |
+| Medical AI | important |
+| Scientific Discovery | important |
+| Product Design & Engineering | important |
+| Molecular Design & Engineering | required |
 
 **Solution landscape**:
 
@@ -407,17 +417,18 @@ This block has two sub-problems settling at different rates:
 
 **What it does**: Runtime environment for continuous digital twin operation — maintaining synchronized state between physical assets and their digital representations, running predictions, and triggering actions.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand     |
+| Domain | Demand |
 | --------------------- | ---------- |
-| Robotics              | important  |
-| Digital Twins         | required   |
-| Autonomous Vehicles   | optional   |
-| Quality Control       | important  |
-| Medical Diagnostics   | optional   |
-| Scientific Simulation | important  |
-| Autonomous Agents     | not needed |
+| Robotics | important |
+| Industrial Digital Twins | required |
+| Autonomous Vehicles | optional |
+| Visual AI / Inspection | important |
+| Medical AI | optional |
+| Scientific Discovery | important |
+| Product Design & Engineering | important |
+| Molecular Design & Engineering | not needed |
 
 **Solution landscape**:
 
@@ -444,17 +455,18 @@ This block has two sub-problems settling at different rates:
 
 **What it does**: Manage, monitor, and update fleets of robots at scale — deployment, telemetry, remote diagnostics, OTA updates, and operational dashboards.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand     |
+| Domain | Demand |
 | --------------------- | ---------- |
-| Robotics              | required   |
-| Digital Twins         | optional   |
-| Autonomous Vehicles   | required   |
-| Quality Control       | important  |
-| Medical Diagnostics   | not needed |
-| Scientific Simulation | not needed |
-| Autonomous Agents     | important  |
+| Robotics | required |
+| Industrial Digital Twins | optional |
+| Autonomous Vehicles | required |
+| Visual AI / Inspection | important |
+| Medical AI | not needed |
+| Scientific Discovery | not needed |
+| Product Design & Engineering | not needed |
+| Molecular Design & Engineering | not needed |
 
 **Solution landscape**:
 
@@ -481,17 +493,18 @@ This block has two sub-problems settling at different rates:
 
 **What it does**: Tools and processes for validating AI behavior in safety-critical physical systems. Includes formal verification, scenario testing, uncertainty quantification, and regulatory compliance.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand    |
+| Domain | Demand |
 | --------------------- | --------- |
-| Robotics              | required  |
-| Digital Twins         | important |
-| Autonomous Vehicles   | required  |
-| Quality Control       | required  |
-| Medical Diagnostics   | required  |
-| Scientific Simulation | optional  |
-| Autonomous Agents     | important |
+| Robotics | required |
+| Industrial Digital Twins | important |
+| Autonomous Vehicles | required |
+| Visual AI / Inspection | required |
+| Medical AI | required |
+| Scientific Discovery | optional |
+| Product Design & Engineering | important |
+| Molecular Design & Engineering | required |
 
 **Solution landscape**:
 
@@ -514,17 +527,18 @@ This block has two sub-problems settling at different rates:
 
 **What it does**: Tools for labeling, curating, and managing training data from physical-world sources — video, sensor streams, robot demonstrations, simulation outputs.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand    |
+| Domain | Demand |
 | --------------------- | --------- |
-| Robotics              | required  |
-| Digital Twins         | optional  |
-| Autonomous Vehicles   | required  |
-| Quality Control       | required  |
-| Medical Diagnostics   | required  |
-| Scientific Simulation | optional  |
-| Autonomous Agents     | optional  |
+| Robotics | required |
+| Industrial Digital Twins | optional |
+| Autonomous Vehicles | required |
+| Visual AI / Inspection | required |
+| Medical AI | required |
+| Scientific Discovery | optional |
+| Product Design & Engineering | optional |
+| Molecular Design & Engineering | important |
 
 **Solution landscape**:
 
@@ -547,17 +561,18 @@ This block has two sub-problems settling at different rates:
 
 **What it does**: Standardized frameworks for evaluating robot policies, world models, and simulation quality. Includes benchmark task suites, evaluation harnesses, leaderboards, and sim-to-real correlation validation. Emerging as a standalone platform capability — analogous to software QA/CI for robot policies.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand    |
+| Domain | Demand |
 | --------------------- | --------- |
-| Robotics              | required  |
-| Digital Twins         | important |
-| Autonomous Vehicles   | required  |
-| Quality Control       | important |
-| Medical Diagnostics   | optional  |
-| Scientific Simulation | important |
-| Autonomous Agents     | required  |
+| Robotics | required |
+| Industrial Digital Twins | important |
+| Autonomous Vehicles | required |
+| Visual AI / Inspection | important |
+| Medical AI | optional |
+| Scientific Discovery | important |
+| Product Design & Engineering | important |
+| Molecular Design & Engineering | important |
 
 **Solution landscape**:
 
@@ -586,17 +601,18 @@ This block has two sub-problems settling at different rates:
 
 **What it does**: Frameworks that combine physics equations/constraints with machine learning — neural operators, physics-informed neural networks (PINNs), and learned surrogates for engineering simulation.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand     |
+| Domain | Demand |
 | --------------------- | ---------- |
-| Robotics              | optional   |
-| Digital Twins         | required   |
-| Autonomous Vehicles   | optional   |
-| Quality Control       | important  |
-| Medical Diagnostics   | optional   |
-| Scientific Simulation | required   |
-| Autonomous Agents     | not needed |
+| Robotics | optional |
+| Industrial Digital Twins | required |
+| Autonomous Vehicles | optional |
+| Visual AI / Inspection | important |
+| Medical AI | optional |
+| Scientific Discovery | required |
+| Product Design & Engineering | required |
+| Molecular Design & Engineering | required |
 
 **Solution landscape**:
 

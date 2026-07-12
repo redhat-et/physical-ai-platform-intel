@@ -1,8 +1,47 @@
-# Technical Use Cases
+# Physical AI Domains
 
-> Physical AI capability patterns — what they require and who serves them
+> Solution domains for Physical AI — each with distinct technology stacks, ecosystems, and workflow patterns
 
-**Last Updated**: 2026-06-15
+**Last Updated**: 2026-07-12
+
+---
+
+## Taxonomy
+
+Physical AI spans multiple **domains** — independent solution areas, each with its own technology stack, ISV/SI ecosystem, canonical workflow, and building-block requirements. Domains share common platform infrastructure but differ in how they close the AI-physical-world loop.
+
+### Terminology
+
+| Term | Definition |
+| ---- | ---------- |
+| **Domain** | An independent Physical AI solution area. Each domain passes a four-part independence test: (a) distinct technology stack, (b) distinct core problems, (c) distinct ISV/SI ecosystem, (d) distinct canonical workflow pattern. |
+| **Vertical** | An industry segment within a domain. Verticals share the domain's technology stack and workflow but differ in regulatory requirements, deployment context, and specific ISV solutions. |
+| **Cross-cutting capability** | A technology or pattern used across multiple domains — not a domain itself. Examples: autonomous agents (planning/reasoning), gaming & simulation (training data generation). |
+
+### Domain Overview
+
+| # | Domain | Core Loop | Example Verticals |
+| - | ------ | --------- | ----------------- |
+| 1 | [Robotics](#robotics) | Sense → plan → manipulate/navigate | Manufacturing, logistics, agriculture, defense |
+| 2 | [Autonomous Vehicles](#autonomous-vehicles) | Perceive → predict → navigate | Passenger vehicles, trucking, last-mile delivery |
+| 3 | [Visual AI / Inspection](#visual-ai--inspection) | Capture → detect → classify → act | Factory QC, security/safety, retail analytics, traffic |
+| 4 | [Industrial Digital Twins](#industrial-digital-twins) | Sense → simulate → optimize → actuate | Manufacturing, energy/utilities, infrastructure |
+| 5 | [Product Design & Engineering](#product-design--engineering) | Design → simulate → validate → iterate | Mechanical/structural, electronics, aerospace |
+| 6 | [Molecular Design & Engineering](#molecular-design--engineering) | Design → simulate → synthesize → assay | Drug design (pharma/biotech), materials design (chemicals, energy) |
+| 7 | [Medical AI](#medical-ai) | Image → diagnose → predict → treat | Radiology, cardiology, pathology, surgical planning |
+| 8 | [Scientific Discovery](#scientific-discovery) | Hypothesize → experiment → analyze → iterate | Self-driving labs, fundamental research |
+
+### Cross-Cutting Capabilities (Not Domains)
+
+- **Autonomous Agents** — planning with internal simulation, tool use, multi-step reasoning. Used within Robotics, Digital Twins, and Scientific Discovery domains rather than constituting its own domain.
+- **Gaming & Simulation** — interactive world generation (Genie 3, World Labs Marble). Technology enabler for training data and synthetic environments across domains, not a standalone solution area.
+
+### Verticals That Map to Domains
+
+- **Telecommunications** (WirelessJEPA, beam management) → applies Visual AI + Industrial Digital Twins building blocks
+- **Defense** (drone coordination, battlefield awareness) → Robotics or Autonomous Vehicles depending on application
+- **Construction / AEC** → Industrial Digital Twins + Visual AI
+- **Agriculture** → Robotics + Visual AI
 
 ---
 
@@ -12,8 +51,8 @@
 
 **Common building blocks** (across all verticals):
 
-| Building Block | Role in this use case |
-| -------------- | --------------------- |
+| Building Block | Role in this domain |
+| -------------- | ------------------- |
 | [Robot Foundation Models](building-blocks.md#robot-foundation-models) | Required — Policy networks that execute manipulation/navigation tasks |
 | [Simulation Engines](building-blocks.md#simulation-engines) | Required — Generate synthetic scenarios for policy training |
 | [Sim-to-Real Transfer Pipeline](building-blocks.md#sim-to-real-transfer-pipeline) | Required — Bridge gap between simulated and real-world performance |
@@ -46,8 +85,8 @@
 
 **Common building blocks** (across all verticals):
 
-| Building Block | Role in this use case |
-| -------------- | --------------------- |
+| Building Block | Role in this domain |
+| -------------- | ------------------- |
 | [Video Generation / Prediction Models](building-blocks.md#video-generation--prediction-models) | Required — Generate multi-camera, spatiotemporally consistent driving scenarios |
 | [Simulation Engines](building-blocks.md#simulation-engines) | Required — Simulate rare, safety-critical events (collisions, adverse weather) |
 | [Sensor Data Ingestion](building-blocks.md#sensor-data-ingestion) | Required — Multi-modal fusion (camera, LiDAR, radar) |
@@ -72,14 +111,61 @@
 
 ---
 
-## Digital Twins
+## Visual AI / Inspection
+
+**Description**: Visual and sensor-based detection, classification, and monitoring of physical environments and manufactured goods using AI — spanning real-time video analytics and production-line quality control.
+
+**Common building blocks** (across all verticals):
+
+| Building Block | Role in this domain |
+| -------------- | ------------------- |
+| [Sensor Data Ingestion](building-blocks.md#sensor-data-ingestion) | Required — Process camera, thermal, ultrasonic sensor streams |
+| [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime) | Required — Real-time detection on production lines or camera feeds |
+| [Model Serving for Physical AI](building-blocks.md#model-serving-for-physical-ai) | Important — Serve inspection/analytics models at scale |
+| [Data Annotation & Curation for Physical AI](building-blocks.md#data-annotation--curation-for-physical-ai) | Required — Label defect examples or event types for training |
+
+### Manufacturing (Quality Control)
+
+**Verticals**: Manufacturing
+
+**Additional building blocks**: TBD
+
+**Vertical-specific requirements**:
+
+- **Functional**: TBD — Defect detection, dimensional measurement, surface quality assessment
+- **Non-functional**: TBD — Real-time inspection (<100ms per part), 99.9%+ detection accuracy
+- **Regulatory**: TBD — ISO 9001 (quality management)
+
+**Current solutions**: TBD
+
+**Gaps**: TBD
+
+### Food & Beverage (Quality Control)
+
+**Verticals**: Food & Beverage
+
+**Additional building blocks**: TBD
+
+**Vertical-specific requirements**:
+
+- **Functional**: TBD — Food safety inspection, contamination detection, packaging quality
+- **Non-functional**: TBD
+- **Regulatory**: TBD — FDA Food Safety Modernization Act, HACCP
+
+**Current solutions**: TBD
+
+**Gaps**: TBD
+
+---
+
+## Industrial Digital Twins
 
 **Description**: Autonomous digital twins that continuously simulate, predict, and optimize industrial operations in real time using learned dynamics models coupled to live sensor feeds.
 
 **Common building blocks** (across all verticals):
 
-| Building Block | Role in this use case |
-| -------------- | --------------------- |
+| Building Block | Role in this domain |
+| -------------- | ------------------- |
 | [Simulation Engines](building-blocks.md#simulation-engines) | Required — Multi-physics simulation (thermal, structural, fluid dynamics) |
 | [Digital Twin Runtime](building-blocks.md#digital-twin-runtime) | Required — Real-time predict-then-act loop with safety verification |
 | [Sensor Data Ingestion](building-blocks.md#sensor-data-ingestion) | Required — Process industrial sensors (temperature, pressure, vibration) |
@@ -117,38 +203,100 @@
 
 **Gaps**: TBD
 
-### Healthcare & Life Sciences (Digital Twins)
+---
 
-**Verticals**: Healthcare & Life Sciences
+## Product Design & Engineering
 
-**Additional building blocks**: [Safety, Validation & Certification Frameworks](building-blocks.md#safety-validation--certification-frameworks) (required for medical devices)
+**Description**: AI-driven product design, simulation, and virtual prototyping — using generative design, multi-physics simulation, and learned surrogates to explore design spaces, validate performance, and predict manufacturability before physical prototyping.
+
+**Common building blocks** (across all verticals):
+
+| Building Block | Role in this domain |
+| -------------- | ------------------- |
+| [Simulation Engines](building-blocks.md#simulation-engines) | Required — Multi-physics FEA/CFD for virtual prototyping |
+| [Physics-Informed ML Frameworks](building-blocks.md#physics-informed-ml-frameworks) | Required — Learned surrogates for rapid design space exploration |
+| [Digital Twin Runtime](building-blocks.md#digital-twin-runtime) | Important — Design-to-manufacturing digital thread |
+| [Post-Training / Fine-Tuning Pipeline](building-blocks.md#post-training--fine-tuning-pipeline) | Important — Adapt foundation models to domain-specific CAD/CAE data |
+
+### Manufacturing / Aerospace / Automotive (Product Design)
+
+**Verticals**: Manufacturing | Aerospace | Automotive | Electronics
+
+**Additional building blocks**: [Evaluation & Benchmarking](building-blocks.md#evaluation--benchmarking) (important for surrogate model validation against traditional solvers)
 
 **Vertical-specific requirements**:
 
-- **Functional**: TBD — Patient digital twins, treatment outcome simulation
-- **Non-functional**: TBD
-- **Regulatory**: FDA 510(k), IEC 62304 (medical device software), EU MDR, HIPAA (data privacy)
+- **Functional**: Generative design under physical constraints (structural, thermal, fluid dynamics). Neural surrogate models replacing FEA/CFD for rapid design-space exploration (100-1000x speedup over traditional solvers). Multi-physics co-simulation (structural + thermal + fluid). Virtual crash/stress testing. Manufacturability prediction. CAD/CAE tool integration. Hybrid workflow: AI surrogates for screening, traditional solvers for final validation.
+- **Non-functional**: Support for large assemblies (millions of elements), parametric sweep at scale. Automotive crash predictions at <0.5% error vs. LS-DYNA. Cloud-burst capacity for large-scale design sweeps.
+- **Regulatory**: DO-178C (aerospace software), ISO 26262 (automotive functional safety), industry-specific certification requirements
 
-**Current solutions**: TBD
+**Current solutions**: [Siemens](ecosystem.md#siemens) Simcenter PhysicsAI (neural surrogates, 100x speedup) + PhysicsAI Generate (diffusion-based generative design, 2026.1) + Altair romAI/PhysicsAI (acquired March 2025, ~$10B); Ansys SimAI Pro/Premium (physics-agnostic surrogates using FNOs/PINNs/GNNs, <0.5% error on crash/aero); [Dassault Systèmes](ecosystem.md#dassault-systèmes) 3DEXPERIENCE Virtual Twin + NVIDIA partnership (Feb 2026, targeting 100-1000x acceleration); Autodesk Neural CAD (foundation models generating editable BREP geometry from text, 2026); PTC Creo 13 AI + Onshape-Isaac Sim integration (CAD-to-robotics pipeline); [PhysicsX](ecosystem.md#physicsx) (neural surrogates, $500M raised at $2.4B valuation, Jun 2026, NVIDIA/Siemens investor); Neural Concept (geometric deep learning, crash sim 48h→30s, $100M Series C)
 
-**Gaps**: TBD
+**Gaps**: No standardized benchmark for neural surrogate accuracy vs. traditional solvers. 3D geometry processing and CAD interoperability remain ISV-proprietary — no open-source alternative for production CAD-to-ML pipelines. Regulatory acceptance of AI-surrogate-validated designs is undefined. Hybrid workflow orchestration (surrogate screening → solver validation → design iteration) lacks standard tooling.
 
 ---
 
-## Medical Diagnostics & Imaging
+## Molecular Design & Engineering
+
+**Description**: AI-driven design, simulation, and optimization of molecules, proteins, and materials — using generative models, molecular dynamics, and closed-loop experimentation to accelerate drug discovery and materials development. Structurally parallel to Product Design & Engineering but operating at molecular scale with different tools, ecosystems, and regulatory frameworks.
+
+**Common building blocks** (across all verticals):
+
+| Building Block | Role in this domain |
+| -------------- | ------------------- |
+| [Simulation Engines](building-blocks.md#simulation-engines) | Required — Molecular dynamics, DFT, docking simulations |
+| [Physics-Informed ML Frameworks](building-blocks.md#physics-informed-ml-frameworks) | Required — Machine learning interatomic potentials (MLIPs), ADMET prediction |
+| [Post-Training / Fine-Tuning Pipeline](building-blocks.md#post-training--fine-tuning-pipeline) | Required — Adapt foundation models to domain-specific molecular/materials data |
+| [Safety, Validation & Certification Frameworks](building-blocks.md#safety-validation--certification-frameworks) | Required — FDA validation, GLP compliance |
+
+### Drug Design (Pharma / Biotech)
+
+**Verticals**: Pharmaceuticals | Biotechnology
+
+**Additional building blocks**: [Robot Middleware](building-blocks.md#robot-middleware) (important for laboratory automation integration), [Data Annotation & Curation for Physical AI](building-blocks.md#data-annotation--curation-for-physical-ai) (important for experimental data management)
+
+**Vertical-specific requirements**:
+
+- **Functional**: Generative molecular design (de novo small molecules, antibodies, proteins). ADMET prediction and binding affinity optimization (FEP+ level accuracy). Protein structure prediction and docking. DMTA (Design-Make-Test-Analyze) cycle compression (from 2.5-4 years to 12-18 months). Multi-modal data fusion (genomics, imaging, chemistry). Autonomous lab integration for closed-loop synthesis.
+- **Non-functional**: Large-scale virtual screening (1,000+ molecules/day). Federated learning across proprietary compound libraries. GxP-validated compute environments with audit trails. Elastic GPU scaling for FEP calculations.
+- **Regulatory**: FDA (drug development), GLP (Good Laboratory Practice), ICH guidelines, FDA/EMA joint AI guidelines (Jan 2026) requiring human approval for quality-critical decisions
+
+**Current solutions**: Recursion Pharmaceuticals (merged with Exscientia Nov 2024, $688M; most vertically integrated AI-biotech, 10+ clinical programs, Roche/Sanofi/Bayer partnerships); Insilico Medicine (Pharma.AI end-to-end platform, rentosertib in Phase III Jul 2026, 31 preclinical candidates); Schrödinger (FEP+ physics-based platform, ~70% market penetration in drug design); XtalPi (quantum-mechanics + AI molecular digital twins, XFEP 10-100x FEP throughput, $400M+ GPCR partnership Jun 2026); Isomorphic Labs (IsoDDE — integrated structure prediction + docking + affinity, outperforms AlphaFold 3 by 2.3x, ~$3B in Novartis/Lilly/J&J partnerships); Chai Discovery ($130M Series B at $1.3B, biomolecular foundation models, partially open weights); [NVIDIA](ecosystem.md#nvidia) BioNeMo (open platform for biological foundation models, NIM microservices, $1B co-innovation lab with Eli Lilly)
+
+**Gaps**: Regulatory pathway for AI-designed drugs is emerging but undefined — rentosertib (Insilico) and Isomorphic's first candidates will test FDA acceptance. Federated learning for cross-pharma collaboration is nascent. Integration of autonomous labs with AI design platforms remains bespoke. Transfer between molecular domains (small molecules → biologics → gene therapy) is untested.
+
+### Materials Design (Chemicals / Energy / Semiconductors)
+
+**Verticals**: Chemicals | Energy | Semiconductors | Materials Science
+
+**Additional building blocks**: [Robot Middleware](building-blocks.md#robot-middleware) (important for autonomous lab integration)
+
+**Vertical-specific requirements**:
+
+- **Functional**: Inverse materials design via generative models. Crystal structure prediction and stability analysis. Machine Learning Interatomic Potentials (MLIPs) for atomistic simulation at DFT accuracy. Integrated Computational Materials Engineering (ICME) pipelines connecting simulation to manufacturing. Self-driving lab (SDL) integration for closed-loop synthesis and characterization.
+- **Non-functional**: Universal MLIPs covering 96+ elements. High-throughput computational screening at 20M× DFT speed. Autonomous synthesis integration (SDL 2.0: LLM-orchestrated, multi-instrument). Open data formats for interoperability with national lab databases.
+- **Regulatory**: EPA/REACH (chemical safety), industry-specific material certification
+
+**Current solutions**: Materials Project (Berkeley Lab, 650K+ users, 32K citations, fully open, ~150K+ computed material properties; FORUM-AI agentic platform for automated discovery, Feb 2026); Matlantis (Preferred Networks, cloud SaaS universal atomistic simulator, PFP v8 MLIP covering 96 elements at 20M× DFT speed, 100+ organizations); Citrine Informatics (materials informatics with Bayesian optimization for sparse experimental data, Rolls-Royce/EMD customers, $76M raised); MACE (Cambridge, open-source equivariant MLIP, leading OSS universal potential, ASL/CC-BY); Google DeepMind GNoME (predicted 2.2M crystal structures, contributed ~400K to Materials Project, model proprietary); A-Lab (Berkeley, autonomous robotic lab synthesizing AI-predicted materials)
+
+**Gaps**: SDL 2.0 architectures are emerging but most labs remain at Level 2-3 autonomy. No standardized platform integrates generative design → simulation → autonomous synthesis → characterization. Transfer across material classes (inorganic → organic → polymer → composite) is untested. Open-source MLIPs (MACE) compete with proprietary (Matlantis) on accuracy but lack enterprise support.
+
+---
+
+## Medical AI
 
 **Description**: World models learn representations from medical imaging data to predict disease progression, simulate treatment outcomes, and support clinical decisions through learned latent dynamics.
 
 **Common building blocks** (across all verticals):
 
-| Building Block | Role in this use case |
-| -------------- | --------------------- |
+| Building Block | Role in this domain |
+| -------------- | ------------------- |
 | [Latent World Models](building-blocks.md#latent-world-models) | Required — Learn representations from imaging data (echocardiograms, CT, MRI) |
 | [Simulation Engines](building-blocks.md#simulation-engines) | Important — Simulate post-treatment outcomes (tumor evolution, cardiac function) |
 | [Model Serving for Physical AI](building-blocks.md#model-serving-for-physical-ai) | Required — Integrate with clinical workflows (PACS, EHR systems) |
 | [Safety, Validation & Certification Frameworks](building-blocks.md#safety-validation--certification-frameworks) | Required — FDA/CE marking for clinical use |
 
-### Healthcare & Life Sciences (Medical Diagnostics & Imaging)
+### Healthcare & Life Sciences (Medical AI)
 
 **Verticals**: Healthcare & Life Sciences
 
@@ -160,74 +308,27 @@
 - **Non-functional**: Inference latency <5s for clinical decision support. Support for 300K+ patient cohorts. Uncertainty bounds with 95% confidence intervals.
 - **Regulatory**: FDA 510(k) (medical devices), IEC 62304 (medical device software), EU MDR (medical device regulation), HIPAA (data privacy)
 
-**Current solutions**: EchoJEPA (University of Toronto / Vector Institute); MeWM (action-conditioned 3D tumor simulation); Foresight (medical event timeline prediction); [AMI Labs](ecosystem.md#ami-labs) (targeting healthcare applications)
+**Current solutions**: EchoJEPA (University of Toronto / Vector Institute); MeWM (action-conditioned 3D tumor simulation); Foresight (medical event timeline prediction); [AMI Labs](ecosystem.md#ami-labs) (targeting healthcare applications via Nabla partnership)
 
 **Gaps**: Regulatory pathway for world-model-based clinical decision support is undefined. Causal reasoning required for treatment planning (beyond correlation). Limited multi-modal fusion (imaging + genomics + lab results). Generalization across patient populations and imaging equipment.
 
 ---
 
-## Quality Control / Inspection
+## Scientific Discovery
 
-**Description**: Visual and sensor-based inspection of manufactured goods, using AI to detect defects, measure dimensions, and ensure compliance with quality standards.
-
-**Common building blocks** (across all verticals):
-
-| Building Block | Role in this use case |
-| -------------- | --------------------- |
-| [Sensor Data Ingestion](building-blocks.md#sensor-data-ingestion) | Required — Process camera, thermal, ultrasonic sensor streams |
-| [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime) | Required — Real-time defect detection on production lines |
-| [Model Serving for Physical AI](building-blocks.md#model-serving-for-physical-ai) | Important — Serve inspection models at scale across factories |
-| [Data Annotation & Curation for Physical AI](building-blocks.md#data-annotation--curation-for-physical-ai) | Required — Label defect examples for training |
-
-### Manufacturing (Quality Control)
-
-**Verticals**: Manufacturing
-
-**Additional building blocks**: TBD
-
-**Vertical-specific requirements**:
-
-- **Functional**: TBD — Defect detection, dimensional measurement, surface quality assessment
-- **Non-functional**: TBD — Real-time inspection (<100ms per part), 99.9%+ detection accuracy
-- **Regulatory**: TBD — ISO 9001 (quality management)
-
-**Current solutions**: TBD
-
-**Gaps**: TBD
-
-### Food & Beverage (Quality Control)
-
-**Verticals**: Food & Beverage
-
-**Additional building blocks**: TBD
-
-**Vertical-specific requirements**:
-
-- **Functional**: TBD — Food safety inspection, contamination detection, packaging quality
-- **Non-functional**: TBD
-- **Regulatory**: TBD — FDA Food Safety Modernization Act, HACCP
-
-**Current solutions**: TBD
-
-**Gaps**: TBD
-
----
-
-## Scientific Simulation
-
-**Description**: Autonomous experimentation systems that generate hypotheses, design experiments, execute them robotically, analyze results, and iterate in closed loops for materials discovery, drug development, and fundamental science.
+**Description**: Autonomous experimentation systems that generate hypotheses, design experiments, execute them robotically, analyze results, and iterate in closed loops for fundamental research and exploratory science.
 
 **Common building blocks** (across all verticals):
 
-| Building Block | Role in this use case |
-| -------------- | --------------------- |
+| Building Block | Role in this domain |
+| -------------- | ------------------- |
 | [Simulation Engines](building-blocks.md#simulation-engines) | Required — Predict experimental outcomes before physical execution |
 | [Physics-Informed ML Frameworks](building-blocks.md#physics-informed-ml-frameworks) | Required — Incorporate domain constraints (chemistry, physics) into models |
 | [Post-Training / Fine-Tuning Pipeline](building-blocks.md#post-training--fine-tuning-pipeline) | Important — Adapt foundation models to domain-specific experimental data |
 
-### Pharmaceuticals & Materials Science (Scientific Simulation)
+### Fundamental Research (Scientific Discovery)
 
-**Verticals**: Pharmaceuticals | Materials Science | Chemistry
+**Verticals**: Academic research | National labs
 
 **Additional building blocks**: [Robot Middleware](building-blocks.md#robot-middleware) (important for laboratory automation integration)
 
@@ -235,140 +336,13 @@
 
 - **Functional**: Robotic laboratory automation (liquid handling, synthesis, characterization). Multi-modal sensing beyond vision (spectroscopy, chromatography, mass spectrometry). Closed-loop integration of hypothesis → experiment → analysis. Long-horizon planning across experiment sequences (days to weeks). Domain-specific world models that predict experimental outcomes under physical/chemical constraints.
 - **Non-functional**: Data efficiency — learn from sparse scientific data (not internet-scale). Long-horizon credit assignment over multi-day experiments. Support for symbolic scientific knowledge (equations, constraints).
-- **Regulatory**: FDA (drug development), EPA (chemical safety), GLP (Good Laboratory Practice)
+- **Regulatory**: EPA (chemical safety), GLP (Good Laboratory Practice) where applicable
 
 **Current solutions**: [Periodic Labs](ecosystem.md#periodic-labs) (AI scientist platform for materials discovery); [Medra](ecosystem.md#medra) Platform (autonomous drug discovery with Genentech); Emerald Cloud Lab (cloud laboratory infrastructure); academic self-driving labs (MIT, Berkeley, Toronto)
 
-**Gaps**: Scientific data is sparse compared to internet-scale datasets — data efficiency is critical. Experimental "credit assignment" over long horizons (which early decision caused a late failure?). Integrating symbolic scientific knowledge (equations, constraints) with learned world models. Regulatory pathway for AI-designed drugs and materials is undefined. Transfer across scientific domains (chemistry → biology → materials) untested.
+**Gaps**: Scientific data is sparse compared to internet-scale datasets — data efficiency is critical. Experimental "credit assignment" over long horizons (which early decision caused a late failure?). Integrating symbolic scientific knowledge (equations, constraints) with learned world models. Transfer across scientific domains (chemistry → biology → materials) untested.
 
 ---
 
-## Autonomous Agents
-
-**Description**: Autonomous agents that use world models for planning, tool use, and reasoning about action consequences in digital and physical environments.
-
-**Common building blocks** (across all verticals):
-
-| Building Block | Role in this use case |
-| -------------- | --------------------- |
-| [Latent World Models](building-blocks.md#latent-world-models) | Important — Internal simulation for planning and counterfactual reasoning |
-| [Model Serving for Physical AI](building-blocks.md#model-serving-for-physical-ai) | Required — Serve world models during agent inference |
-| [Robot Foundation Models](building-blocks.md#robot-foundation-models) | Optional — For embodied agents (physical world interaction) |
-
-### Cross-Industry (Autonomous Agents)
-
-**Verticals**: TBD — Cross-industry (web agents, software agents, embodied agents)
-
-**Additional building blocks**: TBD
-
-**Vertical-specific requirements**:
-
-- **Functional**: TBD — Planning with internal simulation, tool use, multi-step reasoning
-- **Non-functional**: TBD
-- **Regulatory**: TBD
-
-**Current solutions**: TBD
-
-**Gaps**: TBD
-
----
-
-## Telecommunications
-
-**Description**: Wireless channel prediction and network optimization using world models to forecast channel state information, manage beams, and optimize interference for next-generation wireless systems.
-
-**Common building blocks** (across all verticals):
-
-| Building Block | Role in this use case |
-| -------------- | --------------------- |
-| [Latent World Models](building-blocks.md#latent-world-models) | Required — Learn representations of wireless channel states (CSI) |
-| [Sensor Data Ingestion](building-blocks.md#sensor-data-ingestion) | Required — Process multi-modal data (RF signals, spatial data, user mobility) |
-| [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime) | Required — Real-time inference for beam management decisions |
-| [Model Serving for Physical AI](building-blocks.md#model-serving-for-physical-ai) | Required — Deploy across cell sites and frequency bands |
-
-### Telecommunications (Wireless Optimization)
-
-**Verticals**: Telecommunications
-
-**Additional building blocks**: None beyond common set
-
-**Vertical-specific requirements**:
-
-- **Functional**: Real-time inference on CSI data streams (millisecond-scale beam decisions). Multi-modal fusion (RF signals + spatial data + user mobility). Transfer learning across cell sites and frequency bands. On-premises deployment for telco infrastructure (latency, data sovereignty). Support for 6 downstream tasks from a single model (WirelessJEPA).
-- **Non-functional**: Inference latency <10ms for beam management. Support for thousands of base stations (dense urban networks). Transfer across cell sites without retraining.
-- **Regulatory**: 3GPP standards (5G/6G), ITU-R (radio regulations)
-
-**Current solutions**: WirelessJEPA (JEPA for 6 wireless tasks); JEPA-MSAC (multi-task wireless sensing); Wireless World Model for 6G (China Mobile/Huawei, multi-modal JEPA + MoE)
-
-**Gaps**: No production deployment of JEPA-based wireless models yet (all academic). Scalability to dense urban networks with thousands of base stations untested. Integration with existing O-RAN and network automation frameworks (e.g., ONAP) undefined. Real-time inference latency requirements for beam management may exceed current model serving capabilities.
-
----
-
-## Gaming & Simulation
-
-**Description**: Interactive world generation from text and image prompts, creating explorable 3D environments with emergent physics for game development, VFX pre-visualization, and architectural design.
-
-**Common building blocks** (across all verticals):
-
-| Building Block | Role in this use case |
-| -------------- | --------------------- |
-| [Video Generation / Prediction Models](building-blocks.md#video-generation--prediction-models) | Required — Generate spatiotemporally consistent, interactive environments |
-| [Simulation Engines](building-blocks.md#simulation-engines) | Important — Emergent physics learned from observation (not hardcoded) |
-| [Model Serving for Physical AI](building-blocks.md#model-serving-for-physical-ai) | Required — Real-time generation for interactive experiences |
-
-### Gaming & Creative Media (Interactive World Generation)
-
-**Verticals**: Gaming & Creative Media
-
-**Additional building blocks**: None beyond common set
-
-**Vertical-specific requirements**:
-
-- **Functional**: Real-time generation (24fps minimum for interactivity). Spatial and temporal consistency over minutes of interaction. User control mapping (latent actions → human inputs). 3D persistence (objects maintain state when camera moves away). High visual fidelity (720p+).
-- **Non-functional**: 720p+ at 24fps real-time generation. Minutes-scale consistency. Sub-100ms response to user inputs.
-- **Regulatory**: None (creative application)
-
-**Current solutions**: [Google DeepMind](ecosystem.md#google-deepmind) Genie 3 (interactive, 720p/24fps); [World Labs](ecosystem.md#world-labs) Marble (persistent 3D, Chisel editing); Oasis AI (dreamlike interactive worlds); GWM-1 (deterministic spatial coherence)
-
-**Gaps**: Minutes-scale consistency degrades in autoregressive generation. No standard benchmark for interactive world model quality. Compute costs for real-time high-fidelity generation remain prohibitive for consumer deployment. Social/NPC behavior modeling within generated worlds is rudimentary.
-
----
-
-## Other Applications
-
-*Defense, legal, energy, logistics, etc.*
-
-### Autonomous Drone Coordination and Battlefield Awareness
-
-**Industry**: Defense
-
-**Verticals**: Defense
-
-**Description**: World models enable autonomous coordination of drones and unmanned systems in complex, contested environments. Anduril Industries' Lattice platform uses world-aware reasoning to coordinate autonomous drones and manage battlefield technology, building real-time situational awareness from multi-sensor fusion and predicting adversary behavior through internal simulation.
-
-**Technical Requirements**: Real-time multi-sensor fusion (cameras, radar, RF). Adversary behavior prediction under uncertainty. Edge deployment on constrained hardware (drone-mounted compute). Communication-denied operation (models must function without continuous connectivity). Formal safety verification for autonomous weapons decisions.
-
-**Current Solutions**: Anduril Industries Lattice platform
-
-**Research Gaps**: Adversarial robustness — world models must handle deliberate deception. Ethical and regulatory frameworks for autonomous lethal decision-making. Multi-agent coordination with degraded communications. Transfer from simulation to contested real-world environments.
-
----
-
-### Counterfactual Accident Reconstruction
-
-**Industry**: Legal
-
-**Verticals**: Legal
-
-**Description**: Counterfactual World Simulation Models (CWSMs) reconstruct accidents in high-fidelity 3D and simulate alternative scenarios (e.g., "would the accident have been avoided if the pedestrian had seen the car?"). CWMDT turns standard video diffusion models into counterfactual world models by constructing digital twins of observed scenes and reasoning over object relationships through an LLM. Used as persuasive evidence for legal fact-finders.
-
-**Technical Requirements**: High-fidelity 3D scene reconstruction from limited evidence (dashcam, surveillance footage). Causal reasoning over object relationships (not just visual generation). Counterfactual simulation with controlled variable manipulation. Expert-explainable outputs suitable for courtroom presentation. Temporal precision (exact timing of driver reactions, braking distances).
-
-**Current Solutions**: CWMDT (digital twin-conditioned video diffusion); CausalVAE (causal inference); Pearl theory-based frameworks
-
-**Research Gaps**: Legal admissibility standards for AI-generated reconstructions are undefined. Bias in world model training data could produce systematically skewed reconstructions. Uncertainty quantification for counterfactual claims needed. No established methodology for validating counterfactual accuracy.
-
----
-
-**Note**: Each entry follows the use-case-entry template from `templates/use-case-entry.md`.
-Use cases include technical requirements, current solutions, and research gaps.
+**Note**: Each domain section follows a consistent structure: description, common building blocks, and vertical-specific entries with requirements, solutions, and gaps.
+Verticals include technical requirements, current solutions, and research gaps.

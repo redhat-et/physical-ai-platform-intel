@@ -2,17 +2,18 @@
 
 **What it does**: 1-2 sentences — the capability this provides.
 
-**Use-case demand**:
+**Domain demand**:
 
-| Technical Use Case    | Demand                                           |
-| --------------------- | ------------------------------------------------ |
-| Robotics              | required / important / optional / not needed     |
-| Digital Twins         | required / important / optional / not needed     |
-| Autonomous Vehicles   | required / important / optional / not needed     |
-| Quality Control       | required / important / optional / not needed     |
-| Medical Diagnostics   | required / important / optional / not needed     |
-| Scientific Simulation | required / important / optional / not needed     |
-| Autonomous Agents     | required / important / optional / not needed     |
+| Domain | Demand |
+| ---------------------------------- | -------------------------------------------- |
+| Robotics | required / important / optional / not needed |
+| Industrial Digital Twins | required / important / optional / not needed |
+| Autonomous Vehicles | required / important / optional / not needed |
+| Visual AI / Inspection | required / important / optional / not needed |
+| Medical AI | required / important / optional / not needed |
+| Scientific Discovery | required / important / optional / not needed |
+| Product Design & Engineering | required / important / optional / not needed |
+| Molecular Design & Engineering | required / important / optional / not needed |
 
 **Solution landscape**:
 

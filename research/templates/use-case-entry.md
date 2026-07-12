@@ -1,15 +1,15 @@
-## <Technical Use Case>
+## <Domain Name>
 
-**Description**: What this capability pattern is, 1-2 sentences.
+**Description**: What this domain is, 1-2 sentences.
 
 **Common building blocks** (across all verticals):
 
-| Building Block | Role in this use case |
-| -------------- | --------------------- |
-| <Block A>      | Why needed            |
-| <Block B>      | Why needed            |
+| Building Block | Role in this domain |
+| -------------- | ------------------- |
+| <Block A> | Why needed |
+| <Block B> | Why needed |
 
-### Vertical-Specific Instance: <Industry Name>
+### <Vertical Name> (<Domain Name>)
 
 **Verticals**: Manufacturing | Healthcare & Life Sciences | Energy & Utilities | ...
 

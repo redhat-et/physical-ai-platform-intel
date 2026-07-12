@@ -1335,6 +1335,48 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 
 ---
 
+### Wuji Tech
+
+**Type**: `Startup`
+**Stage/Scale**: Funding undisclosed. Founded 2024. Shenzhen, China
+**About**: Building biomimetic dexterous manipulation hardware — high-DOF robotic hands and teleoperation data gloves for robot foundation model training and deployment. Direct-drive actuation approach emphasizes torque transparency (backdrivable joints with minimal friction) over tactile sensor density. Hardware partner for Genesis AI's GENE foundation model stack. URDF models available for MuJoCo and Isaac Sim. Used in UniDex cross-embodiment foundation model research.
+
+**Solutions**:
+
+#### Wuji Hand 2
+
+- **What it does**: 20-DOF biomimetic dexterous hand with direct-drive actuation, designed for dexterous manipulation research and humanoid robot integration. Debuted at ICRA 2026.
+- **Building blocks covered**: [Robot Middleware](building-blocks.md#robot-middleware), [Sensor Data Ingestion](building-blocks.md#sensor-data-ingestion)
+- **Key features (functional)**: 20 active DOF (4 per finger, full opposition with lateral abduction), MIT force-position hybrid control at 1000 Hz, FOC vector control, 0.05 Nm back-drive torque, 768-point tactile map, 6-axis IMU, three-layer design (skeleton + soft body + replaceable skin), min grasp diameter 0 mm, URDF models for simulation
+- **Key features (non-functional)**: 745g, 180×80×40mm, ~15N fingertip force, 10kg static grasp, 300K+ grasp cycles (tested to ~1M), survives 80cm drops. Priced $5,500–$16,000 depending on configuration. Ethernet RJ45 interface, joint-level Python SDK
+- **Competes with**: Sharpa Wave (1,000+ tactile pixels, selected for NVIDIA GR00T Reference Robot), AGILINK (AGIBOT spin-off, unicorn valuation) — differentiates on torque transparency and affordability for research labs
+- **Complements**: Genesis AI (custom Genesis Hand 1.0 variant with 3ms latency), UniDex foundation model suite, any ROS 2-based robot arm (standard flange adapter for UR, Kinova, OpenArm)
+- **Openness**: `Proprietary` (URDF models and Python SDK are open, hardware is proprietary)
+- **Lock-in vectors**: Proprietary hardware design; open interfaces reduce lock-in
+- **Source**: [Website](https://www.wuji.tech/en/hand), [Docs](https://docs.wuji.tech/docs/en/wuji-hand/latest/overview/), [GitHub](https://github.com/wuji-technology)
+
+#### Wuji Glove
+
+- **What it does**: Teleoperation data glove that captures hand pose and tactile pressure for robot demonstration collection and real-time teleoperation. Pairs with Wuji Hand for imitation learning data pipelines.
+- **Building blocks covered**: [Sensor Data Ingestion](building-blocks.md#sensor-data-ingestion), [Data Annotation & Curation for Physical AI](building-blocks.md#data-annotation--curation-for-physical-ai)
+- **Key features (functional)**: 526-point full-palm pressure sensor matrix (24×32 grid, 4mm resolution, 0.1N pressure resolution, 0–20N range) at 120 FPS; 5 electromagnetic fingertip pose receivers (6-DOF each, ≤2mm position accuracy, <5° orientation) at 120 FPS; 6-axis wrist IMU at 800 Hz (±16g accel, ±2000°/s gyro); ROS 2 teleoperation package with support for ACT, Diffusion Policy, and imitation learning pipelines
+- **Key features (non-functional)**: 67.5g glove weight (192.6g with cable), ≤10ms motion-to-data latency, USB-C power (5V/1A), Ethernet data output, ≥100K press/bend cycles
+- **Competes with**: MANUS Gloves, Rokoko Smartgloves, HaptX — differentiates on combined tactile+pose sensing at research-friendly price
+- **Complements**: Wuji Hand (matched teleoperation pair), ROS 2 robot arms, imitation learning frameworks (ACT, Diffusion Policy)
+- **Openness**: `Proprietary` (Python SDK and ROS 2 teleop package are open)
+- **Lock-in vectors**: Electromagnetic tracking requires Wuji base station; open data formats reduce lock-in
+- **Source**: [Website](https://www.wuji.tech/en/glove), [Docs](https://docs.wuji.tech/docs/en/wuji-glove/latest/introduction/), [ROS 2 teleop](https://github.com/wuji-technology/wuji-hand-teleop)
+
+**Platform relevance**:
+
+- **Partnership surface**: Hardware for robot data collection pipelines; teleoperation data feeds directly into foundation model training. Natural fit for a platform's data layer (ingest demos → train policies → deploy)
+- **Competitive surface**: None — pure hardware play, needs platform infrastructure
+- **What they need from a platform**: Data pipeline for teleoperation recordings, model training infrastructure, edge deployment for trained policies, fleet management for multi-robot setups
+
+**Links**: [Website](https://www.wuji.tech/), [GitHub](https://github.com/wuji-technology), [Docs](https://docs.wuji.tech/), [UniDex paper (uses Wuji Hand)](https://arxiv.org/html/2603.22264v1), [Genesis AI partnership](https://www.humanoidsdaily.com/news/wuji-tech-confirmed-as-hardware-partner-for-genesis-ai-s-human-level-dexterity-breakthrough)
+
+---
+
 ### Zeromatter
 
 **Type**: `Startup`
