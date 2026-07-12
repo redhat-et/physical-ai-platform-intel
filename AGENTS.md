@@ -17,7 +17,7 @@ The repo is organized in three layers:
 
 - **`building-blocks.md`** -- Platform capability map: building blocks with demand matrices, solution landscapes, platform fit assessments
 - **`ecosystem.md`** -- Competitive landscape: Big Tech, startups, OSS communities, research labs with solution-level analysis
-- **`use-cases.md`** -- Technical use cases as primary hierarchy with vertical tags, building-block mappings, regulatory requirements
+- **`use-cases.md`** -- Physical AI domains (Robotics, AV, Visual AI, Digital Twins, Product Design, Molecular Design, Medical AI, Scientific Discovery) with vertical-specific requirements, building-block mappings, and ecosystem solutions
 - **`projects.md`** -- Open-source and proprietary implementations organized by building block with openness assessments
 
 **Research Depth Layer** (`research/`) -- foundational understanding that informs platform decisions:
@@ -39,7 +39,7 @@ The repo is organized in three layers:
 ### Goals
 
 1. Track players AND startups building Physical AI solutions, understanding competitive dynamics
-2. Understand use cases and derive building-block requirements for an enterprise platform
+2. Understand Physical AI domains and derive building-block requirements for an enterprise platform
 3. Assess the open-source landscape for each building block (community health, licensing, vendor control)
 4. Maintain research depth on world model architectures, embodied AI, and simulation
 5. Support synthesis and analysis of research trends and market developments
@@ -183,15 +183,15 @@ research/library/
 ### Add New Entry When
 
 - First time encountering a paper, project, or ecosystem player
-- Genuinely new use case or application
+- Genuinely new domain vertical or application
 - New development from existing player (e.g., new paper, product launch)
-- New building block emerges from use-case analysis
+- New building block emerges from domain analysis
 
 ### Update Existing Entry When
 
 - Project status changes (Active to Archived)
 - Player changes affiliation or focus
-- Use case evolves or new solutions emerge
+- Domain vertical evolves or new solutions emerge
 - Building-block maturity or platform fit assessment changes
 - Correcting errors or adding missing information
 
@@ -226,4 +226,4 @@ The user interacts with this repo through slash commands backed by skill files i
 2. **Profiling companies**: "Profile Skild AI"
 3. **Comparing solutions**: "Compare vLLM, NIM, and TensorRT-LLM for the Inference Server block"
 4. **Requesting searches**: "Find startups doing sim-to-real transfer"
-5. **Asking for synthesis**: "What building blocks are needed for robotic manipulation use cases?"
+5. **Asking for synthesis**: "What building blocks are needed for the Robotics domain?"
