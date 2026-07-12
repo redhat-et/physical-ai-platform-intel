@@ -104,10 +104,10 @@
 | Category               | Solutions                                                                             | Maturity  | Notes                                                                        |
 | ---------------------- | ------------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------------------- |
 | OSS (community-driven) | OpenVLA, SmolVLA, Spirit-v1.5                                                         | Early OSS | Community-driven open VLA baselines; Spirit-v1.5 #1 on RoboChallenge Table30 |
-| OSS (single-vendor)    | GR00T N1.7, OpenPI (pi0/pi0.5/pi0.7), DreamZero, LingBot-VA                           | Early OSS | NVIDIA, Physical Intelligence, Ant Group                                     |
+| OSS (single-vendor)    | GR00T N1.7, OpenPI (pi0/pi0.5/pi0.7), DreamZero, LingBot-VA 2.0                       | Early OSS | NVIDIA, Physical Intelligence, Ant Group                                     |
 | Proprietary            | Gemini Robotics, GEN-1, Qwen-RobotManip, Being-H0.7, Cortex 2.0, Robostral Navigate   | Early OSS | Google, Generalist AI, Alibaba, BeingBeyond, Sereact, Mistral AI (nav-only)  |
 
-**Key trade-offs**: VLAs (pi0) leverage internet-scale pretraining but lack physics understanding. WAMs (DreamZero) learn dynamics from video but cost ~7.4x more to train. MoT emerging as dominant architecture for both VLAs and WAMs. VLA+WAM hybrids (Being-H0.7, Cortex 2.0, Pi-0.7) converging. Frontier gap: closed-weight VLAs (Gemini, Pi-0.5) exhibit zero-shot open-world behavior that open-weight models cannot yet match.
+**Key trade-offs**: VLAs (pi0) leverage internet-scale pretraining but lack physics understanding. WAMs (DreamZero) learn dynamics from video but cost ~7.4x more to train. MoT/MoE emerging as dominant architecture for both VLAs and WAMs. LingBot-VA 2.0 claims 150 Hz WAM inference via sparse MoE, potentially closing the WAM latency gap. VLA+WAM hybrids (Being-H0.7, Cortex 2.0, Pi-0.7) converging. Frontier gap: closed-weight VLAs (Gemini, Pi-0.5) exhibit zero-shot open-world behavior that open-weight models cannot yet match.
 
 **Platform fit**: `Partner`
 

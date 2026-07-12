@@ -526,7 +526,7 @@
 
 **Maturity**: Production-ready
 
-**Competes with**: OpenPI, DreamZero, LingBot-VA
+**Competes with**: OpenPI, DreamZero, LingBot-VA 2.0
 
 **Complements**: Isaac Lab simulation, LeRobot serving framework, vLLM-Omni
 
@@ -593,7 +593,7 @@
 
 **Maturity**: Production-ready
 
-**Competes with**: Isaac-GR00T, DreamZero, LingBot-VA
+**Competes with**: Isaac-GR00T, DreamZero, LingBot-VA 2.0
 
 **Complements**: LeRobot framework, vLLM-Omni, ALOHA/DROID hardware
 
@@ -632,38 +632,41 @@
 
 **Openness assessment**: (to be assessed by oss-health skill)
 
-### LingBot-VA: Causal Video-Action World Model for Robot Control
+### LingBot-VA 2.0: Native Video-Action Foundation Model for Robot Control
 
 **URL**: [github.com/Robbyant/lingbot-va](https://github.com/robbyant/lingbot-va)
 
-**Description**: Autoregressive diffusion framework from Robbyant (Ant Group) that learns frame prediction and policy execution simultaneously. Features Mixture-of-Transformers (MoT) architecture with shared latent space for vision and action tokens, closed-loop rollout with ground-truth observations, and asynchronous inference pipeline parallelizing action prediction and motor execution. Reportedly outperforms π0.5 by 20% on task success rate.
+**Description**: Video-action foundation model from Robbyant (Ant Group) pretrained from scratch for embodied control. v2.0 replaces v1's retrofitted bidirectional-to-causal approach with native causal DiT pretraining on web-scale video, decoupling model quality from scarce robot data. Features semantic visual-action tokenizer (aligned to frozen UMT5), sparse MoE backbone (~5B params), and asynchronous foresight inference predicting future latents in parallel with action execution. Real-time 150 Hz single-GPU inference eliminates the WAM latency penalty.
 
-**Tech Stack**: Python, PyTorch
+**Tech Stack**: Python (96.7%), PyTorch 2.9.0, CUDA 12.6, flash-attn, diffusers, HuggingFace transformers
 
 **Key Features**:
 
-- Autoregressive video-action world modeling: "deduce while acting"
-- 20% higher task success rate vs π0.5
-- 90%+ success on RoboTwin 2.0 two-arm collaborative benchmark
-- 98.5% on LIBERO long-sequence lifelong learning benchmark (industry record)
-- Asynchronous inference pipeline for efficient robot control
-- Part of LingBot family: LingBot-Depth, LingBot-VLA, LingBot-World, LingBot-VA
+- Native causal pretraining on web-scale image/video — no robot data needed for pretraining
+- 150 Hz real-time inference on single GPU (~24 GB VRAM) — eliminates 83x WAM latency gap vs VLAs
+- 20-shot in-context generalization to new tasks without parameter updates
+- RoboTwin 2.0: 92.9% Easy / 91.6% Hard (+4.2/+4.6 over Motus); +8.2%/+9.1% at Horizon=3
+- LIBERO: 98.5% success rate (industry record)
+- Sparse MoE architecture (~5B params DiT + ~20 GB frozen VAE+UMT5)
+- Integrated into LeRobot v0.6.0 as first-class policy
+- Part of six-model LingBot stack: VA 2.0, VLA 2.0, World 2.0, Depth 2.0, Vision, Video
+- Three model variants: lingbot-va-base, lingbot-va-posttrain-robotwin, lingbot-va-posttrain-libero-long
 
 **Status**: Active
 
-**Stats**: (Robbyant / Ant Group)
+**Stats**: 1.5k stars, 138 forks (Robbyant / Ant Group)
 
-**Last Updated**: 2026-04
+**Last Updated**: 2026-07
 
 **Building block(s)**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
 
-**Maturity**: Research
+**Maturity**: Early OSS
 
 **Competes with**: OpenPI, Isaac-GR00T, DreamZero
 
-**Complements**: Simulation engines, robotics hardware platforms
+**Complements**: LeRobot (integrated policy), vLLM-Omni (targeted for serving), simulation engines
 
-**Openness assessment**: (to be assessed by oss-health skill)
+**Openness assessment**: Apache-2.0 license; code, weights, and training recipes on GitHub/HuggingFace. Single-vendor (Ant Group) controlled.
 
 ### OpenVLA: Open-Source Vision-Language-Action Model
 

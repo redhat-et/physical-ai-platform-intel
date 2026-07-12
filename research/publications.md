@@ -2341,6 +2341,30 @@
 
 ---
 
+### LingBot-VA 2.0: Native Video-Action Pretraining for Generalizable Robot Control [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2607.08639)
+
+**Authors/Presenters**: Qihang Zhang, Lin Li, Luyao Zhang, Shuai Yang, Yiming Luo, Shuaiting Li, Ruilin Wang, Junke Wang, Jiahao Shao, Gangwei Xu, Jiaming Zhou, Yishu Shen, Yudong Jin, Fangyi Xu, Shuailei Ma, Jiaqi Liao, Guanxing Lu, Zifan Shi, Yongkun Wen, Yujie Zhao, Weixuan Tang, Xinyang Wang, Chaojian Li, Jiapeng Zhu, Ka Leong Cheng, Nan Xue, Xing Zhu, Yujun Shen, Yinghao Xu ([Robbyant / Ant Group](ecosystem.md#robbyant-ant-group))
+
+**Date**: 2026-07
+
+**Type**: Paper (RSS 2026)
+
+**Summary**: Video-action foundation model pretrained from scratch for embodied control, superseding LingBot-VA v1's retrofit approach. Introduces four architectural innovations: semantic visual-action tokenizer (replacing reconstruction VAEs), strict causal pretraining on web-scale video (eliminating catastrophic forgetting from bidirectional adaptation), sparse MoE backbone (~5B params), and asynchronous foresight inference predicting future latents in parallel with action execution.
+
+**Key Findings**:
+
+- Native causal pretraining on web-scale image/video acquires control knowledge without scarce robot demonstrations — the data scaling bottleneck that limited v1
+- Semantic visual-action tokenizer aligns latents to frozen visual foundation model (UMT5), producing representations far more semantic than pixel-reconstruction VAEs
+- Sparse MoE backbone enables 150 Hz real-time inference on a single GPU (~24 GB VRAM) — eliminates the 83x latency penalty vs VLAs that made WAMs impractical (v1: 5.2s/step)
+- 20-shot in-context generalization to new tasks without parameter updates
+- RoboTwin 2.0: 92.9% Easy / 91.6% Hard (surpassing Motus by +4.2/+4.6 points); gains increase with horizon length (+8.2%/+9.1% at Horizon=3)
+- LIBERO: 98.5% average success rate (industry record)
+- Completes Robbyant's six-model embodied AI stack: LingBot-VA 2.0, LingBot-VLA 2.0, LingBot-World 2.0, LingBot-Depth 2.0, LingBot-Vision, LingBot-Video
+
+**Relevance to World Models**: Directly addresses the latency objection that was the primary barrier to WAM deployment. The v1→v2 evolution validates the "train natively for embodiment" thesis over "adapt video generators" — the same architectural argument behind NVIDIA's DreamZero and the Fast-WAM representation-only approach. The 150 Hz inference claim, if reproducible, makes WAMs competitive with VLAs on the latency axis for the first time, potentially shifting the WAM vs VLA trade-off from "robustness vs speed" to "robustness at parity speed." The web-scale pretraining route also decouples WAM quality from robot data availability — a key infrastructure implication for platform builders.
+
+---
+
 ### Robots Need More Than VLAs & World Models [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.06556)
 
 **Authors**: Elis Karcini, Faisal Mehrban, Quang Nguyen, Mac Schwager, Arash Ajoudani, Cesar Cadena, Jan Peters, Marco Hutter, Haitham Bou-Ammar

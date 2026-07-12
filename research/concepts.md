@@ -222,7 +222,7 @@ The a16z "Frontier Systems for the Physical World" essay proposes a three-way cl
 3. **Architecture** — how components are composed:
    - *Hierarchical*: Separate video prediction and action stages connected one-way (UniPi, Pi-0.7 BAGEL subgoals)
    - *Monolithic Transformer*: Single transformer jointly denoises video and actions (DreamZero, Cosmos Policy)
-   - *Mixture-of-Transformers (MoT)*: Modality-specific experts with shared self-attention (LingBot-VA, Fast-WAM, Pi-0, Pi-0.5) — predicted to become dominant
+   - *Mixture-of-Transformers (MoT) / Sparse MoE*: Modality-specific experts with shared self-attention (LingBot-VA 2.0 sparse MoE, Fast-WAM, Pi-0, Pi-0.5) — predicted to become dominant
 
 **Fast-WAM representation-only finding**: Fast-WAM (arXiv:2603.16666) demonstrates that a WAM can skip video generation entirely at inference and still match full video-generating WAMs on simulation benchmarks. This cuts inference from 590-800ms (full video generation) to sub-200ms per action chunk, eliminating the 3-4x WAM inference penalty versus VLAs. However, current evidence is simulation-only — real-robot validation is pending. If confirmed, this collapses the WAM deployment cost objection: WAMs would train on video (learning physical dynamics priors) but deploy as fast as VLAs. Both DreamZero and Fast-WAM found that action learning still benefits from co-training with a video-prediction objective during robot fine-tuning.
 
@@ -237,7 +237,7 @@ The a16z "Frontier Systems for the Physical World" essay proposes a three-way cl
 - RL post-training applicable to both paradigms
 - Physical reasoning (Cosmos-Reason) could enhance either approach; Cosmos 3 subsumes Cosmos-Reason into its reasoner tower
 - ARM-EBM bijection suggests autoregressive and energy-based approaches are theoretically unified
-- MoT convergence: Mixture-of-Transformers emerging as the dominant architecture for both VLAs (Pi-0, Pi-0.5) and WAMs (LingBot-VA, Fast-WAM) — modality-specific experts with shared attention as the practical compromise between modularity and coupling
+- MoT/MoE convergence: Mixture-of-Transformers emerging as the dominant architecture for both VLAs (Pi-0, Pi-0.5) and WAMs (LingBot-VA 2.0, Fast-WAM) — modality-specific experts with shared attention as the practical compromise between modularity and coupling. LingBot-VA 2.0's sparse MoE variant achieves 150 Hz inference, potentially closing the WAM latency gap
 - WAM+VLA hybrids predicted as the next generation: Pi-0.7 BAGEL subgoals, [Sereact](ecosystem.md#sereact) Cortex 2.0 planning-by-foresight, [Being-H0.7](ecosystem.md#beingbeyond) latent bridge
 - Chinese Big Tech entering Physical AI: [Alibaba](ecosystem.md#alibaba-tongyi-lab) Qwen-Robot suite introduces language-as-action-interface paradigm (composable tool-use rather than monolithic VLA/WAM), trained on 8.6M video-text pairs across 20+ embodiments
 - VLA field exploding: 18x growth in ICLR submissions (9 at ICLR 2025 → 164 at ICLR 2026), but frontier gap persists between closed-weight (Gemini, Pi-0.5) and open-weight VLAs on zero-shot open-world behavior

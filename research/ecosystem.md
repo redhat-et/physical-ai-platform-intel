@@ -662,21 +662,21 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 
 **Type**: `Startup`
 **Stage/Scale**: Division of Ant Group (Alibaba affiliate)
-**About**: Embodied AI division of Ant Group building a comprehensive foundation model stack for robotics. The LingBot family covers spatial perception, VLAs, world models, and video-action models.
+**About**: Embodied AI division of Ant Group building a six-model full-stack for embodied AI. The LingBot 2.0 family (July 2026) covers video-action models, VLAs, world models, spatial perception, vision, and video generation — the broadest open foundation model stack for robotics from a single vendor. Targets elderly care, medical assistance, and household deployment.
 
 **Solutions**:
 
-#### LingBot Family
+#### LingBot Family (2.0 stack, July 2026)
 
-- **What it does**: Comprehensive foundation model stack: LingBot-Depth (spatial perception), LingBot-VLA (vision-language-action), LingBot-World (interactive world model), LingBot-VA (video-action model).
+- **What it does**: Six-model embodied AI stack: LingBot-VA 2.0 (video-action foundation model), LingBot-VLA 2.0 (vision-language-action), LingBot-World 2.0 (interactive world model), LingBot-Depth 2.0 (spatial perception), LingBot-Vision (visual foundation model), LingBot-Video (video generation).
 - **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models), [Latent World Models](building-blocks.md#latent-world-models), [Video Generation / Prediction Models](building-blocks.md#video-generation--prediction-models)
-- **Key features (functional)**: LingBot-VA (autoregressive video-action, 20% better than pi0.5), LingBot-World (interactive simulator), LingBot-Depth (spatial perception), LingBot-Map (streaming 3D reconstruction)
-- **Key features (non-functional)**: LingBot-VA: 98.5% on LIBERO benchmark (industry record); LingBot-World: 16 FPS, sub-second interaction latency
-- **Competes with**: pi0/pi0.5, GR00T N1, Cosmos — across multiple building blocks
-- **Complements**: vLLM-Omni community (LingBot-VA targeted for P1 integration)
-- **Openness**: `OSS-single-vendor` (partially open)
-- **Lock-in vectors**: Ant Group ecosystem, partially open-source
-- **Source**: [GitHub](https://github.com/Robbyant), [LingBot-VA](https://github.com/Robbyant/lingbot-va)
+- **Key features (functional)**: LingBot-VA 2.0 (native causal DiT, 150 Hz real-time inference, 20-shot generalization), LingBot-World 2.0 (interactive simulator, 1-hour playable world generation), LingBot-Depth 2.0 (spatial perception), LingBot-VLA 2.0 (outperforms GR00T N1.6)
+- **Key features (non-functional)**: LingBot-VA 2.0: 92.9%/91.6% RoboTwin 2.0 Easy/Hard, 98.5% LIBERO, 150 Hz on single GPU (~24 GB VRAM); LingBot-World 2.0: 16 FPS, sub-second interaction latency
+- **Competes with**: pi0/pi0.5/pi0.7, GR00T N1.7, DreamZero, Cosmos — across multiple building blocks
+- **Complements**: LeRobot (LingBot-VA integrated as first-class policy in v0.6.0), vLLM-Omni community (targeted for serving integration)
+- **Openness**: `OSS-single-vendor` (Apache-2.0; code + weights on GitHub/HuggingFace)
+- **Lock-in vectors**: Ant Group ecosystem, single-vendor controlled
+- **Source**: [GitHub](https://github.com/Robbyant), [LingBot-VA 2.0](https://github.com/Robbyant/lingbot-va), [LingBot-VLA 2.0](https://github.com/Robbyant/lingbot-vla-v2)
 
 **Links**: [Website](https://technology.robbyant.com/), [GitHub](https://github.com/Robbyant)
 
