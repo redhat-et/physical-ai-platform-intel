@@ -139,11 +139,12 @@
 
 **Solution landscape**:
 
-| Category               | Solutions          | Maturity          | Notes                                             |
-| ---------------------- | ------------------ | ----------------- | ------------------------------------------------- |
-| OSS (community-driven) | ROS2               | Industry standard | Open Robotics / OSRA governance; broad ecosystem  |
-| OSS (single-vendor)    | Isaac ROS          | Production-ready  | NVIDIA; accelerated layer on ROS2, CUDA-only      |
-| Proprietary            | Various OEM stacks | Production-ready  | ABB, FANUC, KUKA, YASKAWA proprietary controllers |
+| Category               | Solutions          | Maturity          | Notes                                              |
+| ---------------------- | ------------------ | ----------------- | -------------------------------------------------- |
+| OSS (community-driven) | ROS2, Nav2, MoveIt | Industry standard | Open Robotics / OSRA governance; broad ecosystem   |
+| OSS (community-driven) | PX4-Autopilot      | Industry standard | Dronecode Foundation (LF); drone/UAV autopilot     |
+| OSS (single-vendor)    | Isaac ROS          | Production-ready  | NVIDIA; accelerated layer on ROS2, CUDA-only       |
+| Proprietary            | Various OEM stacks | Production-ready  | ABB, FANUC, KUKA, YASKAWA proprietary controllers  |
 
 **Key trade-offs**: ROS2 is the industry standard but lacks enterprise support and hardened security. Isaac ROS adds hardware acceleration but locks to NVIDIA GPUs. Proprietary stacks offer reliability but limit interoperability.
 
@@ -153,7 +154,7 @@
 - **Partnership surface**: Open Robotics / OSRA (community governance); robot OEMs needing enterprise middleware.
 
 **Related blocks**: [Edge AI Inference Runtime](#edge-ai-inference-runtime), [Robot Fleet Management & Observability](#robot-fleet-management--observability), [Sensor Data Ingestion](#sensor-data-ingestion)
-**Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia) (Isaac ROS), Open Robotics (ROS2)
+**Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia) (Isaac ROS), Open Robotics (ROS2, Gazebo), Dronecode Foundation (PX4), Open Navigation LLC (Nav2)
 **Relevant research**: (to be populated)
 
 ---
@@ -171,6 +172,7 @@
 | Genesis World       | Custom (Quadrants) | Nyx              | CUDA, ROCm, Metal, Vulkan, CPU |
 | Newton              | MuJoCo Warp        | (via OpenUSD)    | CUDA only                      |
 | SAPIEN / ManiSkill  | PhysX 5            | Vulkan           | CUDA, CPU                      |
+| CARLA               | PhysX (via UE)     | Unreal Engine 5.5| RTX, DirectX, Vulkan           |
 | Webots              | ODE (custom fork)  | WREN (custom)    | OpenGL; CPU only               |
 | MuJoCo Playground   | MuJoCo / MJX       | MuJoCo built-in  | CUDA (via JAX), CPU            |
 | Genie 3             | Learned            | Learned          | Google TPU/GPU (proprietary)   |
@@ -192,7 +194,7 @@
 
 | Category               | Solutions                                      | Maturity         | Notes                                                         |
 | ---------------------- | ---------------------------------------------- | ---------------- | ------------------------------------------------------------- |
-| OSS (community-driven) | Gazebo, MuJoCo, Genesis World, Webots          | Production-ready | Gazebo: OSRA; MuJoCo: Google; Genesis: Apache 2.0, 29K stars  |
+| OSS (community-driven) | Gazebo, MuJoCo, Genesis World, Webots, CARLA   | Production-ready | Gazebo: OSRA; MuJoCo: Google; Genesis: Apache 2.0; CARLA: MIT |
 | OSS (multi-vendor)     | Newton                                         | Early OSS        | Linux Foundation; NVIDIA + Google DeepMind + Disney Research  |
 | OSS (single-vendor)    | PhysicsNeMo, SAPIEN/ManiSkill, MuJoCo Playgnd  | Production-ready | NVIDIA; Google DeepMind; UC San Diego                         |
 | Proprietary            | Isaac Sim, Omniverse, Simulink, Genie 3        | Production-ready | NVIDIA (CUDA-locked), MathWorks, Google DeepMind              |

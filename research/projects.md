@@ -834,7 +834,74 @@
 
 *Robot Operating Systems, middleware, and communication layers for robot control and coordination.*
 
-(No current entries — to be populated)
+### Nav2 (Navigation 2): ROS 2 Navigation Framework
+
+**URL**: [github.com/ros-navigation/navigation2](https://github.com/ros-navigation/navigation2)
+**Building block(s)**: [Robot Middleware](building-blocks.md#robot-middleware)
+
+**Description**: Complete mobile robot navigation stack for ROS 2. Provides path planning, obstacle avoidance, localization (AMCL), costmap management, and behavior-tree-based task orchestration. Supports differential drive, omnidirectional, and Ackermann kinematics.
+**Tech Stack**: C++, Python, ROS 2, Behavior Trees
+
+**Key Features**:
+
+- Multiple planners: NavFn, Smac (Hybrid A*, State Lattice, 2D), Theta Star
+- Multiple controllers: DWB, MPPI, Regulated Pure Pursuit, Graceful Controller
+- Costmap 2D with pluggable layers; Collision Monitor for safety
+- Behavior-tree navigator for composable multi-step missions
+- Docking support (opennav_docking) and waypoint following
+- Simple Commander Python API for programmatic access
+
+**Openness assessment**:
+
+| Dimension              | Rating     | Detail                                                      |
+| ---------------------- | ---------- | ----------------------------------------------------------- |
+| License                | Permissive | Apache-2.0 and BSD-3-Clause mix                             |
+| Governance             | BDFL       | Open Navigation LLC (Steve Macenski) leads; community PRs   |
+| Contributor diversity  | Medium     | Sponsors include NVIDIA, AMD, Dexory; BDFL-driven core      |
+| Community health       | Active     | 3.5K+ commits, ROS 2 Humble/Jazzy/Kilted releases           |
+| Corporate control risk | Medium     | Open Navigation LLC holds project leadership                |
+
+**Maturity**: Production-ready
+
+**Competes with**: Isaac ROS Nav (NVIDIA-accelerated wrapper around Nav2), proprietary OEM navigation stacks
+**Complements**: ROS 2, MoveIt (manipulation + navigation integration), Gazebo (sim testing)
+
+**Stats**: 4.5K stars, 1.9K forks; sponsored by NVIDIA, AMD, Dexory, Stereolabs
+**Last Updated**: 2026-07
+
+### PX4-Autopilot: Open-Source Drone Flight Controller Stack
+
+**URL**: [github.com/PX4/PX4-Autopilot](https://github.com/PX4/PX4-Autopilot)
+**Building block(s)**: [Robot Middleware](building-blocks.md#robot-middleware)
+
+**Description**: Open-source autopilot for drones and unmanned vehicles. Supports multirotors, fixed-wing, VTOL, rovers, and experimental platforms. Runs on NuttX RTOS and Linux; interfaces with ROS 2 via DDS/MAVROS.
+**Tech Stack**: C++ (51%), C (36%), NuttX RTOS, uORB middleware (DDS-compatible), MAVLink protocol
+
+**Key Features**:
+
+- Modular publish-subscribe architecture (uORB); fully parallelized and thread-safe modules
+- First-class ROS 2 / DDS integration; native MAVLink protocol support
+- Pixhawk ecosystem hardware support (Pixhawk 6X, Cube, etc.)
+- SITL (software-in-the-loop) simulation for development and CI
+- Vendor-neutral governance under Dronecode Foundation (Linux Foundation)
+
+**Openness assessment**:
+
+| Dimension              | Rating     | Detail                                                        |
+| ---------------------- | ---------- | ------------------------------------------------------------- |
+| License                | Permissive | BSD-3-Clause                                                  |
+| Governance             | Foundation | Dronecode Foundation (Linux Foundation); holds all trademarks |
+| Contributor diversity  | High       | 50K+ commits, 15.7K forks; multi-vendor contributor base      |
+| Community health       | Active     | v1.17.0 (May 2026); weekly dev calls, active Discord          |
+| Corporate control risk | Low        | Foundation governance; no single vendor controls roadmap      |
+
+**Maturity**: Industry standard
+
+**Competes with**: ArduPilot (copyleft alternative), DJI SDK (proprietary), Auterion PX4-based commercial
+**Complements**: ROS 2 (via MAVROS / DDS bridge), Gazebo (SITL), QGroundControl (ground station)
+
+**Stats**: 12.1K stars, 15.7K forks, 135 releases; Dronecode Foundation
+**Last Updated**: 2026-07
 
 ---
 
@@ -1253,6 +1320,53 @@
 **Complements**: MuJoCo, Newton (MuJoCo Warp backend), LeRobot
 
 **Openness assessment**: (to be assessed by oss-health skill)
+
+#### CARLA: Open-Source Autonomous Driving Simulator
+
+**URL**: [github.com/carla-simulator/carla](https://github.com/carla-simulator/carla)
+
+**Description**: Open-source simulator for autonomous driving research and development. Provides urban environments, vehicle models, and flexible sensor suites for training and validating AD stacks. Migrated to Unreal Engine 5.5; 150K+ developer community. Founded on Dosovitskiy et al. (CoRL 2017).
+
+**Tech Stack**: C++ (79%), Python (14%), Unreal Engine 5.5 (ue5-dev) / UE 4.26 (ue4-dev), CMake/Ninja
+
+**Dependencies**:
+
+| Layer            | Engine            | Acceleration         |
+| ---------------- | ----------------- | -------------------- |
+| Physics backend  | PhysX (via UE)    | CPU, GPU             |
+| Rendering engine | Unreal Engine 5.5 | RTX, DirectX, Vulkan |
+
+**Key Features**:
+
+- Flexible sensor suite: cameras, LiDAR, radar, GNSS, IMU — configurable via Python API
+- Open digital assets (cities, buildings, vehicles) under CC-BY
+- Native ROS 2 integration (`-DENABLE_ROS2=ON`); separate [ROS-bridge](https://github.com/carla-simulator/ros-bridge)
+- Scenario Runner and Leaderboard for reproducible AD benchmarking
+- AutoWare and MathWorks RoadRunner interop
+- UE 5.5 migration brings Nanite, Lumen, and modern rendering pipeline
+
+**Status**: Active
+
+**Stats**: 14.2K stars, 4.6K forks, 6.7K+ commits, 28 releases
+
+**Last Updated**: 2026-07
+
+**Building block(s)**: [Simulation Engines](building-blocks.md#simulation-engines)
+
+**Maturity**: Production-ready
+
+**Competes with**: Isaac Sim (higher fidelity, NVIDIA-locked), Gazebo (robotics-first, lighter weight), LGSVL (archived), NVIDIA DRIVE Sim (proprietary)
+**Complements**: ROS 2 (via ROS-bridge), AutoWare (AD stack), OpenDRIVE/OpenSCENARIO standards
+
+**Openness assessment**:
+
+| Dimension              | Rating       | Detail                                                                |
+| ---------------------- | ------------ | --------------------------------------------------------------------- |
+| License                | Permissive   | MIT (code), CC-BY (assets); UE 5.5 has separate license terms         |
+| Governance             | Multi-vendor | carla-simulator org; originated from CVC/Intel Labs research          |
+| Contributor diversity  | High         | 14.2K stars, 4.6K forks; broad academic + industry contributor base   |
+| Community health       | Active       | v0.9.16 (Sep 2025); active UE5 migration; 150K+ developer community   |
+| Corporate control risk | Medium       | Unreal Engine dependency introduces Epic Games coupling               |
 
 ### Physics Engines
 
