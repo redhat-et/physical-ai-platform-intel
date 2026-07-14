@@ -67,6 +67,7 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 | Isaac Sim (NVIDIA) | [isaac-sim.md](deliverables/intel/projects/isaac-sim.md) | Partner |
 | Isaac Lab (NVIDIA) | [isaac-lab.md](deliverables/intel/projects/isaac-lab.md) | Partner |
 | Genesis World | [genesis-world.md](deliverables/intel/projects/genesis-world.md) | Integrate (watch) |
+| O3DE (O3DF/LF) | [o3de.md](deliverables/intel/projects/o3de.md) | Partner |
 
 ### Primers
 
