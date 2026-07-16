@@ -2,7 +2,7 @@
 
 > Players in Physical AI — their solutions, reference architectures, and platform relevance
 
-**Last Updated**: 2026-07-09
+**Last Updated**: 2026-07-15
 
 **Market context**: Robotics VC funding reached $18.8B globally in H1 2026, already exceeding full-year 2025 ($15B) and the 2021 peak ($14.1B). Physical AI dominates deal flow. Funding is top-heavy: top 3 deals account for 60.5% of capital. Humanoid robotics is the breakout category.
 
@@ -1164,8 +1164,8 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 ### Agility Robotics
 
 **Type**: `Startup`
-**Stage/Scale**: ~$683M total raised. $2.1B valuation (Series C, $400M, March 2025, WP Global Partners, SoftBank, Amazon). Oregon State University spinout (2015). Salem, OR
-**About**: Only humanoid robot company with meaningful commercial deployments. Digit robot (5'9", 35 lb lift capacity) operating in Amazon, GXO, Schaeffler, Spanx, and Mercado Libre facilities — 100K+ totes moved. RoboFab manufacturing facility (70K sq ft) in Salem, OR. Robot-as-a-Service at $30/hr. Multi-year commercial agreement with GXO (industry first). Powered by NVIDIA Jetson AGX Thor.
+**Stage/Scale**: Going public via SPAC merger with Churchill Capital Corp XI (ticker: AGLT) at $2.5B valuation. $620M gross proceeds ($420M trust + $200M PIPE led by Foxconn). Previously ~$683M raised (Series C $400M, March 2025). Oregon State University spinout (2015). Salem, OR
+**About**: First pure-play humanoid robotics company to trade publicly. Digit robot (5'9", 35 lb lift capacity) operating across 9 customer sites including Amazon, GXO, Schaeffler, Toyota, Spanx, and Mercado Libre — 100K+ totes moved, $300M+ in multi-year booked revenue (~1,000 robots). RoboFab manufacturing facility (70K sq ft) in Salem, OR. Robot-as-a-Service at $30/hr. Multi-year commercial agreement with GXO (industry first). Powered by NVIDIA Jetson AGX Thor.
 
 **Solutions**:
 
@@ -1187,9 +1187,96 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 - **Competitive surface**: Vertically integrated — limited platform interop by design
 - **What they need from a platform**: Sim-to-real training infrastructure at scale, safety certification frameworks, multi-site fleet management
 
-**Collaborations**: Amazon (investor + pilot customer), GXO (multi-year commercial deployment), NVIDIA (Jetson AGX Thor), Schaeffler, Mercado Libre
+**Collaborations**: Amazon (investor + pilot customer), GXO (multi-year commercial deployment), NVIDIA (Jetson AGX Thor), Schaeffler, Toyota, Mercado Libre, Foxconn (PIPE lead for SPAC)
 
-**Links**: [Website](https://www.agilityrobotics.com/), [GXO agreement](https://www.agilityrobotics.com/content/gxo-signs-industry-first-multi-year-agreement-with-agility-robotics), [Contrary Research profile](https://research.contrary.com/company/agility-robotics)
+**Links**: [Website](https://www.agilityrobotics.com/), [GXO agreement](https://www.agilityrobotics.com/content/gxo-signs-industry-first-multi-year-agreement-with-agility-robotics), [SPAC announcement](https://techcrunch.com/2026/06/24/agility-robotics-plans-to-go-public-via-spac-in-a-2-5b-deal/), [Contrary Research profile](https://research.contrary.com/company/agility-robotics)
+
+---
+
+### General Intuition
+
+**Type**: `Startup`
+**Stage/Scale**: $454M total ($320M Series A at $2.3B valuation, June 2026; $134M seed closed January 2026). New York, NY
+**About**: Trains world models on billions of hours of gameplay data from Medal (gaming clip platform, also founded by CEO Pim de Witte). Uses embedded action labels (button presses, controller inputs) as naturally-paired action-consequence data — no manual annotation required. Single model architecture powers both virtual agents and physical robots; demonstrated quadruped locomotion with 8 minutes of real-world fine-tuning data.
+
+**Solutions**:
+
+#### General Intuition World Model
+
+- **What it does**: World model trained on game video with native action labels, transferable to physical robot control via minimal real-world fine-tuning.
+- **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models), [Synthetic Data Generation](building-blocks.md#synthetic-data-generation)
+- **Key features (functional)**: Gameplay-pretrained world model, cross-domain transfer (game → robot), 8 minutes of real-world data for quadruped locomotion
+- **Key features (non-functional)**: $2.3B valuation, backed by Jeff Bezos, Eric Schmidt, Khosla Ventures, General Catalyst; researchers from Google DeepMind and MIT
+- **Competes with**: Odyssey (game-based world models), DreamZero (NVIDIA), Cosmos (NVIDIA) — on world models for robotics
+- **Complements**: Medal gaming data platform (proprietary data pipeline)
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Proprietary Medal gameplay data pipeline, closed model weights
+- **Source**: [TechCrunch](https://techcrunch.com/2026/06/25/general-intuitions-2-3b-bet-that-video-games-can-train-ai-agents-for-the-real-world/)
+
+**Platform relevance**:
+
+- **Partnership surface**: If models or training recipes are open-sourced, could provide a non-NVIDIA world model alternative
+- **Competitive surface**: Fully proprietary — no open-source components announced
+- **What they need from a platform**: GPU training infrastructure, sim-to-real transfer pipelines, edge inference for robot deployment
+
+**Links**: [TechCrunch coverage](https://techcrunch.com/2026/06/25/general-intuitions-2-3b-bet-that-video-games-can-train-ai-agents-for-the-real-world/), [The Robot Report](https://www.therobotreport.com/general-intuition-raises-320m-uses-video-game-data-train-robots/)
+
+---
+
+### AI² Robotics
+
+**Type**: `Startup`
+**Stage/Scale**: $735M round at ~$3B valuation (June 2026). Shenzhen, China
+**About**: Chinese wheeled humanoid robot company building the AlphaBot platform powered by "Alpha Brain" foundation model. Trades bipedal mobility for mechanical simplicity and durability — wheeled base with humanoid upper body. Targets industrial automation, biotech, public services, and retail. Investors include National Small and Medium Enterprises Development Fund, Sino Biopharmaceutical, Moutai Group, CICC Capital, GSR Ventures.
+
+**Solutions**:
+
+#### AlphaBot
+
+- **What it does**: Wheeled humanoid robot platform with Alpha Brain foundation model for cross-environment task execution.
+- **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models), [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime)
+- **Key features (functional)**: Wheeled locomotion + humanoid manipulation, Alpha Brain VLA foundation model, multi-environment deployment (industrial, biotech, retail, public services)
+- **Competes with**: Agility Robotics (Digit), Figure AI (Figure 03), Unitree (G1/H2), 1X (NEO) — on humanoid-class robots
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Vertically integrated hardware + software + foundation model
+- **Source**: [The Robot Report](https://www.therobotreport.com/ai%C2%B2-robotics-raises-735m-3b-valuation-wheeled-humanoid-robots/)
+
+**Platform relevance**:
+
+- **Partnership surface**: Limited — fully vertically integrated, China-based
+- **Competitive surface**: Competitor to Western humanoid players; wheeled approach is distinct design tradeoff
+- **What they need from a platform**: Sim-to-real training infrastructure, fleet management for multi-site deployment
+
+**Links**: [The Robot Report](https://www.therobotreport.com/ai%C2%B2-robotics-raises-735m-3b-valuation-wheeled-humanoid-robots/), [SiliconANGLE](https://siliconangle.com/2026/06/29/chinese-robotics-outfits-ai2-robotics-x-square-robots-secure-funding-around-2-8b-valuation/)
+
+---
+
+### Mind Robotics
+
+**Type**: `Startup`
+**Stage/Scale**: >$1B total ($400M latest round led by Kleiner Perkins, May 2026; $500M Series A March 2026; $115M seed late 2025). >$3B valuation (per WSJ). Palo Alto, CA
+**About**: Full-stack robotics platform for dexterous, reasoning-intensive manufacturing tasks. Founded by RJ Scaringe (Rivian co-founder), spun out November 2025. Rivian partnership provides live training environment at EV production facilities — real-time data from active manufacturing lines. Investors include Meritech Capital, Redpoint, SV Angel, Accel, a16z, Eclipse, Bain Capital Ventures, Greenoaks, Volkswagen Ventures, Salesforce Ventures.
+
+**Solutions**:
+
+#### Mind Robotics Platform
+
+- **What it does**: Foundation models + purpose-built robots for manufacturing tasks requiring dexterous manipulation and multi-step reasoning.
+- **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models), [Sim-to-Real Transfer](building-blocks.md#sim-to-real-transfer)
+- **Key features (functional)**: Full-stack platform (foundation models + custom hardware + deployment infrastructure), Rivian manufacturing line as training environment, dexterous manipulation for EV assembly tasks
+- **Key features (non-functional)**: $1B+ raised in <12 months, automotive validation via Rivian partnership
+- **Competes with**: Figure AI, Agility Robotics, Apptronik — on manufacturing humanoid deployment
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Vertically integrated hardware + software + manufacturing data pipeline
+- **Source**: [The Robot Report](https://www.therobotreport.com/mind-robotics-raises-400m-scale-ai-powered-robots-in-manufacturing/)
+
+**Platform relevance**:
+
+- **Partnership surface**: Limited — fully vertically integrated
+- **Competitive surface**: Direct competitor for manufacturing robotics deployment. Rivian-as-training-environment approach is unique
+- **What they need from a platform**: Training infrastructure, sim-to-real pipelines, Dassault/Siemens digital twin integration
+
+**Links**: [The Robot Report](https://www.therobotreport.com/mind-robotics-raises-400m-scale-ai-powered-robots-in-manufacturing/), [Business Wire](https://www.businesswire.com/news/home/20260513731983/en/Mind-Robotics-Announces-%24400M-in-New-Funding-to-Expand-Industrial-Robotics-Deployment)
 
 ---
 
@@ -1205,8 +1292,8 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 
 - **What it does**: Full-stack observability for robotics — unified visualization and debugging of 3D, video, audio, GPS, and time-series sensor data. Combines data collection, analysis, and fleet-level insights.
 - **Building blocks covered**: [Data Annotation & Curation for Physical AI](building-blocks.md#data-annotation--curation-for-physical-ai), [Evaluation & Benchmarking Infrastructure](building-blocks.md#evaluation--benchmarking-infrastructure)
-- **Key features (functional)**: Multimodal data visualization (3D, video, audio, GPS, time-series), fleet-level observability, event/incident debugging, data pipeline for training
-- **Key features (non-functional)**: Dexterity reports 20% dev time savings and $150K annual savings in tooling
+- **Key features (functional)**: Multimodal data visualization (3D, video, audio, GPS, time-series), fleet-level observability, event/incident debugging, data pipeline for training. Unified Data Search and Curation (April 2026): cross-modal query across operational data without pre-ingestion into separate warehouses, plus tagging, annotation, and enrichment for training datasets. BYOS model (customers host data in own cloud storage; Foxglove provides managed indexing, query, and metadata workflows)
+- **Key features (non-functional)**: Dexterity reports 20% dev time savings and $150K annual savings in tooling. Free Basic Seat tier (April 2026) for QA/triage/safety stakeholders beyond engineering
 - **Competes with**: Custom internal tools, Webviz (predecessor) — on robotics observability
 - **Complements**: ROS 2, NVIDIA Isaac, any robot middleware (via MCAP format)
 - **Openness**: `OSS-single-vendor` (MCAP format is open-source; platform is proprietary)
@@ -1978,6 +2065,23 @@ Turing Award laureate (2018), founder and scientific director of Mila. Advocates
 - **Links**: [Google Scholar](https://scholar.google.com/citations?user=kukA0LcAAAAJ), [Homepage](https://yoshuabengio.org/)
 
 **Links**: [Website](https://mila.quebec/), [Research](https://mila.quebec/en/publications/)
+
+---
+
+### BAAI (Beijing Academy of Artificial Intelligence)
+
+**About**: Chinese government-backed AI research institute. Launched Wujie ("无界" / Boundless) Physical AI initiative at the 2026 Zhiyuan Conference (June 12). Claims "world's first general-purpose world foundation model" (Wujie Physis-v0.1) emphasizing physical consistency and causal action. Part of a broader June 2026 wave of 13 Chinese embodied AI models released at ~1 every 48 hours — including Alibaba Qwen-Robot suite, CasiaHand Brain-Si, GalaxyBot AstraBrain-WBC, and others.
+
+**Focus Areas**: World foundation models, embodied AI, physical reasoning
+
+**Key Work**:
+
+- **Wujie Physis-v0.1**: World model predicting physical states via fusion of video, RGB-D, 3D point clouds, and force-tactile signals into a shared latent representation. Emphasizes physical consistency and causal action understanding
+- **Wujie RoboBrain Orca**: Embodied brain model integrating language, vision, causal reasoning, and multimodal decoding
+
+**Platform relevance**: BAAI models are typically open-weight (BAAI's previous FlagAI, Aquila models were open). If Wujie follows the same pattern, it could provide an alternative to NVIDIA Cosmos and Meta V-JEPA for world model pretraining. The multi-modal fusion approach (video + depth + point cloud + tactile) is architecturally distinct from both pixel-space (Cosmos) and latent-space (JEPA) approaches.
+
+**Links**: [CGTN coverage](https://news.cgtn.com/news/2026-06-14/China-unveils-AI-world-model-that-understands-physical-world-1NYmex0KQlG/p.html), [eWeek](https://www.eweek.com/news/embodied-ai-robot-foundation-models/)
 
 ---
 

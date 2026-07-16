@@ -2,7 +2,7 @@
 
 > Papers, talks, videos, and blog posts on Physical AI — world models, robot learning, sim-to-real, and related topics
 
-**Last Updated**: 2026-07-09
+**Last Updated**: 2026-07-15
 
 ---
 
@@ -1369,6 +1369,59 @@
 
 **Relevance to World Models**: Proposes a fundamentally different data collection paradigm — rather than teleoperating a physical robot or training in simulation, the world model itself becomes the environment. Architecturally related to Qwen-RobotWorld (language-conditioned video generation for cross-embodiment transfer) but uses hand-pose conditioning instead of language, enabling real-time interactive control. The zero-shot sim-to-real results without any real-world data parallel HyperSim's co-training approach but eliminate the real-world data requirement entirely. Practical implications for the Data Collection & Curation building block: lowers hardware barriers to demonstration collection and enables scalable data generation from human operators without robots. [Local copy](library/papers/2607.06558-rynnworld-teleop.pdf).
 
+### WEAVER: Better, Faster, Longer — An Effective World Model for Robotic Manipulation [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.13672)
+
+**Authors/Presenters**: Arnav Kumar Jain, Yilin Wu, Jesse Farebrother et al.
+
+**Date**: 2026-06
+
+**Summary**: Multi-view world model for robotic manipulation using flow-matching loss to predict future latents and reward values. Achieves ρ=0.870 correlation with real-world success rates for policy evaluation, enabling reliable model selection without physical trials. Demonstrates 38% real-world success improvement when used for policy improvement on the π₀.₅ robot foundation model.
+
+**Key Findings**:
+
+- Flow-matching loss predicts multi-view future latents and reward values simultaneously, achieving ρ=0.870 Pearson correlation with real-world success
+- 38% real-world success improvement on π₀.₅ foundation model via world-model-guided policy optimization
+- 14% success improvement with 5-10x speedup for test-time planning compared to prior world models
+- Outperforms prior models on out-of-distribution scenarios — key for deployment robustness
+
+**Code**: [arnavkj1995.github.io/WEAVER/](https://arnavkj1995.github.io/WEAVER/)
+
+**Relevance to World Models**: Demonstrates that world models can serve as reliable proxies for real-world evaluation, addressing the critical bottleneck of needing physical trials for policy selection. The high correlation (ρ=0.870) between predicted and real-world success makes automated model selection practical. The flow-matching approach is architecturally distinct from diffusion-based world models (Cosmos, DreamZero) and JEPA-style latent prediction (V-JEPA 2), offering a third generation mechanism for learned dynamics.
+
+### Kairos: A Regret-Aware Native World-Action Model Stack for Physical AI [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.16533)
+
+**Authors/Presenters**: Fei Wang, Shan You, Qiming Zhang et al. (23 authors, Kairos Team)
+
+**Date**: 2026-06
+
+**Summary**: Introduces a deployment-aware world-action model stack designed around Physical AI operational requirements. Argues that world models should not simulate all future pixels but instead maintain information most relevant to embodiment control: object state, spatial relations, contact conditions, task progress. Uses Hybrid Linear Temporal Attention for multi-timescale state maintenance.
+
+**Key Findings**:
+
+- Cross-Embodiment Data Curriculum organizing open-world videos, human behavioral data, and robot interactions by intervention strength
+- Unified understanding/generation/prediction architecture with Hybrid Linear Temporal Attention for multi-timescale state maintenance
+- Deployment-Aware System Co-Design treating latency, memory, and hardware compatibility as first-order constraints rather than afterthoughts
+- Strong results on embodied benchmarks with favorable efficiency-capability tradeoff
+
+**Relevance to World Models**: The closest paper to our platform framing — treats deployment requirements (latency, memory, hardware portability) as first-order design constraints rather than post-hoc optimization. The "regret-aware" framing (focusing prediction on action-relevant state changes rather than full pixel simulation) is a concrete design principle for the World Model Runtime building block. The cross-embodiment data curriculum provides a template for the Data Collection & Curation building block.
+
+### Mem-World: Memory-Augmented Action-Conditioned World Models for Persistent Robot Manipulation [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.18960)
+
+**Authors/Presenters**: Zirui Zheng, Jiaqian Yu, Xiongfeng Peng et al.
+
+**Date**: 2026-06
+
+**Summary**: Addresses persistent world modeling in manipulation where occlusions and rapid wrist camera motion cause models to forget or hallucinate. Proposes W-VMem, a 4D surfel-indexed memory anchoring observations to evolving surface elements for geometry-aware history retrieval. Built on pretrained video diffusion backbones, fine-tuned on large-scale robotics datasets.
+
+**Key Findings**:
+
+- Novel surfel-indexed memory (W-VMem) enabling geometry-aware retrieval conditioned on future actions — 4D surfels anchor observations to evolving geometry
+- 14.5% improvement in Pearson correlation with real-world performance vs. Ctrl-World baseline
+- Policy success rate increase from 58% to 72% on long-horizon tasks via synthetic data generated by the world model
+- Addresses the critical "forgetting" failure mode in wrist-camera manipulation where rapid viewpoint changes cause context loss
+
+**Relevance to World Models**: Tackles a practical deployment problem — current video world models lose coherence during rapid camera motion and occlusion events common in manipulation. The surfel-indexed memory is an architectural innovation that could be integrated into any video-based world model. The 58% → 72% success rate improvement from world-model-generated synthetic data validates the Synthetic Data Generation building block value proposition.
+
 ---
 
 ## Applications & Use Cases
@@ -2441,11 +2494,85 @@
 
 **Relevance to World Models**: Paradigm-shifting approach to sim-to-real: rather than bridging a gap, eliminates it by making simulation the ground truth that reality follows. The 60Hz synchronization requirement is a concrete infrastructure spec for the Digital Twin Runtime building block. Gaussian splatting as the simulation substrate connects to the Simulation Engines building block and complements traditional physics engines.
 
+### Efficient Sim-to-Real Transfer of World-Action Models from Synthetic Priors [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.31101)
+
+**Authors/Presenters**: Zixing Wang, Kausik Sivakumar, Jinghuan Shang et al.
+
+**Date**: 2026-06
+
+**Summary**: Investigates zero-shot deployment of world-action models trained entirely on synthetic data. Builds on Cosmos Policy (video diffusion model) with domain randomization and AnyTask motion planning to generate ~800 synthetic demonstrations per task. No real-world demonstrations required.
+
+**Key Findings**:
+
+- First successful sim-to-real transfer of a world-action model for robotic manipulation — zero-shot, no real data
+- 35% average success rate on Franka robot across lifting, drawer opening, and pick-and-place from ~800 synthetic demos per task
+- Domain randomization applied at scene, camera, and physics levels to bridge the visual and dynamics gap
+- Builds on Cosmos Policy (video diffusion backbone), extending WAMs from real-data-trained (DreamZero) to fully synthetic
+
+**Relevance to World Models**: Closes the loop on WAM sim-to-real: DreamZero showed WAMs work with real data, this paper shows they can transfer from pure simulation. The 35% success rate is modest but demonstrates feasibility — the approach is data-scalable (more synthetic demos = higher success). Directly validates the Synthetic Data Generation building block as sufficient for WAM training. The Cosmos Policy backbone creates a dependency on NVIDIA's video foundation model stack.
+
+### How Should a Simulation-to-Reality Transfer Budget Be Spent? [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.22062)
+
+**Authors/Presenters**: Syed Hamzah Rizvi, Yash Vardhan Tomar
+
+**Date**: 2026-06
+
+**Summary**: Studies allocation of real-robot measurement time between system identification (calibrating sim parameters) and domain randomization (widening sim distributions). Controlled sim-to-sim experiments on a pendulum show that minimal identification rollouts close most of the transfer gap, outperforming broad randomization alone.
+
+**Key Findings**:
+
+- Training at identified (calibrated) parameters consistently beats training over widened randomization distributions
+- Even minimal system identification substantially outperforms broad domain randomization
+- Formalizes the tradeoff between identification vs. randomization under a fixed measurement budget
+- Practical guidance: invest real-robot time in calibration first, randomize only residual uncertainty
+
+**Code**: [github.com/YTomar79/sim2real_budget](https://github.com/YTomar79/sim2real_budget)
+
+**Relevance to World Models**: Provides actionable guidance for sim-to-real pipelines — platform infrastructure should prioritize system identification tools (automated parameter calibration) over brute-force domain randomization. This directly informs the Simulation Engines building block: simulators need accessible parameter calibration workflows. The finding that calibration beats randomization also has implications for digital twin fidelity vs. diversity tradeoffs.
+
+### SILO: Simulation-in-the-Loop Sim-to-Real Transfer for Multi-Stage Cable Routing [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2607.04616)
+
+**Authors/Presenters**: Stone Tao, Jie Xu, Hesam Rabeti et al.
+
+**Date**: 2026-07
+
+**Summary**: Addresses manipulation of linear-deformable objects (cables) using GPU-parallelized simulation with localized RL policies. Combines Simulation-In-the-LOop (SILO) execution, localized RL policies for each routing stage, and robust cable state estimation. First successful sim-to-real RL transfer for multi-stage cable routing.
+
+**Key Findings**:
+
+- First sim-to-real RL transfer for multi-stage cable routing — a category of deformable object manipulation previously intractable for RL
+- GPU-parallelized simulation across thousands of environments for training generalization across diverse cable geometries
+- Higher success rates and 2x cycle time reduction vs. prior state-of-the-art
+- Localized RL policies decompose multi-stage tasks into tractable sub-problems, each trained in simulation
+
+**Code**: [silo-cable-routing.github.io](https://silo-cable-routing.github.io/)
+
+**Relevance to World Models**: Demonstrates that GPU-parallel simulation (Newton/MuJoCo class) can solve industrial deformable object manipulation — a category where analytical models fail and imitation learning requires impractical demonstration volumes. The localized policy decomposition is a practical pattern for the Training Infrastructure building block. Cable routing is a high-value industrial application (automotive, aerospace wire harness assembly) that validates the Simulation Engines → RL Training → Deployment pipeline.
+
 ---
 
 ## Digital Twins & Simulation
 
 *Digital twin architectures, simulation methods, synthetic data generation, neural surrogate models*
+
+### Sandbox-Enabled Digital Twin for Cyber-Physical Systems [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.17001)
+
+**Authors/Presenters**: Meet Udeshi, Md Raz, Prashanth Krishnamurthy et al.
+
+**Date**: 2026-06
+
+**Summary**: Closed-loop digital twin framework (SaMOSA) running unmodified controller binaries in a Linux sandbox with I/O rerouted to an external plant simulator. Captures four time-synchronized side channels (hardware performance counters, syscalls, disk, network) plus plant state for vulnerability detection. Demonstrated on OpenPLC with IEEE 14-bus power system.
+
+**Key Findings**:
+
+- SaMOSA framework runs unmodified controller binaries — no source code access or recompilation required
+- Four synchronized side channels enable correlation of controller execution with plant events
+- Demonstrated on OpenPLC with IEEE 14-bus power system model — industrial control use case
+- Enables cyber-physical vulnerability detection by observing controller behavior under simulated attack scenarios
+
+**Relevance to World Models**: Directly relevant to the Digital Twin Runtime building block — demonstrates a concrete architecture for running real controller software against simulated plant models. The "unmodified binary" approach is critical for industrial adoption where source code access is impractical. The Linux sandbox + I/O redirection pattern maps to container-based deployment on OpenShift. The cyber-physical security use case (vulnerability detection via behavioral monitoring) extends digital twin value beyond training and validation.
+
+---
 
 ### Neural Surrogate Models for Engineering Simulation
 
@@ -2568,24 +2695,38 @@
 
 **Relevance to World Models**: Sets hardware context for physical AI platform decisions over the next decade. The "intelligence per joule" framing directly impacts edge deployment strategy — physical AI robots cannot scale with datacenter-class power budgets. The 1000x efficiency target implies current robot inference infrastructure (Jetson, etc.) is an early-stage compromise. The cross-layer co-design vision supports platform investments in hardware abstraction and runtime optimization.
 
+### AI Sandboxes: A Threat Model, Taxonomy, and Measurement Framework [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.18532)
+
+**Authors/Presenters**: Inderjeet Singh, Haitham Mahmoud, Andrés Murillo
+
+**Date**: 2026-06
+
+**Summary**: Develops an assurance framework for AI sandboxes spanning digital AI, embodied autonomy, and cyber-physical systems that sense, decide, actuate, and communicate through physical processes. Formalizes the sandbox boundary with a weakest-link compositional rule for bounded deployment claims.
+
+**Key Findings**:
+
+- Taxonomy of sandbox archetypes covering digital, embodied, and cyber-physical AI systems
+- Measurement framework with six dimensions: fidelity, controllability, observability, containment, reproducibility, governance
+- Weakest-link compositional rule — overall sandbox assurance is bounded by its weakest dimension
+- Addresses attacks on assurance infrastructure itself — meta-security for the testing pipeline
+- Three case studies demonstrating framework application
+
+**Relevance to World Models**: Directly relevant to Physical AI platform security architecture. The six-dimension measurement framework (fidelity, controllability, observability, containment, reproducibility, governance) provides a concrete evaluation rubric for simulation environments used in safety-critical robot validation. The "weakest-link" rule means a high-fidelity physics simulation provides no assurance if containment or governance is weak — this informs platform requirements for the Simulation Engines and Digital Twin Runtime building blocks. Connects to OpenShell (sandboxing) and the broader safety/certification infrastructure.
+
 ---
 
 ## Recent Additions
 
-*Last synthesized: 2026-07-01*
+*Last synthesized: 2026-07-15*
 
-- Bridge-WA: Predicting Where and How the World Changes for Robotic Action (World Models & Model-Based RL)
-- RynnWorld-Teleop: Action-Conditioned World Model for Digital Teleoperation (World Models & Model-Based RL)
-- PhysMani: Physics-principled 3D World Model for Dynamic Object Manipulation (World Models & Model-Based RL)
-- Towards Trustworthy Agentic AI: Safety, Robustness, Privacy, and System Security (Foundational / Theory)
-- TwinRL: Digital Twin-Driven Reinforcement Learning for Real-World Robotic Manipulation (Sim-to-Real Transfer)
-- ABot-M0: VLA Foundation Model with Action Manifold Learning (Robot Foundation Models)
-- World Models for Robotic Manipulation: A Survey (Robot Foundation Models)
-- Robots Need More Than VLAs & World Models (Robot Foundation Models)
-- WorldOlympiad: Can Your World Model Survive a Triathlon? (Evaluation & Benchmarking)
-- HyperSim: Holistic Sim-to-Real Framework (Sim-to-Real Transfer)
-- Real-is-Sim: Dynamic Digital Twin (Sim-to-Real Transfer)
-- AI+HW 2035: Shaping the Next Decade (Physical AI Deployment)
+- WEAVER: Flow-Matching World Model for Robotic Manipulation (World Models & Model-Based RL)
+- Kairos: Regret-Aware Native World-Action Model Stack (World Models & Model-Based RL)
+- Mem-World: Memory-Augmented World Models for Persistent Manipulation (World Models & Model-Based RL)
+- Efficient Sim-to-Real Transfer of World-Action Models from Synthetic Priors (Sim-to-Real Transfer)
+- How Should a Sim-to-Real Transfer Budget Be Spent? (Sim-to-Real Transfer)
+- SILO: Simulation-in-the-Loop for Multi-Stage Cable Routing (Sim-to-Real Transfer)
+- Sandbox-Enabled Digital Twin for Cyber-Physical Systems (Digital Twins & Simulation)
+- AI Sandboxes: Threat Model and Measurement Framework for Physical AI (Physical AI Deployment)
 
 ---
 
