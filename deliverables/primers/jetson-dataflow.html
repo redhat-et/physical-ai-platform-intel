@@ -11,6 +11,7 @@
   .hw-inf { fill: #fff3cd; stroke: #f57f17; stroke-width: 1.5; rx: 6; }
   .sw     { fill: #f3e5f5; stroke: #7b1fa2; stroke-width: 1.5; rx: 6; }
   .buf    { fill: #fff8e1; stroke: #ff8f00; stroke-width: 2; rx: 10; }
+  .aud    { fill: #e0f2f1; stroke: #00695c; stroke-width: 1.5; rx: 6; }
   .out    { fill: #fce4ec; stroke: #c62828; stroke-width: 1.5; rx: 6; }
 
   .label  { font-size: 11px; font-weight: 600; fill: #222; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
@@ -21,7 +22,7 @@
   .arrow-thick { stroke: #ff8f00; stroke-width: 2; fill: none; marker-end: url(#arrowhead-gold); }
   .arrow-dashed { stroke: #999; stroke-width: 1; fill: none; stroke-dasharray: 4,3; marker-end: url(#arrowhead-grey); }
 
-  .legend { display: flex; gap: 16px; margin: 12px 0; font-size: 11px; flex-wrap: wrap; }
+  .legend { display: flex; flex-direction: column; gap: 6px; margin: 12px 0; font-size: 11px; }
   .legend-item { display: flex; align-items: center; gap: 4px; }
   .legend-box { width: 14px; height: 14px; border-radius: 3px; }
 
@@ -35,8 +36,8 @@
   table.paths th { background: #e8e8e4; }
 </style>
 
-<h2>Jetson Media & Vision Data Flow</h2>
-<p class="subtitle">How cameras, video streams, and sensor data flow through Jetson hardware accelerators via NVMM zero-copy buffers</p>
+<h2>Jetson Data Flow — Vision, Audio &amp; Sensor Paths</h2>
+<p class="subtitle">How cameras, video, audio, IMU, LiDAR, and robotics sensors flow through Jetson Orin / Thor hardware accelerators</p>
 
 <div class="legend">
   <div class="legend-item"><div class="legend-box" style="background:#e3f2fd; border:1px solid #1565c0;"></div> Input sources</div>
@@ -44,6 +45,7 @@
   <div class="legend-item"><div class="legend-box" style="background:#fff3cd; border:1px solid #f57f17;"></div> HW accelerator (inference)</div>
   <div class="legend-item"><div class="legend-box" style="background:#f3e5f5; border:1px solid #7b1fa2;"></div> Software layer</div>
   <div class="legend-item"><div class="legend-box" style="background:#fff8e1; border:2px solid #ff8f00;"></div> NVMM shared buffer pool</div>
+  <div class="legend-item"><div class="legend-box" style="background:#e0f2f1; border:1px solid #00695c;"></div> HW accelerator (audio / sensor)</div>
   <div class="legend-item"><div class="legend-box" style="background:#fce4ec; border:1px solid #c62828;"></div> Outputs</div>
 </div>
 
@@ -51,7 +53,7 @@
 <!-- SVG DATA FLOW DIAGRAM                                               -->
 <!-- ================================================================== -->
 
-<svg viewBox="0 0 920 680" width="920" height="680" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 920 840" width="920" height="840" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#555"/>
@@ -61,6 +63,9 @@
     </marker>
     <marker id="arrowhead-grey" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#999"/>
+    </marker>
+    <marker id="arrowhead-teal" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#00695c"/>
     </marker>
   </defs>
 
@@ -86,10 +91,23 @@
   <text class="label" x="85" y="315">JPEG / MJPEG</text>
   <text class="sublbl" x="85" y="330">Still images, MJPEG stream</text>
 
-  <!-- IMU / other sensors -->
-  <rect class="src" x="20" y="420" width="130" height="44"/>
-  <text class="label" x="85" y="435">IMU / LiDAR</text>
-  <text class="sublbl" x="85" y="450">Non-vision sensors</text>
+  <!-- ==================== NON-VISION INPUTS (left column, lower) ==================== -->
+
+  <!-- Audio -->
+  <rect class="src" x="20" y="430" width="130" height="44"/>
+  <text class="label" x="85" y="445">Audio</text>
+  <text class="sublbl" x="85" y="460">I2S, S/PDIF, DMIC</text>
+
+  <!-- IMU -->
+  <rect class="src" x="20" y="510" width="130" height="44"/>
+  <text class="label" x="85" y="525">IMU</text>
+  <text class="sublbl" x="85" y="540">I2C / SPI, data-ready IRQ</text>
+
+  <!-- LiDAR -->
+  <rect class="src" x="20" y="580" width="130" height="44"/>
+  <text class="label" x="85" y="595">LiDAR</text>
+  <text class="sublbl" x="85" y="610">PCIe / Ethernet</text>
+
 
   <!-- ==================== CAPTURE & DECODE (column 2) ==================== -->
 
@@ -166,6 +184,10 @@
   <!-- VIC → OFA -->
   <line class="arrow-dashed" x1="465" y1="204" x2="465" y2="223"/>
 
+  <!-- Dashed bounding box around NVMM + accelerators -->
+  <rect x="200" y="20" width="570" height="400" rx="12"
+        fill="none" stroke="#ff8f00" stroke-width="1" stroke-dasharray="6,4" opacity="0.4"/>
+
   <!-- ==================== INFERENCE (right column) ==================== -->
 
   <!-- DLA -->
@@ -176,7 +198,7 @@
   <!-- PVA -->
   <rect class="hw-inf" x="620" y="165" width="130" height="50"/>
   <text class="label" x="685" y="183">PVA</text>
-  <text class="sublbl" x="685" y="200">Stereo, features</text>
+  <text class="sublbl" x="685" y="200">VLIW DSP: stereo, FFT</text>
 
   <!-- GPU -->
   <rect class="hw-inf" x="620" y="240" width="130" height="50"/>
@@ -215,46 +237,115 @@
   <text class="sublbl" x="852" y="270">VLA / RL output</text>
 
   <!-- Encoded stream out -->
-  <rect class="out" x="800" y="340" width="105" height="40"/>
-  <text class="label" x="852" y="354">Encoded Stream</text>
-  <text class="sublbl" x="852" y="370">H.264/H.265 out</text>
+  <rect class="out" x="800" y="390" width="105" height="40"/>
+  <text class="label" x="852" y="404">Encoded Stream</text>
+  <text class="sublbl" x="852" y="420">H.264/H.265 out</text>
 
   <!-- Arrows: inference → outputs -->
   <line class="arrow" x1="750" y1="120" x2="798" y2="120"/>
   <line class="arrow" x1="750" y1="190" x2="798" y2="185"/>
   <line class="arrow" x1="750" y1="265" x2="798" y2="260"/>
   <!-- NVENC → encoded stream -->
-  <line class="arrow" x1="540" y1="352" x2="798" y2="355"/>
+  <line class="arrow" x1="540" y1="352" x2="798" y2="405"/>
 
-  <!-- ==================== SENSOR FUSION PATH ==================== -->
+  <!-- ==================== AUDIO PROCESSING ENGINE (APE) ==================== -->
 
-  <!-- IMU → GPU (via CPU, dashed) -->
-  <path class="arrow-dashed" d="M 150,442 Q 460,442 460,320 Q 460,290 620,265" />
-  <text class="edgelbl" x="350" y="435">CPU memcpy (not NVMM)</text>
+  <!-- APE bounding box -->
+  <rect x="210" y="420" width="350" height="118" rx="10"
+        fill="#e0f2f1" fill-opacity="0.25" stroke="#00695c" stroke-width="1" stroke-dasharray="6,4"/>
+  <text class="label" x="385" y="440" style="font-size:12px; fill:#00695c;">Audio Processing Engine (APE)</text>
+  <text class="sublbl" x="385" y="454">Dedicated audio DSP — own DMA, minimal CPU</text>
 
-  <!-- ==================== SOFTWARE PIPELINES (bottom) ==================== -->
+  <!-- AHUB block -->
+  <rect class="aud" x="225" y="465" width="130" height="44"/>
+  <text class="label" x="290" y="480">AHUB</text>
+  <text class="sublbl" x="290" y="495">SFC, AMX, MIXER, OPE</text>
 
-  <rect class="sw" x="210" y="500" width="220" height="44"/>
-  <text class="label" x="320" y="515">DeepStream (GStreamer)</text>
-  <text class="sublbl" x="320" y="530">Pipeline orchestration for above</text>
+  <!-- ADSP block -->
+  <rect class="aud" x="375" y="465" width="80" height="44"/>
+  <text class="label" x="415" y="480">ADSP</text>
+  <text class="sublbl" x="415" y="495">locked (Orin)</text>
 
-  <rect class="sw" x="480" y="500" width="220" height="44"/>
-  <text class="label" x="590" y="515">Isaac ROS (NITROS + GXF)</text>
-  <text class="sublbl" x="590" y="530">ROS 2 perception nodes</text>
+  <!-- ASRC block -->
+  <rect class="aud" x="470" y="465" width="75" height="44"/>
+  <text class="label" x="507" y="480">ASRC</text>
+  <text class="sublbl" x="507" y="495">Resample</text>
+
+  <!-- Arrow: Audio source → AHUB -->
+  <line class="arrow" x1="150" y1="452" x2="223" y2="480" style="stroke:#00695c;" marker-end="url(#arrowhead-teal)"/>
+
+  <!-- AHUB → ADSP -->
+  <line class="arrow" x1="355" y1="487" x2="373" y2="487"/>
+
+  <!-- Audio output -->
+  <rect class="out" x="800" y="460" width="105" height="40"/>
+  <text class="label" x="852" y="474">Audio Out</text>
+  <text class="sublbl" x="852" y="490">I2S, S/PDIF, DSPK</text>
+
+  <!-- APE → Audio Out -->
+  <line class="arrow" x1="545" y1="487" x2="798" y2="480"/>
+
+  <!-- ==================== SENSOR PROCESSING ENGINE (SPE) ==================== -->
+
+  <!-- SPE bounding box -->
+  <rect x="210" y="545" width="350" height="70" rx="10"
+        fill="#e0f2f1" fill-opacity="0.25" stroke="#00695c" stroke-width="1" stroke-dasharray="6,4"/>
+  <text class="label" x="385" y="563" style="font-size:12px; fill:#00695c;">Sensor Processing Engine (SPE)</text>
+  <text class="sublbl" x="385" y="577">Cortex-R5, 200 MHz, FreeRTOS — Always-On domain</text>
+
+  <!-- GTE block -->
+  <rect class="aud" x="225" y="585" width="80" height="20"/>
+  <text class="label" x="265" y="596" style="font-size:9px;">GTE (timestamps)</text>
+
+  <!-- IVC block -->
+  <rect class="aud" x="320" y="585" width="80" height="20"/>
+  <text class="label" x="360" y="596" style="font-size:9px;">IVC (shared mem)</text>
+
+  <!-- I2C/SPI block -->
+  <rect class="aud" x="415" y="585" width="80" height="20"/>
+  <text class="label" x="455" y="596" style="font-size:9px;">I2C / SPI</text>
+
+  <!-- Arrow: IMU → SPE -->
+  <line class="arrow" x1="150" y1="532" x2="223" y2="580" style="stroke:#00695c;" marker-end="url(#arrowhead-teal)"/>
+  <text class="edgelbl" x="175" y="548">data-ready</text>
+  <text class="edgelbl" x="175" y="558">IRQ + I2C</text>
+
+  <!-- Arrow: SPE → GPU (via IVC → CPU → GPU) -->
+  <path class="arrow-dashed" d="M 560,580 L 618,270" />
+  <text class="edgelbl" x="600" y="410" style="fill:#00695c;">IVC → CPU</text>
+  <text class="edgelbl" x="600" y="422" style="fill:#00695c;">→ cuVSLAM</text>
+
+  <!-- ==================== LiDAR PATH ==================== -->
+
+  <!-- Arrow: LiDAR → GPU (via PCIe → CPU → CUDA) -->
+  <path class="arrow-dashed" d="M 150,602 Q 200,602 350,500 Q 500,400 618,268" />
+  <text class="edgelbl" x="275" y="530">PCIe → CPU → CUDA-PCL</text>
+
+  <!-- Point cloud output -->
+  <rect class="out" x="800" y="305" width="105" height="40"/>
+  <text class="label" x="852" y="319">Point Cloud</text>
+  <text class="sublbl" x="852" y="335">3D map, obstacles</text>
+
+  <!-- GPU → Point Cloud output -->
+  <line class="arrow" x1="750" y1="275" x2="798" y2="320"/>
+
+  <!-- ==================== SOFTWARE PIPELINES ==================== -->
+
+  <rect class="sw" x="210" y="650" width="220" height="44"/>
+  <text class="label" x="320" y="665">DeepStream (GStreamer)</text>
+  <text class="sublbl" x="320" y="680">Video analytics pipeline</text>
+
+  <rect class="sw" x="480" y="650" width="220" height="44"/>
+  <text class="label" x="590" y="665">Isaac ROS (NITROS + GXF)</text>
+  <text class="sublbl" x="590" y="680">ROS 2 perception + fusion</text>
 
   <!-- Dashed lines connecting software to HW -->
-  <line class="arrow-dashed" x1="320" y1="500" x2="320" y2="420"/>
-  <text class="edgelbl" x="290" y="475">manages HW</text>
-  <text class="edgelbl" x="290" y="487">elements</text>
-  <line class="arrow-dashed" x1="590" y1="500" x2="590" y2="420"/>
-  <text class="edgelbl" x="625" y="475">zero-copy</text>
-  <text class="edgelbl" x="625" y="487">GPU transport</text>
+  <line class="arrow-dashed" x1="320" y1="650" x2="320" y2="625"/>
+  <text class="edgelbl" x="290" y="640">manages HW</text>
+  <line class="arrow-dashed" x1="590" y1="650" x2="590" y2="625"/>
+  <text class="edgelbl" x="625" y="640">zero-copy</text>
 
-  <!-- Dashed bounding box around NVMM + accelerators -->
-  <rect x="200" y="20" width="570" height="400" rx="12"
-        fill="none" stroke="#ff8f00" stroke-width="1" stroke-dasharray="6,4" opacity="0.4"/>
-
-  <!-- ==================== SECURITY / SAFETY (bottom-right) ==================== -->
+  <!-- ==================== SECURITY / SAFETY ==================== -->
 
   <rect class="hw" x="620" y="340" width="130" height="40"/>
   <text class="label" x="685" y="354">SE (crypto)</text>
@@ -263,34 +354,40 @@
   <rect class="hw" x="620" y="395" width="130" height="32"/>
   <text class="label" x="685" y="414">FSI (safety)</text>
 
-  <!-- Arrow: SE operates independently -->
   <text class="edgelbl" x="775" y="325" style="fill:#999;">independent</text>
 
   <!-- ==================== TYPICAL PIPELINE ANNOTATIONS ==================== -->
 
-  <!-- Path 1 annotation -->
-  <rect x="20" y="560" width="880" height="110" rx="6" fill="#f8f9fa" stroke="#ccc"/>
-  <text class="label" x="460" y="580" style="font-size:12px;">Typical Pipeline Paths</text>
+  <rect x="20" y="710" width="880" height="125" rx="6" fill="#f8f9fa" stroke="#ccc"/>
+  <text class="label" x="460" y="730" style="font-size:12px;">Typical Pipeline Paths</text>
 
-  <text class="sublbl" x="30" y="600" style="text-anchor:start; font-size:10px;">
+  <text class="sublbl" x="30" y="750" style="text-anchor:start; font-size:10px;">
     <tspan x="30" dy="0" font-weight="bold" fill="#1565c0">① Live camera:</tspan>
     <tspan fill="#333"> Camera → VI → ISP (demosaic) → VIC (resize) → NVMM → DLA/GPU (inference) → detections / policy actions</tspan>
   </text>
-  <text class="sublbl" x="30" y="618" style="text-anchor:start; font-size:10px;">
+  <text class="sublbl" x="30" y="768" style="text-anchor:start; font-size:10px;">
     <tspan x="30" dy="0" font-weight="bold" fill="#1565c0">② Video stream:</tspan>
     <tspan fill="#333"> RTSP/file → NVDEC (decode H.265) → VIC (scale) → NVMM → GPU (DNN) → NVENC (re-encode) → output stream</tspan>
   </text>
-  <text class="sublbl" x="30" y="636" style="text-anchor:start; font-size:10px;">
+  <text class="sublbl" x="30" y="786" style="text-anchor:start; font-size:10px;">
     <tspan x="30" dy="0" font-weight="bold" fill="#1565c0">③ Stereo depth:</tspan>
     <tspan fill="#333"> 2× Camera → VI → ISP → VIC → NVMM → PVA (stereo disparity) → depth map → GPU (point cloud / obstacle grid)</tspan>
   </text>
-  <text class="sublbl" x="30" y="654" style="text-anchor:start; font-size:10px;">
-    <tspan x="30" dy="0" font-weight="bold" fill="#1565c0">④ Motion features:</tspan>
-    <tspan fill="#333"> NVMM frames → OFA (dense optical flow) → GPU (temporal features for action recognition or VLA input)</tspan>
+  <text class="sublbl" x="30" y="804" style="text-anchor:start; font-size:10px;">
+    <tspan x="30" dy="0" font-weight="bold" fill="#1565c0">④ IMU fusion:</tspan>
+    <tspan fill="#333"> IMU → SPE (GTE timestamp) → IVC → CPU → cuVSLAM (GPU visual-inertial SLAM) or EKF (CPU sensor fusion)</tspan>
+  </text>
+  <text class="sublbl" x="30" y="822" style="text-anchor:start; font-size:10px;">
+    <tspan x="30" dy="0" font-weight="bold" fill="#1565c0">⑤ Audio:</tspan>
+    <tspan fill="#333"> Mic → APE/AHUB (HW resample, mix, EQ via XBAR) → ADMA → output; CPU not in hot path</tspan>
   </text>
 </svg>
 
 <div class="note">
-<strong>Key architectural point:</strong> All vision accelerators share the <strong>NVMM buffer pool</strong> — frames never touch CPU memory in the hot path. This is what makes Jetson's vision pipeline fast: a frame captured by VI flows through ISP → VIC → DLA → GPU entirely in DMA buffers. <strong>DeepStream</strong> and <strong>Isaac ROS (NITROS)</strong> are two software frameworks that orchestrate these hardware elements — DeepStream for streaming analytics, Isaac ROS for robotics perception. Both use GStreamer-style pipeline composition but with GPU-accelerated plugins replacing CPU processing.<br><br>
-<strong>Non-vision sensors</strong> (IMU, LiDAR, force/torque) bypass NVMM and arrive via CPU — they're fused with vision data at the GPU or application layer. <strong>SE</strong> and <strong>FSI</strong> operate independently of the media pipeline: SE handles crypto (TLS for camera streams, secure boot), FSI monitors the SoC for safety-critical applications.
+<strong>Vision pipeline:</strong> All vision accelerators share the <strong>NVMM buffer pool</strong> — frames never touch CPU memory in the hot path. A frame captured by VI flows through ISP → VIC → DLA → GPU entirely in DMA buffers. <strong>DeepStream</strong> and <strong>Isaac ROS (NITROS)</strong> orchestrate these hardware elements — DeepStream for streaming analytics, Isaac ROS for robotics perception.<br><br>
+<strong>Audio pipeline:</strong> The <strong>APE (Audio Processing Engine)</strong> is a self-contained subsystem with its own DMA engine (ADMA, 20 channels) and a crossbar switch (AXBAR) routing audio through hardware accelerators — sample rate conversion (SFC, ASRC), multiplexing (AMX/ADX), mixing, volume control (MVC), and equalization (OPE). On Orin, the <strong>ADSP</strong> (Cortex-A9) is present in hardware but <strong>locked down</strong> — not accessible to developers. Audio processing beyond AHUB hardware runs on the CPU via ALSA/ASoC. On Thor, the ADSP moves to <strong>dual Cadence HiFi 5</strong> DSP cores in an always-on domain.<br><br>
+<strong>Sensor pipeline:</strong> The <strong>SPE (Sensor Processing Engine)</strong> — an ARM Cortex-R5 at 200 MHz running FreeRTOS in the Always-On domain — can independently poll IMU and other I2C/SPI sensors, hardware-timestamp them via the <strong>GTE</strong>, and forward pre-processed data to the main CPU via <strong>IVC</strong> shared memory. This is the intended low-latency sensor path. Sensor fusion itself splits: visual-inertial SLAM (cuVSLAM) runs on <strong>GPU</strong>; EKF-based multi-sensor fusion runs on <strong>CPU</strong>. Neither DLA nor PVA is used for IMU fusion.<br><br>
+<strong>LiDAR:</strong> Connects via <strong>PCIe</strong> or Ethernet. Point cloud processing runs on <strong>GPU via CUDA-PCL</strong> (up to 10× faster than CPU). No dedicated hardware accelerator for point clouds.<br><br>
+<strong>Robotics I/O:</strong> Orin has 2× on-chip <strong>MTTCAN</strong> controllers (CAN FD, up to 15 Mbps) for force/torque sensors and motor drives. No native EtherCAT hardware — EtherCAT requires a software master (SOEM or acontis EC-Master) over standard Ethernet. Thor adds <strong>built-in CAN transceivers</strong> and the <strong>Holoscan Sensor Bridge</strong>, which streams diverse sensors over Ethernet directly into GPU memory.<br><br>
+<strong>SE</strong> and <strong>FSI</strong> operate independently: SE handles crypto (TLS, secure boot), FSI monitors the SoC for safety-critical applications. Orin has <strong>no ADC</strong> — analog sensors require an external ADC module.
 </div>
