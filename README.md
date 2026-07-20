@@ -19,11 +19,13 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 | Company | Profile | Deep Dive |
 | --- | --- | --- |
 | AMD | [amd.md](deliverables/intel/companies/amd.md) | [amd-deep-dive.md](deliverables/intel/companies/amd-deep-dive.md) |
+| FANUC | [fanuc.md](deliverables/intel/companies/fanuc.md) | [fanuc-deep-dive.md](deliverables/intel/companies/fanuc-deep-dive.md) |
 | Figure AI | [figure-ai.md](deliverables/intel/companies/figure-ai.md) | [figure-ai-deep-dive.md](deliverables/intel/companies/figure-ai-deep-dive.md) |
 | Foxglove | [foxglove.md](deliverables/intel/companies/foxglove.md) | [foxglove-deep-dive.md](deliverables/intel/companies/foxglove-deep-dive.md) |
 | Google DeepMind | [google-deepmind.md](deliverables/intel/companies/google-deepmind.md) | [google-deepmind-deep-dive.md](deliverables/intel/companies/google-deepmind-deep-dive.md) |
 | Intel | [intel.md](deliverables/intel/companies/intel.md) | [intel-deep-dive.md](deliverables/intel/companies/intel-deep-dive.md) |
 | Intrinsic (Google) | [intrinsic.md](deliverables/intel/companies/intrinsic.md) | [intrinsic-deep-dive.md](deliverables/intel/companies/intrinsic-deep-dive.md) |
+| KUKA | [kuka.md](deliverables/intel/companies/kuka.md) | [kuka-deep-dive.md](deliverables/intel/companies/kuka-deep-dive.md) |
 | Mistral AI | [mistral-ai.md](deliverables/intel/companies/mistral-ai.md) | [mistral-ai-deep-dive.md](deliverables/intel/companies/mistral-ai-deep-dive.md) |
 | NEURA Robotics | [neura-robotics.md](deliverables/intel/companies/neura-robotics.md) | [neura-robotics-deep-dive.md](deliverables/intel/companies/neura-robotics-deep-dive.md) |
 | NVIDIA | [nvidia.md](deliverables/intel/companies/nvidia.md) | [nvidia-deep-dive.md](deliverables/intel/companies/nvidia-deep-dive.md) |
@@ -32,6 +34,7 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 | Qualcomm | [qualcomm.md](deliverables/intel/companies/qualcomm.md) | [qualcomm-deep-dive.md](deliverables/intel/companies/qualcomm-deep-dive.md) |
 | Rerun | [rerun.md](deliverables/intel/companies/rerun.md) | [rerun-deep-dive.md](deliverables/intel/companies/rerun-deep-dive.md) |
 | Skild AI | [skild-ai.md](deliverables/intel/companies/skild-ai.md) | [skild-ai-deep-dive.md](deliverables/intel/companies/skild-ai-deep-dive.md) |
+| Universal Robots | [universal-robots.md](deliverables/intel/companies/universal-robots.md) | [universal-robots-deep-dive.md](deliverables/intel/companies/universal-robots-deep-dive.md) |
 
 ### Project Comparisons
 
