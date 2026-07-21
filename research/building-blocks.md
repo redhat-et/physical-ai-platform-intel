@@ -308,14 +308,21 @@
 
 **Solution landscape**:
 
-(to be populated — research needed on NVIDIA TensorRT, ONNX Runtime, OpenVINO, Qualcomm AI Engine)
+| Solution | Category | Notes |
+| --- | --- | --- |
+| NVIDIA TensorRT / TensorRT-LLM | `Proprietary` | Best single-vendor perf on NVIDIA GPUs. Bundled in JetPack SDK. Supports INT4/FP4 quantization on Blackwell |
+| NVIDIA Jetson (Thor family) | `Proprietary` | Four-tier Blackwell edge platform (T2000–T5000, 400–2070 FP4 TFLOPS, 16–128GB). T3000 positioned as AGX Orin successor. IGX T3000 adds Halos safety stack |
+| ONNX Runtime | `OSS-community` | Cross-platform inference. EP backends for CUDA, TensorRT, OpenVINO, QNN. Portable but slower than native runtimes |
+| OpenVINO | `OSS-single-vendor` | Intel-optimized. Supports CPU, iGPU, NPU. Strong on x86 edge but limited GPU ecosystem |
+| Qualcomm AI Engine / QNN | `Proprietary` | Snapdragon / QCS series. Low-power focus (5–40W). Competes with Jetson on AMR/drone tier |
+| Cosmos 3 Edge | `OSS-single-vendor` | 4B-parameter world foundation model for on-device inference on Jetson Thor. Post-trainable in ~1 day for specific embodiments |
 
-**Key trade-offs**: Hardware-specific acceleration (TensorRT) delivers best performance but locks to vendor. Cross-platform runtimes (ONNX) are portable but slower. Real-time guarantees require OS-level support (PREEMPT_RT). The AI+HW 2035 roadmap projects a 1000x efficiency target for edge AI hardware, implying current edge inference runtimes are early-stage compromises — platform abstractions should anticipate rapid hardware churn.
+**Key trade-offs**: Hardware-specific acceleration (TensorRT) delivers best performance but locks to vendor. Cross-platform runtimes (ONNX) are portable but slower. Real-time guarantees require OS-level support (PREEMPT_RT). Memory bandwidth (not TFLOPS) is the binding constraint for LLM/VLM inference at the edge — Jetson Thor T3000 at 273 GB/s outperforms AGX Orin's 205 GB/s, but the T2000 at 137 GB/s is below AGX Orin. The AI+HW 2035 roadmap projects a 1000x efficiency target for edge AI hardware, implying current edge inference runtimes are early-stage compromises — platform abstractions should anticipate rapid hardware churn.
 
 **Platform fit**: `Build`
 
 - **Rationale**: Natural extension of Device Edge. Enterprise Linux with PREEMPT_RT + model serving is a core platform capability.
-- **Partnership surface**: Hardware vendors (NVIDIA Jetson, Qualcomm), model providers.
+- **Partnership surface**: Hardware vendors (NVIDIA Jetson Thor T2000–T5000, Qualcomm QCS/RB series), model providers. Jetson Agent Skills (open-source AI-assisted BSP customization) lowers integration barrier.
 
 **Related blocks**: [Model Serving for Physical AI](#model-serving-for-physical-ai), [Robot Middleware](#robot-middleware), [Sensor Data Ingestion](#sensor-data-ingestion)
 **Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia)

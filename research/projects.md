@@ -372,7 +372,7 @@
 
 **Key Features**:
 
-- Three model scales: Nano (16B: 8B reasoner + 8B generator), Super (64B: 32B reasoner + 32B generator), Edge (2B, announced for later release)
+- Three model scales: Nano (16B: 8B reasoner + 8B generator), Super (64B: 32B reasoner + 32B generator), Edge (4B, on-device inference on Jetson Thor; post-trainable for specific embodiments/sensors in ~1 day; announced July 2026)
 - Five open model checkpoints: Super, Nano, Super-Text2Image, Super-Image2Video, Nano-Policy-DROID
 - Five curated synthetic datasets (PhyxSim, RobotSim, DriveSim, SynHuman, Warehouse) on HuggingFace
 - Available on Hugging Face under OpenMDW 1.1 license (commercial use permitted)
@@ -1856,6 +1856,38 @@
 **Competes with**: ROS1/ROS2 action servers, custom robot control stacks
 
 **Complements**: OpenPI, Isaac-GR00T, vLLM-Omni
+
+**Openness assessment**: (to be assessed by oss-health skill)
+
+### NemoClaw / OpenClaw: Agent Orchestration for Physical AI
+
+**URL**: [github.com/NVIDIA/NeMo-Claw](https://github.com/NVIDIA/NeMo-Claw)
+
+**Description**: NVIDIA's blueprint for building and deploying autonomous AI agents safely. Provides orchestration framework for composing multi-agent workflows on Jetson and datacenter platforms. OpenClaw is the open-source variant. As of July 2026, NemoClaw blueprints are integrated into the Jetson platform for agentic orchestration of physical AI workloads — positioning Jetson as an "agentic-ready platform."
+
+**Tech Stack**: Python, NeMo Framework
+
+**Key Features**:
+
+- Multi-agent orchestration for physical AI (robotics, visual AI, industrial)
+- Safety blueprints for policy-based governance of agent actions
+- Jetson integration via JetPack 7.2.1 — agents run on-device for edge autonomy
+- Supported by Jetson Agent Skills (open-source AI-assisted development workflows)
+- Compatible with Claude Code, OpenAI Codex, Cursor as agent runtimes
+
+**Status**: Active
+
+**Stats**: (to be populated)
+
+**Last Updated**: 2026-07
+
+**Building block(s)**: [Model Serving for Physical AI](building-blocks.md#model-serving-for-physical-ai), [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime)
+
+**Maturity**: Early OSS
+
+**Competes with**: ROS 2 action servers, custom agent frameworks
+
+**Complements**: Jetson (edge deployment), Isaac GR00T (robot policies), Cosmos 3 Edge (on-device world models)
 
 **Openness assessment**: (to be assessed by oss-health skill)
 

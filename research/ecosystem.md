@@ -23,7 +23,7 @@
 
 - **What it does**: World foundation models for Physical AI — general-purpose video prediction models trained on 20M hours of real-world data for generating synthetic training data, sim-to-real transfer, and world simulation.
 - **Building blocks covered**: [Latent World Models](building-blocks.md#latent-world-models), [Video Generation / Prediction Models](building-blocks.md#video-generation--prediction-models), [Sim-to-Real Transfer Pipeline](building-blocks.md#sim-to-real-transfer-pipeline)
-- **Key features (functional)**: Cosmos-Predict2.5 (world simulation), Cosmos-Transfer2 / Transfer2.5 (sim2real from depth/segmentation/edge/HD map inputs), Cosmos-Reason2 (7B physical reasoning VLM, #1 on Hugging Face Physical Reasoning Leaderboard), Cosmos-Tokenizer. Distilled Cosmos Transfer collapses 70-step generation to 1 step for RTX PRO Server deployment
+- **Key features (functional)**: Cosmos-Predict2.5 (world simulation), Cosmos-Transfer2 / Transfer2.5 (sim2real from depth/segmentation/edge/HD map inputs), Cosmos-Reason2 (7B physical reasoning VLM, #1 on Hugging Face Physical Reasoning Leaderboard), Cosmos-Tokenizer. Distilled Cosmos Transfer collapses 70-step generation to 1 step for RTX PRO Server deployment. Cosmos 3 Edge (4B-parameter world foundation model for on-device inference on Jetson Thor; post-trainable for specific embodiments/sensors in ~1 day)
 - **Key features (non-functional)**: Trained on 20M hours of video; open-weight models under permissive licensing; 2M+ total downloads. Adopters include Lightwheel, Moon Surgical, Skild AI, Uber (AV data annotation), Magna (autonomous delivery)
 - **Competes with**: Genie 3, Sora, GAIA series — on synthetic data generation and world simulation
 - **Complements**: Isaac Sim (simulation source), GR00T (policy consumer), Omniverse (rendering)
@@ -81,15 +81,16 @@
 
 #### Jetson
 
-- **What it does**: Edge AI computing platform for deploying AI models on robots, autonomous machines, and IoT devices.
+- **What it does**: Edge AI computing platform for deploying AI models on robots, autonomous machines, and IoT devices. Now a four-tier Blackwell-based family (Thor T2000–T5000) succeeding the Ampere-based Orin generation.
 - **Building blocks covered**: [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime)
-- **Key features (functional)**: TensorRT optimization, CUDA acceleration, JetPack SDK, container support
-- **Key features (non-functional)**: Low power (10-75W), real-time inference, industrial temperature range (Orin NX/Nano)
+- **Key features (functional)**: TensorRT optimization, CUDA acceleration, JetPack 7.2.1 SDK, container support, Jetson Agent Skills (open-source AI-assisted BSP customization and memory optimization), NemoClaw blueprints for agentic orchestration
+- **Key features (non-functional)**: 40–130W power range across tiers. Thor T3000 (865 FP4 TFLOPS, 32GB, 273 GB/s, 25GbE, ~70W) replaces AGX Orin; T2000 (400 FP4 TFLOPS, 16GB, 137 GB/s, 2×10GbE, ~40W) replaces Orin NX. All tiers share Blackwell GPU, Neoverse V3AE CPU, PCIe Gen5. IGX T3000 variant adds NVIDIA Halos for Robotics (functional safety). T3000/T2000 ship Q1 2027; T4000/T5000 shipping now. Not pin-compatible with Orin — new carrier boards required
 - **Competes with**: Qualcomm RB series, Intel/Mobileye EyeQ — on edge AI performance
-- **Complements**: Isaac ROS (middleware), GR00T (model deployment), Isaac Sim (sim-to-real target)
-- **Openness**: `Proprietary` (JetPack SDK free)
-- **Lock-in vectors**: NVIDIA-only hardware, CUDA dependency, TensorRT model format
-- **Source**: [Jetson](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/)
+- **Complements**: Isaac ROS (middleware), GR00T (model deployment), Isaac Sim (sim-to-real target), Cosmos 3 Edge (4B on-device world model)
+- **Openness**: `Proprietary` (JetPack SDK free, Jetson Agent Skills open-source)
+- **Lock-in vectors**: NVIDIA-only hardware, CUDA dependency, TensorRT model format, Thor not pin-compatible with Orin (carrier board lock-in)
+- **Source**: [Jetson Thor](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-thor/), [Jetson Agent Skills](https://github.com/NVIDIA-AI-IOT/jetson-device-skills)
+- **Reference**: [Jetson Thor Family Analysis](../deliverables/references/nvidia-jetson-family.md)
 
 #### PhysicsNeMo
 

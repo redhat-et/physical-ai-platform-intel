@@ -81,6 +81,10 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 - [Physical AI Data Pipelines & Workflows](deliverables/primers/physical-ai-workflows-synthesis.md) -- Canonical workflow patterns, cross-workflow analysis, Red Hat platform mapping
 - [Jetson Data Flows](deliverables/primers/jetson-dataflow.html) -- Typical data processing flows on an NVIDIA Jetson platform
 
+### References
+
+- [NVIDIA Jetson Thor Family](deliverables/references/nvidia-jetson-family.md) -- Thor T2000–T5000 specs, Orin comparison, Cosmos 3 Edge, Jetson Agent Skills
+
 ## Research Notebook
 
 Foundation research that feeds the intelligence layer.
