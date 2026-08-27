@@ -2,7 +2,7 @@
 
 > Open-source and proprietary implementations organized by building block
 
-**Last Updated**: 2026-07-09
+**Last Updated**: 2026-08-27
 
 ---
 
@@ -585,9 +585,9 @@
 
 **Status**: Active
 
-**Stats**: 11,484 stars, 1,817 forks (Physical Intelligence)
+**Stats**: 13,507 stars, 2,383 forks (Physical Intelligence)
 
-**Last Updated**: 2026-04
+**Last Updated**: 2026-08 (active development; companion repos openpi-basic-control for C++ hardware integration and pi-data-sharing for dataset utilities also actively maintained)
 
 **Building block(s)**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
 

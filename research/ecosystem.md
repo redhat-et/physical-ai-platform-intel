@@ -2,9 +2,9 @@
 
 > Players in Physical AI — their solutions, reference architectures, and platform relevance
 
-**Last Updated**: 2026-07-30
+**Last Updated**: 2026-08-27
 
-**Market context**: Physical AI VC funding exceeded $23B in H1 2026 (WSJ). Robotics specifically reached $18.8B, already exceeding full-year 2025 ($15B) and the 2021 peak ($14.1B). Funding is top-heavy: Waymo $16B Series D, Skild $1.4B, NEURA $1.4B, PI $1B. Humanoid robotics is the breakout category. Japan announced a national strategy targeting 10M AI-equipped robots across 18 sectors by 2040, with $65B public+private investment and a $6.2B sovereign AI compute consortium (Noetra).
+**Market context**: Physical AI VC funding exceeded $23B in H1 2026 (WSJ). Robotics specifically reached $18.8B, already exceeding full-year 2025 ($15B) and the 2021 peak ($14.1B). Funding is top-heavy: Waymo $16B Series D, Skild $1.4B, NEURA $1.4B, PI $1B. Humanoid robotics is the breakout category. Japan announced a national strategy targeting 10M AI-equipped robots across 18 sectors by 2040, with $65B public+private investment and a $6.2B sovereign AI compute consortium (Noetra). US government banned new foreign-made humanoids, robot dogs, and solar inverters citing national security risks (Jul 2026) — significant policy signal for domestic robotics manufacturing and supply chain sovereignty. Generalist AI reportedly reached $3B valuation (Aug 2026, TechCrunch).
 
 ---
 
@@ -177,8 +177,8 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 
 - **What it does**: VLA foundation model for robot control — translates visual observations and language instructions into robot actions with embodied reasoning capabilities.
 - **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
-- **Key features (functional)**: Gemini Robotics 1.5/On-Device (VLA), Gemini Robotics-ER 1.6 (embodied reasoning, spatial understanding, instrument reading), action chunking for high-frequency control, cross-embodiment (ALOHA 2, Franka, Apptronik Apollo)
-- **Key features (non-functional)**: Cloud: ~250ms latency, 50Hz via action chunking; On-Device: <10ms inference, learns from 50 demos, cross-embodiment transfer
+- **Key features (functional)**: Gemini Robotics 2 (Jul 2026, whole body intelligence), Gemini Robotics-ER 2 (Jul 2026, video understanding + task orchestration + multi-robot collaboration), Gemini Robotics 1.5/On-Device (VLA), action chunking for high-frequency control, cross-embodiment (ALOHA 2, Franka, Apptronik Apollo)
+- **Key features (non-functional)**: Cloud: ~250ms latency, 50Hz via action chunking; On-Device: <10ms inference, learns from 50 demos, cross-embodiment transfer. Gemini Robotics 2 adds whole-body locomotion+manipulation; ER 2 adds multi-robot coordination and video understanding for task planning
 - **Competes with**: GR00T N1, pi0/pi0.5, GEN-1 — on generalist robot control
 - **Complements**: Gemini Omni (reasoning backbone), Newton (physics simulation)
 - **Openness**: `Proprietary` (API access)
@@ -603,7 +603,7 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 ### Generalist AI
 
 **Type**: `Startup`
-**Stage/Scale**: (to be researched)
+**Stage/Scale**: Reportedly reached $3B valuation (Aug 2026, TechCrunch)
 **About**: Robotics foundation model company pursuing a "native embodied" approach — training directly on physical interaction data from wearable devices rather than internet images or teleoperation. Represents an alternative paradigm to VLAs (internet pretraining) and WAMs (video diffusion).
 
 **Solutions**:
@@ -1639,6 +1639,30 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 **Collaborations**: AWS (preferred cloud, Trainium compute), AMD Ventures (GPU alternative), IQT (defense applications)
 
 **Links**: [Website](https://odyssey.ml), [Agora-1](https://odyssey.ml/introducing-agora-1), [Series B coverage](https://techfundingnews.com/odyssey-310m-series-b-nvidia-amazon-amd-ai-world-models/)
+
+---
+
+### Perceptron
+
+**Type**: `Startup`
+**Stage/Scale**: (newly announced Aug 2026)
+**About**: Founded by former Meta AI researchers to bring visual AI systems to industrial and manufacturing applications. Focused on factory-floor visual intelligence — bridging the gap between research-grade computer vision (DINO, SAM, V-JEPA) and production industrial deployment. Exit from stealth reported Aug 2026.
+
+**Solutions**:
+
+#### Industrial Visual AI
+
+- **What it does**: Visual AI systems for factory floor applications — quality inspection, process monitoring, and manufacturing automation using foundation model-based perception.
+- **Building blocks covered**: [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime)
+- **Key features (functional)**: Factory-floor visual AI, foundation model-based perception for manufacturing
+- **Key features (non-functional)**: Founded by ex-Meta researchers with DINO/SAM expertise
+- **Competes with**: Cognex, Keyence, Landing AI — on industrial visual inspection; differentiates on foundation model approach
+- **Complements**: Robot middleware (ROS2), edge inference runtimes
+- **Openness**: (to be determined)
+- **Lock-in vectors**: (to be determined)
+- **Source**: [TechCrunch coverage](https://techcrunch.com/)
+
+**Links**: (to be populated)
 
 ---
 

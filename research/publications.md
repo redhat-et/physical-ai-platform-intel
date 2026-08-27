@@ -2,7 +2,7 @@
 
 > Papers, talks, videos, and blog posts on Physical AI — world models, robot learning, sim-to-real, and related topics
 
-**Last Updated**: 2026-07-15
+**Last Updated**: 2026-08-27
 
 ---
 
@@ -158,6 +158,90 @@
 - Bridges test-time training literature (TTT, Tent, EATA, CoTTA) with latent world model planning — first to integrate online adaptation directly into the MPC closed loop
 
 **Relevance to World Models**: Tackles the critical gap between training and deployment for JEPA world models. Where LeWorldModel and the JEPA-WMs ablation study optimized the training recipe, and Hierarchical Planning extended the planning horizon, AdaJEPA addresses what happens when the deployed environment diverges from training data. The one-gradient-step adaptation makes it practical for real-time robotics — a necessary ingredient for sim-to-real transfer with latent world models.
+
+### LpWM: A Case for Sparse Representations in World Models [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2608.22764)
+
+**Authors/Presenters**: Yilun Kuang, Yash Dagade, Quentin Le Lidec, Lucas Maes, [Randall Balestriero](ecosystem.md#randall-balestriero), [Yann LeCun](ecosystem.md#yann-lecun)
+
+**Date**: 2026-08
+
+**Summary**: Challenges the dense Gaussian regularization used by LeWorldModel and related JEPAs, proving that nonlinear Lipschitz dynamics can be approximated arbitrarily well by action-conditioned linear dynamics in a sufficiently high-dimensional one-hot latent space. Proposes LpWorldModel (LpWM) using Rectified Distribution Matching Regularization (RDMReg) to produce non-negative sparse codes.
+
+**Key Findings**:
+
+- Sparse LpWM outperforms dense LeWM by up to 57% in planning success on PushT at intermediate predictor capacities
+- Theoretical result: rollout error for linearized dynamics diminishes as latent dimensionality increases, providing formal justification for sparse representations
+- Learned sparse codes exhibit mode-factored structure: support encodes discrete dynamical regimes, feature magnitudes capture continuous within-regime state
+- Sparse representations lower predictor complexity needed for control while surfacing interpretable structure
+
+**Relevance to World Models**: Directly challenges the foundational assumption of LeWorldModel and the "When Does LeJEPA Learn a World Model?" theory paper — that Gaussian regularization is necessary for identifiable latent recovery. LpWM shows sparse representations can be superior for control, suggesting that the optimal regularization depends on the downstream task (planning vs. representation recovery). From the same FAIR group (Le Lidec, Maes, Balestriero, LeCun), indicating an internal evolution of the LeWM line of work.
+
+### UniJEPA: A Unified Joint-Embedding Predictive Architecture for Task-Agnostic Visual World Modeling [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2608.07409)
+
+**Authors/Presenters**: An Lanji, Dawei Liu, Jin Li, Haoran Xu, Mei Chen, Yu Tian
+
+**Date**: 2026-08 (ICML 2026)
+
+**Summary**: Unifies photometric and temporal JEPA prediction in one shared latent space through a single end-to-end objective composed of a next-embedding prediction loss and a Gaussian regularizer. Supports controllable abstraction: photometric prediction learns invariant structure while temporal prediction learns equivariant dynamics. After action-conditioned post-training, enables zero-shot planning by treating goal features as prediction targets.
+
+**Key Findings**:
+
+- Single loss hyperparameter — unifies photometric (I-JEPA-style) and temporal (V-JEPA-style) prediction without separate encoders, predictors, or anti-collapse regularizers
+- Trainable from raw pixels without EMA, stop-gradient, or pre-trained encoders
+- Matches or surpasses task-specific JEPAs across multiple benchmarks
+- Plans up to tens of times faster than generative world models via latent-space goal matching
+
+**Relevance to World Models**: Addresses the fragmentation in the JEPA landscape — currently separate recipes exist for image JEPA, video JEPA, and action-conditioned variants with distinct training procedures. UniJEPA shows these can be unified under a single objective, simplifying the path from self-supervised pretraining to world model deployment. The speed advantage over generative world models reinforces the latent-space planning efficiency thesis.
+
+### No Gaussian Required: Contrastive Inverse Dynamics for JEPA World Models [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2608.17542)
+
+**Authors/Presenters**: Jack Boylan, Chris Hokamp
+
+**Date**: 2026-08
+
+**Summary**: Proposes Action-Contrastive Masked Transition Modeling (AC-MTM), replacing SIGReg Gaussian regularization with an inverse-dynamics head trained via Action-NCE. Each latent transition must identify the action that produced it among other actions in the batch — a task a collapsed encoder provably fails. The inverse branch is discarded after training, keeping test-time compute identical to LeWM.
+
+**Key Findings**:
+
+- On OGBench Visual Scene, AC-MTM achieves 80.0±2.0% success vs. 58.0±2.0% for SIGReg — a 22-point improvement over the standard Gaussian approach
+- Distribution-free anti-collapse signal: no target network, stop-gradient, pretrained encoder, or reconstruction objective required
+- Matches SIGReg on average across four simpler pixel-control tasks; significantly outperforms on the hardest benchmark
+- Characterizes action-space and observability assumptions under which the contrastive approach holds
+
+**Relevance to World Models**: Together with LpWM (sparse regularization), provides a second alternative to LeWorldModel's Gaussian regularization — this time via contrastive action discrimination rather than distributional matching. The 22-point improvement on OGBench suggests that for complex environments, action-awareness provides a stronger training signal than distributional constraints. The theoretical analysis of when contrastive inverse dynamics works (and when it doesn't) complements the "When Does LeJEPA Learn a World Model?" identifiability theory.
+
+### Mol-JEPA: A Multimodal Joint Embedding Predictive Architecture for Molecules [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2608.22642)
+
+**Authors/Presenters**: Florian Rottach, Sebastian Schieferdecker, William Rudman, [Randall Balestriero](ecosystem.md#randall-balestriero), Carsten Eickhoff
+
+**Date**: 2026-08
+
+**Summary**: Applies JEPA to molecular representation learning, extending the architecture to multimodal molecular inputs. From the Balestriero group, continuing the expansion of JEPA into scientific domains following Polymer-JEPA's application to conjugated copolymers.
+
+**Key Findings**:
+
+- Multimodal JEPA architecture operating across molecular graph and sequence representations
+- Extends the JEPA principle (prediction in latent space rather than reconstruction) to molecular property prediction
+- Part of the growing family of domain-specific JEPAs (Polymer-JEPA, BioM-JEPA, CardioState-JEPA) applying self-supervised latent prediction to scientific data
+
+**Relevance to World Models**: Continues the expansion of JEPA into molecular and materials science domains relevant to Scientific Discovery use cases. Where Polymer-JEPA demonstrated JEPA for conjugated copolymers, Mol-JEPA generalizes to broader molecular representation learning — complementing domain-specific world models for drug discovery and materials design (cf. Periodic Labs, Medra).
+
+### Orthogonal JEPA: Factorized Predictive States for Latent World Models [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2608.20065)
+
+**Authors/Presenters**: Taoyong Cui, Pheng Ann Heng, Wanli Ouyang
+
+**Date**: 2026-08
+
+**Summary**: Addresses the monolithic prediction bottleneck in standard JEPAs by factorizing target states into orthogonal components with dedicated prediction branches. Uses learned basis matrices to analyze targets, with orthogonality objectives to prevent redundancy, factor-activity regularization, and online variance regularization against encoder collapse.
+
+**Key Findings**:
+
+- Factorized prediction prevents dominant signals from monopolizing representation capacity — each orthogonal branch specializes in different predictive structure
+- Predicted components synthesize into complete latent states usable by readouts, decoders, planners, or autoregressive rollouts
+- Evaluated across controlled vision, single-cell transcriptomics, longitudinal health records, continuous control, and molecular dynamics
+- Predictive-state mechanism applies across temporal, spatial, and partial observation settings
+
+**Relevance to World Models**: Addresses a practical scaling limitation: as JEPA world models tackle more complex environments, a single prediction pathway may underallocate capacity to subtle-but-important dynamics. The orthogonal factorization parallels Causal-JEPA's object-centric decomposition but operates at the representation level rather than the input level, making it architecture-agnostic. The breadth of evaluation domains (vision through molecular dynamics) suggests general applicability.
 
 ### ACT-JEPA: Novel Joint-Embedding Predictive Architecture for Efficient Policy Representation Learning [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2501.14622)
 
@@ -699,6 +783,57 @@
 ## World Models & Model-Based RL
 
 *Papers on world models, DreamerV3, latent models, etc.*
+
+### Zero-WAM: In-Context World-Action Modeling from Human Videos for Open-Ended Task Generalization [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2608.26103)
+
+**Authors/Presenters**: Jiaming Zhou, Qihang Zhang, Gangwei Xu, Cunxin Fan, Yujie Zhao, Ruilin Wang, Yiming Luo, Shuai Yang, Xing Zhu, Yujun Shen, Junwei Liang, Yinghao Xu
+
+**Date**: 2026-08
+
+**Summary**: Causal video-action model that executes unseen manipulation tasks by following in-context human video guidance. Draws on in-context learning from LLMs — the task specification is a human video showing the intended manipulation, providing rich visual cues about task evolution. Introduces HumanGen, an automatically generated dataset of 74.2K human-robot in-context learning pairs across 8.6K tasks.
+
+**Key Findings**:
+
+- 47.0% average success rate on 7 unseen RoboTwin 2.0 simulation tasks — 29.5pp absolute improvement over strongest video-action baseline
+- In-context future chunk prediction (IFP) objective prevents shortcut learning and forces the policy to extract task information from video prompts
+- Real-world generalization to unseen configurations including multi-object scenes, long-horizon manipulation, and fine-grained insertion tasks
+- HumanGen dataset pipeline produces paired human-robot demonstrations automatically, addressing the limited paired data bottleneck
+
+**Relevance to World Models**: Extends the WAM paradigm (DreamZero) with in-context learning from human demonstrations — rather than requiring robot-specific training data for each task, a single human video specifies the intent. Architecturally related to Demo-JEPA (which also uses demonstrations as goal specifications) but operates in video space rather than latent space. The 29.5pp improvement over standard WAMs suggests that human video provides a richer task specification than language instructions alone, relevant to the Data Collection & Curation building block.
+
+### NVIDIA Cosmos-H-Dreams: Real-Time Generative Physics Simulation for Surgical Robotics [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2608.24199)
+
+**Authors/Presenters**: Javier Gamazo Tejero, Lukas Zbinden, Keyur Sheth, Raghavendra K M, Nadim Daher, Diego Granero Maraña, Filip Binkiewicz, Patrick Thornycroft, Mahdi Azizian, Sean D. Huver ([NVIDIA](ecosystem.md#nvidia) + CMR Surgical)
+
+**Date**: 2026-08
+
+**Summary**: First interactive surgical world model supporting live human and policy control. Integrates an action-conditioned generative model with teacher-to-student distillation via Self Forcing, deployed through NVIDIA's FlashDreams streaming library. Fine-tuned on the Open-H-Embodiment corpus and post-trained on procedure-specific data. Controller-agnostic: supports browser keyboard over WebRTC, Meta Quest over WebXR, CMR Surgical Versius consoles, and learned policies in closed loop.
+
+**Key Findings**:
+
+- ~160 inference FPS on a single NVIDIA RTX PRO 6000 Blackwell workstation GPU via Self Forcing distillation
+- Controller-agnostic design supports browser, VR headset, commercial surgical consoles, and autonomous policies
+- Open system released for surgical education, synthetic data generation, and future intraoperative decision support
+- Builds on Cosmos platform, demonstrating vertical specialization of world foundation models for medical robotics
+
+**Relevance to World Models**: Extends Cosmos into surgical robotics — a high-value vertical where real-world data is expensive (animal/cadaver labs) and simulation fidelity matters for patient safety. The ~160 FPS real-time capability via distillation demonstrates that world models can serve as interactive training environments, not just data generators. The controller-agnostic design (browser → VR → surgical console → autonomous policy) exemplifies how world models can serve multiple deployment modes from a single backbone. Significant for the Medical AI use case and the Synthetic Data Generation building block.
+
+### Do Robotic World Models Really Follow Actions? Diagnosing and Aligning Action-Conditioned Generation for Policy Learning [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2608.24885)
+
+**Authors/Presenters**: Sixiang Chen, Jiaming Liu, Jixian Wu, Yichen Guo, Tinghao Wang, Siyuan Qian, Hao Chen, Jiajun Cao, Jian Tang, Shanghang Zhang
+
+**Date**: 2026-08
+
+**Summary**: Introduces WorldEcho, a diagnostic benchmark for evaluating whether action-conditioned world models actually follow input actions, and WorldSync, an alignment method that improves action-fidelity without sacrificing visual quality. Addresses a critical but underexplored failure mode: world models may generate plausible-looking videos that ignore the conditioning actions.
+
+**Key Findings**:
+
+- WorldEcho benchmark provides systematic evaluation of action-conditioned fidelity — measuring whether generated futures actually reflect the commanded actions
+- WorldSync alignment method improves action-following accuracy while maintaining visual generation quality
+- Identifies that many existing world models suffer from action-conditioning failures — generating visually plausible but dynamically incorrect predictions
+- Directly impacts downstream policy learning: policies trained on action-unfaithful world model data learn incorrect dynamics
+
+**Relevance to World Models**: Addresses a fundamental quality concern for world model-based policy training: if the world model ignores actions during generation, policies trained on its outputs learn incorrect dynamics. This parallels the "Do World Action Models Generalize Better than VLAs?" robustness study but focuses on action fidelity rather than visual robustness. WorldEcho provides a needed evaluation tool for the World Model Runtime building block, and WorldSync offers a practical fix.
 
 ### Introducing Agora-1: Multi-Agent World Models [<img src="templates/icons/website.svg" alt="website" height="16">](https://odyssey.ml/introducing-agora-1)
 
