@@ -1051,6 +1051,38 @@
 
 **Openness assessment**: (to be assessed by oss-health skill)
 
+#### PINNpapers: Curated Reading List for Physics-Informed Neural Networks
+
+**URL**: [github.com/idrl-lab/PINNpapers](https://github.com/idrl-lab/PINNpapers)
+
+**Description**: Curated reading list of ~103 papers on Physics-Informed Neural Networks, maintained by the IDRL lab. Covers PINN models, parallel PINNs, acceleration techniques, model transfer and meta-learning, probabilistic PINNs and uncertainty quantification, and applications (fluid mechanics, optics, geoscience, power systems). Includes 11 software entries (DeepXDE, NVIDIA SimNet, IDRLnet, etc.). Primary coverage spans 2018-2022. Ships a bibtex-to-markdown conversion script.
+
+**Tech Stack**: Markdown (curated list)
+
+**Key Features**:
+
+- ~103 papers across 8 categories plus 11 software entries
+- Covers core PINN formulations, scalability (parallel PINNs), and training acceleration
+- Probabilistic PINNs and uncertainty quantification section
+- Application-focused papers spanning fluid mechanics, optics, geoscience, power systems
+- MIT licensed
+
+**Status**: Maintained (last substantive updates ~2022)
+
+**Stats**: ~1,500 stars, 208 forks (IDRL Lab)
+
+**Last Updated**: 2022 (substantive content)
+
+**Building block(s)**: [Physics-Informed ML Frameworks](building-blocks.md#physics-informed-ml-frameworks)
+
+**Maturity**: Research
+
+**Competes with**: Ad-hoc literature searches for PINN papers
+
+**Complements**: DeepXDE (PINN library), NeuralOperator, PhysicsNeMo
+
+**Openness assessment**: MIT licensed; community contributions welcomed; academic-maintained
+
 #### PDEBench: Standardized Benchmarks for Neural PDE Solvers
 
 **URL**: [github.com/pdebench/PDEBench](https://github.com/pdebench/PDEBench)
@@ -1680,6 +1712,39 @@
 
 **Openness assessment**: (to be assessed by oss-health skill)
 
+### WorldPrediction: High-Level World Modeling Benchmark
+
+**URL**: [github.com/facebookresearch/WorldPrediction](https://github.com/facebookresearch/WorldPrediction)
+
+**Description**: Video-based benchmark from Meta FAIR for evaluating world modeling and long-horizon procedural planning at a high level of temporal and semantic abstraction. Unlike manipulation benchmarks that test low-level motor control, WorldPrediction tests whether models understand state transitions and multi-step action sequences from instructional video. Two tasks: WorldPrediction-WM (identify which action caused an observed state change) and WorldPrediction-PP (select correctly ordered action sequences for multi-step goals). Uses counterfactual distractors and action equivalents to prevent shortcut exploitation.
+
+**Tech Stack**: Python 3.9+, SLURM (submitit), JSON annotations, Jupyter notebooks
+
+**Key Features**:
+
+- Two evaluation tasks: world modeling (single-step causation) and procedural planning (multi-step sequencing)
+- Annotations aggregated from 5 instructional video datasets: COIN, CrossTask, EgoExo4D, IKEA-ASM, EPIC-KITCHENS-100
+- Evaluates across model families: VLMs (Qwen2.5-VL, GPT-4o, Gemini), LLMs (via captions), video diffusion (CogVideoX), vision-only baselines (CLIP, DINOv2)
+- Counterfactual distractors and action equivalents prevent shortcut solutions
+- Extensible custom model interface for community evaluation
+- CC BY-NC 4.0 licensed
+
+**Status**: Maintained
+
+**Stats**: 31 stars (Meta FAIR Paris, HKUST, Sorbonne Universite)
+
+**Last Updated**: 2025
+
+**Building block(s)**: [Evaluation & Benchmarking](building-blocks.md#evaluation--benchmarking)
+
+**Maturity**: Research
+
+**Competes with**: WorldOlympiad (tests physics/geometry/interaction fidelity), RoboWM-Bench (manipulation-specific)
+
+**Complements**: VLM and world model evaluation pipelines — tests semantic understanding rather than visual quality or motor control
+
+**Openness assessment**: CC BY-NC 4.0 — non-commercial restriction limits production use; Meta FAIR single-vendor
+
 ### RLBench: Large-Scale Robot Learning Benchmark
 
 **URL**: [github.com/stepjam/RLBench](https://github.com/stepjam/RLBench)
@@ -2078,6 +2143,39 @@
 **Complements**: Academic research, robotics surveys
 
 **Openness assessment**: (to be assessed by oss-health skill)
+
+### Awesome-WAM: Curated List for World Action Models
+
+**URL**: [github.com/OpenMOSS/Awesome-WAM](https://github.com/OpenMOSS/Awesome-WAM)
+
+**Description**: Curated, continuously updated reading list and resources for World Action Models (WAMs) in embodied AI. Companion to survey paper (arXiv:2605.12090). Provides architecture taxonomy covering cascaded WAMs (explicit pixel-space, implicit latent) and joint WAMs (autoregressive, diffusion-based), plus training data and evaluation sections. Includes structured summary blogs for each paper and a companion benchmark leaderboard with performance trend visualization.
+
+**Tech Stack**: Markdown (curated list)
+
+**Key Features**:
+
+- Architecture taxonomy: cascaded (pixel-space, latent) vs. joint (autoregressive, diffusion) WAMs
+- Covers key WAM papers: UniPi, TesserAct, pi0.7, GR-1/GR-2, UWM, Cosmos Policy, FLARE, Motus
+- Structured summary blog per paper for quick understanding
+- Companion benchmark leaderboard with performance trends
+- Companion survey: arXiv:2605.12090
+- MIT licensed
+
+**Status**: Active
+
+**Stats**: 1,200+ stars, 167 commits (Fudan University, Shanghai Innovation Institute, NUS)
+
+**Last Updated**: 2026-07
+
+**Building block(s)**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
+
+**Maturity**: Research
+
+**Competes with**: Awesome-World-Model-for-Robotics-Policy (NTUMARS — broader scope, less WAM-specific)
+
+**Complements**: DreamZero, LingBot-VA, OpenPI — tracks the WAM paradigm these projects implement
+
+**Openness assessment**: MIT licensed; multi-institutional academic project; community-driven
 
 ### Cosmos-Cookbook: Post-Training Recipes & Workflows
 

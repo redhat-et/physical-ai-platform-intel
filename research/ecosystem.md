@@ -2,9 +2,9 @@
 
 > Players in Physical AI — their solutions, reference architectures, and platform relevance
 
-**Last Updated**: 2026-07-15
+**Last Updated**: 2026-07-30
 
-**Market context**: Robotics VC funding reached $18.8B globally in H1 2026, already exceeding full-year 2025 ($15B) and the 2021 peak ($14.1B). Physical AI dominates deal flow. Funding is top-heavy: top 3 deals account for 60.5% of capital. Humanoid robotics is the breakout category.
+**Market context**: Physical AI VC funding exceeded $23B in H1 2026 (WSJ). Robotics specifically reached $18.8B, already exceeding full-year 2025 ($15B) and the 2021 peak ($14.1B). Funding is top-heavy: Waymo $16B Series D, Skild $1.4B, NEURA $1.4B, PI $1B. Humanoid robotics is the breakout category. Japan announced a national strategy targeting 10M AI-equipped robots across 18 sectors by 2040, with $65B public+private investment and a $6.2B sovereign AI compute consortium (Noetra).
 
 ---
 
@@ -15,7 +15,7 @@
 ### NVIDIA
 
 **Type**: `Big Tech`
-**About**: Largest industrial investor in world foundation models via the Cosmos platform. Frames world models as "the ChatGPT moment for robotics." Building a full-stack Physical AI platform spanning world models, simulation, robot foundation models, physics ML, edge inference, and digital twins. An investor in SSI and AMI Labs. Released open-source Physical AI agent skills and tools (May 2026, [github.com/NVIDIA/skills](https://github.com/NVIDIA/skills)) covering robotics, AV, vision AI, industrial digital twins, and healthcare — adopted by Pegatron (67% training time reduction), Delta Electronics, Foxconn, and Li Auto.
+**About**: Largest industrial investor in world foundation models via the Cosmos platform. Frames world models as "the ChatGPT moment for robotics." Building a full-stack Physical AI platform spanning world models, simulation, robot foundation models, physics ML, edge inference, and digital twins. An investor in SSI and AMI Labs. Released open-source Physical AI agent skills and tools (May 2026, [github.com/NVIDIA/skills](https://github.com/NVIDIA/skills)) covering robotics, AV, vision AI, industrial digital twins, and healthcare — adopted by Pegatron (67% training time reduction), Delta Electronics, Foxconn, and Li Auto. Central to Japan's national Physical AI strategy (Jul 2026): supplying a Vera Rubin AI factory (13,750 Vera CPUs + 27,500 Rubin GPUs, 140 MW) to the Noetra consortium (~44 Japanese firms including SoftBank, Sony, NEC, Honda) backed by 1 trillion yen ($6.2B) over five years. Robotics coalition with Fanuc, Yaskawa, Kawasaki Heavy, Fujitsu, Hitachi, and others building on Cosmos models including Cosmos 3 Edge. Toyota extending integration into manufacturing simulation and vehicle software.
 
 **Solutions**:
 
@@ -388,6 +388,37 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 
 ---
 
+### AMD
+
+**Type**: `Big Tech`
+**About**: Semiconductor company entering Physical AI edge compute with a heterogeneous CPU+GPU+NPU+FPGA portfolio targeting robotics. Announced Ryzen AI Embedded X100 series and Kria AI SoM at Advancing AI 2026 (Jul 2026) — first direct challenge to NVIDIA Jetson in robotics edge compute. Positions a body-metaphor architecture: X100 Kria SoM as "brain," Versal AI Edge Gen 2 as "spine," Zynq UltraScale+ for "joints," Spartan UltraScale+ for "sensors." Projects Physical AI silicon market at $200B by 2035.
+
+**Solutions**:
+
+#### Ryzen AI Embedded X100 / Kria AI SoM
+
+- **What it does**: Edge AI compute platform for robotics and industrial automation — single embedded SoC combining CPU, GPU, and NPU with unified memory, paired with Kria system-on-module and robotics carrier card with FPGA.
+- **Building blocks covered**: [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime)
+- **Key features (functional)**: Up to 16 Zen 5 CPU cores, 40 RDNA 3.5 GPU CUs, 50 TOPS XDNA 2 NPU, up to 128 GB LPDDR5x unified memory. Kria AI Robotics Developer Platform combines SoM with FPGA carrier card and AMD Robotics Software Suite (ROCm + ROS 2). Deterministic control loop latency as low as 125 microseconds, AI inference under 92 ms on GPU. CUDA-to-ROCm migration tooling
+- **Key features (non-functional)**: -40 to 105C operating range, 55W TDP, 10-year supply guarantee through 2037. Six SKUs including industrial-grade variants. SoMs from Congatec, iBase, IEI, Sapphire, Seavo. Sampling Jun 2026, mass production Q4 2026
+- **Competes with**: NVIDIA Jetson Thor (T2000/T3000), Intel Core Ultra Embedded — on robotics edge AI compute. Claims up to 3x performance vs Intel Core Ultra Series 3 and Jetson T500 in specific workloads (e.g., medical ultrasound beamforming)
+- **Complements**: ROS 2 (native support), AMD Versal/Zynq (real-time control tiers), Liquid AI (LFM deployment partner)
+- **Openness**: `Proprietary` (ROCm is open-source; hardware and Kria platform are proprietary)
+- **Lock-in vectors**: AMD hardware dependency, ROCm ecosystem (smaller than CUDA), FPGA carrier board design
+- **Source**: [AMD Newsroom](https://newsroom.amd.com/news/aai-2026-kria-robotics-dev-platform/), [AMD Kria](https://www.amd.com/en/products/system-on-modules/kria/ai.html)
+
+**Implied reference architecture**: Heterogeneous compute stack — X100 SoC for high-level AI reasoning (CPU+GPU+NPU), Versal AI Edge for mid-level sensor fusion and planning (FPGA+AI Engine), Zynq for real-time motor control, Spartan for sensor interfaces. Open software stack (Linux, ROCm, ROS 2, PyTorch, ONNX) differentiates from NVIDIA's CUDA-locked ecosystem.
+
+**Platform relevance**:
+
+- **Partnership surface**: ROCm as open GPU compute alternative to CUDA; ROS 2 native support; potential hardware platform for vendor-neutral Physical AI deployments. Liquid AI partnership signals LFM-on-AMD edge inference path
+- **Competitive surface**: Direct Jetson competitor — offers an alternative for platform builders seeking to avoid NVIDIA hardware lock-in
+- **What they need from a platform**: Software ecosystem depth to match CUDA/JetPack, model optimization tooling, fleet management integration
+
+**Links**: [AMD Newsroom](https://newsroom.amd.com/news/aai-2026-kria-robotics-dev-platform/), [AMD Kria AI](https://www.amd.com/en/products/system-on-modules/kria/ai.html), [CNX Software](https://www.cnx-software.com/2026/07/24/amd-launches-ryzen-ai-embedded-x100-processors-kria-ai-som-and-physical-ai-robotics-developer-platform/)
+
+---
+
 ### Amazon
 
 **Type**: `Big Tech`
@@ -458,8 +489,8 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 ### Physical Intelligence (pi)
 
 **Type**: `Startup`
-**Stage/Scale**: $400M+ raised (reportedly seeking $1B round in 2026). Investors: Bezos Expeditions, Khosla Ventures, OpenAI Fund
-**About**: Robotics foundation model company building vision-language-action (VLA) models for general-purpose robot manipulation. Co-founded by [Sergey Levine](#sergey-levine) and [Chelsea Finn](#chelsea-finn). ~80 employees; reportedly blown through their 5-10 year roadmap in 18 months. pi0/pi0.5 are policy models (not dynamics predictors) that represent a key consumer of world model outputs. pi0.5 (Apr 2026) claims first cross-embodiment generalization without per-robot fine-tuning. pi0.7 enables zero-shot task generalization to untrained tasks.
+**Stage/Scale**: $1B+ raised; reportedly raising $1B at $11B valuation (spring 2026). Investors: Bezos Expeditions, Khosla Ventures, Thrive Capital, Founders Fund, OpenAI Fund
+**About**: Robotics foundation model company building vision-language-action (VLA) models for general-purpose robot manipulation. Co-founded by [Sergey Levine](#sergey-levine), [Chelsea Finn](#chelsea-finn), and Lachy Groom (ex-Stripe). ~80 employees; reportedly blown through their 5-10 year roadmap in 18 months. pi0/pi0.5 are policy models (not dynamics predictors) that represent a key consumer of world model outputs. pi0.5 (Apr 2026) claims first cross-embodiment generalization without per-robot fine-tuning. pi0.7 enables zero-shot task generalization to untrained tasks. Anthropic and PI held acquisition talks in spring 2026 (The Information, Jul 2026); PI CEO Karol Hausman denied the reports. OpenAI is an investor in PI, making it a stakeholder in a company its chief rival reportedly sought to acquire — a signal of how contested the Physical AI talent and model layer has become.
 
 **Solutions**:
 
@@ -1390,6 +1421,40 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 - **What they need from a platform**: High-fidelity simulation at scale, model lifecycle management, edge deployment for force control loops
 
 **Links**: [Website](https://ekarobotics.com/), [Humanoids Daily profile](https://www.humanoidsdaily.com/news/the-era-of-eka-new-startup-unveils-vision-force-action-model-to-crack-dexterity)
+
+---
+
+### Encord
+
+**Type**: `Startup`
+**Stage/Scale**: (to be researched)
+**About**: Data tooling company for Physical AI training data production. Originally focused on annotation and model evaluation for machine vision, Encord now operates a physical data production facility in San Leandro, CA where "pilots" generate robot training datasets using leader-follower rigs, egocentric video, and experimental modalities. Trialing brain-wave-reading headsets (from Zander Labs) that measure neural signals — error detection, intent, and surprise — during physical tasks to tag training data with cognitive state information. Core thesis: real-world physical training data is the binding constraint for robot foundation models, not compute or architecture. Estimates a dataset roughly 5x the size of YouTube's video corpus is needed for breakthrough performance. Claims densely annotated data is worth 100x sparse data while costing only 20x more to produce.
+
+**Key People**: Vineeth Velmurugan (Head of Robot Learning, ex-OpenAI robotics, ex-Berkshire Grey)
+
+**Focus Areas**: Physical AI training data production, data annotation, brain-wave-tagged training data, data quality
+
+**Solutions**:
+
+#### Encord Data Production Platform
+
+- **What it does**: Physical data production facility and tooling pipeline for generating high-quality robot training data — including leader-follower teleoperation rigs, egocentric video capture, and experimental brain-wave headsets for cognitive state tagging.
+- **Building blocks covered**: [Data Annotation & Curation for Physical AI](building-blocks.md#data-annotation--curation-for-physical-ai)
+- **Key features (functional)**: Physical data production facility, leader-follower rigs, egocentric video, brain-wave cognitive state tagging (trial with Zander Labs), dense annotation pipelines
+- **Key features (non-functional)**: Targets humanoid and warehouse robotics training data at scale
+- **Competes with**: Scale AI, Labelbox — on Physical AI data; differentiates on physical data production (not just annotation of existing data)
+- **Complements**: Robot foundation model companies (pi, Skild, Figure AI) as data supplier
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Proprietary data production pipeline, physical facility dependency
+- **Source**: [TechCrunch](https://techcrunch.com/2026/07/26/are-brain-waves-the-next-unlock-for-physical-ai/)
+
+**Platform relevance**:
+
+- **Partnership surface**: Data production pipeline that feeds into model training infrastructure; brain-wave data as a novel modality for training data enrichment
+- **Competitive surface**: Minimal — data production layer, not a platform
+- **What they need from a platform**: Data pipeline integration, model training infrastructure, dataset management and versioning
+
+**Links**: [TechCrunch (brain waves)](https://techcrunch.com/2026/07/26/are-brain-waves-the-next-unlock-for-physical-ai/)
 
 ---
 

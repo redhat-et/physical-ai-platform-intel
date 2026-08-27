@@ -18,6 +18,7 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 
 | Company | Profile | Deep Dive |
 | --- | --- | --- |
+| Agility Robotics | [agility-robotics.md](deliverables/intel/companies/agility-robotics.md) | [agility-robotics-deep-dive.md](deliverables/intel/companies/agility-robotics-deep-dive.md) |
 | AMD | [amd.md](deliverables/intel/companies/amd.md) | [amd-deep-dive.md](deliverables/intel/companies/amd-deep-dive.md) |
 | FANUC | [fanuc.md](deliverables/intel/companies/fanuc.md) | [fanuc-deep-dive.md](deliverables/intel/companies/fanuc-deep-dive.md) |
 | Figure AI | [figure-ai.md](deliverables/intel/companies/figure-ai.md) | [figure-ai-deep-dive.md](deliverables/intel/companies/figure-ai-deep-dive.md) |

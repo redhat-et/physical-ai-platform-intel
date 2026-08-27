@@ -192,6 +192,7 @@ Useful for identifying emerging companies, investment signals, and market framin
 - **Andrej Karpathy**: https://karpathy.github.io/
 - **Lilian Weng**: https://lilianweng.github.io/
 - **Ilya Sutskever**: https://www.cs.toronto.edu/~ilya/
+- **Asier Arranz**: https://www.asierarranz.com/ — NVIDIA Senior Staff Developer Advocate for Physical AI/robotics. Hands-on demos of full NVIDIA Physical AI stack (GR00T, Cosmos, Isaac, Newton, Jetson, VR teleoperation). Practical integration patterns and sim-to-real workflows
 
 ---
 

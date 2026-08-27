@@ -1754,6 +1754,23 @@
 
 **Relevance to World Models**: Complements the "Digital Twins to World Models" paper (2603.17420) with a broader, lifecycle-oriented perspective. The four-stage framework maps cleanly to world model capability levels: L1 (modeling) → L2 (mirroring/prediction) → L3 (intervention/planning) → L4 (autonomous management). Useful for framing world models in enterprise/industrial contexts.
 
+### Telecom World Models: Unifying Digital Twins, Foundation Models, and Predictive Planning for 6G [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2604.06882)
+
+**Authors/Presenters**: Hang Zou, Yuzhi Yang, Lina Bariah, Yu Tian, Yuhuan Lu, Bohao Wang, Anis Bara, Brahim Mefgouda, Hao Liu, Yiwei Tao, Sergy Petrov, Salma Cheour, Nassim Sehad, Sumudu Samarakoon, Chongwen Huang, Samson Lasaulce, Mehdi Bennis, Mérouane Debbah
+
+**Date**: 2026-04
+
+**Summary**: Formalizes a Telecom World Model (TWM) architecture that bridges language-based systems (LLMs) and physics-based systems (digital twins) for 6G network management. Decomposes the problem into two interacting worlds — a controllable system world (operator settings) and an external world (propagation, mobility, traffic, failures) — with a three-layer stack: field world model for spatial prediction, control/dynamics world model for action-conditioned KPI trajectory forecasting, and a telecom foundation model layer for intent translation and orchestration.
+
+**Key Findings**:
+
+- Two-world decomposition separates controllable dynamics (operator configuration) from uncontrollable dynamics (environment, user behavior), enabling targeted modeling of each
+- Three-layer architecture: field world model (spatial), control/dynamics world model (action-conditioned KPI prediction), telecom foundation model (intent translation + orchestration)
+- TWM jointly provides telecom state grounding, fast action-conditioned rollouts, calibrated uncertainty, multi-timescale dynamics, and LLM-integrated guardrails
+- Proof-of-concept on network slicing validates that the full three-layer pipeline outperforms single-world baselines
+
+**Relevance to World Models**: Extends the DT→WM convergence mapped by Zheng et al. (2603.17420) into a concrete architecture for telecom. The two-world/three-layer decomposition is a domain-specific instantiation of the general world model pattern — perception, dynamics, planning — applied to network state rather than physical scene state. The action-conditioned KPI rollout capability mirrors how robotics world models predict future states given actions, but for network configuration decisions. Relevant to Red Hat's telecom infrastructure positioning where OpenShift already serves as the 5G/6G platform.
+
 ### Meta Acquires Assured Robot Intelligence (ARI) [<img src="templates/icons/website.svg" alt="website" height="16">](https://thetechportal.com/2026/05/01/meta-acquires-assured-robot-intelligence-to-strengthen-robotics-and-physical-ai-capabilities-report/)
 
 **Authors/Presenters**: The Tech Portal
@@ -2575,6 +2592,12 @@
 ---
 
 ### Neural Surrogate Models for Engineering Simulation
+
+#### Li et al. — Fourier Neural Operator for Parametric PDEs (2020)
+
+- **Source**: [arXiv:2010.08895](https://arxiv.org/abs/2010.08895) — ICLR 2021. Caltech + Purdue.
+- **Key finding**: Foundational FNO paper. Parameterizes integral kernels directly in Fourier space, learning mappings between function spaces rather than finite-dimensional approximations. Achieves 3 orders of magnitude speedup over traditional PDE solvers while maintaining superior accuracy. First ML-based method to model turbulent flows (Navier-Stokes) with zero-shot super-resolution — train at one resolution, evaluate at another without retraining. Demonstrated on Burgers' equation, Darcy flow, and Navier-Stokes.
+- **Relevance**: The original paper behind FNO — the architecture now implemented in PhysicsNeMo and NeuralOperator. Establishes the operator learning paradigm that competes with PINNs (see Neural Operators Survey below). The zero-shot super-resolution property is particularly valuable for Physical AI: train surrogates on coarse simulation data, deploy at higher fidelity without retraining.
 
 #### Lu et al. — Comprehensive Comparison of DeepONet and FNO (2022)
 
