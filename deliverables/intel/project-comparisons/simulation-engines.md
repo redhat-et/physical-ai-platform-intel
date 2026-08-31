@@ -1,7 +1,7 @@
 # Simulation Engines — Solution Comparison
 
 **Date**: 2026-06-22
-**Last updated**: 2026-07-14
+**Last updated**: 2026-08-31
 **Building block**: Simulation Engines
 **Classification**: Internal analysis — not for public repo
 
@@ -13,7 +13,7 @@ Compares solutions for the **Simulation Engines** platform capability to inform 
 
 ## Decision Summary
 
-**Recommended pick**: **Newton (Linux Foundation)** — best governance fit (LF charter, multi-vendor steering with NVIDIA + Google DeepMind + Disney Research), most production-ready GPU physics (8 pluggable solvers), and the only project where Red Hat can contribute to governance and roadmap. CUDA-only hardware is a gap, but the LF governance path provides the strongest long-term strategic position.
+**Recommended pick**: **Newton (Linux Foundation)** — best governance fit (LF charter, multi-vendor steering with NVIDIA + Google DeepMind + Disney Research), most production-ready GPU physics (8 pluggable solvers), and the only project where Red Hat can contribute to governance and roadmap. CUDA-only hardware is a gap, but the LF governance path provides the strongest long-term strategic position. **August 2026 update**: IsaacLab 3.0 (beta) introduces a multi-backend factory architecture (`PhysicsManager` ABC) with Newton/MJWarp as a first-class backend alongside PhysX — and a Kit-less mode that runs Newton workflows without Isaac Sim/Omniverse Kit dependency. This strengthens Newton's strategic position: the dominant RL framework now treats Newton as a peer backend, not an Isaac Sim plugin.
 
 **Runner-up**: **Gazebo (OSRA/Open Robotics)** — strongest open governance (OSRA PMC), no GPU vendor lock-in, deepest ROS 2 integration, and the standard deployment/validation simulator. Preferred when the use case is ROS 2 validation or sensor simulation rather than large-scale RL training.
 
@@ -90,8 +90,8 @@ Compares solutions for the **Simulation Engines** platform capability to inform 
 | Dimension | Newton (LF) | MuJoCo (Google DeepMind) | Genesis World (Genesis AI) | Gazebo (OSRA) | Isaac Sim (NVIDIA) | O3DE (O3DF/LF) |
 | --- | --- | --- | --- | --- | --- | --- |
 | **Hardware** | High — CUDA-only via Warp | Low — CPU native; CUDA/ROCm/Metal via MJX/JAX | Low — CUDA, ROCm, Metal, Vulkan, CPU via Quadrants | Low — CPU only, no GPU vendor | High — CUDA-only, RTX for rendering | Low — multi-API rendering (DX12/Vulkan/Metal); PhysX GPU optional |
-| **Vendor** | Medium — LF governance mitigates, but NVIDIA controls Warp dependency | High — Google DeepMind 89% commits, CLA, no external maintainers | High — Genesis AI controls all repos + Quadrants compiler (fork of unmaintained Taichi) | Low — OSRA PMC governance, multiple maintainer orgs | High — 117 proprietary omni.* deps, no contributions accepted | Low — LF governance, DCO, Amazon donated and cannot reclaim; PhysX vendored as O3DE fork (BSD-3-Clause) |
-| **Ecosystem** | Low — open formats (MJCF, URDF, USD), standard APIs | Low — MJCF open standard, wide ecosystem support | Low — standard formats (URDF, MJCF), Gymnasium integration | Low — SDF open standard, native ROS 2 ecosystem | High — proprietary Kit extensions, NVIDIA-only ecosystem (Isaac Lab, GR00T, Cosmos) | Medium — custom AZ asset formats not widely adopted outside O3DE; but URDF/SDF import, 83 Gems, Gem registry |
+| **Vendor** | Medium — LF governance mitigates, but NVIDIA controls Warp dependency | High — Google DeepMind 89% commits, CLA, no external maintainers | High — Genesis AI controls all repos + Quadrants compiler (fork of unmaintained Taichi) | Low — OSRA PMC governance, multiple maintainer orgs | High — 117 proprietary omni.* deps, no contributions accepted. IsaacLab 3.0 Kit-less Newton mode partially mitigates by bypassing Kit SDK for RL training | Low — LF governance, DCO, Amazon donated and cannot reclaim; PhysX vendored as O3DE fork (BSD-3-Clause) |
+| **Ecosystem** | Low — open formats (MJCF, URDF, USD), standard APIs. IsaacLab 3.0 multi-backend architecture elevates Newton to a first-class physics backend in the dominant RL framework | Low — MJCF open standard, wide ecosystem support | Low — standard formats (URDF, MJCF), Gymnasium integration | Low — SDF open standard, native ROS 2 ecosystem | High — proprietary Kit extensions, NVIDIA-only ecosystem (Isaac Lab, GR00T, Cosmos). But IsaacLab 3.0 factory pattern decouples RL framework from Kit for Newton backend | Medium — custom AZ asset formats not widely adopted outside O3DE; but URDF/SDF import, 83 Gems, Gem registry |
 
 ---
 
@@ -112,7 +112,7 @@ Compares solutions for the **Simulation Engines** platform capability to inform 
 
 | Dimension | Newton (LF) | MuJoCo (Google DeepMind) | Genesis World (Genesis AI) | Gazebo (OSRA) | Isaac Sim (NVIDIA) | O3DE (O3DF/LF) |
 | --- | --- | --- | --- | --- | --- | --- |
-| **Runs on OpenShift** | With effort | With effort | With effort | With effort | No (proprietary Kit SDK) | With effort (Dockerfile available) |
+| **Runs on OpenShift** | With effort | With effort | With effort | With effort | No (proprietary Kit SDK); but IsaacLab 3.0 Kit-less Newton mode bypasses Kit SDK | With effort (Dockerfile available) |
 | **RHEL compatible** | Yes | Yes | Yes | Yes | Partial (NVIDIA runtime) | Yes (Linux primary platform) |
 | **License compatible** | Yes (Apache-2.0) | Yes (Apache-2.0) | Yes (Apache-2.0) | Yes (Apache-2.0) | Caution (code Apache-2.0, runtime proprietary) | Yes (Apache-2.0 + MIT dual) |
 | **Contribution model** | Open (DCO) | CLA (Google CLA) | None (no CLA/DCO) | Open (DCO) | Closed (no contributions accepted) | Open (DCO) |
@@ -163,13 +163,14 @@ Compares solutions for the **Simulation Engines** platform capability to inform 
 - **Strategic positioning**: Absorbs MuJoCo's physics model (via MuJoCo Warp) while providing LF governance. Represents the industry's attempt to create a vendor-neutral simulation standard. Red Hat contributing here builds influence over the future of open simulation
 - **Production adoption**: Already used by Skild AI + Foxconn, Samsung + Lightwheel, Disney Research, Toyota, Universal Robots — demonstrates real-world viability at 14 months old
 - **Isaac Sim integration**: Newton is now a physics backend in Isaac Sim 6.0, meaning Newton adoption does not require abandoning the Isaac Sim ecosystem — it provides a governance-independent physics path within it
+- **IsaacLab 3.0 multi-backend architecture (Aug 2026)**: IsaacLab 3.0 (beta) introduces a `PhysicsManager` ABC with factory pattern, supporting three backends: PhysX (`isaaclab_physx`), Newton/MJWarp (`isaaclab_newton`), and OvPhysX (`isaaclab_ov`). Newton is now a first-class peer backend in the dominant robot learning framework, not just an Isaac Sim plugin. Kit-less Newton mode runs IsaacLab RL training workflows without Isaac Sim or Omniverse Kit dependency — removing the proprietary runtime from the critical path for RL training. MJWarp (MuJoCo-Warp by Google DeepMind) serves as the primary validated solver within the Newton backend. Active development: PR #7429 (backend registry), PR #7393 (MuJoCo schema, merged), PR #7386 (MJC attributes). Component support matrix across backends covers Articulation, Rigid Object, and Deformable (partial for Newton)
 
 ### What we give up
 
-- **Hardware portability**: Newton is CUDA-only (via Warp). MuJoCo (via MJX/JAX) and Genesis World (via Quadrants) support ROCm, Metal, and multi-backend GPU. This is Newton's biggest gap for Red Hat's hardware-neutral positioning
+- **Hardware portability**: Newton is CUDA-only (via Warp). MuJoCo (via MJX/JAX) and Genesis World (via Quadrants) support ROCm, Metal, and multi-backend GPU. This is Newton's biggest gap for Red Hat's hardware-neutral positioning. IsaacLab 3.0's `use_mujoco_cpu=True` diagnostic mode provides a CPU fallback via MuJoCo's native C engine, but it is not validated for training — it is a development/debugging tool only
 - **Rendering**: Newton has no built-in renderer — relies on Isaac Sim or OpenUSD for visualization. Genesis World (Nyx) and Isaac Sim (RTX) have photorealistic rendering built in
 - **Maturity**: At 14 months, Newton is the youngest project. MuJoCo has 14 years and 9,250+ citations. Gazebo has 20+ years and NASA/DARPA pedigree
-- **CPU path**: Newton has no CPU fallback. MuJoCo, Genesis World, and Gazebo all run on CPU, which matters for development, CI, and non-GPU environments
+- **CPU path**: Newton has no production CPU fallback. MuJoCo, Genesis World, and Gazebo all run on CPU, which matters for development, CI, and non-GPU environments
 - **ROS 2 integration**: Gazebo has native, battle-tested ROS 2 integration. Newton's ROS path is indirect (via Isaac Sim)
 
 ### Where O3DE fits
@@ -188,6 +189,8 @@ Red Hat's existing investment (General member of O3DF, Roddie Kieley co-chairs S
 - **If Gazebo adds GPU physics**: becomes viable for training workloads, not just validation. Currently no indication Intrinsic plans this
 - **If Newton community narrows further** (NVIDIA share grows beyond 75%): LF governance becomes a paper shield rather than real multi-vendor collaboration
 - **If O3DE contributor base stabilizes and grows**: the post-Amazon transition is the key risk. If the resurgence (May–Jul 2026) sustains and broadens, O3DE becomes the strongest governance + rendering + ROS 2 combination. If it stalls, the 2.5M LOC codebase becomes unmaintainable
+- **When IsaacLab 3.0 reaches GA** (currently beta2): the multi-backend factory pattern and Kit-less Newton mode become production-grade. At GA, IsaacLab becomes a Kit-free RL framework for Newton — significantly reducing the lock-in argument against Newton adoption. Full tech eval of Isaac Lab warranted at that point
+- **If IsaacLab adds non-CUDA backends** (e.g., MuJoCo MJX via JAX/ROCm, or Genesis World Quadrants): would create a truly hardware-portable RL framework. The `PhysicsManager` ABC is architecturally ready for this, but no non-CUDA backend exists yet
 
 ---
 
