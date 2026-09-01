@@ -2,7 +2,7 @@
 
 > Open-source and proprietary implementations organized by building block
 
-**Last Updated**: 2026-08-27
+**Last Updated**: 2026-09-01
 
 ---
 
@@ -372,18 +372,25 @@
 
 **Key Features**:
 
-- Three model scales: Nano (16B: 8B reasoner + 8B generator), Super (64B: 32B reasoner + 32B generator), Edge (4B, on-device inference on Jetson Thor; post-trainable for specific embodiments/sensors in ~1 day; announced July 2026)
-- Five open model checkpoints: Super, Nano, Super-Text2Image, Super-Image2Video, Nano-Policy-DROID
-- Five curated synthetic datasets (PhyxSim, RobotSim, DriveSim, SynHuman, Warehouse) on HuggingFace
-- Available on Hugging Face under OpenMDW 1.1 license (commercial use permitted)
+- Three model scales: Nano (16B: 8B reasoner + 8B generator), Super (64B: 32B reasoner + 32B generator), Edge (4B with 2B Nemotron reasoner, on-device inference on Jetson Thor)
+- Mixture-of-Transformers (MoT) architecture unifying vision reasoning, world generation, and action prediction
+- Five open model checkpoints: Super, Nano, Super-Text2Image, Super-Image2Video, Nano-Policy-DROID, plus Edge-Policy-DROID
+- Five curated synthetic datasets (PhyxSim, RobotSim, DriveSim, SynHuman, Warehouse) on HuggingFace; Cosmos3-DROID dataset (76K trajectories, 350 hours, 86 tasks, Franka Panda)
+- Available on Hugging Face under OpenMDW 1.1 license (Linux Foundation, commercial use permitted)
 - Cosmos-HUE evaluation benchmark for Physical AI video generation
+- #1 on Artificial Analysis (open text-to-image, image-to-video), PAI-Bench (world generation), Physics-IQ (image-to-video), RoboLab (robot policy)
+- Edge deployment: ~9 GB BF16 weights fit on Jetson AGX Thor T5000 memory; ~1.53s action chunk generation (32 steps at 15 Hz = 2.13s of motion — no gaps); 22.9% success on 120 language-conditioned manipulation tasks (vs. 36.8% for Nano). Uses OpenPI protocol (WebSocket server) for inference — same interface as Physical Intelligence pi0
+- Post-training pipeline: 64 nodes × 4 GB200 GPUs, ~68 hours (~17,400 GPU-hours). Supports Franka, UR, WidowX 250, LeRobot SO101 embodiments
+- Simulation eval via RoboLab (built on Isaac Lab-Arena)
 - ABB Robotics, FANUC, KUKA, Yaskawa (2M+ combined robot install base) using Omniverse + Isaac with Cosmos
+- Cosmos Coalition expanding to Japan (factories, logistics, agriculture, construction, healthcare, transportation)
+- Adopters: Doosan Robotics, LG, Samsung, Skild AI (robotics); Li Auto, Xiaomi, Afari (AV); Centific, Fogsphere, Linker Vision, Milestone Systems (vision AI)
 
 **Status**: Active
 
 **Stats**: 8,500 stars, 543 forks, 84 watchers (NVIDIA)
 
-**Last Updated**: 2026-06
+**Last Updated**: 2026-08
 
 **Building block(s)**: [Video Generation / Prediction Models](building-blocks.md#video-generation--prediction-models)
 

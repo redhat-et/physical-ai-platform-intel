@@ -2,7 +2,7 @@
 
 > Players in Physical AI — their solutions, reference architectures, and platform relevance
 
-**Last Updated**: 2026-08-27
+**Last Updated**: 2026-09-01
 
 **Market context**: Physical AI VC funding exceeded $23B in H1 2026 (WSJ). Robotics specifically reached $18.8B, already exceeding full-year 2025 ($15B) and the 2021 peak ($14.1B). Funding is top-heavy: Waymo $16B Series D, Skild $1.4B, NEURA $1.4B, PI $1B. Humanoid robotics is the breakout category. Japan announced a national strategy targeting 10M AI-equipped robots across 18 sectors by 2040, with $65B public+private investment and a $6.2B sovereign AI compute consortium (Noetra). US government banned new foreign-made humanoids, robot dogs, and solar inverters citing national security risks (Jul 2026) — significant policy signal for domestic robotics manufacturing and supply chain sovereignty. Generalist AI reportedly reached $3B valuation (Aug 2026, TechCrunch).
 
@@ -15,7 +15,7 @@
 ### NVIDIA
 
 **Type**: `Big Tech`
-**About**: Largest industrial investor in world foundation models via the Cosmos platform. Frames world models as "the ChatGPT moment for robotics." Building a full-stack Physical AI platform spanning world models, simulation, robot foundation models, physics ML, edge inference, and digital twins. An investor in SSI and AMI Labs. Released open-source Physical AI agent skills and tools (May 2026, [github.com/NVIDIA/skills](https://github.com/NVIDIA/skills)) covering robotics, AV, vision AI, industrial digital twins, and healthcare — adopted by Pegatron (67% training time reduction), Delta Electronics, Foxconn, and Li Auto. Central to Japan's national Physical AI strategy (Jul 2026): supplying a Vera Rubin AI factory (13,750 Vera CPUs + 27,500 Rubin GPUs, 140 MW) to the Noetra consortium (~44 Japanese firms including SoftBank, Sony, NEC, Honda) backed by 1 trillion yen ($6.2B) over five years. Robotics coalition with Fanuc, Yaskawa, Kawasaki Heavy, Fujitsu, Hitachi, and others building on Cosmos models including Cosmos 3 Edge. Toyota extending integration into manufacturing simulation and vehicle software.
+**About**: Largest industrial investor in world foundation models via the Cosmos platform. Frames world models as "the ChatGPT moment for robotics." Building a full-stack Physical AI platform spanning world models, simulation, robot foundation models, physics ML, edge inference, and digital twins. Co-signed open letter with 200+ companies ("Open Weights and American AI Leadership", Aug 2026) — positions open weights as a "practical technical requirement" for Physical AI, since every deployment demands specialization to specific robots, sensors, and environments. An investor in SSI and AMI Labs. Released open-source Physical AI agent skills and tools (May 2026, [github.com/NVIDIA/skills](https://github.com/NVIDIA/skills)) covering robotics, AV, vision AI, industrial digital twins, and healthcare — adopted by Pegatron (67% training time reduction), Delta Electronics, Foxconn, and Li Auto. Central to Japan's national Physical AI strategy (Jul 2026): supplying a Vera Rubin AI factory (13,750 Vera CPUs + 27,500 Rubin GPUs, 140 MW) to the Noetra consortium (~44 Japanese firms including SoftBank, Sony, NEC, Honda) backed by 1 trillion yen ($6.2B) over five years. Robotics coalition with Fanuc, Yaskawa, Kawasaki Heavy, Fujitsu, Hitachi, and others building on Cosmos models including Cosmos 3 Edge. Toyota extending integration into manufacturing simulation and vehicle software.
 
 **Solutions**:
 
@@ -23,8 +23,8 @@
 
 - **What it does**: World foundation models for Physical AI — general-purpose video prediction models trained on 20M hours of real-world data for generating synthetic training data, sim-to-real transfer, and world simulation.
 - **Building blocks covered**: [Latent World Models](building-blocks.md#latent-world-models), [Video Generation / Prediction Models](building-blocks.md#video-generation--prediction-models), [Sim-to-Real Transfer Pipeline](building-blocks.md#sim-to-real-transfer-pipeline)
-- **Key features (functional)**: Cosmos-Predict2.5 (world simulation), Cosmos-Transfer2 / Transfer2.5 (sim2real from depth/segmentation/edge/HD map inputs), Cosmos-Reason2 (7B physical reasoning VLM, #1 on Hugging Face Physical Reasoning Leaderboard), Cosmos-Tokenizer. Distilled Cosmos Transfer collapses 70-step generation to 1 step for RTX PRO Server deployment. Cosmos 3 Edge (4B-parameter world foundation model for on-device inference on Jetson Thor; post-trainable for specific embodiments/sensors in ~1 day)
-- **Key features (non-functional)**: Trained on 20M hours of video; open-weight models under permissive licensing; 2M+ total downloads. Adopters include Lightwheel, Moon Surgical, Skild AI, Uber (AV data annotation), Magna (autonomous delivery)
+- **Key features (functional)**: Cosmos 3 family (MoT architecture): Super (64B), Nano (16B), Edge (4B with 2B Nemotron reasoner). Cosmos-Predict2.5 (world simulation), Cosmos-Transfer2 / Transfer2.5 (sim2real from depth/segmentation/edge/HD map inputs), Cosmos-Reason2 (7B physical reasoning VLM, #1 on Hugging Face Physical Reasoning Leaderboard), Cosmos-Tokenizer. Distilled Cosmos Transfer collapses 70-step generation to 1 step for RTX PRO Server deployment. Edge runs on Jetson AGX Thor T5000 (~9 GB BF16, ~1.53s/action chunk, 32 steps at 15 Hz); uses OpenPI protocol for inference; post-trainable for Franka, UR, WidowX 250, SO101 embodiments in ~68 hours on 64×4 GB200. #1 on Artificial Analysis, PAI-Bench, Physics-IQ, RoboLab benchmarks
+- **Key features (non-functional)**: Trained on 20M hours of video; open-weight models under OpenMDW 1.1 license (Linux Foundation); 2M+ total downloads. Cosmos Coalition expanding to Japan. Adopters: Doosan Robotics, LG, Samsung, Skild AI (robotics); Li Auto, Xiaomi, Afari (AV); Centific, Fogsphere, Linker Vision, Milestone Systems (vision AI); plus Lightwheel, Moon Surgical, Uber (AV data annotation), Magna (autonomous delivery)
 - **Competes with**: Genie 3, Sora, GAIA series — on synthetic data generation and world simulation
 - **Complements**: Isaac Sim (simulation source), GR00T (policy consumer), Omniverse (rendering)
 - **Openness**: `OSS-single-vendor`
@@ -984,6 +984,38 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 **Collaborations**: [Adrian Kosowski](#adrian-kosowski) (lead researcher), University of Wroclaw
 
 **Links**: [GitHub](https://github.com/pathwaycom/bdh), [Website](https://pathway.com)
+
+---
+
+### Nebius
+
+**Type**: `Startup`
+**Stage/Scale**: $582M Q2 2026 revenue (+454% YoY), $3B ARR. NASDAQ: NBIS. $2B NVIDIA strategic investment (Mar 2026). Anchor contracts: Meta ($27B), Microsoft ($19.4B)
+**About**: Ex-Yandex AI cloud infrastructure provider (spun out Jul 2024, Amsterdam HQ), positioning as the cloud execution layer for Physical AI. Offers managed GPU clusters (H100/B200/GB200 NVL72) with integrated NVIDIA simulation and world-model tooling (OSMO, Cosmos, Isaac Sim/Lab) as a turnkey Physical AI platform. Physical AI Living Lab (first cohort Sep 2026, UK) funnels European robotics startups via NVIDIA Inception. Asset-light model (Jul 2026) allows partners to deploy Nebius stack in their own data centers. Subsidiary Avride builds autonomous delivery robots (Uber Eats in Austin/Dallas/Jersey City) and robotaxis (200 vehicles in Dallas on Uber app). Zero edge presence — structural gap for every customer deploying to real robots.
+
+**Solutions**:
+
+#### Physical AI Cloud
+
+- **What it does**: Managed platform for the robotics lifecycle — training, simulation, synthetic data generation, and inference on GPU clusters with pre-integrated NVIDIA OSMO orchestration, Cosmos synthetic data, and Isaac Sim/Lab simulation
+- **Building blocks covered**: Training infrastructure, simulation (managed), synthetic data generation (managed)
+- **Key features (functional)**: NVIDIA OSMO orchestration, Cosmos synthetic data pipeline, Isaac Sim/Lab simulation, RTX PRO 6000 Blackwell GPUs, high-throughput storage, data labeling integration (Voxel51 FiftyOne)
+- **Key features (non-functional)**: Managed service — Nebius handles infrastructure; customers focus on model development. Living Lab provides 6-month accelerator with engineering mentorship
+- **Competes with**: CoreWeave, Lambda Labs, AWS/Azure/GCP — on AI cloud for Physical AI workloads
+- **Complements**: Edge deployment platforms (RHEL Device Edge, Jetson), robot middleware (ROS 2)
+- **Openness**: `Proprietary` (managed service wrapping NVIDIA OSS/proprietary tools)
+- **Lock-in vectors**: NVIDIA GPU dependency (entire platform built on NVIDIA silicon + InfiniBand + CUDA), cloud-locked (no hybrid until asset-light model matures), proprietary inference stack (Eigen AI + Clarifai)
+- **Source**: [Nebius Physical AI](https://nebius.com/newsroom/nebius-teams-with-nvidia-to-build-cloud-for-robotics-and-physical-ai)
+
+**Platform relevance**:
+
+- **Partnership surface**: Edge deployment (Nebius has none — every Physical AI customer deploying to robots needs edge infrastructure), OS for asset-light model partner deployments, fleet management
+- **Competitive surface**: Managed Kubernetes for AI workloads competes with OpenShift AI in cloud tier; managed MLOps overlaps with RHOAI
+- **What they need from a platform**: Edge OS and device management for robot deployment, fleet orchestration, on-prem Kubernetes for sovereign/regulated environments
+
+**Collaborations**: [NVIDIA](#nvidia) ($2B strategic investment, OSMO/Cosmos/Isaac integration), Uber (Avride $375M co-investment), Voxel51 (data curation)
+
+**Links**: [Website](https://nebius.com), [Intel Profile](../deliverables/intel/companies/nebius.md)
 
 ---
 

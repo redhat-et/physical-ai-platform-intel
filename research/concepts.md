@@ -2,7 +2,7 @@
 
 > Deep dives into fundamental concepts underlying AI world models
 
-**Last Updated**: 2026-07-01
+**Last Updated**: 2026-09-01
 **Last Synthesized**: 2026-07-01
 
 ---
@@ -399,6 +399,28 @@ Yoshua Bengio's proposal (2025) for non-agentic AI built around a world model th
 **Definition**: Methods for deploying simulation-trained robot policies in the real world, bridging the gap between simulated and physical environments. Three main approaches: domain randomization (train across varied sim parameters), domain adaptation (style transfer between domains), and co-training (joint training on sim + real data).
 
 **Connection to World Models**: World models can serve as sim-to-real bridges in two ways: (1) video generation (Cosmos-Transfer) translates sim scenes to photorealistic visuals, (2) latent-space models (JEPA) learn representations invariant to the sim-real gap. HyperSim (2026) demonstrates co-training achieving 95% sim-to-real success with pi0. Real-is-Sim (2025) inverts the paradigm — a 60Hz dynamic digital twin via Gaussian splatting makes simulation the control authority, eliminating the transfer gap entirely.
+
+### Three-Computer Architecture
+
+NVIDIA's reference architecture for Physical AI systems (Jensen Huang, GTC). Three compute tiers form a continuous learning loop:
+
+1. **Training computer** (datacenter): DGX/HGX clusters for fine-tuning foundation models, RL training, and large-scale data processing. Requires scale, fast networking, resilient scheduling, rapid access to multimodal sensor data
+2. **Simulation computer** (datacenter): GPU-accelerated simulation for synthetic data generation, domain randomization, policy evaluation, and scenario replay. Requires rendering GPUs, physics CPUs, fast storage, orchestration for thousands of parallel environments. NVIDIA implementation: Isaac Sim + Omniverse + Cosmos
+3. **Edge computer** (on-robot): Constrained hardware running trained policies with low latency. Requires safety, reliability, power efficiency, real-time performance. NVIDIA implementation: Jetson Thor running Cosmos 3 Edge (4B) or GR00T N1
+
+**The gap**: In practice these three computers operate as separate islands — different toolchains, data formats, storage systems, and orchestration. Teams spend more time wrangling infrastructure than improving models. Closing this gap is the core platform challenge for Physical AI.
+
+**Platform implication**: The three-computer architecture maps directly to platform building blocks — training infrastructure, simulation engines, and edge inference runtime — and motivates the [robotics data flywheel](#robotics-data-flywheel) as the integration pattern connecting them.
+
+### Robotics Data Flywheel
+
+Continuous improvement loop connecting the three-computer architecture: edge telemetry feeds back into data lakes → failure cases become simulation scenarios → simulation generates synthetic training data → training produces better models → better models deploy to edge → cycle repeats.
+
+**Why it matters**: The faster this loop runs, the faster the system improves. Currently assembled manually by most teams — stitching together real-world failure data, simulation replay, synthetic data generation, retraining, and redeployment across disconnected tools and formats.
+
+**Early implementations**: NVIDIA's OSMO orchestrator and Physical AI Data Factory Blueprint provide workflow templates. Skild AI's Foxconn deployment demonstrates a production flywheel — real assembly-line data feeding back into model improvement. The pattern requires unified data management across real and synthetic sources, automated failure mining, and seamless model promotion from training to edge.
+
+**Connection to World Models**: World models accelerate the flywheel at multiple points — Cosmos generates synthetic training data, world models enable model-based evaluation without physical deployment (Ctrl-World), and sim-to-real transfer (Cosmos-Transfer) bridges the visual domain gap between simulation and reality.
 
 ---
 

@@ -28,6 +28,7 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 | Intrinsic (Google) | [intrinsic.md](deliverables/intel/companies/intrinsic.md) | [intrinsic-deep-dive.md](deliverables/intel/companies/intrinsic-deep-dive.md) |
 | KUKA | [kuka.md](deliverables/intel/companies/kuka.md) | [kuka-deep-dive.md](deliverables/intel/companies/kuka-deep-dive.md) |
 | Mistral AI | [mistral-ai.md](deliverables/intel/companies/mistral-ai.md) | [mistral-ai-deep-dive.md](deliverables/intel/companies/mistral-ai-deep-dive.md) |
+| Nebius | [nebius.md](deliverables/intel/companies/nebius.md) | [nebius-deep-dive.md](deliverables/intel/companies/nebius-deep-dive.md) |
 | NEURA Robotics | [neura-robotics.md](deliverables/intel/companies/neura-robotics.md) | [neura-robotics-deep-dive.md](deliverables/intel/companies/neura-robotics-deep-dive.md) |
 | NVIDIA | [nvidia.md](deliverables/intel/companies/nvidia.md) | [nvidia-deep-dive.md](deliverables/intel/companies/nvidia-deep-dive.md) |
 | Physical Intelligence | [physical-intelligence.md](deliverables/intel/companies/physical-intelligence.md) | [physical-intelligence-deep-dive.md](deliverables/intel/companies/physical-intelligence-deep-dive.md) |
