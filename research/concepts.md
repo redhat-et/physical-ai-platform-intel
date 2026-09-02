@@ -38,7 +38,7 @@ Joint-Embedding Predictive Architecture is Yann LeCun's framework for self-super
 - VL-JEPA (vision-language, continuous embedding prediction replacing autoregressive tokens)
 - Le MuMo JEPA (multi-modal: RGB + LiDAR/thermal via learnable fusion tokens)
 - Causal-JEPA (object-centric masking for causal reasoning)
-- LeWorldModel (stable end-to-end from pixels, 2 loss terms, ~15M params)
+- LeWorldModel (stable end-to-end from pixels, 2 loss terms, ~15M params) → LeVJEPA (SIGReg for video, no EMA/predictor/stop-gradient, 5-20x cheaper than V-JEPA 2)
 - VJEPA/BJEPA (probabilistic/Bayesian extensions for uncertainty quantification)
 - Var-JEPA (variational formulation — derives JEPA from latent-variable model, principled uncertainty quantification without ad-hoc regularizers)
 - ACT-JEPA (unified policy + world model learning)
@@ -54,7 +54,7 @@ Joint-Embedding Predictive Architecture is Yann LeCun's framework for self-super
 
 **vs. Diffusion/Flow Models** (Cosmos, Genie): Diffusion/flow models generate in pixel space — producing inspectable video outputs. JEPA operates in latent space — more efficient for planning (48x faster, per LeWorldModel) but outputs are not directly visualizable. Historically complementary (Cosmos for synthetic data, JEPA for planning), though Cosmos 3's dual-tower MoT architecture now integrates autoregressive latent reasoning alongside diffusion-based generation, blurring the boundary.
 
-### JEPA Current State (as of 2026-07)
+### JEPA Current State (as of 2026-09)
 
 **Maturation signals**:
 
@@ -63,15 +63,17 @@ Joint-Embedding Predictive Architecture is Yann LeCun's framework for self-super
 - Accessible tooling: EB-JEPA library, stable-worldmodel framework, LeWM implementation
 - AMI Labs ($1.03B seed) commercializing JEPA-based world models
 - Var-JEPA derives JEPA from variational principles — collapse prevention emerges naturally from ELBO rather than requiring hand-crafted regularization
+- LeVJEPA (Aug 2026) eliminates all architectural heuristics (EMA, stop-gradient, predictor) for video JEPA, matching V-JEPA 2 at 5-20x lower compute — the simplest competitive video pretraining recipe to date
 
 **Active frontiers**:
 
-- Dense features (V-JEPA 2.1): Addressing weakness in per-patch feature quality for fine-grained tasks
+- Dense features (V-JEPA 2.1): Addressing weakness in per-patch feature quality for fine-grained tasks. LeVJEPA achieves emergent patch-level organization from [cls]-only supervision without explicit patch loss — a potential alternative to V-JEPA 2.1's approach
 - Causal reasoning (Causal-JEPA): Object-level masking for counterfactual understanding; 100x reduction in required latent features
 - Probabilistic extensions (VJEPA/BJEPA): Uncertainty quantification for planning under stochastic dynamics
 - Multi-modal fusion (Le MuMo JEPA, VL-JEPA): Integrating heterogeneous sensor inputs and language
 - Cross-embodiment imitation (Demo-JEPA): One-shot transfer across robot embodiments via goal inference in V-JEPA 2.1 latent space
 - Domain expansion: Telecommunications (3 papers), healthcare (EchoJEPA), autonomous driving (Le MuMo JEPA on Waymo/nuScenes)
+- Regularization diversity: Three alternatives to Gaussian regularization now exist — SIGReg (LeVJEPA), sparse codes (LpWM), and contrastive inverse dynamics (AC-MTM) — suggesting task-dependent regularization rather than a single universal approach
 
 **Open questions**:
 

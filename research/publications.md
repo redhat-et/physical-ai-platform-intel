@@ -2,7 +2,7 @@
 
 > Papers, talks, videos, and blog posts on Physical AI — world models, robot learning, sim-to-real, and related topics
 
-**Last Updated**: 2026-08-27
+**Last Updated**: 2026-09-02
 
 ---
 
@@ -25,6 +25,24 @@
 - Deep self-supervision applied across multiple intermediate encoder layers improves spatial, semantic, and temporal coherence of learned features
 
 **Relevance to World Models**: Direct successor to V-JEPA 2, addressing its weakness in dense (per-pixel/per-patch) feature quality while maintaining strong global representations. The 20-point robotics improvement demonstrates that dense features matter for world model downstream tasks — global scene understanding alone is insufficient for fine-grained manipulation planning.
+
+### LeVJEPA: Efficient & Scalable Video Pretraining without the Heuristics [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2608.27395)
+
+**Authors/Presenters**: Lukas Kuhn, Lucas Maes, Giuseppe Serra, Quentin Le Lidec, [Yann LeCun](ecosystem.md#yann-lecun), Randall Balestriero, Florian Buettner
+
+**Date**: 2026-08
+
+**Summary**: Extends LeJEPA's collapse-free SIGReg objective to video, eliminating all architectural heuristics required by V-JEPA/V-JEPA 2: no EMA target encoder, no stop-gradient, no capacity-limited predictor. Trainable architecture is encoder + projector only, with a single hyperparameter (lambda=0.02, not tuned). Matches or exceeds V-JEPA 2 across ViT-S/B/L at 5.6-20.8x lower total pretraining compute. At matched FLOPs, exceeds the strongest video baseline by 7.6 points on ImageNet-1K (61.0 vs 53.4).
+
+**Key Findings**:
+
+- 95% token dropping (keeping 39 of 784 tokens) counterintuitively *increases* accuracy (47.6% vs 33.9% at 0% drop) — serves as both compute reduction and stochastic augmentation. Uniform random dropping far superior to tube masking (50.7% vs 39.6%)
+- Block-causal attention (bidirectional within frame, causal across frames) at no accuracy cost (51.2% vs 50.7% bidirectional) — enables streaming inference and autoregressive world model compatibility
+- Emergent patch-level semantic organization from [cls]-only supervision: PCA of patch tokens shows object-background separation without any patch-level loss. V-JEPA 2 "exhibits no comparable token-level organization" without explicit patch loss
+- ViT-Tiny on a single consumer GPU for 12 hours using 8 unannotated videos: 8.9% → 25.2% ImageNet-1K — demonstrates accessibility of the approach
+- Scaled ViT-L/16 on full data (K710 + SSv2 + Walking Tours + PE Video): 67.5% ImageNet-1K, 55.0% SSv2 (frozen attentive probing)
+
+**Relevance to World Models**: Validates SIGReg as a complete replacement for V-JEPA's EMA/predictor/stop-gradient collapse prevention — the simplest JEPA recipe to date with competitive or superior results. The block-causal attention is directly relevant for world model architectures requiring causal temporal structure (autoregressive rollouts, streaming inference on robots). From the same FAIR group (Le Lidec, Maes, Balestriero, LeCun) as LpWM and LeWorldModel, indicating convergence toward SIGReg as the preferred regularization for the LeCun JEPA line. The 5-20x compute reduction lowers the barrier for organizations to train their own video foundation models rather than depending on pretrained backbones. [Code](https://github.com/galilai-group/levjepa), [Checkpoints](https://huggingface.co/galilai-group/LeVJEPA-VideoMix-Large).
 
 ### VL-JEPA: Joint Embedding Predictive Architecture for Vision-language [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2512.10942)
 
