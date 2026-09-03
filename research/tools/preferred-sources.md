@@ -163,6 +163,7 @@ Tier 3 — niche, useful for specific building blocks:
 
 - **Figure AI**: https://www.figure.ai/news — humanoid robotics
 - **Agility Robotics**: https://agilityrobotics.com/blog — warehouse/logistics robotics
+- **Anyware Robotics**: https://anyware-robotics.com/articles/ — mobile manipulation for container unloading and palletizing (Pixmo)
 - **1X Technologies**: https://www.1x.tech/blog — humanoid robotics
 - **Unitree**: https://www.unitree.com/news — affordable quadruped/humanoid robots
 - **Physical Intelligence**: https://www.physicalintelligence.company/blog — robot foundation models

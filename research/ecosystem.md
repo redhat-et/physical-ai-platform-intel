@@ -1876,6 +1876,48 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 
 ---
 
+### Anyware Robotics
+
+**Type**: `Startup`
+**Stage/Scale**: ~$17.7M raised over 3 rounds (Tracxn): $5M seed (Mar 2023), $12M seed led by GFT Ventures with Foothill Ventures, Black Forest Ventures, Alumni Ventures (Mar 2025), undisclosed NAVER D2SF investment (Mar 2026). ~35 employees. Fremont, CA
+**About**: Mobile manipulators for labor-intensive warehouse box handling, starting with floor-loaded container and trailer unloading. Founded Jan 2023 by Thomas Tang (CEO, ex-founding member of FANUC Silicon Valley research lab, led FANUC's AI palletization product), Bruce Fan (CTO, ex-FANUC), Sam Zhou (Chief Engineer, ex-BMW/Porsche autonomous driving), and Torsten Schreiber (VP Product, ex-GreyOrange); three UC Berkeley robotics PhDs, 25 patents collectively. Thesis is one multi-purpose robot whose task set (unloading, palletizing, depalletizing, case picking, trailer loading) grows through software releases, deployed without dock modifications. Named customers: Saddle Creek Logistics (Modesto, CA) and Western Post US. MHI Best Innovation Award at ProMat 2025 and Best Robotics Innovation at MODEX 2026.
+
+**Solutions**:
+
+#### Pixmo
+
+- **What it does**: Mobile manipulator for container/trailer unloading and, via software updates, palletizing and other box-handling tasks. Omnidirectional AMR base with pallet-sized footprint, FANUC CRX-30iA collaborative arm (30 kg payload, 1,889 mm reach), vacuum end effector, 3D perception sensor array. Patent-pending conveyor add-on turns unloading into a "pull" motion onto an onboard conveyor instead of pick-and-place.
+- **Building blocks covered**: [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime), [Sensor Data Ingestion](building-blocks.md#sensor-data-ingestion), [Safety, Validation & Certification Frameworks](building-blocks.md#safety-validation--certification-frameworks)
+- **Key features (functional)**: Handles variable box sizes, orientations, SKUs, and packaging quality without per-SKU programming; force-sensing cobot arm for operation alongside associates; direct purchase or RaaS; deploys in days with no fixed conveyors, dock changes, or WMS integration
+- **Key features (non-functional)**: Vendor claims up to 1,000 boxes/hr with conveyor add-on and 65 lb (29 kg) case capacity. Saddle Creek outcomes: container unloaded in under 3 hours, unloading crew cut from 4-5 to 1-2 associates, zero dock injuries for unloading, operation in 130-140 F containers
+- **Competes with**: Boston Dynamics Stretch, Dexterity DexR/Mech, Pickle Robot, Contoro, Mujin TruckBot — on container/trailer unloading; differentiates on lightweight cobot-based design, onboard conveyor, and no-infrastructure deployment
+- **Complements**: FANUC CRX cobots (embedded), 3PL receiving-dock operations and outbound conveyors
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Vertically integrated robot + software; single-vendor arm (FANUC); RaaS keeps software lifecycle with vendor
+- **Source**: [Industries page](https://anyware-robotics.com/industries/), [FANUC case study](https://www.fanucamerica.com/case-studies/automation-on-the-move-saddle-creek-logistics-deploys-pixmo-for-smarter-safer-logistics)
+
+#### AnywareOS
+
+- **What it does**: Proprietary onboard intelligence layer for perception, motion planning, and autonomous decision-making in unstructured industrial environments; machine learning trained on real-world handling data.
+- **Building blocks covered**: [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime), [Robot Middleware](building-blocks.md#robot-middleware)
+- **Key features (functional)**: Task-specific box detection and grasp/pull planning; new applications shipped as over-the-air software releases
+- **Key features (non-functional)**: No public architecture, model, compute platform, or simulation detail. Job postings list ROS/ROS 2, Python, C++
+- **Competes with**: Vertically integrated stacks of Dexterity, Boston Dynamics, Pickle Robot — on unstructured box handling; not offered as a standalone product
+- **Complements**: Open robotics middleware (ROS/ROS 2, inferred), FANUC controller
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Bundled with Pixmo hardware only
+- **Source**: [Website](https://www.anyware-robotics.com/)
+
+**Platform relevance**:
+
+- **Partnership surface**: Robot OEM consuming edge OS, middleware, and (as fleet grows) fleet management and training infrastructure; no disclosed fleet platform of its own
+- **Competitive surface**: None — sells robots and onboard software, not platform components
+- **What they need from a platform**: Supported ROS 2 on a hardened edge OS, OTA/fleet lifecycle tooling for RaaS operations, training pipeline for task-specific models from deployment data
+
+**Links**: [Website](https://www.anyware-robotics.com/), [Competitive profile](../deliverables/intel/companies/anyware-robotics.md), [Seed funding](https://www.therobotreport.com/anyware-robotics-picks-up-12m-seed-funding-to-automate-container-unloading/), [NAVER D2SF investment](https://navercorp.com/en/media/pressReleasesDetail?seq=34658)
+
+---
+
 ## OSS Communities
 
 *Open-source communities and foundations governing key Physical AI infrastructure*
