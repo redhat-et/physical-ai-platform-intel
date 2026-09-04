@@ -61,7 +61,7 @@
 - **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
 - **Key features (functional)**: Cross-embodiment transfer, bimanual manipulation, dual-system architecture, pre-trained on diverse robot data
 - **Key features (non-functional)**: Adopted by 1X, Agility, Figure AI, Boston Dynamics, Unitree, Sanctuary AI. Isaac GR00T Reference Humanoid Robot (GTC Taipei, Jun 2026): first open humanoid reference design combining Unitree H2 Plus + Sharpa Wave tactile hands + Jetson AGX Thor T5000 (Blackwell, 2070 FP4 TFLOPS). Partners: Ai2, ETH Zurich, Stanford, UCSD. Available from Unitree late 2026
-- **Competes with**: pi0/pi0.5, Gemini Robotics, GEN-1 — on generalist robot control
+- **Competes with**: pi0/pi0.5, Gemini Robotics, GEN-1.5 — on generalist robot control
 - **Complements**: Isaac Sim (training), Cosmos (synthetic data), Jetson (deployment)
 - **Openness**: `OSS-single-vendor`
 - **Lock-in vectors**: Optimized for Jetson deployment, NVIDIA training infrastructure
@@ -179,7 +179,7 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 - **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
 - **Key features (functional)**: Gemini Robotics 2 (Jul 2026, whole body intelligence), Gemini Robotics-ER 2 (Jul 2026, video understanding + task orchestration + multi-robot collaboration), Gemini Robotics 1.5/On-Device (VLA), action chunking for high-frequency control, cross-embodiment (ALOHA 2, Franka, Apptronik Apollo)
 - **Key features (non-functional)**: Cloud: ~250ms latency, 50Hz via action chunking; On-Device: <10ms inference, learns from 50 demos, cross-embodiment transfer. Gemini Robotics 2 adds whole-body locomotion+manipulation; ER 2 adds multi-robot coordination and video understanding for task planning
-- **Competes with**: GR00T N1, pi0/pi0.5, GEN-1 — on generalist robot control
+- **Competes with**: GR00T N1, pi0/pi0.5, GEN-1.5 — on generalist robot control
 - **Complements**: Gemini Omni (reasoning backbone), Newton (physics simulation)
 - **Openness**: `Proprietary` (API access)
 - **Lock-in vectors**: Google Cloud dependency, Gemini API, proprietary model
@@ -500,7 +500,7 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 - **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
 - **Key features (functional)**: Cross-embodiment transfer, bimanual manipulation, open-world generalization (pi0.5), multi-task learning, MEM (multi-scale embodied memory for 10+ min tasks), RL Token for online RL fine-tuning
 - **Key features (non-functional)**: 50Hz action generation via flow matching, trained on 10K+ hours robot data across 7 platforms
-- **Competes with**: GR00T N1, Gemini Robotics, GEN-1 — on generalist robot policy
+- **Competes with**: GR00T N1, Gemini Robotics, GEN-1.5 — on generalist robot policy
 - **Complements**: World models (upstream perception), simulation platforms (training)
 - **Openness**: `OSS-single-vendor` (via OpenPI)
 - **Lock-in vectors**: Minimal — open-source release via OpenPI
@@ -604,13 +604,25 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 
 **Type**: `Startup`
 **Stage/Scale**: Reportedly reached $3B valuation (Aug 2026, TechCrunch)
-**About**: Robotics foundation model company pursuing a "native embodied" approach — training directly on physical interaction data from wearable devices rather than internet images or teleoperation. Represents an alternative paradigm to VLAs (internet pretraining) and WAMs (video diffusion).
+**About**: Robotics foundation model company pursuing a "native embodied" approach — training directly on physical interaction data from wearable devices rather than internet images or teleoperation. Represents an alternative paradigm to VLAs (internet pretraining) and WAMs (video diffusion). GEN-1.5 (Aug 2026) demonstrates emergent one-shot in-context learning of physical tasks — the first credible GPT-3-style in-context learning for robot manipulation.
 
 **Solutions**:
 
+#### GEN-1.5
+
+- **What it does**: Large multimodal embodied model with emergent one-shot and few-shot in-context learning of physical manipulation tasks. Successor to GEN-1, pretrained continuously for 8+ months on ~1.9M scenes from proprietary data engine (homes, warehouses, factories)
+- **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models), [Data Annotation & Curation for Physical AI](building-blocks.md#data-annotation--curation-for-physical-ai)
+- **Key features (functional)**: One-shot in-context learning (59% avg success across 10 tasks from a single 3-12s video demo, zero gradient updates), few-shot gradient adaptation (83% avg success with 10 gradient steps on 5 min of data), 100 Hz action trajectories, 30s context/memory window, compositional generalization (chaining independent physical prompts), zero-shot sim-to-real transfer (no simulation data in pretraining), human-to-robot imitation (human demonstrates with own hands, robot reproduces), emergent novel tool use (banana as brush, dustpan for scooping), spontaneous bimanual coordination, self-correction, physical prompt engineering (drag-and-drop demo selection)
+- **Key features (non-functional)**: No meta-learning architecture — capabilities emerged from scale alone (predictable scaling laws since GEN-0). Extreme one-step adaptation: 66.5% success with 1 gradient step on 1 min of data (weight change <0.15%). Architecture/parameter count undisclosed
+- **Competes with**: pi0/pi0.5, GR00T N1, Gemini Robotics — on robot manipulation. Differentiates on data efficiency (one-shot learning) and native embodied training (not internet pretraining)
+- **Complements**: Wearable data collection devices (data engine)
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Proprietary data collection pipeline, closed model, no architecture details disclosed
+- **Source**: [GEN-1.5 Blog](https://generalistai.com/blog/gen-1.5)
+
 #### GEN-1
 
-- **What it does**: Native embodied foundation model trained on 500K+ hours of human movement data captured via low-cost "data hands" (UMIs) for production manipulation tasks.
+- **What it does**: Native embodied foundation model trained on 500K+ hours of human movement data captured via low-cost "data hands" (UMIs) for production manipulation tasks. Predecessor to GEN-1.5
 - **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models), [Data Annotation & Curation for Physical AI](building-blocks.md#data-annotation--curation-for-physical-ai)
 - **Key features (functional)**: Native embodied training (not internet pretraining), wearable data collection, production manipulation
 - **Key features (non-functional)**: 99% success rates on production tasks, 3x faster than SOTA (GEN-1, April 2026)
@@ -620,7 +632,7 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 - **Lock-in vectors**: Proprietary data collection pipeline, closed model
 - **Source**: [GEN-1 Blog](https://generalistai.com/blog/apr-02-2026-GEN-1)
 
-**Links**: [Website](https://generalistai.com/), [GEN-1 Blog](https://generalistai.com/blog/apr-02-2026-GEN-1)
+**Links**: [Website](https://generalistai.com/), [GEN-1.5 Blog](https://generalistai.com/blog/gen-1.5), [GEN-1 Blog](https://generalistai.com/blog/apr-02-2026-GEN-1)
 
 ---
 
@@ -650,7 +662,7 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 - **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
 - **Key features (functional)**: GENE-26.5 (May 2026): 20-step cooking, Rubik's Cube solving, lab automation
 - **Key features (non-functional)**: Human-level manipulation benchmarks
-- **Competes with**: pi0/pi0.5, GR00T N1, GEN-1 — on dexterous manipulation
+- **Competes with**: pi0/pi0.5, GR00T N1, GEN-1.5 — on dexterous manipulation
 - **Complements**: Genesis World (simulation training), custom dexterous hands (hardware)
 - **Openness**: `Proprietary`
 - **Lock-in vectors**: Proprietary data pipeline, Genesis hardware ecosystem
@@ -1440,7 +1452,7 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 - **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models), [Sim-to-Real Transfer Pipeline](building-blocks.md#sim-to-real-transfer-pipeline)
 - **Key features (functional)**: Force-based manipulation learning (not language-conditioned), self-supervised sim-to-real transfer, claims to bridge sim-to-real gap without human-in-the-loop
 - **Key features (non-functional)**: Targets "superhuman" performance rather than human imitation
-- **Competes with**: pi0/pi0.5 (VLA), GR00T N1 (VLA), GEN-1 (native embodied) — differentiates on force-first approach
+- **Competes with**: pi0/pi0.5 (VLA), GR00T N1 (VLA), GEN-1.5 (native embodied) — differentiates on force-first approach
 - **Complements**: High-fidelity simulation (training environment), force/torque sensors (hardware)
 - **Openness**: `Proprietary`
 - **Lock-in vectors**: Proprietary sim-to-real algorithms, proprietary VFA model
