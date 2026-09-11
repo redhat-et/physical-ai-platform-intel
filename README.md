@@ -35,6 +35,7 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 | Prometheus | [prometheus.md](deliverables/intel/companies/prometheus.md) | [prometheus-deep-dive.md](deliverables/intel/companies/prometheus-deep-dive.md) |
 | Qualcomm | [qualcomm.md](deliverables/intel/companies/qualcomm.md) | [qualcomm-deep-dive.md](deliverables/intel/companies/qualcomm-deep-dive.md) |
 | Rerun | [rerun.md](deliverables/intel/companies/rerun.md) | [rerun-deep-dive.md](deliverables/intel/companies/rerun-deep-dive.md) |
+| Scale AI | [scale-ai.md](deliverables/intel/companies/scale-ai.md) | [scale-ai-deep-dive.md](deliverables/intel/companies/scale-ai-deep-dive.md) |
 | Skild AI | [skild-ai.md](deliverables/intel/companies/skild-ai.md) | [skild-ai-deep-dive.md](deliverables/intel/companies/skild-ai-deep-dive.md) |
 | Universal Robots | [universal-robots.md](deliverables/intel/companies/universal-robots.md) | [universal-robots-deep-dive.md](deliverables/intel/companies/universal-robots-deep-dive.md) |
 

@@ -2,9 +2,9 @@
 
 > Players in Physical AI — their solutions, reference architectures, and platform relevance
 
-**Last Updated**: 2026-09-01
+**Last Updated**: 2026-09-11
 
-**Market context**: Physical AI VC funding exceeded $23B in H1 2026 (WSJ). Robotics specifically reached $18.8B, already exceeding full-year 2025 ($15B) and the 2021 peak ($14.1B). Funding is top-heavy: Waymo $16B Series D, Skild $1.4B, NEURA $1.4B, PI $1B. Humanoid robotics is the breakout category. Japan announced a national strategy targeting 10M AI-equipped robots across 18 sectors by 2040, with $65B public+private investment and a $6.2B sovereign AI compute consortium (Noetra). US government banned new foreign-made humanoids, robot dogs, and solar inverters citing national security risks (Jul 2026) — significant policy signal for domestic robotics manufacturing and supply chain sovereignty. Generalist AI reportedly reached $3B valuation (Aug 2026, TechCrunch).
+**Market context**: Physical AI VC funding exceeded $23B in H1 2026 (WSJ). Robotics specifically reached $18.8B, already exceeding full-year 2025 ($15B) and the 2021 peak ($14.1B). Funding is top-heavy: Waymo $16B Series D, Skild $1.4B, NEURA $1.4B, PI $1B. Humanoid robotics is the breakout category. Japan announced a national strategy targeting 10M AI-equipped robots across 18 sectors by 2040, with $65B public+private investment and a $6.2B sovereign AI compute consortium (Noetra). US government banned new foreign-made humanoids, robot dogs, and solar inverters citing national security risks (Jul 2026) — significant policy signal for domestic robotics manufacturing and supply chain sovereignty. Generalist AI reached $3B valuation on ~$200M Series B extension (Aug 2026, TechCrunch). Unitree became the first pure-play humanoid IPO in mainland China (Aug 2026, Shanghai STAR Market, ¥6.1B raised). XPeng's robotics unit Dogotix raised $900M+ at $6.3B+ valuation. Skild AI hit $100M ARR 10 months after first commercial deployment. UBTech began first consumer humanoid deliveries (U1, 13K+ pre-orders).
 
 ---
 
@@ -603,7 +603,7 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 ### Generalist AI
 
 **Type**: `Startup`
-**Stage/Scale**: Reportedly reached $3B valuation (Aug 2026, TechCrunch)
+**Stage/Scale**: $600M+ raised (Series B $400M + ~$200M extension, led by 8VC + Radical Ventures, Aug 2026). Valuation $3B (up from $2B)
 **About**: Robotics foundation model company pursuing a "native embodied" approach — training directly on physical interaction data from wearable devices rather than internet images or teleoperation. Represents an alternative paradigm to VLAs (internet pretraining) and WAMs (video diffusion). GEN-1.5 (Aug 2026) demonstrates emergent one-shot in-context learning of physical tasks — the first credible GPT-3-style in-context learning for robot manipulation.
 
 **Solutions**:
@@ -730,7 +730,7 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 
 **Type**: `Startup`
 **Stage/Scale**: Series B — $1.7B+ raised ($14.5M seed 2023, $300M Series A July 2024, $1.4B Series B Jan 2026). Valuation >$14B. Investors: SoftBank (lead), NVIDIA NVentures, Macquarie Capital, Bezos Expeditions, Lightspeed, Coatue
-**About**: Building the first omni-bodied robotics foundation model (Skild Brain) — a single model that controls any robot form factor without prior knowledge of embodiment. Founded 2023 as CMU spinout. Offices in Pittsburgh, San Francisco, and Bengaluru. Revenue ~$30M in first months of commercial deployment (2025).
+**About**: Building omni-bodied robotics foundation models — a single model that controls any robot form factor without prior knowledge of embodiment. Founded 2023 as CMU spinout. Offices in Pittsburgh, San Francisco, and Bengaluru. Hit $100M ARR 10 months after first commercial deployment (Aug 2026). NVIDIA collaboration on training infrastructure. S1 flagship model (Aug 2026) learns unseen 10-minute tasks from a single video demo without fine-tuning. Deployed with Foxconn on NVIDIA Blackwell assembly.
 
 **Solutions**:
 
@@ -746,7 +746,19 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 - **Lock-in vectors**: Proprietary model, NVIDIA infrastructure dependency
 - **Source**: [Skild Brain Blog](https://www.skild.ai/blogs/building-the-general-purpose-robotic-brain)
 
-Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU servers in Houston, TX. Partnership accelerates data flywheel — more tasks, more real-world data, smarter model. Revenue ~$30M in first months of commercial deployment across warehousing, construction, and inspections.
+#### S1
+
+- **What it does**: Flagship foundation model that learns unseen multi-minute tasks from a single video demonstration — no fine-tuning or gradient updates required. Successor to Skild Brain with emergent one-shot task acquisition.
+- **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
+- **Key features (functional)**: One-shot learning from a single video demo (unseen 10-minute tasks), 66% success on unseen tasks (vs 9% language-conditioned baseline) at 100K hours training data, one demo equivalent to ~380 post-training episodes, no fine-tuning required
+- **Key features (non-functional)**: Trained on 100K hours of data; NVIDIA collaboration on training infrastructure
+- **Competes with**: GEN-1.5 (Generalist AI), pi0/pi0.5, GR00T N1 — on one-shot robot task learning. Closest comparison to GEN-1.5's emergent in-context learning
+- **Complements**: Skild Brain (omni-bodied base), NVIDIA Cosmos (data augmentation), Foxconn (deployment partner)
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Proprietary model, NVIDIA infrastructure dependency
+- **Source**: [S1 Blog](https://skild.ai/blogs/s1)
+
+Skild Brain and S1 deployed on Foxconn assembly lines building NVIDIA Blackwell GPU servers in Houston, TX. Partnership accelerates data flywheel — more tasks, more real-world data, smarter model. $100M ARR reached 10 months after first commercial deployment across warehousing, construction, and inspections.
 
 **Implied reference architecture**: Software-only play — Skild Brain as a universal policy layer deployed on third-party robot hardware. Pre-training loop: simulation (Isaac Lab) + internet video → omni-bodied foundation model → post-training with customer-specific real-world data → deployment on customer robots.
 
@@ -793,8 +805,8 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 ### Unitree Robotics
 
 **Type**: `Startup`
-**Stage/Scale**: Shanghai STAR Market IPO approved (Jul 2026) — targeting 4.2B yuan (~$620M), estimated $6.2B valuation. FY2025: CNY 1.7B (~$251M) revenue, ~CNY 591M adjusted profit, 335% revenue growth. Chinese firms led by Unitree account for >80% of global humanoid installations
-**About**: Chinese robotics company building affordable quadruped and humanoid robots. G1 humanoid ($16K) and H2 Plus are volume leaders in humanoid production. 30K+ quadrupeds and 4K+ humanoids shipped since 2022; 5,500 humanoid units in 2025, targeting 10K-20K in 2026. Over 40% revenue from outside China. G1 robots deployed at OpenAI, NVIDIA, Stanford, ETH Zurich, and top US academic institutions. Selected by NVIDIA as hardware partner for Isaac GR00T Reference Humanoid Robot — first open humanoid reference design combining H2 Plus + Sharpa tactile hands + Jetson AGX Thor. IPO earmarks ~$300M for AI model training over three years (VLA and WMA architectures). IPO review completed in 73 days — fastest since STAR Market pre-review mechanism. Televised autonomous kung fu routine (Feb 2026) and -47°C arctic endurance test demonstrated platform maturity.
+**Stage/Scale**: Shanghai STAR Market IPO (Aug 2026) — first pure-play humanoid IPO in mainland China. Raised ¥6.1B (~$905M). Shares surged 460% on day 1, then lost approximately half. FY2025: ~¥1.71B revenue (+335%), ~¥600M profit. Chinese firms led by Unitree account for >80% of global humanoid installations
+**About**: Chinese robotics company building affordable quadruped and humanoid robots. G1 humanoid ($16K) and H2 Plus are volume leaders in humanoid production. 30K+ quadrupeds and 5,500+ humanoids shipped in 2025, targeting 20K in 2026. Over 40% revenue from outside China. G1 robots deployed at OpenAI, NVIDIA, Stanford, ETH Zurich, and top US academic institutions. Selected by NVIDIA as hardware partner for Isaac GR00T Reference Humanoid Robot — first open humanoid reference design combining H2 Plus + Sharpa tactile hands + Jetson AGX Thor. IPO earmarks ~$300M for AI model training over three years (VLA and WMA architectures). IPO review completed in 73 days — fastest since STAR Market pre-review mechanism. Televised autonomous kung fu routine (Feb 2026) and -47°C arctic endurance test demonstrated platform maturity.
 
 **Solutions**:
 
@@ -1739,6 +1751,64 @@ Skild Brain deployed on Foxconn assembly lines building NVIDIA Blackwell GPU ser
 **Collaborations**: Amazon (investor + AWS partnership), NVIDIA (investor), Bosch (investor), Schaeffler (investor)
 
 **Links**: [Website](https://neura-robotics.com/), [Series C announcement](https://neura-robotics.com/record-series-c/), [Sifted coverage](https://sifted.eu/articles/neura-robotics-1-4bn-series-c)
+
+---
+
+### UBTech Robotics
+
+**Type**: `Startup`
+**Stage/Scale**: Public (HKEX: 9880). Shenzhen, China
+**About**: Chinese humanoid robotics company. Launched U1 companion humanoid (Sep 2026) — the first mass-market consumer humanoid robot with 13,000+ pre-orders before first deliveries began mid-September 2026. Targets household companionship and assistance. Previously known for Walker series industrial humanoids and Yanshee educational robots.
+
+**Solutions**:
+
+#### U1
+
+- **What it does**: Consumer companion humanoid robot designed for household interaction, companionship, and basic assistance tasks.
+- **Building blocks covered**: [Robot Hardware Platforms](building-blocks.md#robot-hardware-platforms)
+- **Key features (functional)**: Consumer-oriented humanoid, household companionship and assistance
+- **Key features (non-functional)**: 13,000+ pre-orders, first consumer deliveries mid-September 2026, first mass-market consumer humanoid
+- **Competes with**: 1X NEO, Figure AI Figure 03 (home segment), Tesla Optimus — on consumer humanoid robotics
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Vertically integrated hardware + software
+- **Source**: [Website](https://www.ubtrobot.com/)
+
+**Platform relevance**:
+
+- **Partnership surface**: Consumer humanoid hardware platform; mass-market scale could drive demand for cloud-based AI services and fleet management
+- **Competitive surface**: Minimal — consumer hardware focus
+- **What they need from a platform**: Cloud AI services, OTA update infrastructure, consumer fleet management
+
+**Links**: [Website](https://www.ubtrobot.com/)
+
+---
+
+### XPeng Robotics (Dogotix)
+
+**Type**: `Startup`
+**Stage/Scale**: Raised $900M+ (Aug 2026). Valuation $6.3B+. Robotics unit of XPeng Inc. (NYSE: XPEV)
+**About**: XPeng's robotics division (operating as Dogotix) building the IRON humanoid robot. Spun out from XPeng's automotive AI platform, leveraging shared perception and planning technology. Targeting mass production by end of 2026.
+
+**Solutions**:
+
+#### IRON
+
+- **What it does**: Humanoid robot platform leveraging XPeng's automotive AI stack for perception, planning, and control.
+- **Building blocks covered**: [Robot Hardware Platforms](building-blocks.md#robot-hardware-platforms), [Robot Foundation Models](building-blocks.md#robot-foundation-models)
+- **Key features (functional)**: Automotive-derived perception and planning, humanoid locomotion and manipulation
+- **Key features (non-functional)**: Mass production targeted end of 2026; backed by $900M+ funding at $6.3B+ valuation
+- **Competes with**: Unitree G1/H2, Figure AI Figure 03, NEURA 4NE-1 — on humanoid robots for commercial deployment
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: XPeng ecosystem, Chinese supply chain
+- **Source**: (to be populated)
+
+**Platform relevance**:
+
+- **Partnership surface**: Volume humanoid hardware from an automotive-robotics crossover; shared AV/robotics platform technology
+- **Competitive surface**: Vertically integrated — limited platform interop
+- **What they need from a platform**: Robot middleware, fleet management, sim-to-real training infrastructure
+
+**Links**: (to be populated)
 
 ---
 

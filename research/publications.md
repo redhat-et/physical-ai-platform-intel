@@ -2,7 +2,7 @@
 
 > Papers, talks, videos, and blog posts on Physical AI — world models, robot learning, sim-to-real, and related topics
 
-**Last Updated**: 2026-09-02
+**Last Updated**: 2026-09-11
 
 ---
 
@@ -2371,6 +2371,96 @@
 
 **Relevance to World Models**: Primary industry data source for physical AI enterprise adoption. The 21% figure for intelligent security/monitoring as the top physical AI type suggests world model-based anomaly detection has near-term market pull. The 58→80% adoption trajectory and SI-dominated go-to-market channel (Deloitte, Accenture, Siemens, Schneider) are key inputs for platform strategy.
 
+### Robot Brain Builders Are Pushing Out of Their GPT-2 Era [<img src="templates/icons/website.svg" alt="website" height="16">](https://techcrunch.com/2026/08/26/robot-brain-builders-are-pushing-out-of-their-gpt-2-era/)
+
+**Authors/Presenters**: TechCrunch
+
+**Date**: 2026-08
+
+**Summary**: Industry analysis framing Physical AI as in its "GPT-2 era" -- end-to-end learning approaches have not yet delivered reliable commercial performance. Task-specific robots (Gritt solar, Agility industrial, Bedrock excavation) are shipping while generalist approaches mature. Genesis AI's Gervet captures the dilemma: vertical-focused robots generate revenue and real-world data, but building narrowly on immature models risks obsolescence -- "if you're building [for a narrow] vertical on top of GPT-2, you're going to get crushed by the company building on GPT-4." Foxglove CEO Macneil argues "there will not be a ChatGPT moment for robotics."
+
+**Key Findings**:
+
+- Harry Mellsop (Antioch) coins the "GPT-2 era" framing; robot hardware advancing faster than robot intelligence due to insufficient training data and model sophistication
+- Wayve CEO Alex Kendall launching humanoid robotics lab, sees AV infrastructure transferring to robotics; benchmarks "eyes-off autonomy for less than $1,000 [hardware] in a car"
+- Unitree IPO valued at $66B then lost approximately half its value -- early market volatility signal
+- Foxglove's Actuate conference tripled in size since 2023 (1,500 attendees), indicating growing Physical AI developer community
+- Largest robot deployment worldwide remains consumer vacuum bots; general-purpose humanoids not yet leaving labs
+
+**Relevance to World Models**: The "GPT-2 era" framing is the clearest industry articulation of the maturity gap between world model research and commercial deployment. The tension between task-specific and generalist approaches directly maps to the building-block analysis: task-specific robots can succeed with narrow world models (or none), while generalist robots require the kind of broad world understanding that JEPA, Cosmos, and foundation model approaches target. The Wayve AV-to-humanoid transfer thesis supports the platform strategy of shared infrastructure across Physical AI domains.
+
+### 5 Physical AI Infrastructure Platforms Shaping Robotics in 2026 [<img src="templates/icons/website.svg" alt="website" height="16">](https://www.therobotreport.com/5-physical-ai-infrastructure-platforms-shaping-robotics-in-2026/)
+
+**Authors/Presenters**: The Robot Report
+
+**Date**: 2026-08
+
+**Summary**: Overview of five Physical AI infrastructure platforms spanning the full stack. NVIDIA Isaac covers simulation, training, and edge deployment in one ecosystem. Applied Intuition provides validation and systems engineering for autonomous machines. Scale AI operates data factories collecting 1,000+ hours of demonstration data per day (150K+ hours delivered in 2025). Hugging Face LeRobot serves as the open-source coordination layer (datasets, models, tools, benchmarks). Lightwheel provides closed-loop Real2Sim2Real continuous learning infrastructure.
+
+**Key Findings**:
+
+- NVIDIA's strategic advantage is connecting computation, simulation, synthetic data, training, evaluation, and edge deployment in one developer ecosystem; Newton physics engine (with DeepMind, Disney Research) now under Linux Foundation governance
+- Scale AI reported 150,000+ hours of physical AI data delivered in 2025; partners include Generalist AI and Physical Intelligence
+- LeRobot v3.0 standardized dataset format prevents fragmentation ("one format per robot, one dataset implementation per laboratory"); NVIDIA GR00T models accessible through LeRobot workflows
+- Applied Intuition built its position during AV era, now spans automotive, defense, trucking, mining, construction, agriculture, and robotics
+- Lightwheel's compounding loop (EgoSuite -> SimFoundry -> RoboFinals -> RoboStack) mirrors the data flywheel concept from NVIDIA's 3-computer architecture
+- Article is partner content sponsored by Lightwheel
+
+**Relevance to World Models**: Maps the emerging Physical AI infrastructure stack -- the same building blocks tracked in this notebook (simulation engines, data pipelines, model training, edge deployment). The five platforms cluster around distinct stack layers, with LeRobot as the notable open-source entry and NVIDIA as the most vertically integrated. The absence of any Red Hat or OpenShift-adjacent platform from this list reinforces the infrastructure whitespace opportunity. Scale AI's data volume (150K+ hours) quantifies the data layer that world model training depends on.
+
+### OSRA Releases ROS 2 + LeRobot Integration Demo [<img src="templates/icons/website.svg" alt="website" height="16">](https://x.com/OpenRoboticsOrg/status/2090900070891999422)
+
+**Authors/Presenters**: Open Source Robotics Alliance (OSRA)
+
+**Date**: 2026-08
+
+**Summary**: OSRA published an official ROS 2 + LeRobot integration demo connecting the ROS ecosystem with Hugging Face's robot learning framework. Separately, the OSRA Technical Governance Committee approved $250K for ecosystem infrastructure and documentation investments.
+
+**Key Findings**:
+
+- Official integration bridges the ROS 2 middleware/perception/nav stack with LeRobot's learning-based policies and demonstration datasets
+- Signals OSRA's recognition that robot learning frameworks are complementary to, not competitive with, traditional robotics middleware
+- $250K TGC allocation for ecosystem infrastructure demonstrates OSRA's capacity to fund community development under its new governance model (post-Open Robotics acquisition by Intrinsic/Alphabet)
+
+**Relevance to World Models**: The ROS 2 + LeRobot bridge is a concrete integration point between the traditional robotics stack (ROS) and the AI-native robot learning stack (VLA policies, world models). For platform strategy, this validates that the two stacks are converging rather than diverging -- a Physical AI platform needs to support both ROS-style middleware and learning-based policy deployment. The OSRA funding signal is relevant to the ROS 2 project health assessment.
+
+### Humanoid Market Data: H1 2026 Shipments and Funding [<img src="templates/icons/website.svg" alt="website" height="16">](https://humanoidindex.org/funding)
+
+**Authors/Presenters**: Counterpoint Research, Humanoid Index
+
+**Date**: 2026-08
+
+**Summary**: H1 2026 humanoid shipments reached approximately 19K-22K units, a 272% year-over-year increase. Chinese manufacturers hold 93-97% of global humanoid shipments. Global humanoid funding reached approximately $8.6B in 2026 (1.8x all of 2025), with the top 10 companies capturing approximately 80% of all capital since 2022.
+
+**Key Findings**:
+
+- Top 5 by shipments (all Chinese): AgiBot, Unitree, Galbot, UBTECH, Leju -- China dominates volume production
+- Top funded globally: Figure AI ($1.9B, $39B valuation), Apptronik ($1.45B+), Boston Dynamics ($1.1B acquisition), UBTECH ($940M+), Agility ($641M+) -- US dominates capital
+- Geographic split: China leads shipments and unit economics; US leads fundraising and valuation
+- 101 deals across 31 funded companies; 15 labeled "Commercial," 7 "Pilot," 5 "Prototype," 3 "R&D"
+- Automotive OEMs active as investors/partners: Mercedes-Benz (Apptronik), BMW (Figure AI), Hyundai (Boston Dynamics), Toyota (TRI)
+- Mega-rounds ($500M+) now common in humanoid robotics, a scale previously rare in the sector
+
+**Relevance to World Models**: Quantifies the hardware deployment base that world models and robot foundation models will target. The China-US split (China ships units, US raises capital) suggests different world model deployment strategies: Chinese manufacturers may prioritize cost-effective, task-specific models for volume production, while US companies invest in generalist foundation models for higher-value applications. The 272% shipment growth confirms the demand side of the Physical AI platform opportunity, while the 93-97% Chinese manufacturing share is a supply chain consideration for any platform strategy.
+
+### TechCrunch Disrupt 2026: New "Real World AI Stage" [<img src="templates/icons/website.svg" alt="website" height="16">](https://techcrunch.com/2026/09/02/techcrunch-disrupt-2026s-new-real-world-ai-stage-features-nvidia-robots-and-extinct-animals/)
+
+**Authors/Presenters**: TechCrunch
+
+**Date**: 2026-09
+
+**Summary**: TechCrunch Disrupt 2026 (October 13-15, Moscone West, San Francisco) adds a dedicated "Real World AI Stage" covering the intersection of digital and physical AI. Speakers include NVIDIA's Les Karpas (Head of Physical AI), Shield AI's Nate Michael, FieldAI's Ali Agha, Bedrock's Boris Sofman, and Foxglove's Adrian Macneil. Sessions address robotics' data gap, safety-critical AI deployment, edge AI, and the prototype-to-production gap.
+
+**Key Findings**:
+
+- Expansion from one AI stage to two signals that Physical AI has grown beyond a niche topic into a standalone conference category
+- NVIDIA's Karpas to discuss "the path to a ChatGPT moment for physical AI" and the robotics data gap
+- Session topics span the full deployment stack: data collection, safety/trust, edge inference, and manufacturing scale-up
+- Defense and industrial adoption (Shield AI, FieldAI, Medra) shows Physical AI moving into mission-critical environments
+- 10,000+ expected attendees from startup, tech, and VC communities
+
+**Relevance to World Models**: Signal of Physical AI entering the mainstream tech conference circuit. The dedicated stage validates that Physical AI is transitioning from research niche to commercial category -- a maturity milestone tracked in the ecosystem analysis. The session topics (data gap, edge AI, prototype-to-production) map directly to building-block challenges: data pipelines, edge inference runtime, and deployment infrastructure. NVIDIA's prominent role reinforces their position as the ecosystem anchor.
+
 ---
 
 ## Robot Foundation Models
@@ -2853,6 +2943,26 @@
 
 ---
 
+### Physical Agentic AI: An Architecture for Orchestrating a Robot Crew with LLMs [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2608.22657)
+
+**Authors/Presenters**: Xinyuan Liu, Eren Sadikoglu, Riana Chatterjee, Ransalu Senanayake
+
+**Date**: 2026-08
+
+**Summary**: Skill-grounded multi-robot orchestration framework separating LLM-based semantic planning from deterministic execution enforcement. An LLM Mission Planner decomposes tasks into phases and assigns robot-skill pairs drawn from typed skill libraries. A deterministic Robot Orchestrator then validates each dispatch against robot capabilities, system state, and workflow constraints before permitting actuation. Core architectural claim: skill grounding is a retrieval problem (solved by retrieval augmentation, 51% to 96%), while dispatch safety is an enforcement problem that prompt-side knowledge alone cannot solve.
+
+**Key Findings**:
+
+- Retrieval-augmented skill grounding raises planner accuracy from 51% to 96%; deterministic per-dispatch enforcement reduces false dispatch to 0% with no false blocks
+- Even well-informed planners dispatch 23-29% of faulted steps without runtime enforcement — prompt-side knowledge is insufficient for safety
+- Identifies "retrieval-induced substitution": better-informed planners shift from detectable hallucination (nonexistent skills) to plausible but wrong skill selections, a subtler failure mode
+- Tested on drone-UGV search-and-dispatch in Gazebo simulation and physical [Unitree](ecosystem.md#unitree-robotics) G1 humanoid + Go2 quadruped crew
+- Held-plan ablation confirms enforcement (not plan variation) is the causal factor for safety improvements
+
+**Relevance to World Models**: Complements the NVIDIA lifecycle agent tools (above) by addressing the runtime orchestration layer — coordinating physical robot actions rather than training/deployment pipelines. The retrieval-induced substitution finding is a cautionary result for any system using LLMs to select robot actions: as planners get more capable, their failures become harder to detect, reinforcing the case for deterministic safety gates outside the LLM. The architecture's separation of semantic planning from capability enforcement maps to the actor/orchestrator pattern and informs platform requirements for multi-robot fleet management. The skill-library interface pattern (typed, capability-checked) aligns with emerging standards for robot skill registries.
+
+---
+
 ### AI+HW 2035: Shaping the Next Decade [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2603.05225)
 
 **Authors**: Deming Chen, Jason Cong, Azalia Mirhoseini, Christos Kozyrakis, Subhasish Mitra, Jinjun Xiong, Cliff Young, Anima Anandkumar, Michael Littman, Aron Kirschen, Sophia Shao, Serge Leef, Naresh Shanbhag, Dejan Milojicic, Michael Schulte, Gert Cauwenberghs, Jerry M. Chow, Tri Dao, Kailash Gopalakrishnan, Richard Ho, Hoshik Kim, Kunle Olukotun, David Z. Pan, Mark Ren, Dan Roth, Aarti Singh, Yizhou Sun, Yusu Wang, Yann LeCun, Ruchir Puri
@@ -2889,6 +2999,25 @@
 
 **Relevance to World Models**: Directly relevant to Physical AI platform security architecture. The six-dimension measurement framework (fidelity, controllability, observability, containment, reproducibility, governance) provides a concrete evaluation rubric for simulation environments used in safety-critical robot validation. The "weakest-link" rule means a high-fidelity physics simulation provides no assurance if containment or governance is weak — this informs platform requirements for the Simulation Engines and Digital Twin Runtime building blocks. Connects to OpenShell (sandboxing) and the broader safety/certification infrastructure.
 
+### A Roadmap for Physical AI Foundation Models in Robotics [<img src="templates/icons/website.svg" alt="website" height="16">](https://engrxiv.org/preprint/view/8105)
+
+**Authors/Presenters**: Takeshi Ando (Panasonic R&D Center Singapore)
+
+**Date**: 2026-08
+
+**Summary**: Argues Physical AI foundation models must evolve from monolithic VLAs into cloud-edge-robot (CER) distributed systems separated by time scale: cloud handles seconds-to-days reasoning, edge handles ms-to-seconds approval, robot retains µs-to-tens-of-ms reflexive control with final stop authority. Introduces the Action Proposal Contract (APC) as a structured interface making VLA outputs inspectable, rejectable, replayable, and auditable. Proposes Physical Intelligence Metrics and a 2030 deployment roadmap.
+
+**Key Findings**:
+
+- CER architecture separates concerns by time scale and safety authority: cloud proposes actions, edge approves/rejects, robot retains final stop authority
+- Action Proposal Contract (APC) specifies fields for task intent, skill identifier, target state, preconditions, constraints, time-to-live (500 ms), state confidence, authority level, fallback policy, and audit ID — making VLA outputs machine-inspectable
+- Physical Intelligence Metrics define six evaluation dimensions beyond task success: Adaptability, Safety Resilience, Real-Time Robustness, Energy Efficiency, Embodiment-Aware Transfer, Maintainability
+- Four-layer safety stack: semantic safety, operational safety, runtime assurance, physical/reflexive safety
+- Deployment roadmap: 2026 model emergence, 2028 domain deployment, 2030 assurance-ready systems
+- Data flywheel from deployment logs through digital-twin reconstruction for continuous model improvement
+
+**Relevance to World Models**: The CER architecture directly addresses the deployment gap between large foundation models and real-time robot control — a problem most VLA papers ignore. The APC interface pattern is notable: rather than treating VLA outputs as opaque action vectors, it structures them as inspectable contracts with explicit preconditions, time bounds, and fallback policies. This aligns with the deterministic enforcement pattern from the Physical Agentic AI paper (above) and strengthens the case for platform-level action validation layers. The six Physical Intelligence Metrics provide a concrete evaluation framework beyond task success rate, relevant to building-block assessment criteria. The four-layer safety stack maps to platform architecture decisions about where safety enforcement lives (model, middleware, runtime, hardware).
+
 ---
 
 ## Recent Additions
@@ -2903,6 +3032,13 @@
 - SILO: Simulation-in-the-Loop for Multi-Stage Cable Routing (Sim-to-Real Transfer)
 - Sandbox-Enabled Digital Twin for Cyber-Physical Systems (Digital Twins & Simulation)
 - AI Sandboxes: Threat Model and Measurement Framework for Physical AI (Physical AI Deployment)
+- A Roadmap for Physical AI Foundation Models in Robotics (Physical AI Deployment)
+- Robot Brain Builders Are Pushing Out of Their GPT-2 Era (Strategy)
+- 5 Physical AI Infrastructure Platforms Shaping Robotics in 2026 (Strategy)
+- OSRA Releases ROS 2 + LeRobot Integration Demo (Strategy)
+- Humanoid Market Data: H1 2026 Shipments and Funding (Strategy)
+- TechCrunch Disrupt 2026: New "Real World AI Stage" (Strategy)
+- Physical Agentic AI: Orchestrating a Robot Crew with LLMs (Physical AI Deployment)
 
 ---
 
