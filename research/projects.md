@@ -962,6 +962,47 @@
 
 **Openness assessment**: (to be assessed by oss-health skill)
 
+#### GzDRL: Reproducible and Scalable RL with Gazebo
+
+**URL**: [github.com/amaldevh/gz-drl](https://github.com/amaldevh/gz-drl)
+
+**Building block(s)**: [Simulation Engines](building-blocks.md#simulation-engines), [Model Training Infrastructure](building-blocks.md#model-training-infrastructure)
+
+**Description**: Middleware-free reinforcement learning framework for Gazebo providing deterministic environment stepping through direct server synchronization. Implements vectorized environments via EnvPool-derived C++ architecture with zero-copy NumPy observations for high-throughput robot policy training.
+
+**Tech Stack**: Python 3.10-3.14, C++, CMake, Gazebo (Harmonic/Ionic/Jetty), Eigen3, Google Glog; optional ROS support
+
+**Key Features**:
+
+- Direct Gazebo server interface (`DRLServer` → `gz::sim::Server::Run(1)`) eliminating middleware nondeterminism
+- C++ vectorized environments (`GazeboPool`) with environment-indexed work queues and zero-copy observation transfer
+- 100% reproducible training (identical checkpoint hashes for same-seed PPO runs)
+- Runtime domain randomization for mass, inertia, actuator parameters during resets
+- Multi-agent support with batched execution across multiple robots per environment instance
+- Multiple control interfaces: rotor velocity, thrust, body rates, velocity commands, state references
+- Workstation throughput: 78.58 ± 2.08 × 10³ steps/s; laptop: 43.38 ± 0.56 × 10³ steps/s
+- Validated sim-to-real transfer on QDrone2 quadrotor (20.2 ± 3.4 cm tracking error, zero real-world fine-tuning)
+
+**Openness assessment**:
+
+| Dimension              | Rating             | Detail                                              |
+| ---------------------- | ------------------ | --------------------------------------------------- |
+| License                | Permissive         | MIT                                                 |
+| Governance             | BDFL               | Academic project (lead: Amal Dev Haridevan)         |
+| Contributor diversity  | Low                | 1 primary author, early community contributions     |
+| Community health       | Active             | Recent commits (Sept 2026), active documentation    |
+| Corporate control risk | Low                | Academic project, no CLA, permissive license        |
+
+**Maturity**: Research
+
+**Competes with**: Isaac Lab (NVIDIA), Gymnasium-Robotics, MuJoCo Playground
+
+**Complements**: Gazebo simulation environments, PPO/SAC/TD3 implementations, robot foundation models
+
+**Stats**: 2 stars, 1 fork, 7 commits (as of Sept 2026)
+
+**Last Updated**: 2026-09
+
 #### PhysicsNeMo: Physics-ML Framework for AI Surrogate Models
 
 **URL**: [github.com/NVIDIA/physicsnemo](https://github.com/NVIDIA/physicsnemo)

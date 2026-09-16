@@ -2,7 +2,7 @@
 
 > Platform capability map for Physical AI — the building blocks a platform needs to support
 
-**Last Updated**: 2026-07-12
+**Last Updated**: 2026-09-16
 
 ---
 
@@ -208,7 +208,7 @@
 
 **Related blocks**: [Sim-to-Real Transfer Pipeline](#sim-to-real-transfer-pipeline), [Post-Training Pipeline](#post-training--fine-tuning-pipeline), [Digital Twin Runtime](#digital-twin-runtime), [Evaluation & Benchmarking](#evaluation--benchmarking)
 **Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia), [Genesis AI](ecosystem.md#genesis-ai), [Google DeepMind](ecosystem.md#google-deepmind), Open Robotics
-**Relevant research**: (to be populated)
+**Relevant research**: [GzDRL](publications.md#gzdrl-reproducible-and-scalable-deep-reinforcement-learning-with-gazebo) (deterministic RL training with Gazebo)
 
 ---
 
@@ -403,11 +403,11 @@ This block has two sub-problems settling at different rates:
 
 **Solution landscape**:
 
-| Category               | Solutions                  | Maturity  | Notes                            |
-| ---------------------- | -------------------------- | --------- | -------------------------------- |
-| OSS (community-driven) | (none identified)          | —         | —                                |
-| OSS (single-vendor)    | Cosmos-RL, Cosmos-Cookbook | Early OSS | NVIDIA; RL + SFT for Physical AI |
-| Proprietary            | (none identified)          | —         | —                                |
+| Category               | Solutions                  | Maturity  | Notes                                                    |
+| ---------------------- | -------------------------- | --------- | -------------------------------------------------------- |
+| OSS (community-driven) | GzDRL                      | Research  | Deterministic RL training for Gazebo; academic project   |
+| OSS (single-vendor)    | Cosmos-RL, Cosmos-Cookbook | Early OSS | NVIDIA; RL + SFT for Physical AI                         |
+| Proprietary            | (none identified)          | —         | —                                                        |
 
 **Key trade-offs**: Simulation-based post-training is scalable but depends on sim-to-real fidelity. Real-world fine-tuning is accurate but expensive and slow. RL-based optimization (Cosmos-RL) can improve beyond human demonstrations but is unstable.
 

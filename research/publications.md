@@ -2,7 +2,7 @@
 
 > Papers, talks, videos, and blog posts on Physical AI — world models, robot learning, sim-to-real, and related topics
 
-**Last Updated**: 2026-09-11
+**Last Updated**: 2026-09-16
 
 ---
 
@@ -2831,6 +2831,25 @@
 - Enables cyber-physical vulnerability detection by observing controller behavior under simulated attack scenarios
 
 **Relevance to World Models**: Directly relevant to the Digital Twin Runtime building block — demonstrates a concrete architecture for running real controller software against simulated plant models. The "unmodified binary" approach is critical for industrial adoption where source code access is impractical. The Linux sandbox + I/O redirection pattern maps to container-based deployment on OpenShift. The cyber-physical security use case (vulnerability detection via behavioral monitoring) extends digital twin value beyond training and validation.
+
+---
+
+### GzDRL: Reproducible and Scalable Deep Reinforcement Learning with Gazebo [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2609.13243)
+
+**Authors/Presenters**: Amal Dev Haridevan, Junjie Kang, Jinjun Shan
+
+**Date**: 2026-09
+
+**Summary**: Middleware-free RL framework for Gazebo enabling deterministic environment stepping through direct server synchronization rather than ROS/Gazebo Transport. Achieves vectorized execution via EnvPool-derived C++ architecture with zero-copy NumPy observations. Validated through sim-to-real quadrotor deployment (20.2 ± 3.4 cm tracking error) without real-world fine-tuning.
+
+**Key Findings**:
+
+- Direct Gazebo server integration via explicit action → physics → observation sequence eliminates nondeterminism from message-passing middleware, enabling 100% reproducible PPO training (identical checkpoint hashes)
+- Workstation throughput 78.58 ± 2.08 × 10³ steps/s through C++ vectorization and multi-agent batching
+- Runtime domain randomization (mass, inertia, actuator parameters) during environment resets
+- Successful zero-shot sim-to-real transfer on QDrone2 hardware platform demonstrates practical robustness
+
+**Relevance to World Models**: Addresses reproducibility crisis in sim-to-real robotics by providing deterministic RL training — critical for validating world model-based policies where nondeterministic training confounds ablations. The middleware-free architecture pattern (direct simulator API rather than message-passing) trades ecosystem compatibility for determinism and throughput, a tradeoff relevant to platform builders choosing between ROS-integrated vs. standalone simulation stacks. [Code](https://github.com/amaldevh/gz-drl), [Docs](https://gz-drl.readthedocs.io/en/latest/).
 
 ---
 
