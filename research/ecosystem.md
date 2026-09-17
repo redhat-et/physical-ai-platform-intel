@@ -2,7 +2,7 @@
 
 > Players in Physical AI — their solutions, reference architectures, and platform relevance
 
-**Last Updated**: 2026-09-11
+**Last Updated**: 2026-09-17
 
 **Market context**: Physical AI VC funding exceeded $23B in H1 2026 (WSJ). Robotics specifically reached $18.8B, already exceeding full-year 2025 ($15B) and the 2021 peak ($14.1B). Funding is top-heavy: Waymo $16B Series D, Skild $1.4B, NEURA $1.4B, PI $1B. Humanoid robotics is the breakout category. Japan announced a national strategy targeting 10M AI-equipped robots across 18 sectors by 2040, with $65B public+private investment and a $6.2B sovereign AI compute consortium (Noetra). US government banned new foreign-made humanoids, robot dogs, and solar inverters citing national security risks (Jul 2026) — significant policy signal for domestic robotics manufacturing and supply chain sovereignty. Generalist AI reached $3B valuation on ~$200M Series B extension (Aug 2026, TechCrunch). Unitree became the first pure-play humanoid IPO in mainland China (Aug 2026, Shanghai STAR Market, ¥6.1B raised). XPeng's robotics unit Dogotix raised $900M+ at $6.3B+ valuation. Skild AI hit $100M ARR 10 months after first commercial deployment. UBTech began first consumer humanoid deliveries (U1, 13K+ pre-orders).
 
@@ -539,6 +539,38 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 **Collaborations**: Uber, Nissan (robotaxi deployment), [Yann LeCun](#yann-lecun) (investor)
 
 **Links**: [Website](https://wayve.ai), [Research](https://wayve.ai/thinking/)
+
+---
+
+### SteerAI
+
+**Type**: `Startup`
+**Stage/Scale**: Seed — undisclosed funding. Founded 2024, Abu Dhabi, UAE. 37 employees (as of Jul 2026)
+**About**: Autonomous vehicle technology for off-road defense and industrial applications. Launched by VentureOne (ATRC's commercialization arm) with technology from Technology Innovation Institute (TII). Retrofits standard military and industrial vehicles with CoreX autonomous driving system for unmapped, GNSS-denied environments (deserts, rocky terrain). Acting CEO Michael Sonderby (ex-BCG Digital Ventures, former Danish military officer).
+
+**Solutions**:
+
+#### CoreX Autonomous Driving System
+
+- **What it does**: Modular hardware kit + AI software stack enabling autonomous operation of existing vehicle fleets in off-road environments without maps or GPS. Provides perception, localization, and decision-making for challenging terrain.
+- **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models), [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime)
+- **Key features (functional)**: Vehicle-agnostic retrofit system, off-road navigation in unmapped environments, GNSS-denied operation, AI perception and decision-making
+- **Key features (non-functional)**: Deployed in UAE Land Forces trials (20 THeMIS UGVs via Milrem Robotics partnership), xRift purpose-built ATV platform
+- **Competes with**: Waymo, Wayve — on autonomous driving, but focused on off-road defense/industrial vs on-road civilian
+- **Complements**: Fleet management systems, edge computing platforms
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Proprietary CoreX system, TII technology dependency
+- **Source**: [Website](https://steerai.ai/)
+
+**Platform relevance**:
+
+- **Partnership surface**: Off-road edge AI deployment use case; defense-oriented autonomy distinct from commercial robotics
+- **Competitive surface**: Minimal — vertical application (defense AV), no platform ambitions disclosed
+- **What they need from a platform**: Edge inference runtime, vehicle middleware, fleet orchestration
+
+**Collaborations**: Milrem Robotics (UGV integration), UAE Land Forces (trials), Dell (edge hardware), AT&T (edge connectivity), Elistair (tethered drone integration for xRift)
+
+**Links**: [Website](https://steerai.ai/), [UMEX 2026 xRift unveiling](https://steerai.ai/steerai-unveils-xrift-at-umex-new-autonomous-vehicle-brings-off-road-flexibility-to-the-gulf-region), [Milrem partnership](https://steerai.ai/milrem-robotics-partners-with-steerai.php)
 
 ---
 
@@ -1898,6 +1930,50 @@ Skild Brain and S1 deployed on Foxconn assembly lines building NVIDIA Blackwell 
 **Collaborations**: Airbus, BMW (industrial partnerships), Emmi AI (acquired May 2026)
 
 **Links**: [Website](https://mistral.ai/), [Robostral Navigate](https://mistral.ai/news/robostral-navigate/)
+
+---
+
+### Stereolabs
+
+**Type**: `Startup` (acquired by Ouster, Feb 2026)
+**Stage/Scale**: $1.88M seed funding (Nov 2013), bootstrapped to exit. Acquired by Ouster (lidar company) for undisclosed amount in Feb 2026. San Francisco, USA. 57 employees. Founder/CEO: Cecile Schmollgruber
+**About**: AI perception technology for automation based on stereo vision and spatial AI. Develops ZED camera family (stereo depth cameras) and ZED SDK spatial perception platform used by 100K+ developers and 22K+ businesses. Acquisition by Ouster (lidar) represents sensor fusion convergence: camera (stereo vision) + lidar for comprehensive spatial perception. TERRA AI (unified foundation model in ZED SDK 5.0) delivers multi-task vision: depth, semantic, objects, occupancy in real-time on embedded GPUs.
+
+**Solutions**:
+
+#### ZED Camera Family
+
+- **What it does**: Stereo cameras for depth sensing and spatial perception in robotics, autonomous vehicles, and smart infrastructure. ZED X Nano targets robot manipulation and humanoids ("Physical AI"), ZED X for industrial/outdoor, ZED 2i for indoor robotics.
+- **Building blocks covered**: [Sensor Data Ingestion](building-blocks.md#sensor-data-ingestion), [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime)
+- **Key features (functional)**: Stereo depth + color capture, centimeter-level precision, 4K resolution (ZED X One), global shutter options, operates 24/7 in indoor/outdoor conditions
+- **Key features (non-functional)**: Used in Monarch Tractors (autonomous electric tractors), 1,800+ scientific publications, compatible with ROS/ROS2, NVIDIA Jetson, Unity, Unreal Engine
+- **Competes with**: Intel RealSense (discontinued), Luxonis OAK-D, Azure Kinect — on stereo depth cameras for robotics
+- **Complements**: Robot middleware (ROS2), simulation platforms (Isaac Sim, Gazebo), robot foundation models (pi0, GR00T)
+- **Openness**: `Proprietary` (hardware + software)
+- **Lock-in vectors**: ZED SDK proprietary, camera hardware dependency
+- **Source**: [Website](https://www.stereolabs.com/)
+
+#### ZED SDK 5.0 with TERRA AI
+
+- **What it does**: Spatial perception SDK with unified foundation model (TERRA AI) for multi-task AI vision: depth estimation, semantic segmentation, object detection, occupancy mapping in real-time on embedded GPUs/NPUs.
+- **Building blocks covered**: [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime), [Robot Foundation Models](building-blocks.md#robot-foundation-models)
+- **Key features (functional)**: Multi-task vision model, 2-megapixel depth maps in 30ms on Jetson Orin Nano 8GB, 5× faster than previous version, superior accuracy in challenging conditions (low-light, reflective surfaces, fog, rain)
+- **Key features (non-functional)**: 100K+ developers, integrations with ROS2, OpenCV, Docker, Python, C++, C#, TensorFlow, PyTorch, Nav2
+- **Competes with**: NVIDIA Isaac perception stack, custom stereo vision pipelines — on spatial AI middleware
+- **Complements**: NVIDIA Jetson (target hardware), ROS2 (integration), robot platforms
+- **Openness**: `Proprietary` (closed SDK)
+- **Lock-in vectors**: Requires ZED cameras, proprietary API
+- **Source**: [ZED SDK 5.0 announcement](https://www.stereolabs.com/blog/introducing-zed-sdk-50)
+
+**Platform relevance**:
+
+- **Partnership surface**: Post-Ouster acquisition, potential lidar + stereo camera sensor fusion offerings for Physical AI perception; TERRA AI as spatial perception model; Jetson integration validates edge AI use case
+- **Competitive surface**: Proprietary perception stack competes with open alternatives (ROS2 perception, Isaac ROS)
+- **What they need from a platform**: Robot middleware integration, edge deployment infrastructure, model serving for TERRA AI inference
+
+**Collaborations**: Ouster (acquired Feb 2026, lidar + camera fusion), Monarch Tractors (autonomous tractor deployment), NVIDIA (Jetson integration)
+
+**Links**: [Website](https://www.stereolabs.com/), [GitHub (ZED SDK)](https://github.com/stereolabs/zed-sdk), [ZED SDK 5.0 with TERRA AI](https://www.prweb.com/releases/stereolabs-unveils-zed-sdk-5-with-terra-ai-revolutionizing-vision-based-sensing-302405461.html), [Crunchbase](https://www.crunchbase.com/organization/stereolabs)
 
 ---
 
