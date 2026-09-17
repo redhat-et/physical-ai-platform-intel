@@ -16,64 +16,27 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 
 ### Company Profiles
 
-| Company | Profile | Deep Dive |
+| Category | Companies |
+| --- | --- |
+| **Silicon & Accelerators** | [AMD](deliverables/intel/companies/amd.md), [Intel](deliverables/intel/companies/intel.md), [NVIDIA](deliverables/intel/companies/nvidia.md), [Qualcomm](deliverables/intel/companies/qualcomm.md) |
+| **Foundation Models & AI Research** | [Google DeepMind](deliverables/intel/companies/google-deepmind.md), [Mistral AI](deliverables/intel/companies/mistral-ai.md), [Physical Intelligence](deliverables/intel/companies/physical-intelligence.md), [Skild AI](deliverables/intel/companies/skild-ai.md) |
+| **Training Data & Simulation** | **Simulation Assets:** [Imagine.io](deliverables/intel/companies/imagine-io.md), [Lightwheel](deliverables/intel/companies/lightwheel.md), [Palatial](deliverables/intel/companies/palatial.md), [Physicl](deliverables/intel/companies/physicl.md), [Scale AI](deliverables/intel/companies/scale-ai.md) • **Physical Data:** [Config](deliverables/intel/companies/config.md), [Mecka](deliverables/intel/companies/mecka.md), [Sunday Robotics](deliverables/intel/companies/sunday-robotics.md), [XDOF](deliverables/intel/companies/xdof.md) |
+| **Developer Tools & Observability** | [Foxglove](deliverables/intel/companies/foxglove.md), [Rerun](deliverables/intel/companies/rerun.md) |
+| **Robotics Software Platforms** | [Intrinsic](deliverables/intel/companies/intrinsic.md) |
+| **Cloud & Infrastructure Providers** | [Nebius](deliverables/intel/companies/nebius.md) |
+| **Vertical Solution Providers** | Siemens, Dassault Systèmes, PTC, Rockwell Automation, ABB, Tesla, Waymo |
+| **System Integrators** | Accenture, Capgemini, Deloitte, Toyota Automated Logistics, Bastian Solutions, Vanderlande, Dematic |
+| **Robotics OEMs — Humanoid** | [Agility Robotics](deliverables/intel/companies/agility-robotics.md), [Figure AI](deliverables/intel/companies/figure-ai.md), [NEURA Robotics](deliverables/intel/companies/neura-robotics.md), [Prometheus](deliverables/intel/companies/prometheus.md) |
+| **Robotics OEMs — Industrial** | [FANUC](deliverables/intel/companies/fanuc.md), [KUKA](deliverables/intel/companies/kuka.md), [Universal Robots](deliverables/intel/companies/universal-robots.md) |
+
+### OSS Project Evaluations
+
+| Building Block / Function | Projects | |
 | --- | --- | --- |
-| Agility Robotics | [agility-robotics.md](deliverables/intel/companies/agility-robotics.md) | [agility-robotics-deep-dive.md](deliverables/intel/companies/agility-robotics-deep-dive.md) |
-| AMD | [amd.md](deliverables/intel/companies/amd.md) | [amd-deep-dive.md](deliverables/intel/companies/amd-deep-dive.md) |
-| FANUC | [fanuc.md](deliverables/intel/companies/fanuc.md) | [fanuc-deep-dive.md](deliverables/intel/companies/fanuc-deep-dive.md) |
-| Figure AI | [figure-ai.md](deliverables/intel/companies/figure-ai.md) | [figure-ai-deep-dive.md](deliverables/intel/companies/figure-ai-deep-dive.md) |
-| Foxglove | [foxglove.md](deliverables/intel/companies/foxglove.md) | [foxglove-deep-dive.md](deliverables/intel/companies/foxglove-deep-dive.md) |
-| Google DeepMind | [google-deepmind.md](deliverables/intel/companies/google-deepmind.md) | [google-deepmind-deep-dive.md](deliverables/intel/companies/google-deepmind-deep-dive.md) |
-| Intel | [intel.md](deliverables/intel/companies/intel.md) | [intel-deep-dive.md](deliverables/intel/companies/intel-deep-dive.md) |
-| Intrinsic (Google) | [intrinsic.md](deliverables/intel/companies/intrinsic.md) | [intrinsic-deep-dive.md](deliverables/intel/companies/intrinsic-deep-dive.md) |
-| KUKA | [kuka.md](deliverables/intel/companies/kuka.md) | [kuka-deep-dive.md](deliverables/intel/companies/kuka-deep-dive.md) |
-| Mistral AI | [mistral-ai.md](deliverables/intel/companies/mistral-ai.md) | [mistral-ai-deep-dive.md](deliverables/intel/companies/mistral-ai-deep-dive.md) |
-| Nebius | [nebius.md](deliverables/intel/companies/nebius.md) | [nebius-deep-dive.md](deliverables/intel/companies/nebius-deep-dive.md) |
-| NEURA Robotics | [neura-robotics.md](deliverables/intel/companies/neura-robotics.md) | [neura-robotics-deep-dive.md](deliverables/intel/companies/neura-robotics-deep-dive.md) |
-| NVIDIA | [nvidia.md](deliverables/intel/companies/nvidia.md) | [nvidia-deep-dive.md](deliverables/intel/companies/nvidia-deep-dive.md) |
-| Physical Intelligence | [physical-intelligence.md](deliverables/intel/companies/physical-intelligence.md) | [physical-intelligence-deep-dive.md](deliverables/intel/companies/physical-intelligence-deep-dive.md) |
-| Prometheus | [prometheus.md](deliverables/intel/companies/prometheus.md) | [prometheus-deep-dive.md](deliverables/intel/companies/prometheus-deep-dive.md) |
-| Qualcomm | [qualcomm.md](deliverables/intel/companies/qualcomm.md) | [qualcomm-deep-dive.md](deliverables/intel/companies/qualcomm-deep-dive.md) |
-| Rerun | [rerun.md](deliverables/intel/companies/rerun.md) | [rerun-deep-dive.md](deliverables/intel/companies/rerun-deep-dive.md) |
-| Scale AI | [scale-ai.md](deliverables/intel/companies/scale-ai.md) | [scale-ai-deep-dive.md](deliverables/intel/companies/scale-ai-deep-dive.md) |
-| Skild AI | [skild-ai.md](deliverables/intel/companies/skild-ai.md) | [skild-ai-deep-dive.md](deliverables/intel/companies/skild-ai-deep-dive.md) |
-| Universal Robots | [universal-robots.md](deliverables/intel/companies/universal-robots.md) | [universal-robots-deep-dive.md](deliverables/intel/companies/universal-robots-deep-dive.md) |
-
-### Project Comparisons
-
-- **[Simulation Engines](deliverables/intel/project-comparisons/simulation-engines.md)** -- Feature matrix, lock-in assessment, production adoption, Red Hat platform fit, recommendation with tradeoffs
-
-### Project Evaluations (Robotics Frameworks)
-
-| Project | Report | Red Hat Fit |
-| --- | --- | --- |
-| ROS 2 (OSRA) | [ros2.md](deliverables/intel/projects/ros2.md) | Align |
-| Isaac ROS (NVIDIA) | [isaac-ros.md](deliverables/intel/projects/isaac-ros.md) | Misalign |
-
-### Project Evaluations (Agent Runtimes)
-
-| Project | Report | Red Hat Fit |
-| --- | --- | --- |
-| OpenShell (NVIDIA) | [openshell.md](deliverables/intel/projects/openshell.md) | Align |
-
-### Project Evaluations (Data Infrastructure)
-
-| Project | Report | Red Hat Fit |
-| --- | --- | --- |
-| MCAP (Foxglove Technologies) | [mcap.md](deliverables/intel/projects/mcap.md) | Align |
-| Rerun (Rerun Technologies) | [rerun.md](deliverables/intel/projects/rerun.md) | Watch |
-
-### Project Evaluations (Simulation Engines)
-
-| Project | Report | Recommendation |
-| --- | --- | --- |
-| Newton (LF) | [newton.md](deliverables/intel/projects/newton.md) | Integrate (recommended pick) |
-| MuJoCo (DeepMind) | [mujoco.md](deliverables/intel/projects/mujoco.md) | Integrate |
-| Gazebo (OSRA) | [gazebo.md](deliverables/intel/projects/gazebo.md) | Partner (runner-up) |
-| Isaac Sim (NVIDIA) | [isaac-sim.md](deliverables/intel/projects/isaac-sim.md) | Partner |
-| Isaac Lab (NVIDIA) | [isaac-lab.md](deliverables/intel/projects/isaac-lab.md) | Partner |
-| Genesis World | [genesis-world.md](deliverables/intel/projects/genesis-world.md) | Integrate (watch) |
-| O3DE (O3DF/LF) | [o3de.md](deliverables/intel/projects/o3de.md) | Partner |
+| **Robotics Frameworks** | [ROS 2](deliverables/intel/projects/ros2.md) (OSRA), [Isaac ROS](deliverables/intel/projects/isaac-ros.md) (NVIDIA) | compare |
+| **Agent Runtimes** | [OpenShell](deliverables/intel/projects/openshell.md) (NVIDIA) | compare |
+| **Data Infrastructure** | [MCAP](deliverables/intel/projects/mcap.md) (Foxglove), [Rerun](deliverables/intel/projects/rerun.md) (Rerun Technologies) | compare |
+| **Simulation Engines** | [Newton](deliverables/intel/projects/newton.md) (LF), [MuJoCo](deliverables/intel/projects/mujoco.md) (DeepMind), [Gazebo](deliverables/intel/projects/gazebo.md) (OSRA), [Isaac Sim](deliverables/intel/projects/isaac-sim.md) (NVIDIA), [Isaac Lab](deliverables/intel/projects/isaac-lab.md) (NVIDIA), [Genesis World](deliverables/intel/projects/genesis-world.md), [O3DE](deliverables/intel/projects/o3de.md) (O3DF/LF) | [compare](deliverables/intel/project-comparisons/simulation-engines.md) |
 
 ### Primers
 
