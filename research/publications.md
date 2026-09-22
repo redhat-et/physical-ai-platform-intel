@@ -2962,6 +2962,44 @@
 
 ---
 
+### ROSA: A Robotics Foundation Model Serving System for Robot Factories [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2607.01088)
+
+**Authors/Presenters**: Wenqi Jiang, Jason Clemons, Rowland O'Flaherty, Hugo Hadfield, Alperen Degirmenci, [Shuran Song](ecosystem.md#stanford), Yashraj Narang, [Christos Kozyrakis](ecosystem.md#stanford)
+
+**Date**: 2026-07
+
+**Summary**: First system to reframe robotics foundation model (RFM) inference from a per-robot edge problem to a shared GPU-pool serving problem at factory scale. ROSA introduces three design principles: shared GPU-pool serving (robot fleets access centralized server-class GPUs over the network), robotics-aware programming abstractions (multi-model pipelines with per-task SLOs), and factory-objective-driven scheduling that optimizes "SLO-qualified factory productivity" rather than individual request latency.
+
+**Key Findings**:
+
+- Up to 12x factory productivity improvement over conventional dedicated-GPU-per-robot serving
+- Shared GPU pools improve inference quality (larger models feasible), robot battery life (offloaded compute), and GPU utilization
+- Built on Ray Serve for distributed orchestration with vLLM, PyTorch, and JAX model-serving backends
+- Validated on both real robots and synthetic factory-scale workloads
+
+**Relevance to World Models**: Establishes the systems architecture for "robot factory" inference — a deployment pattern distinct from both datacenter LLM serving and single-robot edge inference. The Ray Serve + vLLM backend stack aligns with Red Hat's existing investments in vLLM and Kubernetes-based orchestration. The factory-productivity-oriented scheduling is a novel contribution: optimizing fleet throughput under heterogeneous SLOs rather than minimizing per-request latency. Directly informs the Inference Server building block requirements for robotics deployments and validates the need for robotics-aware serving abstractions beyond generic LLM serving.
+
+---
+
+### Robion: Efficient Vision-Language-Action Management and Serving for Robot Factories [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2609.12075)
+
+**Authors/Presenters**: Dionysios Adamopoulos, Nattapol Chanpaisit, Basel Fakhri, Christina Giannoula
+
+**Date**: 2026-09
+
+**Summary**: First VLA serving and management system for multi-robot, multi-model requests on multi-GPU edge servers. Introduces intra-GPU stage disaggregation: rather than splitting VLA's two stages (VLM + Action Diffusion Transformer) across GPUs, Robion co-locates both on a single GPU using dual CUDA streams with dynamic SM partitioning, ensuring the latency-critical ADiT stage always finds compute resources.
+
+**Key Findings**:
+
+- 6.7x higher robot load vs. vLLM-Omni and 1.5x vs. monolithic baselines while maintaining 98% SLO attainment
+- Serves 64 robots with 8 different VLA models on a single 4-GPU server
+- SLO-aware request scheduler prioritizes by least remaining SLO time across co-located models
+- Management engine with intelligent traffic controller maximizes per-model batching under GPU load bounds
+
+**Relevance to World Models**: Complements ROSA (above) by going deeper into GPU-level execution optimization for VLA models specifically. While ROSA addresses fleet-wide scheduling on Ray Serve, Robion solves the intra-GPU resource management problem — the two could compose (ROSA's scheduler dispatching to Robion-managed GPUs). The 6.7x improvement over vLLM-Omni is notable given that vLLM-Omni is Red Hat's current inference serving investment; the gap highlights that generic multi-stage LLM serving is insufficient for VLA's millisecond-scale latency requirements. The dual-stream SM partitioning technique may inform future vLLM extensions for robotics workloads.
+
+---
+
 ### Physical Agentic AI: An Architecture for Orchestrating a Robot Crew with LLMs [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2608.22657)
 
 **Authors/Presenters**: Xinyuan Liu, Eren Sadikoglu, Riana Chatterjee, Ransalu Senanayake

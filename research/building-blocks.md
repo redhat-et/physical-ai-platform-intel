@@ -382,7 +382,7 @@ This block has two sub-problems settling at different rates:
 
 **Related blocks**: [Robot Foundation Models](#robot-foundation-models), [Edge AI Inference Runtime](#edge-ai-inference-runtime), [Latent World Models](#latent-world-models)
 **Key ecosystem players**: vLLM community, [Physical Intelligence](ecosystem.md#physical-intelligence-π) (OpenPI protocol), [NVIDIA](ecosystem.md#nvidia), HuggingFace (LeRobot)
-**Relevant research**: [vLLM-Omni World Model RFC (Issue #1987)](https://github.com/vllm-project/vllm-omni/issues/1987)
+**Relevant research**: [vLLM-Omni World Model RFC (Issue #1987)](https://github.com/vllm-project/vllm-omni/issues/1987), [ROSA: Factory-scale RFM serving](publications.md#rosa-a-robotics-foundation-model-serving-system-for-robot-factories-) (Ray Serve + vLLM backend, 12x factory productivity vs. dedicated GPUs), [Robion: Intra-GPU VLA serving](publications.md#robion-efficient-vision-language-action-management-and-serving-for-robot-factories-) (dual CUDA streams, 6.7x over vLLM-Omni for VLA workloads)
 
 ---
 
@@ -494,9 +494,9 @@ This block has two sub-problems settling at different rates:
 - **Rationale**: Direct extension of Edge Manager and Advanced Cluster Manager to robot fleets. Observability stack already exists.
 - **Partnership surface**: Foxglove (fleet observability), Rerun (data visualization), robot OEMs.
 
-**Related blocks**: [Robot Middleware](#robot-middleware), [Edge AI Inference Runtime](#edge-ai-inference-runtime)
+**Related blocks**: [Robot Middleware](#robot-middleware), [Edge AI Inference Runtime](#edge-ai-inference-runtime), [Model Serving for Physical AI](#model-serving-for-physical-ai)
 **Key ecosystem players**: Foxglove, Formant, Rerun
-**Relevant research**: (to be populated)
+**Relevant research**: [ROSA](publications.md#rosa-a-robotics-foundation-model-serving-system-for-robot-factories-) (factory-objective-driven scheduling for robot fleets), [Robion](publications.md#robion-efficient-vision-language-action-management-and-serving-for-robot-factories-) (multi-robot multi-model serving on shared GPU servers)
 
 ---
 
