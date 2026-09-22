@@ -34,7 +34,7 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 
 | Building Block / Function | Projects | |
 | --- | --- | --- |
-| **Robotics Frameworks** | [ROS 2](deliverables/intel/projects/ros2.md) (OSRA), [Isaac ROS](deliverables/intel/projects/isaac-ros.md) (NVIDIA) | compare |
+| **Robotics Frameworks** | [ROS 2](deliverables/intel/projects/ros2.md) (OSRA), [Isaac ROS](deliverables/intel/projects/isaac-ros.md) (NVIDIA), [Intrinsic Core](deliverables/intel/projects/intrinsic-core.md) (Google) | [compare](deliverables/intel/project-comparisons/robot-middleware.md) |
 | **Agent Runtimes** | [OpenShell](deliverables/intel/projects/openshell.md) (NVIDIA) | compare |
 | **Data Infrastructure** | [MCAP](deliverables/intel/projects/mcap.md) (Foxglove), [Rerun](deliverables/intel/projects/rerun.md) (Rerun Technologies) | compare |
 | **Simulation Engines** | [Newton](deliverables/intel/projects/newton.md) (LF), [MuJoCo](deliverables/intel/projects/mujoco.md) (DeepMind), [Gazebo](deliverables/intel/projects/gazebo.md) (OSRA), [Isaac Sim](deliverables/intel/projects/isaac-sim.md) (NVIDIA), [Isaac Lab](deliverables/intel/projects/isaac-lab.md) (NVIDIA), [Genesis World](deliverables/intel/projects/genesis-world.md), [O3DE](deliverables/intel/projects/o3de.md) (O3DF/LF) | [compare](deliverables/intel/project-comparisons/simulation-engines.md) |
