@@ -1,7 +1,7 @@
 # Agility Robotics — Competitive Profile
 
 **Date**: 2026-07-22
-**Last updated**: 2026-07-22
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis — not for public repo
 
 See [deep-dive](agility-robotics-deep-dive.md) for manufacturing details, product architecture, and competitive analysis.
@@ -10,12 +10,12 @@ See [deep-dive](agility-robotics-deep-dive.md) for manufacturing details, produc
 
 ## At a Glance
 
-Agility Robotics is a venture-backed humanoid robotics company (Oregon State University spinout, 2015) building purpose-built logistics humanoids. Its Physical AI thesis is **"bipedal humanoids as warehouse labor, sold as a service"** — a vertically integrated approach spanning robot hardware (Digit), fleet orchestration software (Arc), and dedicated manufacturing (RoboFab). Agility is going public via SPAC merger with Churchill Capital Corp XI at a $2.5B valuation, becoming the first publicly listed pure-play humanoid robotics company. Unlike general-purpose competitors (Figure AI, Tesla Optimus), Agility focuses narrowly on logistics — tote handling, conveyor loading, warehouse traversal — where bipedal locomotion solves problems wheeled robots cannot (ramps, dock plates, human-scale aisles).
+Agility Robotics is a venture-backed humanoid robotics company (Oregon State University spinout, 2015) building purpose-built logistics humanoids. Its Physical AI thesis is **"bipedal humanoids as warehouse labor, sold as a service"** — a vertically integrated approach spanning robot hardware (Digit), fleet orchestration software (Arc), and dedicated manufacturing (RoboFab). Agility is going public via SPAC merger with Churchill Capital Corp XI at a $2.5B valuation (S-4 filed Jul 2026, close expected Q4 2026), becoming the first publicly listed pure-play humanoid robotics company (ticker AGLT). Plans European expansion early 2027. Unlike general-purpose competitors (Figure AI, Tesla Optimus), Agility focuses narrowly on logistics — tote handling, conveyor loading, warehouse traversal — where bipedal locomotion solves problems wheeled robots cannot (ramps, dock plates, human-scale aisles).
 
 | | |
 | --- | --- |
 | **Type** | Startup |
-| **Revenue / Funding** | ~$683M raised (Series C $400M, March 2025 at $2.1B). SPAC proceeds ~$620M ($420M trust + $200M PIPE led by Foxconn). $300M+ in multi-year booked revenue |
+| **Revenue / Funding** | ~$683M raised (Series C $400M, March 2025 at $2.1B). SPAC proceeds ~$620M ($420M trust + $200M PIPE led by Foxconn). $300M+ in multi-year booked revenue (~1,000 units). S-4 reveals $1.8M 2025 revenue, $140M operating loss |
 | **Physical AI thesis** | Purpose-built bipedal humanoid for logistics, delivered as Robot-as-a-Service ($30/hr). Own hardware + fleet software + manufacturing |
 | **Platform coverage** | ~8% of blocks — concentrated in edge inference, robotics application layer, and fleet orchestration |
 | **Relationship to Red Hat** | Mixed — potential customer for edge OS and training infrastructure, but Arc fleet platform competes with FlightCtl at the fleet management layer |
@@ -27,7 +27,7 @@ Agility Robotics is a venture-backed humanoid robotics company (Oregon State Uni
 | Product | What It Does |
 | --- | --- |
 | **Digit v4** | Current-generation bipedal humanoid: 175 cm, 65 kg, 28 DOF, 16 kg payload, 360° vision (LiDAR + 4× Intel RealSense + IMU), ~8-hr battery. BOM ~$125K. First OSHA-recognized safety field inspection for a humanoid |
-| **Digit v5** | Next-generation: 50 lb (23 kg) payload, 22-hr operation, rapid-charge batteries. "Cooperatively safe" — designed for barrier-free human-robot collaboration via NVIDIA Halos. $300M+ in pre-orders. Commercial launch imminent |
+| **Digit v5** | Unveiled Sep 2026. 50 lb (23 kg) payload, 5'11" / 284 lb, 7.2 ft max reach (vs 5.5 ft on v4). 90-min runtime + 9-min rapid charge (10:1 run-to-charge ratio, 20+ hrs/day productive). Swappable hand grippers (paddle, pincher, claw, five-fingered). Cooperatively safe — NVIDIA Halos, barrier-free human-robot collaboration. $300M+ in multi-year orders (~1,000 units). Q4 2026 commercial launch |
 | **Agility Arc** | Cloud fleet orchestration platform (SaaS). Real-time KPIs (uptime, throughput, MTBI), WMS/WES/MES integration via standard APIs, fleet support/troubleshooting. Launched March 2024 |
 | **RoboFab** | 70K sq ft humanoid manufacturing facility in Salem, OR. 10K units/year nameplate capacity, currently ~8 units/shift. ~75% US-sourced components. 500 employees at peak |
 
@@ -255,7 +255,7 @@ Agility Robotics is a venture-backed humanoid robotics company (Oregon State Uni
 | --- | --- | --- |
 | **NVIDIA** | Silicon + software | Jetson AGX Thor compute, Isaac Sim/Lab for simulation, Halos for safety certification. NVIDIA is also an investor |
 | **Amazon** | Investor + customer | Industrial Innovation Fund investor. Pilot customer for tote recycling. Dual role creates concentration risk |
-| **GXO Logistics** | Customer | Industry-first multi-year commercial RaaS agreement. 100K+ totes moved. Deployed at Spanx facility |
+| **GXO Logistics** | Customer | Industry-first multi-year commercial RaaS agreement. 100K+ totes moved at Spanx facility |
 | **Foxconn** | Investor | Led $200M PIPE for SPAC. Manufacturing expertise potentially relevant for RoboFab scale-up |
 | **Schaeffler** | Customer | Active deployment site — industrial manufacturing |
 | **Toyota** | Customer | Toyota Motor Manufacturing Canada — active deployment |
@@ -311,4 +311,7 @@ Agility Robotics is a venture-backed humanoid robotics company (Oregon State Uni
 - [Agility — AI and simulation](https://www.agilityrobotics.com/content/agility-and-ai)
 - [Contrary Research — business breakdown](https://research.contrary.com/company/agility-robotics)
 - [Interesting Engineering — going public](https://interestingengineering.com/ai-robotics/us-digit-robot-maker-agility)
+- [Robotics & Automation News — Digit 5 unveil](https://roboticsandautomationnews.com/2026/09/17/agility-unveils-digit-5-humanoid-as-orders-exceed-300-million-ahead-of-public-listing/104857/)
+- [Agility — Analyst & Investor Day (Oct 6)](https://www.roboticstomorrow.com/news/2026/09/17/agility-to-host-analyst-investor-day-on-october-6-2026/27115)
+- [S-4 filing details](https://www.sec.gov/Archives/edgar/data/2074973/000121390026071290/ea029548401ex99-1.htm)
 - [Ecosystem entry](../../../research/ecosystem.md#agility-robotics)

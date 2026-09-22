@@ -2006,6 +2006,47 @@
 
 ---
 
+### AgenticROS: MCP-to-ROS 2 Bridge for AI Agent-Controlled Robots
+
+**URL**: [github.com/agenticros/agenticros](https://github.com/agenticros/agenticros)
+**Building block(s)**: [Robot Middleware](building-blocks.md#robot-middleware), [Model Serving for Physical AI](building-blocks.md#model-serving-for-physical-ai)
+
+**Description**: Open-source MCP server and CLI that connects AI coding agents (Claude Code/Desktop, Codex, Hermes, Gemini, OpenClaw, NemoClaw) to ROS 2 robots via named capabilities and multi-step missions — not raw ROS topics. Sponsored by RealSense; announced alongside Isaac ROS 5.0 at ROSCon 2026.
+
+**Tech Stack**: TypeScript, Node.js 20+, ROS 2 (Humble/Jazzy), rosbridge_server (WebSocket), Zenoh RMW (optional low-latency transport), Gazebo (simulation)
+
+**Key Features**:
+
+- MCP server exposing ROS 2 tools to any MCP-compatible agent — translates natural language intent into ROS 2 operations with robot feedback streaming
+- Skills marketplace (`skills.agenticros.com`): installable skill packages wrapping external ROS nodes (Nav2 navigate-to/through-poses, MoveIt pick, SLAM, follow-me, dock-to-charger, detect-humans)
+- Safety validator: velocity limits, workspace bounds, `/estop` command bypassing AI entirely for emergency stop
+- Fleet awareness via `~/.agenticros/fleet.json` for multi-robot coordination
+- Declarative multi-step mission definitions with pause/resume
+- Sim parity: Gazebo AMR or 6-DOF arm (UR5e-shaped) with same topic names as real robot; swap `--real-camera` for USB RealSense
+- Local VLM support: `ollama pull qwen3-vl:8b-instruct` for on-box camera reasoning without cloud dependency
+- One-command setup wizard: workspace deps, ROS 2 build, OpenClaw plugin, MCP client configs (Codex, Hermes, Claude), health check
+
+**Openness assessment**:
+
+| Dimension | Rating | Detail |
+| --- | --- | --- |
+| License | Permissive | Apache 2.0 |
+| Governance | BDFL | Single developer (Chris Matthieu), no governance body |
+| Contributor diversity | Low | 1 contributor (68 commits), sole developer |
+| Community health | Active | Created Mar 2026, actively maintained, 0 open issues, 151 stars |
+| Corporate control risk | Low | Independent developer; RealSense sponsors but does not control. Apache 2.0 is forkable |
+
+**Maturity**: `Early OSS`
+
+**Competes with**: Custom ROS 2 MCP integrations, NemoClaw/OpenClaw (NVIDIA's agentic orchestration — AgenticROS is an adapter to it, not a replacement), rosbridge + custom agent wrappers
+
+**Complements**: [NemoClaw / OpenClaw](projects.md#nemoclaw--openclaw-agent-orchestration-for-physical-ai) (plugs into as agent runtime), [Isaac ROS](../deliverables/intel/projects/isaac-ros.md) (agentic skills consumed via MCP), ROS 2 Nav2/MoveIt 2 (wrapped as skills), RealSense cameras (D585 Pro)
+
+**Stats**: 151 stars, 20 forks, 1 contributor (Chris Matthieu — serial entrepreneur, independent). Sponsored by RealSense
+**Last Updated**: 2026-09
+
+---
+
 ## Biologically-Inspired Architectures
 
 *Research projects exploring brain-inspired architectures. These don't map directly to a single building block but are tracked as research references.*

@@ -1,7 +1,7 @@
 # NVIDIA — Deep Dive Research
 
 **Date**: 2026-06-22
-**Last updated**: 2026-06-22
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis
 
 Supporting research for the [NVIDIA competitive profile](nvidia.md). Covers OSS foundations analysis, acquisition deep-dives, product architectures, governance risks, hardware platform details, partnership ecosystem, and detailed competitive analysis with Red Hat platform mapping.
@@ -27,7 +27,14 @@ Supporting research for the [NVIDIA competitive profile](nvidia.md). Covers OSS 
 | 2025-04 | PhysX SDK 5.6 fully open-sourced (BSD-3) |
 | 2025-03 | GR00T N1 humanoid VLA announced at GTC 2025 |
 | 2026-03 | GTC 2026: Newton 1.0 (LF), Vera Rubin platform, Nemotron Coalition, $1T cumulative projection |
-| 2026-05 | Cosmos 3 released (Mixture-of-Transformers, from Qwen3-VL) |
+| 2026-05 | Cosmos 3 released (Nano 16B + Super 64B, OpenMDW 1.1 license) |
+| 2026-06 | Isaac GR00T Reference Humanoid Robot announced (Unitree H2 Plus + Jetson AGX Thor T5000 + Sharpa hands). Jetson Thor T5000 modules shipping ($3,499 dev kit) |
+| 2026-06 | Physical AI Data Factory Blueprint released — open reference architecture for training data generation |
+| 2026-07 | GR00T N1.7 GA + Isaac Teleop integrated into HuggingFace LeRobot |
+| 2026-07 | NIM adds SGLang model-free containers alongside vLLM |
+| 2026-08 | Q2 FY2027: $96.2B revenue (+106% YoY). Data Center $89B. Edge Computing $7.2B. Q3 guided $108B |
+| 2026-08 | GTC Washington: Mega Omniverse Blueprint expansion for robot fleet simulation (Siemens first partner) |
+| 2026-08 | Vera Rubin platform in full production. R100 GPU: 336B transistors, 50 PFLOPS FP4, 288 GB HBM4 |
 
 ### Acquisitions — What Each Brought
 
@@ -210,7 +217,7 @@ Isaac Lab depends on Isaac Sim at runtime (imports `isaacsim`, `omni`, `pxr`, `c
 
 Key Python deps (Isaac Lab): PyTorch ≥2.7, gymnasium 1.2.1, warp-lang, pin-pink (Pinocchio IK), trimesh, transformers, einops. RL backends: stable-baselines3, skrl, rl-games, rsl-rl.
 
-### Isaac ROS — Architecture Pattern
+### Isaac ROS 5.0 — Architecture Pattern
 
 ```text
 [ROS 2 Topic] → [isaac_ros_* node (Apache-2.0)] → [NITROS zero-copy GPU transfer]
@@ -218,6 +225,8 @@ Key Python deps (Isaac Lab): PyTorch ≥2.7, gymnasium 1.2.1, warp-lang, pin-pin
 ```
 
 ~60 Apache-2.0 ROS 2 wrapper nodes are thin shells. All actual acceleration (cuVSLAM, cuMotion, nvblox) is proprietary and NVIDIA-GPU-locked. Open alternatives (ORB-SLAM3, MoveIt2, OctoMap) exist but are slower.
+
+**v5.0 updates (ROSCon Sep 2026)**: Agentic "Isaac skills" — structured multi-step workflows that AI agents can discover and invoke (setup, manipulation, FoundationStereo fine-tuning, pick-and-place). FoundationPose 5.5x faster with agent-ready inference library. ROS Lyrical + Ubuntu 24.04 support. NVIDIA contributed a vendor-neutral GPU-accelerated memory transport interface to OSRA (CUDA as reference implementation) — standardizes GPU data handling but entrenches CUDA as de facto. cuMotion benchmarked at 2–5 ms collision-free path planning. Hardware span: Jetson Orin Nano → Jetson Thor. Key partners: Intrinsic (FoundationPose for machine tending), Universal Robots (AI Accelerator SDK), Mentee Robotics (MenteeBot perception), FieldAI (on-device foundation models), RealSense AgenticROS (Nemotron + NemoClaw).
 
 ### Omniverse — Open Data, Proprietary Runtime
 
@@ -553,7 +562,7 @@ Key: NVIDIA owns infrastructure and tooling, Google owns models and developer ec
 | **Software ecosystem** | CUDA (proprietary, dominant) | ROCm (open-source, improving) |
 | **Physical AI stack** | Full (simulation, models, edge) | None — datacenter GPUs only |
 | **Edge** | Jetson (full SoC) | No edge robotics product |
-| **Risk to NVIDIA** | Low near-term; vLLM/PyTorch abstract GPU choice at model layer, eroding CUDA moat long-term |
+| **Risk to NVIDIA** | Low near-term | vLLM/PyTorch abstract GPU choice at model layer, eroding CUDA moat long-term |
 
 ### vs Qualcomm
 

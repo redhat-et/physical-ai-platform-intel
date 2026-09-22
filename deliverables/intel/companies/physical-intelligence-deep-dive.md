@@ -1,7 +1,7 @@
 # Physical Intelligence — Deep Dive Research
 
 **Date**: 2026-06-23
-**Last updated**: 2026-06-23
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis — not for public repo
 
 Supporting research for the [Physical Intelligence competitive profile](physical-intelligence.md). This document covers material that informs the profile's assessments but is too detailed for the exec-level read: model architecture evolution, OSS foundations analysis, research timeline, training infrastructure, and competitive dynamics.
@@ -31,6 +31,8 @@ Supporting research for the [Physical Intelligence competitive profile](physical
 | 2026-03 | Series C reportedly in talks: ~$1B at ~$11B (Founders Fund, Lightspeed, Thrive, Lux) |
 | 2026-04 | π0.7 — 5B-param model with compositional generalization and cross-embodiment transfer |
 | 2026-06 | openpi at 12.5K GitHub stars; commit velocity slowing (6 commits since April) |
+| 2026-mid | Series C closed: ~$1B at $11.2B valuation (Founders Fund lead, Lightspeed, Thrive, Lux). Total raised ~$2.1B |
+| 2026-09 | openpi at 13.4K stars, 82 contributors. No new model release since π0.7 (5 months). Headcount ~200 (Tracxn/SVRC) |
 
 ### Acquisitions — What Each Brought
 
@@ -292,9 +294,9 @@ The open-source trajectory is deteriorating. Evidence:
 
 | Metric | Value |
 | --- | --- |
-| **openpi stars** | 12,484 |
-| **openpi forks** | 2,103 |
-| **Contributors** | 30 (12 PI employees, 18 external) |
+| **openpi stars** | 13,414 |
+| **openpi forks** | 2,359 |
+| **Contributors** | 82 (mix of PI employees and external) |
 | **External merge rate** | ~7–8% (all bug fixes/docs) |
 | **NVIDIA relationship** | NVentures investor ($600M Series B). PI deployed models at Foxconn on NVIDIA Blackwell lines |
 | **HuggingFace** | openpi uses LeRobot data format; models hosted on HuggingFace Hub |

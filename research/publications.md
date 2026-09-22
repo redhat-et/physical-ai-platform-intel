@@ -3037,12 +3037,52 @@
 
 **Relevance to World Models**: The CER architecture directly addresses the deployment gap between large foundation models and real-time robot control — a problem most VLA papers ignore. The APC interface pattern is notable: rather than treating VLA outputs as opaque action vectors, it structures them as inspectable contracts with explicit preconditions, time bounds, and fallback policies. This aligns with the deterministic enforcement pattern from the Physical Agentic AI paper (above) and strengthens the case for platform-level action validation layers. The six Physical Intelligence Metrics provide a concrete evaluation framework beyond task success rate, relevant to building-block assessment criteria. The four-layer safety stack maps to platform architecture decisions about where safety enforcement lives (model, middleware, runtime, hardware).
 
+### Intrinsic Core: Open-Source Physical AI Runtime [<img src="templates/icons/website.svg" alt="website" height="16">](https://www.intrinsic.ai/blog/posts/introducing-intrinsic-core)
+
+**Authors/Presenters**: [Intrinsic (Google)](ecosystem.md#intrinsic-google)
+
+**Date**: 2026-09
+
+**Summary**: Google/Intrinsic open-sources Intrinsic Core — a production-proven runtime, SDK, and hardware-agnostic real-time control framework for industrial robotics — under Apache 2.0 at ROSCon 2026. Components include real-time control with dynamic trajectory adaptation, collision-aware motion planning, adaptive grasp planning, 6DoF pose estimation (NVIDIA FoundationPose integration), and camera calibration. Simultaneously releases Open Machine Tending Solution reference design supporting FANUC and Universal Robots.
+
+**Key Findings**:
+
+- Explicit "Android playbook": open-source the infrastructure layer (Intrinsic Core) to drive adoption, monetize proprietary AI (Gemini Robotics) and commercial platform (Flowstate SaaS) at scale
+- Same capabilities Intrinsic uses daily in production manufacturing deployments — not a stripped-down community edition
+- ROS-compatible by design; hardware-agnostic across robot OEMs — directly competes with proprietary alternatives for the control/motion layer
+- NVIDIA FoundationPose integrated for pose estimation — notable cross-ecosystem collaboration (Google infra + NVIDIA perception)
+- Open Machine Tending Solution provides turnkey reference design: a concrete entry point for integrators rather than an abstract framework
+
+**Relevance to World Models**: Shifts the competitive landscape for robotics platforms. The infrastructure layer (control, motion planning, grasp planning) is now commodity open-source, which validates platform strategies that differentiate above this layer (AI models, fleet management, MLOps, safety certification). The Copybara sync pattern from Google's internal monorepo means contribution dynamics warrant monitoring — if external contributions are structurally difficult, this is "open-source as distribution channel" rather than genuine community governance. For platform builders, the key question is: does Intrinsic Core on your OS displace IntrinsicOS, or does it become a funnel to Flowstate + Google Cloud?
+
+---
+
+### Isaac ROS 5.0: Agentic Open-Source Robotics [<img src="templates/icons/website.svg" alt="website" height="16">](https://blogs.nvidia.com/blog/isaac-ros-5-0-agentic-open-source-robotics/)
+
+**Authors/Presenters**: [NVIDIA](ecosystem.md#nvidia)
+
+**Date**: 2026-09
+
+**Summary**: Announces Isaac ROS 5.0 at ROSCon Toronto, adding "agentic" capabilities — reusable "Isaac skills" (setup, manipulation, perception fine-tuning) that AI agents can discover and invoke autonomously. Extends hardware support from Jetson Orin Nano to Jetson Thor; adds ROS Lyrical + Ubuntu 24.04 support and a vendor-neutral GPU-accelerated memory transport interface contributed upstream to the Open Source Robotics Alliance.
+
+**Key Findings**:
+
+- Agentic framing: "Isaac skills" are structured, multi-step workflows consumable by both human developers and AI agents. FoundationStereo fine-tuning skill lets an agent adapt a stereo perception model to specific cameras/environments autonomously
+- FoundationPose now offers agent-ready inference library with up to 5.5x faster object pose estimation and tracking
+- NVIDIA contributed a vendor-neutral accelerated data-handling interface to ROS Lyrical (CUDA as reference GPU implementation) — notable because it standardizes rather than proprietary-locks the GPU transport layer
+- Expanding ecosystem: Intrinsic (FoundationPose for machine tending), Universal Robots (AI Accelerator SDK on Jetson), Mentee Robotics (MenteeBot humanoid perception), FieldAI (on-device foundation models without cloud), RealSense AgenticROS (connects Isaac ROS with Nemotron + NemoClaw for agent-robot interaction)
+- isaac_ros_cumotion benchmarked at 2–5 ms collision-free path planning on GPU
+
+**Relevance to World Models**: Marks NVIDIA's pivot from "GPU-accelerated ROS packages" to "agentic robotics platform" — AI agents orchestrate robot development workflows rather than humans writing integration code. This is the deployment-side counterpart to the lifecycle agent tools announced at GTC Taipei (May 2026). The upstream contribution of vendor-neutral GPU transport to ROS Lyrical is strategically significant: it could lock in CUDA as the de facto reference while appearing open. The FoundationPose/FoundationStereo skill pattern establishes a concrete interface between agentic AI orchestration and physical perception — informing platform requirements for skill registries and agent-robot APIs.
+
 ---
 
 ## Recent Additions
 
 *Last synthesized: 2026-07-15*
 
+- Intrinsic Core: Open-Source Physical AI Runtime (Physical AI Deployment)
+- Isaac ROS 5.0: Agentic Open-Source Robotics (Physical AI Deployment)
 - WEAVER: Flow-Matching World Model for Robotic Manipulation (World Models & Model-Based RL)
 - Kairos: Regret-Aware Native World-Action Model Stack (World Models & Model-Based RL)
 - Mem-World: Memory-Augmented World Models for Persistent Manipulation (World Models & Model-Based RL)

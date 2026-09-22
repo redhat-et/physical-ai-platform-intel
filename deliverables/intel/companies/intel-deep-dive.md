@@ -1,7 +1,7 @@
 # Intel — Deep Dive Research
 
 **Date**: 2026-06-23
-**Last updated**: 2026-06-23
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis — not for public repo
 
 Supporting research for the [Intel competitive profile](intel.md). This document covers material that informs the profile's assessments but is too detailed for the exec-level read: OSS foundations analysis, acquisition deep-dives, product architectures, governance risks, and technical dependency chains.
@@ -29,6 +29,10 @@ Supporting research for the [Intel competitive profile](intel.md). This document
 | 2026-01 | Mobileye acquires Mentee Robotics for ~$900M (humanoid robots) |
 | 2026-03 | Core Ultra Series 3 (Panther Lake) launches for edge AI |
 | 2026-05 | Announces OpenVINO Physical AI framework and Intel Robotics brand at Computex |
+| 2026-06 | Mobileye announces vertically integrated robotaxi business — U.S. launch 2027, 100→17K vehicles over 5 years |
+| 2026-07 | Q2 2026: $16.1B revenue (25.4% YoY), 7th consecutive beat. AI businesses ~70% of revenue, growing >70% YoY. Capex raised to >$20B |
+| 2026-08 | Hot Chips 2026: Crescent Island specs revealed — 32 Xe3P cores, 256 XMX engines, 480GB LPDDR5X, 350W TDP |
+| 2026-09 | Capgemini+Intel "Dexterity" Physical AI edge demo at AI Infra Summit (Sep 15-17) |
 
 ### Acquisitions — What Each Brought
 
@@ -52,6 +56,31 @@ Supporting research for the [Intel competitive profile](intel.md). This document
 - **Technology**: Humanoid robot design with integrated AI perception
 - **Integration**: Into Mobileye's Physical AI division
 - **Significance**: Positions Mobileye/Intel in humanoid robotics beyond autonomous vehicles. First proof-of-concept deployments expected 2026
+
+### Mobileye Robotaxi Expansion (Jun 2026)
+
+Mobileye announced a strategic pivot from AV technology supplier to vertically integrated robotaxi operator:
+
+- **U.S. launch 2027**: Initial fleet of 100 autonomous vehicles, phased throughout 2027 for driverless validation
+- **Scale target**: ~17,000 vehicles over 5 years following successful initial deployment
+- **Platform**: Combines Mobileye Drive (L4 autonomy) + Moovit (consumer apps, trip planning, fleet management, teleoperation)
+- **Existing partnerships continue**: VW/MOIA (ID. Buzz, U.S. 2026), Uber (LA), Lyft (Dallas), European public transit (Germany, Norway, Switzerland)
+- **Mobileye Chauffeur (L3)**: Shipping to Audi and Polestar
+- **Revenue pipeline**: Projected $24.5B over 8 years (42% growth from 2023's $17.3B pipeline)
+- **Competitive context**: Waymo leads with 500K+ rides/week across 11 U.S. cities; Tesla, Zoox, and others expanding
+
+### Intel Q2 2026 Financial Turnaround
+
+- **Revenue**: $16.1B (up 25.4% YoY), exceeding guidance by $1.8B at midpoint. 7th consecutive beat
+- **AI contribution**: AI-driven businesses grew >70% YoY, contributing ~70% of total revenue
+- **Data Center and AI**: $6.26B (up 59% YoY)
+- **Client Computing**: $8.88B (up 13% YoY)
+- **Intel Foundry**: $5.76B (up 31% YoY) on improved yields and cycle times
+- **Gross margin**: Non-GAAP 41.8% (up 12.1pp YoY)
+- **GAAP loss**: $2.16/share due to $12.53B non-cash CHIPS Act escrow charge
+- **Capital allocation**: 2026 capex raised to >$20B; 2027 significantly above 2026. $29.7B cash + short-term investments
+- **Stock**: Up 170%+ in 2026 (after +84% in 2025)
+- **Q3 guidance**: $15.8–16.8B revenue, non-GAAP EPS $0.38
 
 ---
 
@@ -84,16 +113,14 @@ Supporting research for the [Intel competitive profile](intel.md). This document
 | **Extension model** | SynapseAI SDK; PyTorch-compatible API surface |
 | **Key limitations** | Software maturity vs CUDA; limited adoption beyond IBM/Dell; Falcon Shores successor canceled; Ethernet scaling has lower bandwidth than NVLink for large-scale training |
 
-### Crescent Island (Upcoming)
-
-<!-- TODO: deep research needed -->
+### Crescent Island
 
 | Aspect | Details |
 | --- | --- |
-| **Architecture** | Xe3P architecture; 160 GB LPDDR5X (no HBM — cost/power optimized); air-cooled |
-| **Runtime dependencies** | Expected oneAPI/SYCL support; likely OpenVINO integration |
-| **Extension model** | TBD — sampling H2 2026 |
-| **Key limitations** | Inference-focused only — not a training accelerator. Specifications unconfirmed |
+| **Architecture** | Xe3P architecture; 32 Xe3P cores, 256 XMX engines, 32MB L2 cache. Up to 480GB LPDDR5X (no HBM — cost/power optimized); air-cooled, 350W TDP. Specs revealed at Hot Chips 2026 |
+| **Runtime dependencies** | oneAPI/SYCL support; OpenVINO integration for inference optimization |
+| **Extension model** | Standard PCIe form factor; sampling Q3 2026, commercial launch likely slipping to 2027 |
+| **Key limitations** | Inference-focused only — not a training accelerator. LPDDR5X bandwidth lower than HBM competitors for large-batch workloads |
 
 ---
 
@@ -183,8 +210,8 @@ Intel's recent deprecation of the proprietary DPC++ Compatibility Tool in favor 
 
 | Product | Timeline | Key Changes |
 | --- | --- | --- |
-| **Crescent Island** | H2 2026 (sampling) | Xe3P architecture; 160 GB LPDDR5X; inference-focused; air-cooled |
-| **Jaguar Shores** | 2027+ (unconfirmed) | Rack-scale AI accelerator; silicon photonics interconnects; HBM4; Gaudi brand |
+| **Crescent Island** | Q3 2026 (sampling), 2027 (commercial) | Xe3P; 32 cores, 256 XMX, 480GB LPDDR5X, 350W, air-cooled. Hot Chips 2026 reveal |
+| **Jaguar Shores** | H2 2027 (potential) | Rack-scale AI accelerator; HBM4/HBM4E (SK Hynix partnership); silicon photonics interconnects; design closure H1 2026 |
 | **18A-P** | 2026 | Performance-optimized 18A variant for foundry customers |
 | **14A** | Post-2027 | Next angstrom-scale node; early PDK to core customers |
 
@@ -209,6 +236,8 @@ Gaudi 3 pricing positioned at significant discount to NVIDIA H100/H200. PCIe car
 | **Microsoft** | Foundry | 18A process for Maia AI chips | Foundry customer |
 | **AWS** | Foundry | 18A process for AI Fabric chips | Foundry customer |
 | **NVIDIA** | Strategic | $5B investment; joint chip production | Foundry + hybrid Gaudi/Blackwell inference |
+| **Capgemini** | SI / Physical AI | "Dexterity" Physical AI edge demo at AI Infra Summit (Sep 2026) | Joint edge deployment pipeline for industrial robotics |
+| **SK Hynix** | Memory | HBM4/HBM4E supply for Jaguar Shores | Strategic memory partnership for next-gen training accelerator |
 
 ### Developer Ecosystem
 
@@ -271,3 +300,7 @@ Intel's developer ecosystem for AI is smaller than NVIDIA's but growing:
 - [NVIDIA Invests $5B in Intel](https://fortune.com/2025/10/24/intel-cfo-says-ceo-lip-bu-tan-balance-sheet-discipline-u-s-nvidia-funding-accelerate-turnaround/)
 - [Intel Crescent Island Inference GPU](https://semiwiki.com/forum/threads/intel-to-expand-ai-accelerator-portfolio-with-new-gpu.23826/)
 - [VW-Mobileye Autonomous Driving Collaboration](https://www.automotivedive.com/news/volkswagen-mobileye-boost-collaboration-autonomous-driving-technology-intel-corp/710931/)
+- [Intel Q2 2026 Earnings — $16.1B Revenue](https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results)
+- [Mobileye Vertically Integrated Robotaxi Business](https://www.mobileye.com/news/mobileye-to-establish-vertically-integrated-robotaxi-business/)
+- [Mobileye U.S. Robotaxi Launch — TechCrunch](https://techcrunch.com/2026/06/16/mobileye-us-robotaxi-launch-will-put-it-on-both-sides-of-the-av-business/)
+- [Prof. Shashua CES 2026 — Robotaxi Updates](https://www.mobileye.com/blog/takeaways-from-the-mobileye-press-conference-with-ceo-prof-amnon-shashua-at-ces-2026/)

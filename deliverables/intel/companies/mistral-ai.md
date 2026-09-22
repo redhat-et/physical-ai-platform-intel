@@ -1,7 +1,7 @@
 # Mistral AI — Competitive Profile
 
 **Date**: 2026-07-09
-**Last updated**: 2026-07-09
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis — not for public repo
 
 See [deep-dive](mistral-ai-deep-dive.md) for OSS foundations, acquisition details, and technical architecture.
@@ -15,7 +15,7 @@ Mistral AI is a Paris-based startup pursuing an **open-weight models + sovereign
 | | |
 | --- | --- |
 | **Type** | Startup |
-| **Revenue / Funding** | ~$400M ARR (Jan 2026); ~$6.4B total raised; $23B valuation (Jun 2026 round) |
+| **Revenue / Funding** | ~$400M ARR (Jan 2026); ~$9.9B total raised; €21B ($24B) valuation (Sep 2026 Series D — €3B led by Samsung, largest-ever European tech equity round) |
 | **Physical AI thesis** | Extend efficient open-weight models from language into embodied AI and industrial physics simulation; win European industrial customers (Airbus, BMW, EDF) via sovereignty + on-prem deployment |
 | **Platform coverage** | ~20% of blocks — concentrated in models, MaaS, and emerging Physical AI (simulation, robot policies); no platform infrastructure |
 | **Relationship to Red Hat** | Mixed — Complement on models (Apache 2.0 weights served via vLLM/Red Hat AI); potential overlap on training workflows (Forge vs OpenShift AI) |
@@ -29,8 +29,12 @@ Mistral AI is a Paris-based startup pursuing an **open-weight models + sovereign
 | **Mistral Large 3** | Flagship open-weight MoE model (675B total / 41B active). Apache 2.0. 262K context. Multimodal (vision + text) |
 | **Mistral Small 4** | Efficient MoE (119B total / 6B active). Unifies instruct, reasoning, vision, coding. Apache 2.0 |
 | **Ministral 3** | Dense edge models at 14B, 8B, 3B parameters. 14B reasoning variant hits 85% on AIME 2025. Apache 2.0 |
-| **Mistral Medium 3.5** | Mid-tier model for instruction, reasoning, coding. Powers Le Chat / Vibe |
+| **Mistral Medium 3.5** | Mid-tier model for instruction, reasoning, coding. Powers Le Chat / Vibe. Remote coding agents |
 | **Codestral / Devstral 2** | Code completion (256K window) and agentic coding (46.8% SWE-Bench). Devstral built with All Hands AI |
+| **Shieldstral 1.0** | Content moderation model for safety guardrails |
+| **Leanstral 1.5** | Lean 4 formal proof engineering model (retiring Sep 30, 2026) |
+| **Voxtral Mini Transcribe 2** | Speech transcription model |
+| **Agentic Search** | Retrieval layer for navigating, reading, and verifying complex documents with fewer turns and lower token use |
 | **Voxtral TTS** | Open-weight TTS on Ministral 3B backbone. 9 languages, zero-shot voice cloning. CC BY-NC 4.0 |
 | **Robostral Navigate** | 8B embodied navigation model. Single RGB camera, 76.6% on R2R-CE. Sim-trained (400K trajectories). Apache 2.0 |
 | **Emmi AI (physics sim)** | Neural surrogate models for industrial simulation (airflow, heat, stress). Acquired May 2026 (~€300M) |
@@ -38,7 +42,8 @@ Mistral AI is a Paris-based startup pursuing an **open-weight models + sovereign
 | **Agents API** | Workflow orchestration with function calling, MCP support, Document Library (RAG). Enterprise agentic platform |
 | **Forge** | Custom model training platform: full pre-training + post-training + RL on enterprise data. On-prem or Mistral Compute |
 | **La Plateforme** | Pay-per-token API for all Mistral models. OpenAI-compatible endpoints |
-| **Mistral Compute** | Proprietary AI cloud infrastructure. 18,000 NVIDIA Blackwell GPUs, 44 MW datacenter near Paris |
+| **Mistral Compute** | Proprietary AI cloud infrastructure. 18,000 NVIDIA Blackwell GPUs, 44 MW datacenter near Paris. Regional inference endpoints (EU/US) with Priority Tier SLAs |
+| **Third-party model hosting** | Hosting open-weight models from other providers (starting with Z.ai GLM-5.2) on Mistral infrastructure with same regional controls |
 
 ---
 
@@ -275,14 +280,17 @@ Mistral AI is a Paris-based startup pursuing an **open-weight models + sovereign
 
 | Partner | Type | Significance |
 | --- | --- | --- |
+| **Samsung** | Lead investor (Series D) | Led €3B Series D (Sep 2026). Signals Asian semiconductor industry interest in European AI sovereignty |
 | **NVIDIA** | Compute / Co-development | Nemotron Coalition founding member. Co-developing frontier open-source models. 18K Blackwell GPUs for Mistral Compute |
-| **ASML** | Strategic investor + customer | Largest shareholder (11%, €1.3B). Using Mistral vision models for lithography defect detection |
-| **Microsoft Azure** | Cloud distribution | Mistral models on Azure AI Foundry. Early partnership (Feb 2024) |
+| **ASML** | Strategic investor + customer | 11% shareholder (€1.3B). Using Mistral vision models for lithography defect detection. European Compute Coalition member |
+| **Microsoft Azure** | Cloud distribution + infra | Multibillion-dollar agreement (Jul 2026): Microsoft uses Mistral EU compute capacity; Medium 3.5 + OCR 4 on Azure Foundry + Copilot Studio |
 | **Airbus** | Industrial customer | 5-year deal covering defence, space, helicopters. Custom AI tools for aerospace |
 | **BMW** | Industrial customer | Crash simulation AI using 1 PB of historical simulation data. "Large Industry Models" |
 | **EDF** | Industrial customer | Launch customer for industrial engineering AI stack |
 | **Accenture** | Systems integrator | Strategic partnership for enterprise AI deployment at scale |
 | **SAP** | Sovereign AI | Joint sovereign AI stack for French and German government administrations |
+| **European Compute Coalition** | Infrastructure | ASML, Amadeus, Capgemini, Caisse des Dépôts, CMA CGM — targeting 1 GW European compute by 2030 |
+| **Mozilla** | Consumer AI | Partnership to bring open, private, multilingual AI to Firefox Smart Window |
 
 ---
 
@@ -322,3 +330,14 @@ Mistral AI is a Paris-based startup pursuing an **open-weight models + sovereign
 ## Related Reports
 
 - [Mistral AI — ecosystem entry](../../../research/ecosystem.md#mistral-ai)
+
+---
+
+## Sources
+
+- [Mistral €3B Series D — TechCrunch](https://techcrunch.com/2026/09/08/mistral-raises-e3b-as-sovereign-ai-becomes-big-business/)
+- [Samsung leads Mistral funding — CNBC](https://www.cnbc.com/2026/09/08/mistral-ai-funding-valuation-samsung.html)
+- [Regional inference, open models, new compute — Mistral](https://mistral.ai/news/regional-inference-open-models-new-compute/)
+- [Microsoft multibillion-dollar agreement — Mistral](https://mistral.ai/news/)
+- [Mistral AI official website](https://mistral.ai/)
+- [Run Mistral Large 3 on Red Hat AI — Red Hat Developer](https://developers.redhat.com/articles/2025/12/02/run-mistral-large-3-ministral-3-vllm-red-hat-ai)

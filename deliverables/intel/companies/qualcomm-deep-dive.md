@@ -1,7 +1,7 @@
 # Qualcomm — Deep Dive Research
 
 **Date**: 2026-06-23
-**Last updated**: 2026-06-23
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis — not for public repo
 
 Supporting research for the [Qualcomm competitive profile](qualcomm.md). This document covers material that informs the profile's assessments but is too detailed for the exec-level read: OSS foundations analysis, acquisition deep-dives, product architectures, governance risks, and technical dependency chains.
@@ -30,7 +30,11 @@ Supporting research for the [Qualcomm competitive profile](qualcomm.md). This do
 | 2026-01 | CES: Dragonwing IQ10 unveiled (700 TOPS robotics SoC); IE-IoT expansion complete |
 | 2026-03 | NEURA Robotics strategic collaboration; NexaSDK for Linux |
 | 2026-05 | Stellantis expanded partnership (Ride Pilot + aiMotive LOI) |
-| 2026-06 | Computex: IQ10 reference design detailed; early access program launched |
+| 2026-06 | Computex: IQ10 reference design detailed; early access program launched with 10 partners |
+| 2026-06 | Modular acquisition announced ($3.9B all-stock, ~19.2M Qualcomm shares) |
+| 2026-07 | Modular acquisition completed; Chris Lattner becomes EVP Advanced AI Software; Mojo open-sourced under Apache 2.0 |
+| 2026-07 | Q3 FY2026: $9.9B revenue (-4% YoY); Automotive $1.6B (+61% YoY) |
+| 2026-08 | ModCon 2026: MAX platform support expanded to 6 chip vendors (NVIDIA, AMD, Apple, AWS Trainium, Google TPU, Qualcomm) |
 
 ### Acquisitions — What Each Brought
 
@@ -62,6 +66,13 @@ Supporting research for the [Qualcomm competitive profile](qualcomm.md). This do
 - **Integration**: Complements Oryon (Arm) cores; provides RISC-V option for markets where Arm licensing is a concern
 - **Significance**: Hedge against Arm licensing risk; potential for ultra-low-power RISC-V cores in deeply embedded Physical AI applications
 
+#### Modular Inc (Jul 2026)
+
+- **Price**: ~$3.9B all-stock (~19.2M Qualcomm shares)
+- **Technology**: Mojo (Python-superset language for high-performance AI kernels), MAX (AI compiler platform targeting CPUs, GPUs, NPUs across 6 vendors), Modular Cloud
+- **Integration**: Chris Lattner (LLVM/Clang/Swift creator) becomes EVP Advanced AI Software and Platforms. Entire 150-person workforce integrated into Qualcomm engineering divisions. Mojo, MAX, and Modular Cloud continue as products
+- **Significance**: Direct strike at NVIDIA's CUDA moat. MAX abstracts hardware vendor dependency — models compile once and run on NVIDIA, AMD, Intel, Apple, AWS Trainium, Google TPU, and Qualcomm without rewriting. Fully open-sourced under Apache 2.0 with written commitment to optimize for competing hardware. Transforms Qualcomm from pure silicon vendor to silicon-plus-software platform company
+
 #### Alphawave Semi (2025-2026)
 
 - **Price**: ~$2.4B
@@ -83,7 +94,7 @@ Supporting research for the [Qualcomm competitive profile](qualcomm.md). This do
 | **Connectivity** | Two 10GBase-T, one 2.5GBase-T, four 1GBase-T EtherCAT, eight CAN-FD, PCIe, TSN, 5G/Wi-Fi optional |
 | **Runtime dependencies** | Ubuntu Linux (shipped), ROS 2, Qualcomm AI Runtime (QAIRT) |
 | **Extension model** | Expansion modules for TOPS scaling; standard I/O interfaces; ROS 2 node architecture |
-| **Key limitations** | Not yet shipping (GA Sep 2026); Ubuntu-only OS support at launch; proprietary NPU compiler |
+| **Key limitations** | In early access with 10 OEM partners (GA Sep 2026); Ubuntu-only OS support at launch; proprietary NPU compiler (Mojo/MAX may provide alternative path) |
 
 ### Cloud AI 100 / Ultra
 
@@ -126,17 +137,17 @@ Supporting research for the [Qualcomm competitive profile](qualcomm.md). This do
 | **AI Hub** | ONNX Runtime, LiteRT | Apache 2.0 | Model optimization pipeline, device profiling, conversion toolchain |
 | **ROS 2 support** | ROS 2 | Apache 2.0 | Hexagon transport layer, NPU-accelerated perception nodes |
 | **Cloud AI SDK** | None | Proprietary | Compiler, runtime, model conversion for Cloud AI 100 |
+| **Mojo** | Built on MLIR/LLVM | Apache 2.0 | Python-superset language optimized for AI kernel authoring; fully open-sourced Jul 2026 |
+| **MAX** | MLIR/LLVM backends | Apache 2.0 | Multi-vendor AI compiler: NVIDIA, AMD, Intel, Apple, AWS Trainium, Google TPU, Qualcomm |
 | **Arduino (acquired)** | Arduino core | LGPL 2.1 / Apache 2.0 | Qualcomm-based boards (QRB2210), hardware integration |
 
 ### Pattern Analysis
 
-Qualcomm's OSS strategy is **"proprietary core, OSS bridges."** The core value — the inference compiler, NPU scheduler, and hardware abstraction — is entirely proprietary. OSS involvement is limited to:
+Qualcomm's OSS strategy shifted fundamentally with the Modular acquisition (Jul 2026). Previously it was **"proprietary core, OSS bridges"** — the inference compiler, NPU scheduler, and hardware abstraction were entirely proprietary, with OSS limited to bridge layers (ONNX Runtime QNN EP), tooling (AIMET), and standard adoption (ROS 2).
 
-1. **Bridge layers**: ONNX Runtime QNN Execution Provider allows standard ONNX models to target Qualcomm hardware. This is the primary OSS touchpoint.
-2. **Tooling contributions**: AIMET (quantization toolkit) is genuinely open-source (BSD-3) and useful independent of Qualcomm hardware, though optimized for it.
-3. **Standard adoption**: Supporting ROS 2, ONNX, and LiteRT as input formats rather than building proprietary alternatives.
+Post-Modular, the strategy is **"OSS compiler platform, proprietary silicon optimization."** Mojo/MAX under Apache 2.0 provides a silicon-agnostic AI compiler targeting 6 vendor backends — a direct challenge to NVIDIA's CUDA moat. The commitment to optimize for competing hardware (in writing) distinguishes this from typical single-vendor OSS plays. However, peak performance on Qualcomm silicon still requires proprietary NPU scheduling and hardware-specific optimizations.
 
-This contrasts with NVIDIA, which has a much larger OSS surface area (Newton, Isaac Lab, GPU Operator, KAI Scheduler, etc.) while keeping the core runtime (CUDA) proprietary. Qualcomm's OSS footprint is smaller but also less strategically complex — there are fewer governance or fork risks to track.
+This now gives Qualcomm a larger OSS surface area than before, though still smaller than NVIDIA's (Newton, Isaac Lab, GPU Operator, KAI Scheduler, etc.). The key difference: Mojo/MAX is a horizontal compiler platform, not a vertical robotics/simulation stack.
 
 ### Notable Dependencies
 
@@ -191,7 +202,7 @@ This contrasts with NVIDIA, which has a much larger OSS surface area (Newton, Is
 | --- | --- | --- | --- |
 | **Cloud AI 100** | PCIe card | Competitive tokens/watt vs A100 | Shipping |
 | **Cloud AI 100 Ultra** | 4-chip package | 70B model on 1 card, 148W | Shipping |
-| **AI200** | PCIe card | Next-gen, details TBD | Commercially available 2026 |
+| **AI200** | Rack-scale, liquid-cooled | 160kW, direct NVIDIA GPU pod competitor | H2 2026 availability |
 | **AI250** | TBD | Next-gen+ | Expected 2027 |
 
 #### Edge AI Processors
@@ -206,7 +217,7 @@ This contrasts with NVIDIA, which has a much larger OSS surface area (Newton, Is
 | Product | Timeline | Key Changes |
 | --- | --- | --- |
 | **IQ10** | GA Sep 2026 | First 700+ TOPS robotics SoC with ROS 2 native support |
-| **AI200** | H2 2026 | Next-gen datacenter inference; architecture details TBD |
+| **AI200** | H2 2026 | Rack-scale datacenter inference; liquid-cooled, 160kW; direct GPU pod competitor |
 | **AI250** | 2027 | Follow-on datacenter inference chip |
 | **Snapdragon X3** | 2027 (expected) | Next-gen AI PC SoC |
 
@@ -228,16 +239,19 @@ Qualcomm does not publicly disclose SoC pricing. Typical patterns:
 | **Stellantis** | 14 brands, millions of vehicles | Ride Pilot ADAS; LOI for aiMotive acquisition | Full Digital Chassis deployment |
 | **Volkswagen** | 10M+ vehicles/year | Primary SDV tech provider from 2027 | Zonal architecture, infotainment |
 | **HUMAIN** | Greenfield 200MW DC | First Cloud AI 100 large-scale customer | Hardware supply + inference stack |
-| **NEURA Robotics** | Pre-production | Strategic collaboration (Mar 2026) | IQ10 compute for humanoid robots |
-| **Figure** | Pre-production | Next-gen compute architecture | Silicon roadmap alignment |
+| **NEURA Robotics** | Pre-production | Strategic collaboration (Mar 2026): "Brain + Nervous System" reference architectures; NEURA backed $1.4B (Qualcomm, NVIDIA, Amazon) | IQ10 + NEURA hardware + embodied AI stack |
+| **Figure** | Pre-production | Next-gen compute architecture for Figure 03 humanoid | IQ10 silicon roadmap alignment |
+| **KUKA** | Production | CES 2026 ecosystem partner | IQ10 for industrial robotics deployment |
 
 ### Developer Ecosystem
 
 - **Qualcomm AI Hub**: Central developer portal for model optimization and deployment
+- **Mojo/MAX Community**: Inherited from Modular; Apache 2.0 draws multi-vendor developer interest; ModCon 2026 showcased 6-vendor backend support
 - **Arduino**: Acquired Oct 2025; millions of active developers worldwide; entry point to Qualcomm silicon
+- **IQ10 Early Access**: 10 OEM partners (NEURA, Advantech, APLUX, Booster, Innodisk, MeiG, NEXCOM, Radxa, Thundercomm, VinMotion)
 - **QAIPI Program**: 15 APAC startups per cohort; focuses on Physical AI edge applications
 - **Thundercomm**: Key ODM partner; TurboX development boards for Qualcomm robotics platforms
-- **Developer scale**: Qualcomm claims access to millions of mobile developers; robotics developer base is much smaller and growing
+- **Developer scale**: Qualcomm claims access to millions of mobile developers; Mojo/MAX targets the AI/ML developer community that currently depends on CUDA
 
 ---
 
@@ -250,7 +264,7 @@ Qualcomm does not publicly disclose SoC pricing. Typical patterns:
 | **Peak TOPS** | 700 base, 2,000 expanded | 2,000 (GB10 Grace Blackwell) |
 | **Power efficiency** | Higher tokens/watt (mobile heritage) | Lower efficiency but higher absolute throughput |
 | **Connectivity** | Integrated 5G/Wi-Fi/BT on-chip | External modules required |
-| **Software ecosystem** | QAIRT, AI Hub, ROS 2 support | CUDA, TensorRT, Isaac ROS, Isaac Sim, Omniverse |
+| **Software ecosystem** | QAIRT, AI Hub, Mojo/MAX (Apache 2.0, 6 backends), ROS 2 | CUDA, TensorRT, Isaac ROS, Isaac Sim, Omniverse |
 | **OS** | Ubuntu (Canonical) | L4T (Ubuntu-based, NVIDIA-controlled) |
 | **Simulation** | None | Isaac Sim, Newton (full sim→train→deploy) |
 | **Foundation models** | None | GR00T N1, Cosmos |
@@ -258,7 +272,7 @@ Qualcomm does not publicly disclose SoC pricing. Typical patterns:
 | **Availability** | GA Sep 2026 | Shipping (Orin); Thor H2 2026 |
 | **Price point** | Expected lower (mass-market heritage) | Premium ($1,000+ for Orin NX) |
 
-**Assessment**: Qualcomm IQ10 is competitive on hardware specs and superior on connectivity/industrial I/O, but NVIDIA's software ecosystem advantage (CUDA + Isaac + simulation) is the decisive moat. Qualcomm must rely on partners (or ROS 2 community) for the software stack that NVIDIA builds in-house.
+**Assessment**: Qualcomm IQ10 is competitive on hardware specs and superior on connectivity/industrial I/O. The Modular acquisition gives Qualcomm a CUDA-alternative compiler platform (Mojo/MAX) for the first time, but NVIDIA's advantage extends beyond CUDA into simulation (Isaac Sim), foundation models (GR00T), and vertical toolchains (Isaac ROS). Mojo/MAX addresses the compiler gap but not the application stack gap.
 
 ### vs Intel (Mobileye/Hailo)
 
@@ -287,3 +301,8 @@ Qualcomm does not publicly disclose SoC pricing. Typical patterns:
 - [RB6 Platform](https://www.qualcomm.com/internet-of-things/products/robotics-rb6-platform)
 - [Qualcomm Open Source](https://www.qualcomm.com/developer/opensource)
 - [ABI Research Qualcomm AI Strategy](https://www.abiresearch.com/blog/qualcomms-ai-strategy)
+- [Qualcomm Completes Modular Acquisition (Jul 2026)](https://www.prnewswire.com/news-releases/qualcomm-completes-acquisition-of-modular-302837286.html)
+- [Modular Open-Sources Mojo under Apache 2.0](https://www.modular.com/blog/qualcomm-completes-acquisition-of-modular)
+- [ModCon 2026: Multi-Vendor Backend Expansion (Forbes)](https://www.forbes.com/sites/patrickmoorhead/2026/08/20/modular-delivers-openness-and-accelerator-portability-at-modcon-2026/)
+- [Qualcomm Q3 FY2026 Revenue $9.9B, Automotive $1.6B +61% YoY](https://investor.qualcomm.com/)
+- [NEURA Robotics $1.4B Funding, Qualcomm/NVIDIA/Amazon](https://neura-robotics.com/neura-qualcomm-collaboration-physical-ai/)

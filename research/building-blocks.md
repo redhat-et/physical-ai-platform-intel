@@ -143,10 +143,12 @@
 | ---------------------- | ------------------ | ----------------- | -------------------------------------------------- |
 | OSS (community-driven) | ROS2, Nav2, MoveIt | Industry standard | Open Robotics / OSRA governance; broad ecosystem   |
 | OSS (community-driven) | PX4-Autopilot      | Industry standard | Dronecode Foundation (LF); drone/UAV autopilot     |
-| OSS (single-vendor)    | Isaac ROS          | Production-ready  | NVIDIA; accelerated layer on ROS2, CUDA-only       |
+| OSS (single-vendor)    | Isaac ROS 5.0      | Production-ready  | NVIDIA; agentic skills, GPU-accel ROS 2, CUDA-only |
+| OSS (single-vendor)    | Intrinsic Core     | Production-ready  | Google; control, motion, grasp plan. Apache 2.0    |
+| OSS (community-driven) | AgenticROS         | Early OSS         | MCP-to-ROS 2 bridge for AI agents. Apache 2.0      |
 | Proprietary            | Various OEM stacks | Production-ready  | ABB, FANUC, KUKA, YASKAWA proprietary controllers  |
 
-**Key trade-offs**: ROS2 is the industry standard but lacks enterprise support and hardened security. Isaac ROS adds hardware acceleration but locks to NVIDIA GPUs. Proprietary stacks offer reliability but limit interoperability.
+**Key trade-offs**: ROS2 is the industry standard but lacks enterprise support and hardened security. Isaac ROS adds hardware acceleration but locks to NVIDIA GPUs. Intrinsic Core provides production-proven control/motion stack under Apache 2.0 but is single-vendor OSS (Copybara sync from Google monorepo). AgenticROS bridges AI agents to ROS 2 via MCP but is single-developer early-stage. Proprietary stacks offer reliability but limit interoperability.
 
 **Platform fit**: `Build`
 
@@ -154,8 +156,8 @@
 - **Partnership surface**: Open Robotics / OSRA (community governance); robot OEMs needing enterprise middleware.
 
 **Related blocks**: [Edge AI Inference Runtime](#edge-ai-inference-runtime), [Robot Fleet Management & Observability](#robot-fleet-management--observability), [Sensor Data Ingestion](#sensor-data-ingestion)
-**Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia) (Isaac ROS), Open Robotics (ROS2, Gazebo), Dronecode Foundation (PX4), Open Navigation LLC (Nav2)
-**Relevant research**: (to be populated)
+**Key ecosystem players**: [NVIDIA](ecosystem.md#nvidia) (Isaac ROS), [Intrinsic (Google)](ecosystem.md#intrinsic-google) (Intrinsic Core), Open Robotics (ROS2, Gazebo), Dronecode Foundation (PX4), Open Navigation LLC (Nav2)
+**Relevant research**: [Isaac ROS 5.0](publications.md#isaac-ros-50-agentic-open-source-robotics), [Intrinsic Core](publications.md#intrinsic-core-open-source-physical-ai-runtime)
 
 ---
 

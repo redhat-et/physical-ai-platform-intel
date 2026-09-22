@@ -1,7 +1,7 @@
 # Mistral AI — Deep Dive Research
 
 **Date**: 2026-07-09
-**Last updated**: 2026-07-09
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis — not for public repo
 
 Supporting research for the [Mistral AI competitive profile](mistral-ai.md). This document covers material that informs the profile's assessments but is too detailed for the exec-level read: OSS foundations analysis, acquisition deep-dives, product architectures, governance risks, and technical dependency chains.
@@ -30,6 +30,11 @@ Supporting research for the [Mistral AI competitive profile](mistral-ai.md). Thi
 | 2026-05 | Emmi AI acquisition (~€300M). Airbus 5-year deal, BMW partnership. Le Chat rebranded to Vibe |
 | 2026-06 | Brian Hall (ex-Microsoft/Amazon/Google) joins as CMO. $3.5B raise at ~$23B valuation reported |
 | 2026-07 | Robostral Navigate launched — first robotics model. Physical AI push formalized |
+| 2026-07 | Microsoft multibillion-dollar partnership expansion — EU compute capacity, Medium 3.5 + OCR 4 on Azure Foundry + Copilot Studio |
+| 2026-08 | Regional inference endpoints GA (EU/US). Third-party model hosting announced (Z.ai GLM-5.2 first). European Compute Coalition launched (1 GW by 2030) |
+| 2026-08 | Shieldstral 1.0, Mistral OCR 4.1, Voxtral Mini Transcribe 2, Agentic Search, Leanstral 1.5 released |
+| 2026-09 | €3B Series D led by Samsung at €21B valuation — largest European tech equity round ever. a16z, NVIDIA, Salesforce, Advent, BlackRock participate |
+| 2026-09 | Mozilla partnership for Firefox Smart Window AI |
 
 ### Acquisitions — What Each Brought
 
@@ -163,6 +168,7 @@ Mistral AI is a pure-software company with no proprietary hardware. All compute 
 | **Bruyères-le-Châtel (Paris)** | 44 MW | 13,800 NVIDIA GB300 GPUs | Operational 2026 |
 | **Borlänge (Sweden)** | Undisclosed | NVIDIA Blackwell GPUs | Planned 2027 |
 | **Existing capacity** | 40 MW | 18,000 NVIDIA Blackwell GPUs (total deployed) | Current |
+| **European Compute Coalition** | 200 MW by end-2027; 1 GW by 2030 | NVIDIA Blackwell+ | Coalition with ASML, Amadeus, Capgemini, Caisse des Dépôts, CMA CGM |
 
 ### Chip Design Exploration
 
@@ -174,7 +180,8 @@ Mistral has publicly stated it is "exploring designing its own chips" to control
 
 | Partner | Deal Details | Integration Depth |
 | --- | --- | --- |
-| **ASML** | €1.3B for 11% equity (Sep 2025). Strategic partnership for AI across ASML product portfolio | Deep — Mistral vision models deployed in lithography equipment for defect detection. Hours → 8 minutes diagnostic time reduction |
+| **Samsung** | Led €3B Series D (Sep 2026). Largest European tech equity round ever | Strategic — Samsung + ASML (semiconductor supply chain) backing signals European AI sovereignty as investable thesis beyond European investors |
+| **ASML** | €1.3B for 11% equity (Sep 2025). European Compute Coalition member | Deep — Mistral vision models deployed in lithography equipment for defect detection. Hours → 8 minutes diagnostic time reduction |
 | **Airbus** | 5-year agreement (May 2026). Covers defence, space, and helicopter programs | High — Access to Mistral's full product suite + research teams. Airbus gets roadmap influence. "Trusted and secure AI" focus |
 | **BMW** | Partnership for crash simulation AI (May 2026). 1 PB historical simulation data | Medium — "Large Industry Models" concept. Emmi AI physics surrogates applied to crash simulation |
 | **EDF** | Launch customer for industrial engineering AI stack (May 2026) | Medium — Energy sector application of physics surrogates |

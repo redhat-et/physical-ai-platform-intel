@@ -12,7 +12,8 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 
 ### Competitive Analysis Reports
 
-- **[2026-06-23 Synthesis](deliverables/intel/reports/2026-06-23-synthesis.md)** -- 9-company coverage heat map across 22 platform blocks, partnership network analysis, ecosystem dynamics, 6 trend signals, 8 Red Hat strategic implications
+- **[2026-09-22 Synthesis](deliverables/intel/reports/2026-09-22-synthesis.md)** -- 45-company coverage heat map across 22 platform blocks, partnership networks, alliance blocs, 8 trend signals, 8 Red Hat strategic implications
+- **[2026-06-23 Synthesis](deliverables/intel/reports/2026-06-23-synthesis.md)** -- 9-company baseline synthesis
 
 ### Company Profiles
 
@@ -22,10 +23,10 @@ AI-driven workflow: provide URLs or search terms, AI extracts and structures the
 | **Foundation Models & AI Research** | [Archetype AI](deliverables/intel/companies/archetype-ai.md), [Google DeepMind](deliverables/intel/companies/google-deepmind.md), [Mistral AI](deliverables/intel/companies/mistral-ai.md), [Physical Intelligence](deliverables/intel/companies/physical-intelligence.md), [Skild AI](deliverables/intel/companies/skild-ai.md) |
 | **Training Data & Simulation** | **Simulation Assets:** [Imagine.io](deliverables/intel/companies/imagine-io.md), [Lightwheel](deliverables/intel/companies/lightwheel.md), [Palatial](deliverables/intel/companies/palatial.md), [Physicl](deliverables/intel/companies/physicl.md), [Scale AI](deliverables/intel/companies/scale-ai.md) • **Physical Data:** [Config](deliverables/intel/companies/config.md), [Mecka](deliverables/intel/companies/mecka.md), [Sunday Robotics](deliverables/intel/companies/sunday-robotics.md), [XDOF](deliverables/intel/companies/xdof.md) |
 | **Developer Tools & Observability** | [Foxglove](deliverables/intel/companies/foxglove.md), [Rerun](deliverables/intel/companies/rerun.md) |
-| **Robotics Software Platforms** | [Intrinsic](deliverables/intel/companies/intrinsic.md) |
+| **Robotics Software Platforms** | [Intrinsic](deliverables/intel/companies/intrinsic.md), [Staer AI](deliverables/intel/companies/staer-ai.md) |
 | **Cloud & Infrastructure Providers** | [Nebius](deliverables/intel/companies/nebius.md) |
-| **Vertical Solution Providers** | Siemens, Dassault Systèmes, PTC, Rockwell Automation, ABB, Tesla, Waymo |
-| **System Integrators** | Accenture, Capgemini, Deloitte, Toyota Automated Logistics, Bastian Solutions, Vanderlande, Dematic |
+| **Vertical Solution Providers** | [ABB](deliverables/intel/companies/abb.md), [Dassault Systèmes](deliverables/intel/companies/dassault-systemes.md), [PTC](deliverables/intel/companies/ptc.md), [Rockwell Automation](deliverables/intel/companies/rockwell-automation.md), [Siemens](deliverables/intel/companies/siemens.md), [SteerAI](deliverables/intel/companies/steerai.md), [Tesla](deliverables/intel/companies/tesla.md), [Waymo](deliverables/intel/companies/waymo.md) |
+| **System Integrators** | [Accenture](deliverables/intel/companies/accenture.md), [Capgemini](deliverables/intel/companies/capgemini.md), [Deloitte](deliverables/intel/companies/deloitte.md), [Dematic](deliverables/intel/companies/dematic.md), [Toyota Automated Logistics](deliverables/intel/companies/toyota-automated-logistics.md) (merging [Bastian](deliverables/intel/companies/bastian-solutions.md) and [Vanderlande](deliverables/intel/companies/vanderlande.md)) |
 | **Robotics OEMs — Humanoid** | [Agility Robotics](deliverables/intel/companies/agility-robotics.md), [Figure AI](deliverables/intel/companies/figure-ai.md), [NEURA Robotics](deliverables/intel/companies/neura-robotics.md), [Prometheus](deliverables/intel/companies/prometheus.md) |
 | **Robotics OEMs — Industrial** | [FANUC](deliverables/intel/companies/fanuc.md), [KUKA](deliverables/intel/companies/kuka.md), [Universal Robots](deliverables/intel/companies/universal-robots.md) |
 

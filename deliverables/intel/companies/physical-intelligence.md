@@ -1,7 +1,7 @@
 # Physical Intelligence — Competitive Profile
 
 **Date**: 2026-06-23
-**Last updated**: 2026-06-23
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis — not for public repo
 
 See [deep-dive](physical-intelligence-deep-dive.md) for OSS foundations, technical architecture, and research timeline.
@@ -15,7 +15,7 @@ Physical Intelligence (π) is a VC-backed startup ($1.1B raised, $5.6B valuation
 | | |
 | --- | --- |
 | **Type** | Startup |
-| **Revenue / Funding** | $1.1B raised (Series B Nov 2025 at $5.6B); ~$1B Series C reportedly in talks |
+| **Revenue / Funding** | ~$2.1B raised total; Series C closed mid-2026 at $11.2B valuation (Founders Fund lead, Lightspeed, Thrive, Lux) |
 | **Physical AI thesis** | One generalist policy for all robots; software-only, hardware-agnostic |
 | **Platform coverage** | ~5% of blocks — concentrated on VLA models and fine-tuning |
 | **Relationship to Red Hat** | Complement — pure model provider with no infrastructure ambitions; potential workload on OpenShift for training/inference |
@@ -28,7 +28,7 @@ Physical Intelligence (π) is a VC-backed startup ($1.1B raised, $5.6B valuation
 | --- | --- |
 | **π0.7** | 5B-param VLA foundation model (4B VLM + 860M action expert). Compositional generalization: recombines skills across embodiments without task-specific data. Latest in the π0 → π0-FAST → π0.5 → π\*0.6 → π0.7 progression |
 | **π\*0.6 (RECAP)** | Self-improving VLA via RL with Experience and Corrections. Three-stage learning (instruct → coach → practice). Demonstrated full-shift autonomy: >90% success on T-shirt folding, box assembly, espresso operation |
-| **openpi** | Open-source VLA server + fine-tuning framework (Apache 2.0 code, Gemma ToU weights). WebSocket policy server + client SDK. π0, π0-FAST, π0.5 weights. 12.5K GitHub stars. PyTorch + JAX. LeRobot data format |
+| **openpi** | Open-source VLA server + fine-tuning framework (Apache 2.0 code, Gemma ToU weights). WebSocket policy server + client SDK. π0, π0-FAST, π0.5 weights. 13.4K GitHub stars (growing but repo low-activity since Apr 2026). PyTorch + JAX. LeRobot data format |
 | **Fine-tuning API** | Private beta API for robotics companies to fine-tune π0 models on their hardware. Requires 1–20 hours of task-specific data |
 
 ---

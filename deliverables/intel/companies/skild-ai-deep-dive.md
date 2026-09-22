@@ -1,7 +1,7 @@
 # Skild AI — Deep Dive Research
 
 **Date**: 2026-06-23
-**Last updated**: 2026-06-23
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis
 
 Supporting research for the [Skild AI competitive profile](skild-ai.md). This document covers material that informs the profile's assessments but is too detailed for the exec-level read: OSS foundations analysis, acquisition deep-dives, product architectures, governance risks, and technical dependency chains.
@@ -24,7 +24,12 @@ Supporting research for the [Skild AI competitive profile](skild-ai.md). This do
 | 2025 | Foxconn deployment — Skild Brain on Blackwell GPU assembly lines in Houston |
 | 2025 | ABB Robotics and Universal Robots partnerships announced |
 | 2026-01 | $1.4B Series C at $14B+ valuation. Led by SoftBank. NVentures, Macquarie, Bezos, Samsung, LG, Schneider |
+| 2026-02 | Bengaluru, India office opened |
 | 2026-04 | Acquired Zebra Technologies' robotics automation business (Fetch Robotics + Symmetry) |
+| 2026-05 | Skild Brain 1.0 launched — 500B parameters, trained on 10K robots across 200 platforms |
+| 2026-08 | S1 model announced — learns unseen 10-min tasks from single human video (66% success vs 9% baseline) |
+| 2026-09 | $100M ARR milestone — 60+ paying customers. 90% revenue from manipulation, 10% from mobility |
+| 2026 | Key customers revealed: Amazon Robotics (15K robots), Boston Dynamics (Spot/Atlas), Unitree (H1/G1) |
 | 2026 | SoftBank acquiring ABB robotics ($5.38B, closing mid-to-late 2026) |
 
 ### Acquisitions — What Each Brought
@@ -44,8 +49,8 @@ Supporting research for the [Skild AI competitive profile](skild-ai.md). This do
 
 | Aspect | Details |
 | --- | --- |
-| **Architecture** | Hierarchical control: (1) High-level VLA policy — processes camera feeds, language instructions, proprioception → outputs abstract actions ("walk to shelf, grasp box") at ~10 Hz. (2) Low-level motor controller — translates abstract actions into joint torques/voltages at kHz rates. Analogous to cerebrum/cerebellum split in biological systems |
-| **Training pipeline** | Pre-training on trillions of synthetic episodes across 100,000+ simulated robot embodiments (Isaac Lab). Data augmentation via Cosmos Transfer. Post-training with customer-specific real-world data. Claims 1,000× more training data points than competing models |
+| **Architecture** | Skild Brain 1.0: 500B-parameter hierarchical control. (1) High-level VLA policy — processes camera feeds, language instructions, proprioception → outputs abstract actions at ~10 Hz. (2) Low-level motor controller — translates to joint torques/voltages at kHz rates. S1 adds one-shot video learning: ingests a single egocentric human video as prompt, executes the task with no fine-tuning or weight changes |
+| **Training pipeline** | Pre-training on 10K robots across 200 hardware platforms using trillions of synthetic episodes (Isaac Lab). Data augmentation via Cosmos Transfer. Post-training with customer-specific real-world data. Data flywheel: deployments across 60+ customers feed back into model improvement |
 | **Runtime dependencies** | NVIDIA GPUs for training (Isaac Lab, Omniverse, Cosmos). On-robot inference hardware unspecified but targets $4K-$15K systems. Cloud API for high-level policy offloading |
 | **Extension model** | API-based model licensing. OEMs integrate Skild Brain via cloud API or on-device deployment. In-context learning enables adaptation without retraining |
 | **Key limitations** | Deep NVIDIA training dependency. Unclear edge inference framework. Proprietary model — no open-source components. Real-world deployment data still limited vs simulation scale |
@@ -144,6 +149,9 @@ Skild claims deployment on hardware costing $4K-$15K. The on-robot inference har
 
 | Partner | Installed Base | Deal Details | Integration Depth |
 | --- | --- | --- | --- |
+| **Amazon Robotics** | 15K warehouse robots | Largest foundation model deployment in robotics history | Skild Brain on warehouse AMR fleet |
+| **Boston Dynamics** | Spot + Atlas | Skild Brain integration on legged platforms | Multi-platform (quadruped + humanoid) |
+| **Unitree** | H1 + G1 humanoids | Skild Brain integration | Humanoid deployment |
 | **NVIDIA** | — | NVentures investor (Series A + C). Sim infra provider | Deep — training pipeline depends on Isaac Lab, Cosmos, Omniverse |
 | **Foxconn** | Global electronics mfg | Blackwell GPU assembly in Houston | Dual-arm manipulator deployment on production lines |
 | **ABB Robotics** | 500K+ installed robots | Partnership to embed Skild Brain | API-level integration into ABB robot portfolio |
@@ -184,7 +192,7 @@ The investor composition is strategically significant:
 | **Hardware ownership** | Yes (Fetch AMRs via Zebra acquisition) | No — pure software |
 | **OEM partnerships** | ABB, Universal Robots, Foxconn | Less public OEM network |
 | **Training infra** | NVIDIA Isaac Lab + Cosmos (deep dependency) | Less publicly documented |
-| **Revenue** | ~$30M (2025) | Not publicly disclosed |
+| **Revenue** | $100M ARR (Sep 2026), 60+ customers | Not publicly disclosed |
 
 ### vs NVIDIA GR00T N1
 
@@ -228,3 +236,7 @@ If realized, this would be the largest non-NVIDIA vertically integrated Physical
 - [Sacra — Skild AI Analysis](https://sacra.com/c/skild-ai/)
 - [Sequoia — Partnering with Skild](https://sequoiacap.com/article/partnering-with-skild/)
 - [Lightspeed — Skild Bringing GenAI to Real World](https://lsvp.com/stories/skild-is-bringing-generative-ai-to-the-real-world/)
+- [Bloomberg — Skild AI $100M ARR](https://www.bloomberg.com/news/articles/2026-09-10/robotics-startup-skild-ai-hits-100-million-in-revenue-run-rate)
+- [Skild AI S1 model — The Robot Report](https://www.therobotreport.com/skild-ai-unveils-s1-flagship-robot-foundation-model/)
+- [Skild AI S1 one-shot video learning — explainx.ai](https://explainx.ai/blog/skild-ai-s1-robot-one-video-learning-august-2026)
+- [Skild AI S1 2027 deployment plan — Technical.ly](https://technical.ly/entrepreneurship/skild-ai-plans-2027-robot-brain-deployment/)

@@ -1,7 +1,7 @@
 # Figure AI — Competitive Profile
 
 **Date**: 2026-06-23
-**Last updated**: 2026-06-23
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis — not for public repo
 
 See [deep-dive](figure-ai-deep-dive.md) for technology architecture, manufacturing details, and competitive analysis.
@@ -10,12 +10,12 @@ See [deep-dive](figure-ai-deep-dive.md) for technology architecture, manufacturi
 
 ## At a Glance
 
-Figure AI is a venture-backed humanoid robotics startup building general-purpose humanoid robots (Figure 02/03) powered by a proprietary vision-language-action model (Helix). Founded in 2022 by serial entrepreneur Brett Adcock, the company has raised $1.9B+ at a $39B valuation. Its Physical AI thesis is **"own the full stack from hardware to AI to manufacturing"** — a vertically integrated approach spanning robot design, the Helix VLA, and a dedicated manufacturing facility (BotQ, 12K units/year capacity). Figure ended its OpenAI partnership in February 2025 to build fully in-house AI. BMW is the primary deployment customer (30,000+ vehicles, 40 Figure 03 units deployed), with logistics expansion (reportedly UPS) underway. Figure 03 targets a $20K consumer price point by leveraging BotQ manufacturing scale.
+Figure AI is a venture-backed humanoid robotics startup building general-purpose humanoid robots (Figure 03/04) powered by a proprietary vision-language-action model (Helix). Founded in 2022 by serial entrepreneur Brett Adcock, the company has raised ~$2.5B at a $39B valuation. Its Physical AI thesis is **"own the full stack from hardware to AI to manufacturing"** — a vertically integrated approach spanning robot design, the Helix VLA, and a dedicated manufacturing facility (BotQ). Figure ended its OpenAI partnership in February 2025 to build fully in-house AI. 1,000th Figure 03 produced Jul 2026; ~740 robots operating vs ~600 human employees by end Jun 2026. BMW deployment expanded to 120 units at Spartanburg (material handling, kitting, sub-assembly — 73% inventory error reduction, 18% throughput increase). Helix 2.5 (Sep 2026) demonstrates zero-shot generalization across 30 unseen homes. $3.5B Nscale compute partnership for up to 100K NVIDIA GPUs. Figure 04 design locked; $89K commercial price / $3,200/month RaaS; $600/month consumer lease planned.
 
 | | |
 | --- | --- |
 | **Type** | Startup |
-| **Revenue / Funding** | $1.9B+ raised, $39B valuation (Sep 2025). First revenue Dec 2024. Revenue negligible vs valuation |
+| **Revenue / Funding** | ~$2.5B raised, $39B valuation (Sep 2025). First revenue Dec 2024. $89K/unit commercial; $3,200/mo RaaS. $3.5B Nscale compute commitment |
 | **Physical AI thesis** | Full vertical integration: robot hardware + Helix VLA + BotQ manufacturing. Own the stack, don't depend on vendors |
 | **Platform coverage** | ~10% of blocks — concentrated in edge inference (Helix) and robotics application layer |
 | **Relationship to Red Hat** | Potential customer — needs edge OS, fleet management, simulation infrastructure as it scales beyond vertical integration |
@@ -26,10 +26,11 @@ Figure AI is a venture-backed humanoid robotics startup building general-purpose
 
 | Product | What It Does |
 | --- | --- |
-| **Figure 03** | General-purpose humanoid: 168 cm, 60 kg, 44 DOF, 16-DOF hands with tactile sensing, 5-hr battery with wireless charging, dual embedded GPUs. $20K target consumer price. TIME Best Invention 2025 |
-| **Figure 02** | Industrial humanoid predecessor: 35 DOF, 25 kg payload, deployed at BMW Spartanburg for 11 months. Being replaced by Figure 03 |
-| **Helix 02** | Proprietary VLA model — full-body autonomy. System 2 (7B VLA, 7-10 Hz reasoning) + System 1 (200 Hz reactive control) + System 0 (1 kHz balance/contact physics). Runs entirely onboard |
-| **BotQ** | Dedicated humanoid manufacturing facility in San Jose, CA. 12K units/year capacity, producing 1 robot every 90 minutes (April 2026). In-house MES with full traceability |
+| **Figure 03** | General-purpose humanoid: 168 cm, 60 kg, 44 DOF, 16-DOF hands with tactile sensing, 5-hr battery with wireless charging, dual embedded GPUs. 1,000th unit produced Jul 2026. $89K commercial / $3,200/mo RaaS. TIME Best Invention 2025 |
+| **Figure 04** | Next-gen humanoid — design locked May 2026. Details not yet disclosed |
+| **Helix 2.5** | Latest VLA model (Sep 2026) — zero-shot generalization across 30 unseen homes. Index pretraining raised zero-shot success 9% → 56%; uses half the task-specific data of Helix 02. System 0/1/2 architecture retained |
+| **Index** | Data engine for Helix training — generates ~35 minutes of human-experience data per second. Accelerates real-world physical data collection |
+| **BotQ** | Dedicated humanoid manufacturing facility in San Jose, CA. 1 robot/hour production rate (from 1/day in 4 months). 1,000th unit Jul 2026. In-house MES with full traceability |
 
 ---
 
@@ -254,13 +255,11 @@ Figure AI is a venture-backed humanoid robotics startup building general-purpose
 
 | Partner | Type | Significance |
 | --- | --- | --- |
-| **BMW** | Manufacturing customer | Primary deployment: 11 months at Spartanburg, 30K+ vehicles, 90K+ parts, >99% accuracy. 40 Figure 03 units deployed. Expanding to Leipzig (Germany) summer 2026 |
+| **BMW** | Manufacturing customer | 120 Figure 03 units at Spartanburg: material handling, kitting, sub-assembly. 73% inventory error reduction, 18% throughput increase. Evaluating European expansion (Munich, Dingolfing, Regensburg). Figure 02 retired after 11 months / 30K+ vehicles |
+| **Nscale** | Compute partner / Investor | $3.5B compute commitment (intent to scale to $6B). Up to 100K NVIDIA GPUs on Vera Rubin platform. First deployments H2 2027. Nscale taking equity stake |
 | **UPS** | Logistics customer (reported) | Second major customer — logistics/package handling |
-| **NVIDIA** | Technology / Investor | Cosmos for synthetic data; GR00T ecosystem. NVIDIA is Series C investor |
+| **NVIDIA** | Technology / Investor | Cosmos for synthetic data; GR00T ecosystem. Series C investor. GPU dependency (edge + training) |
 | **Microsoft** | Investor | Series B investor. No disclosed technology integration |
-| **Intel Capital** | Investor | Series C investor |
-| **Qualcomm Ventures** | Investor | Series C investor |
-| **OpenAI** | Former partner | Collaboration ended Feb 2025; Figure built Helix fully in-house |
 | **Brookfield** | Investor | Series C lead ($250M+) |
 | **Jeff Bezos** | Investor | Personal investment in Series B |
 
@@ -279,7 +278,7 @@ Figure AI is a venture-backed humanoid robotics startup building general-purpose
 
 ## Coverage Summary
 
-- **Strong**: Edge inference (Helix onboard), Dexterous manipulation (16-DOF hands + tactile), Manufacturing proof (BMW 30K+ vehicles), VLA model (System 0/1/2 architecture)
+- **Strong**: Edge inference (Helix onboard), Dexterous manipulation (16-DOF hands + tactile), Manufacturing proof (BMW 120 units, 73% error reduction), VLA model (System 0/1/2 architecture), Zero-shot generalization (Helix 2.5, 30 unseen homes), Data engine (Index, 35 min/sec data generation), Manufacturing scale (1 robot/hour)
 - **Absent**: Simulation engine, Model registry, Pipelines, CI/CD, GitOps, Experiment tracking, Model monitoring, MaaS, KServe, llm-d, Container platform, Fleet management (at scale)
 - **Conflicts with Red Hat**: None — Figure is a potential customer, not a platform competitor
 - **Lock-in**: Fully vertically integrated (hardware + AI + manufacturing); NVIDIA GPU dependency at edge; proprietary Helix model not available to third parties
@@ -294,6 +293,8 @@ Figure AI is a venture-backed humanoid robotics startup building general-purpose
 
 3. **NVIDIA dependency creates platform leverage**: Figure depends on NVIDIA GPUs for edge inference and NVIDIA Cosmos/Isaac for simulation/training. Red Hat's position as the neutral platform layer (OpenShift for training, RHEL for edge) allows it to serve Figure without competing with NVIDIA — the same complementary dynamic as with other NVIDIA-dependent robotics companies.
 
-4. **Fleet management gap will emerge at scale**: BotQ targets 12K units/year, scaling to 100K over 4 years. Managing software updates, model deployments, and compliance across a fleet of this size requires purpose-built fleet management (like FlightCtl). Figure has no disclosed fleet orchestration — unlike Agility, which built Arc for this purpose.
+4. **Fleet management gap is materializing**: With ~740 robots operating and 1/hour production rate, fleet management becomes critical. Managing OTA updates, model deployments (Helix 2.5 rollouts), and compliance across a growing fleet requires purpose-built fleet management (like FlightCtl). Figure has no disclosed fleet orchestration — unlike Agility, which built Arc for this purpose.
 
-5. **Monitor the vertical integration thesis**: Figure's "own the full stack" strategy works at startup scale but creates scaling bottlenecks. Watch for signs of unbundling — if Figure opens its hardware to third-party models, or its models to third-party hardware, the platform opportunity expands significantly. The $20K consumer price point will force supply chain partnerships that break the vertical integration.
+5. **$3.5B Nscale compute deal signals training infrastructure scale**: Figure's commitment to up to 100K NVIDIA GPUs via Nscale (H2 2027) means massive training infrastructure needs. Red Hat's position in GPU cluster management (OpenShift AI) is relevant, though Nscale provides the managed compute layer.
+
+6. **Monitor the vertical integration thesis**: Figure's "own the full stack" strategy works at startup scale but creates scaling bottlenecks. Watch for signs of unbundling — if Figure opens its hardware to third-party models, or its models to third-party hardware, the platform opportunity expands significantly. Consumer lease at $600/month will force supply chain partnerships that break the vertical integration. Figure 04 design lock suggests accelerating hardware iteration.

@@ -1,7 +1,7 @@
 # Intel — Competitive Profile
 
 **Date**: 2026-06-23
-**Last updated**: 2026-06-23
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis — not for public repo
 
 See [deep-dive](intel-deep-dive.md) for OSS foundations, acquisition details, and technical architecture.
@@ -10,12 +10,12 @@ See [deep-dive](intel-deep-dive.md) for OSS foundations, acquisition details, an
 
 ## At a Glance
 
-Intel is a $54B-revenue semiconductor company undergoing a major turnaround under CEO Lip-Bu Tan (appointed March 2025), pivoting from its legacy x86/PC business toward AI infrastructure and Physical AI at the edge. Its Physical AI thesis is **"edge-first robotics enablement"** — delivering a unified CPU+NPU SoC (Core Ultra Series 3 / Panther Lake) paired with an open-source inference runtime (OpenVINO Physical AI) that eliminates the need for discrete GPUs in robots. Intel's datacenter AI accelerator story (Gaudi) has faltered, but its edge compute heritage (100,000+ edge deployments), Mobileye autonomous driving subsidiary (230M+ vehicles), and open-source software strategy (oneAPI, SYCL, OpenVINO) create a distinct competitive profile — more complement than competitor to Red Hat.
+Intel is a semiconductor company in dramatic turnaround under CEO Lip-Bu Tan (appointed March 2025), posting Q2 2026 revenue of $16.1B (up 25.4% YoY, 7th consecutive beat) with AI-driven businesses contributing ~70% of revenue and growing >70% YoY. Shares up 170%+ in 2026 after U.S. government took 9.9% stake. Physical AI thesis is **"edge-first robotics enablement"** — delivering a unified CPU+NPU SoC (Core Ultra Series 3 / Panther Lake) paired with an open-source inference runtime (OpenVINO Physical AI) that eliminates the need for discrete GPUs in robots. Datacenter AI strategy pivoting from struggling Gaudi toward Crescent Island (inference GPU, Xe3P, specs revealed at Hot Chips 2026) and Jaguar Shores (rack-scale training, HBM4, H2 2027). Mobileye expanding from AV supplier to vertically integrated robotaxi operator (U.S. launch 2027, 17K vehicle scale plan). Edge compute heritage (100,000+ edge deployments), open-source software strategy (oneAPI, SYCL, OpenVINO), and Capgemini "Dexterity" Physical AI edge partnership create a distinct competitive profile — more complement than competitor to Red Hat.
 
 | | |
 | --- | --- |
 | **Type** | Big Tech |
-| **Revenue / Funding** | ~$54B revenue (2025E), ~$110B market cap; U.S. government holds 9.9% stake ($8.9B CHIPS Act) |
+| **Revenue / Funding** | $16.1B Q2 2026 revenue (25.4% YoY growth); AI businesses ~70% of revenue; U.S. government holds 9.9% stake ($8.9B CHIPS Act); capex raised to >$20B for 2026 |
 | **Physical AI thesis** | Edge-first: single-SoC robotics compute (CPU+NPU+GPU) + open-source inference runtime; foundry services for AI chips |
 | **Platform coverage** | ~25% of blocks — concentrated in edge inference, drivers, accelerator libs, and autonomous driving |
 | **Relationship to Red Hat** | Complement — 25+ year partnership; Gaudi certified on OpenShift AI; Intel Technology Enabling for OpenShift; no container platform or OS conflict |
@@ -30,8 +30,9 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
 | **OpenVINO Physical AI** | Open-source robotics inference framework; silicon-optimized runtime connecting Physical AI Studio and LeRobot to deployed robots. Preview on GitHub; GA H2 2026 |
 | **OpenVINO Toolkit** | Open-source inference optimization toolkit for Intel CPUs, GPUs, NPUs. Cross-platform model deployment |
 | **Gaudi 3** | Datacenter AI accelerator (Habana Labs). 64 TPCs, 128 GB HBM2e, 24×200Gb Ethernet. Struggled commercially — Falcon Shores successor canceled |
-| **Crescent Island** | Next-gen inference-focused datacenter GPU (Xe3P). 160 GB LPDDR5X, air-cooled. Sampling H2 2026, targets cost-efficient inference |
-| **Mobileye** | Autonomous driving platform: EyeQ SoCs, SuperVision (L2+), Chauffeur (L3), Drive (L4). 230M+ vehicles, 80% Intel-owned |
+| **Crescent Island** | Next-gen inference GPU (Xe3P): 32 Xe3P cores, 256 XMX engines, 32MB L2, up to 480GB LPDDR5X, 350W TDP, air-cooled. Hot Chips 2026 reveal; sampling Q3 2026, commercial launch likely 2027 |
+| **Jaguar Shores** | Rack-scale AI accelerator: HBM4/HBM4E (SK Hynix), silicon photonics interconnects. Design closure H1 2026; launch potentially H2 2027. Gaudi successor for training |
+| **Mobileye** | Autonomous driving platform: EyeQ SoCs, SuperVision (L2+), Chauffeur (L3, shipping to Audi/Polestar), Drive (L4). 230M+ vehicles, 80% Intel-owned. Expanding to vertically integrated robotaxi operator (U.S. 2027, 17K vehicle target). Acquired Mentee Robotics for humanoid robots |
 | **Robotics AI Suite** | End-to-end edge robotics toolkit: Physical AI Studio (VLA training), OpenVINO Physical AI (deployment), reference boards |
 | **Intel Tiber AI Studio** | MLOps platform for AI model lifecycle — cluster management, pipelines, monitoring, automated retraining |
 | **oneAPI / SYCL** | Open programming model for heterogeneous compute. DPC++ compiler (LLVM-based), UXL Foundation governance |
@@ -262,9 +263,10 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
 
 | Partner | Type | Significance |
 | --- | --- | --- |
-| **Mobileye** | Autonomous Driving (80% owned subsidiary) | 230M+ vehicles, L2-L4 AV platform. Acquired Mentee Robotics ($900M) for humanoid robots |
-| **Volkswagen Group** | Automotive | Mobileye SuperVision/Chauffeur across multiple models; L4 robotaxi via MOIA (100K vehicles by 2033) |
-| **Uber / Lyft** | Mobility | Mobileye robotaxi deployments — Uber (Los Angeles), Lyft (Dallas) |
+| **Mobileye** | Autonomous Driving (80% owned subsidiary) | 230M+ vehicles, L2-L4 AV platform. Acquired Mentee Robotics ($900M) for humanoid robots. Now building own robotaxi fleet (U.S. 2027, 100→17K vehicles over 5 years) |
+| **Volkswagen Group** | Automotive | Mobileye SuperVision/Chauffeur across multiple models; MOIA robotaxi JV with ID. Buzz platform, initial U.S. deployments 2026 |
+| **Uber / Lyft** | Mobility | Mobileye robotaxi deployments — Uber (Los Angeles), Lyft (Dallas); partnerships continue alongside Mobileye's own fleet |
+| **Capgemini** | SI / Physical AI | "Dexterity" Physical AI edge demo at AI Infra Summit (Sep 2026); joint edge deployment pipeline |
 | **Dell** | Infrastructure | Dell AI Factory with Gaudi 3; validated reference architecture |
 | **Red Hat** | Platform | 25+ year partnership; Gaudi certified on OpenShift AI; Intel Technology Enabling for OpenShift |
 | **Outsight** | Spatial Intelligence | Physical AI collaboration on Google Distributed Cloud Edge with Xeon 6 + AMX |
@@ -298,10 +300,12 @@ Intel is a $54B-revenue semiconductor company undergoing a major turnaround unde
 
 1. **Strongest hardware partner for Physical AI edge**: Intel's Core Ultra Series 3 eliminates the dual-compute problem for robots without requiring NVIDIA GPUs. OpenVINO Physical AI is open-source and designed to run on Red Hat-supported OS. Unlike Jetson (L4T/Ubuntu), Intel edge SoCs have no competing OS — RHEL Device Edge + MicroShift is a natural fit.
 
-2. **Gaudi is a strategic hedge against NVIDIA, despite struggles**: Gaudi 3 is already certified on OpenShift AI with one-click Ansible deployment. Even with limited market traction, maintaining Gaudi support gives Red Hat customers a credible non-NVIDIA training option and strengthens Red Hat's multi-accelerator narrative. Monitor Crescent Island (H2 2026) as the inference-focused successor.
+2. **Intel's turnaround changes the partnership equation**: Q2 2026 results ($16.1B, 25.4% YoY growth, 7th consecutive beat) validate Lip-Bu Tan's restructuring. AI businesses now ~70% of revenue. Intel is a stronger, more investable partner than 12 months ago — the Capgemini "Dexterity" Physical AI edge demo (Sep 2026) shows Intel actively building SI alliances that Red Hat could join.
 
-3. **OpenVINO Physical AI fills the edge inference gap**: Intel's open-source VLA inference runtime (integrating with LeRobot, Physical AI Studio) could become the standard edge deployment path that NVIDIA's proprietary stack (NIM + TensorRT + Jetson) competes against. Red Hat should evaluate OpenVINO Physical AI as a supported runtime on RHEL Device Edge.
+3. **Crescent Island and Jaguar Shores reshape the datacenter story**: Gaudi's commercial struggles led to Falcon Shores cancellation, but the replacement roadmap is now concrete. Crescent Island (32 Xe3P cores, 480GB LPDDR5X, air-cooled, 2027 commercial) targets cost-efficient inference; Jaguar Shores (HBM4, rack-scale, H2 2027) targets training. Red Hat should prepare OpenShift AI certification for both.
 
-4. **Foundry opportunity creates long-term alignment**: Intel Foundry's 18A process and CHIPS Act investment make Intel strategically important to U.S. AI sovereignty. Red Hat's platform runs on whatever silicon Intel's foundry customers design — the foundry business deepens the structural partnership without creating product conflicts.
+4. **OpenVINO Physical AI fills the edge inference gap**: Intel's open-source VLA inference runtime (integrating with LeRobot, Physical AI Studio) could become the standard edge deployment path that NVIDIA's proprietary stack (NIM + TensorRT + Jetson) competes against. Red Hat should evaluate OpenVINO Physical AI as a supported runtime on RHEL Device Edge.
 
-5. **Mobileye's Mentee Robotics acquisition signals humanoid robot ambitions**: Mobileye's $900M acquisition of Mentee Robotics (humanoid robots) positions Intel/Mobileye as a Physical AI competitor beyond autonomous vehicles. Monitor whether Mobileye's robotics stack remains AV-specific or expands to general-purpose robotics where Red Hat's platform could add value.
+5. **Foundry opportunity creates long-term alignment**: Intel Foundry's 18A process and CHIPS Act investment make Intel strategically important to U.S. AI sovereignty. Capex raised to >$20B for 2026, significantly above 2027 — foundry business deepens the structural partnership without creating product conflicts.
+
+6. **Mobileye's robotaxi pivot creates new platform opportunity**: Beyond supplying AV technology, Mobileye is now building a vertically integrated robotaxi business (U.S. 2027 launch, scaling to 17K vehicles over 5 years) combining Mobileye Drive + Moovit fleet platform. This fleet needs cloud infrastructure for fleet management, teleoperation, and trip planning — potential OpenShift + ACM deployment at scale.

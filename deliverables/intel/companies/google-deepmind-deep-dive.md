@@ -1,7 +1,7 @@
 # Google DeepMind — Deep Dive Research
 
 **Date**: 2026-06-22
-**Last updated**: 2026-06-22
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis
 
 Supporting research for the [Google DeepMind competitive profile](google-deepmind.md). Covers the Gemini Robotics model family architecture, RT-1/2/X lineage, MuJoCo stewardship, and humanoid partnership details.
@@ -32,7 +32,12 @@ For Intrinsic's industrial platform (Flowstate, IVM, IntrinsicOS, ROS/Gazebo gov
 | 2026-01 | Newton 1.0 co-founded (Linux Foundation) with NVIDIA and Disney Research |
 | 2026-03 | Agile Robots partnership — Gemini Robotics on Agile ONE humanoid |
 | 2026-04 | Gemini Robotics-ER 1.6 — agentic capabilities, AI Studio access |
-| 2026-05 | Gemini Robotics 1.5 — transparent reasoning, most capable VLA |
+| 2026-05 | Gemini Robotics 1.5 — transparent reasoning VLA |
+| 2026-06 | DeepMind Robotics Accelerator launches (EMEA, 10-15 startups, 12-15 weeks) |
+| 2026-06 | Apptronik opens Robot Park — 90K sqft humanoid data factory (Austin, TX) |
+| 2026-07 | Gemini Robotics 2 — whole-body humanoid control, 5-finger dexterity, multi-robot collaboration |
+| 2026-07 | Gemini Robotics ER 2 — multi-minute agentic tasks, ASIMOV-Agentic safety benchmark |
+| 2026-07 | Gemini Robotics On-Device 2 — fast cross-embodiment adaptation (hours, <200 demos) |
 
 ### Key Figures in Physical AI
 
@@ -78,18 +83,18 @@ For Intrinsic's industrial platform (Flowstate, IVM, IntrinsicOS, ROS/Gazebo gov
 | **RT-2** | Jul 2023 | Fine-tuned PaLM-E / PaLI-X | First VLA — language model directly outputs robot actions. 62% novel vs RT-1's 32% |
 | **RT-X** | Oct 2023 | RT-1/RT-2 trained on Open X-Embodiment | Cross-embodiment: pooled data from 33 labs, 22 robot types. Positive transfer demonstrated |
 | **Gemini Robotics** | Mar 2025 | Built on Gemini 2.0 | Production VLA. Cross-embodiment (ALOHA, Franka, Apollo). 2× generality vs conventional VLAs |
-| **Gemini Robotics 1.5** | 2026 | Extended Gemini 2.0+ | "Thinks before acting"; transparent reasoning; agentic capabilities; most capable VLA |
+| **Gemini Robotics 1.5** | May 2026 | Extended Gemini 2.0+ | "Thinks before acting"; transparent reasoning; agentic capabilities |
+| **Gemini Robotics 2** | Jul 2026 | Next-gen Gemini | Whole-body humanoid control (feet to fingertips); 22-DOF dexterous hands; multi-robot collaboration; cross-embodiment in hours (<200 demos) |
 
 ### Current Model Family
 
 | Model | Type | Access | Key Capability |
 | --- | --- | --- | --- |
-| **Gemini Robotics** | VLA | Trusted Tester | Direct robot control; dexterous manipulation (origami, Ziploc bags) |
-| **Gemini Robotics-ER** | Embodied Reasoning VLM | Gemini API (preview) | 6D pose, trajectory/grasp prediction, spatial reasoning |
-| **Gemini Robotics On-Device** | Edge VLA | Safari SDK (Trusted Tester) | <10ms inference; offline; fine-tunable with 50-100 demos |
-| **Gemini Robotics-ER 1.5** | ER upgrade | Gemini API | First broadly available; can call tools including VLA models |
-| **Gemini Robotics 1.5** | Advanced VLA | Trusted Tester | Transparent reasoning; agentic; most capable |
-| **Gemini Robotics-ER 1.6** | ER upgrade | Gemini API + AI Studio | Improved spatial reasoning, multi-view understanding |
+| **Gemini Robotics 2** | VLA | Private preview | Whole-body humanoid control; 22-DOF hands; multi-robot collaboration. 89.6% precision insertion (Franka), 92% lightbulb removal (Apollo 2) |
+| **Gemini Robotics ER 2** | Embodied Reasoning VLM | AI Studio + Enterprise Agent Platform | Multi-minute agentic task sequences; ASIMOV-Agentic safety; 91.3% moment-finding accuracy at 4× speed |
+| **Gemini Robotics On-Device 2** | Edge VLA | Safari SDK | Cross-embodiment adaptation in hours (<200 demos); based on Gemma on-device |
+| **Gemini Robotics 1.5** | Previous-gen VLA | Trusted Tester | Transparent reasoning; agentic |
+| **Gemini Robotics-ER 1.6** | Previous-gen ER | Gemini API + AI Studio | Improved spatial reasoning, multi-view understanding |
 
 All proprietary — API access only. No open-weight robotics VLA from Google.
 
@@ -199,8 +204,8 @@ DeepMind has no hardware products. All training runs on Google Cloud TPU pods. E
 | Partner | Product | Installed Base | Integration |
 | --- | --- | --- | --- |
 | **Agile Robots** | Agile ONE humanoid | 20K+ deployed systems | Gemini Robotics fine-tuning; $270M+ raised; series production 2026 |
-| **Apptronik** | Apollo humanoid | Pre-production | Gemini Robotics for humanoid control |
-| **Boston Dynamics** | Atlas (humanoid) + Spot (quadruped) | ~1K+ Spot | Gemini for Atlas intelligence |
+| **Apptronik** | Apollo 2 humanoid | Robot Park (90K sqft, Austin) | Primary Gemini Robotics 2 demo platform. Apollo 2 training data feeds DeepMind. $935M+ total raised (Google, Mercedes-Benz, John Deere, QIA, AT&T Ventures). Apollo 3 next-gen in development |
+| **Boston Dynamics** | Atlas (humanoid) + Spot (quadruped) | All 2026 Atlas committed (Hyundai RMAC + DeepMind) | Gemini for Atlas perception + reasoning. Hyundai targets 30K humanoids/yr by 2028 |
 
 ### Intrinsic Integration
 
@@ -266,3 +271,10 @@ DeepMind provides foundation models that Intrinsic integrates into Flowstate. Th
 - [Genie 3 model page](https://deepmind.google/models/genie/)
 - [Genie 1 paper (arXiv:2402.15391)](https://arxiv.org/abs/2402.15391)
 - [Genie 3 Wikipedia](https://en.wikipedia.org/wiki/Genie_(world_model))
+- [Gemini Robotics 2 announcement](https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/)
+- [Gemini Robotics ER 2 announcement](https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-robotics-er-2/)
+- [Gemini Robotics On-Device 2 model card](https://deepmind.google/models/model-cards/gemini-robotics-on-device-2/)
+- [Apptronik Robot Park announcement](https://apptronik.com/news-collection/welcome-to-robot-park-where-apptroniks-apollo-goes-to-work)
+- [Apptronik $520M raise](https://www.therobotreport.com/apptronik-brings-in-another-520m-to-ramp-up-apollo-production/)
+- [Newton 1.0 GA — NVIDIA blog](https://developer.nvidia.com/blog/newton-adds-contact-rich-manipulation-and-locomotion-capabilities-for-industrial-robotics/)
+- [DeepMind Robotics Accelerator EMEA](https://deepmind.google/accelerators/robotics/)

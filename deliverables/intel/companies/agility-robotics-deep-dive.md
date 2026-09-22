@@ -1,7 +1,7 @@
 # Agility Robotics — Deep Dive Research
 
 **Date**: 2026-07-22
-**Last updated**: 2026-07-22
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis — not for public repo
 
 Supporting research for the [Agility Robotics competitive profile](agility-robotics.md). This document covers material that informs the profile's assessments but is too detailed for the exec-level read: OSS foundations analysis, product architecture, manufacturing details, and competitive dynamics.
@@ -28,7 +28,10 @@ Supporting research for the [Agility Robotics competitive profile](agility-robot
 | 2025-03 | Expanded NVIDIA partnership at GTC 2025: Isaac Sim/Lab adoption, Jetson AGX Thor integration |
 | 2025 | GXO multi-year commercial RaaS agreement — industry first. 100K+ totes moved |
 | 2026-06 | SPAC merger with Churchill Capital Corp XI announced. $2.5B valuation, $620M gross proceeds. Ticker: AGLT |
-| 2026 | First to integrate NVIDIA Halos safety system. Preparing Digit v5 commercial launch |
+| 2026-07 | S-4 draft registration submitted confidentially (Jul 14) |
+| 2026-09 | Digit v5 formally unveiled: 50 lb payload, 7.2 ft reach, 90-min runtime + 9-min charge (20+ hrs/day), swappable grippers |
+| 2026-09 | Analyst & Investor Day announced for Oct 6, 2026 |
+| 2026 Q4 | SPAC close expected. European expansion planned early 2027 |
 
 ### Acquisitions — What Each Brought
 
@@ -47,17 +50,19 @@ No acquisitions disclosed. Agility has grown organically from its OSU spinout ro
 | **Locomotion model** | Whole-body control foundation model trained via reinforcement learning. Simulation-first pipeline: MuJoCo (physics) + NVIDIA Isaac Lab (RL framework). Virtual Digit discovers movements via reward optimization, not prescriptive rules |
 | **Runtime dependencies** | NVIDIA Jetson AGX Thor (compute), L4T (OS), CUDA (acceleration), Intel RealSense SDK. Cloud connectivity to Arc for fleet management (not required for autonomous operation) |
 | **Extension model** | Closed. Arc provides WMS/WES/MES integration APIs but robot behaviors are not user-programmable |
-| **Key limitations** | 16 kg payload (v4) limits to light tote handling; simpler grippers vs competitors' dexterous hands (Figure AI 16-DOF); ~8 hr battery (v4, v5 targets 22 hr); bipedal-only — no wheeled mode for efficiency on flat surfaces |
+| **Key limitations** | 129 kg weight (v5) heavier than competitors; 90-min runtime between charges (though 9-min rapid charge mitigates); bipedal-only — no wheeled mode for efficiency on flat surfaces |
 
 ### Digit v5 Delta
 
 | Aspect | v4 → v5 Change |
 | --- | --- |
-| **Payload** | 16 kg → 23 kg (50 lb) |
-| **Reach** | Standard → 7.2 ft |
-| **Battery** | ~8 hr → ~22 hr (rapid-charge) |
+| **Payload** | 16 kg → 23 kg (50 lb), redesigned leg system |
+| **Height/Weight** | 175 cm / 65 kg → 5'11" (180 cm) / 284 lb (129 kg) |
+| **Reach** | 5.5 ft → 7.2 ft (2.2 m) |
+| **Battery** | ~8 hr (2:1 run-to-charge) → 90 min runtime + 9 min charge (10:1 ratio, 20+ hrs/day productive) |
+| **Hands** | Fixed gripper → swappable gripper system (paddle, pincher, claw, five-fingered hand) |
 | **Safety** | OSHA field inspection → "cooperatively safe" (barrier-free) via NVIDIA Halos |
-| **Backlog** | — $300M+ multi-year orders |
+| **Backlog** | — $300M+ multi-year orders (~1,000 units) |
 
 ### Agility Arc
 

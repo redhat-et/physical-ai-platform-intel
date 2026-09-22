@@ -1,7 +1,7 @@
 # Isaac ROS — Project Intelligence Report
 
 **Date**: 2026-06-27
-**Last updated**: 2026-06-27
+**Last updated**: 2026-09-22 (v5.0 ROSCon update)
 **Classification**: Internal analysis — not for public repo
 
 ## Project Identity
@@ -44,9 +44,9 @@ Isaac ROS spans 65 non-archived repos in the NVIDIA-ISAAC-ROS GitHub org. Analys
 
 ## Executive Summary
 
-- **What it is**: NVIDIA's collection of 55+ GPU-accelerated ROS 2 packages providing CUDA-optimized perception (SLAM, 3D reconstruction, object detection, segmentation, pose estimation), DNN inference (TensorRT/Triton), and motion planning — connected via NITROS zero-copy GPU transport achieving 3-29x speedups over CPU baselines
-- **Health verdict**: Watch — 100% NVIDIA-controlled with 4-8 contributors per repo (all NVIDIA employees), no external contribution pathway, proprietary license on core infrastructure (NITROS, GXF, common), and issue closure ratio of 0.48 (135 opened vs 65 closed in 12mo)
-- **Technical verdict**: Strong — clean NITROS architecture implementing ROS 2 REP-2007/2009 for zero-copy GPU transport, standard ROS 2 interop via type adaptation, strong performance (AprilTag 385fps, Rectify 1550fps on AGX Thor), and deep Nav2/MoveIt 2/ros2_control integration
+- **What it is**: NVIDIA's collection of 65+ GPU-accelerated ROS 2 packages providing CUDA-optimized perception (SLAM, 3D reconstruction, object detection, segmentation, pose estimation), DNN inference (TensorRT/Triton), motion planning, and now agentic "Isaac skills" — connected via NITROS zero-copy GPU transport achieving 3-29x speedups over CPU baselines. v5.0 (Sep 2026) adds agentic capabilities, FoundationPose 5.5x faster, ROS Lyrical + Ubuntu 24.04 support, and a vendor-neutral GPU memory transport interface contributed upstream to OSRA
+- **Health verdict**: Watch — 100% NVIDIA-controlled with 4-8 contributors per repo (all NVIDIA employees), no external contribution pathway, proprietary license on core infrastructure (NITROS, GXF, common), and issue closure ratio of 0.48 (135 opened vs 65 closed in 12mo). However, the upstream OSRA contribution of vendor-neutral GPU transport in v5.0 is a positive signal for ecosystem integration
+- **Technical verdict**: Strong — clean NITROS architecture implementing ROS 2 REP-2007/2009 for zero-copy GPU transport, standard ROS 2 interop via type adaptation, strong performance (AprilTag 385fps, Rectify 1550fps on AGX Thor, cuMotion 2-5ms path planning), deep Nav2/MoveIt 2/ros2_control integration, and new agentic skill framework for AI-agent-driven robotics workflows
 - **Red Hat fit**: Misalign — NVIDIA proprietary license on core infrastructure, CUDA-only (no ROCm/CPU fallback), requires NVIDIA Ampere+ GPU, no CLA/DCO pathway for external contribution, and x86 requires nvidia-container-toolkit
 - **Recommendation**: <!-- filled by: project-comparison or manual assessment -->
 
@@ -62,7 +62,7 @@ Isaac ROS spans 65 non-archived repos in the NVIDIA-ISAAC-ROS GitHub org. Analys
 | **Contributor Absence Factor** | 2 people for 50%+ of commits | Risk | jaiveersinghNV (62 commits to common, 37 to visual_slam, 36 to nitros, 34 to nvblox) and hemalshahNV (31/26/13/27) account for majority of all commits across all repos |
 | **Change Request Closure Ratio** | 135 opened / 65 closed in 12mo | Backlog (0.48) | 387 open issues org-wide. External issues often go unanswered for weeks-months. 69 open PRs |
 | **Time to First Response** | >7 days median | Slow | Community issues often unanswered. NVIDIA forum (forums.developer.nvidia.com) is the primary support channel, not GitHub issues |
-| **Release Frequency** | 10+ releases in 12mo | Active | Regular releases: 4.0 (Nov 2025), 4.1 (Feb 2026), 4.2 (Feb 2026), 4.3 (Mar 2026), 4.4 (May 2026). Parallel 3.2.x maintenance through Dec 2025 |
+| **Release Frequency** | 10+ releases in 12mo | Active | Regular releases: 4.0 (Nov 2025), 4.1 (Feb 2026), 4.2 (Feb 2026), 4.3 (Mar 2026), 4.4 (May 2026), 5.0 (Sep 2026). Parallel 3.2.x maintenance through Dec 2025 |
 | **Contribution Trend** | Stable (narrow) | Stable | No broadening — same 4-5 NVIDIA engineers across all repos. No external contributors joining. Project is delivered as product, not community-developed |
 | **Libyears** | < 1 year | Current | Tracks latest ROS 2 Jazzy, CUDA 13.0, JetPack 7.1, TensorRT 10.x |
 
@@ -169,11 +169,13 @@ Isaac ROS uses a layered architecture: NITROS provides zero-copy GPU transport i
 | **GPU motion planning (cuMotion)** | CUDA-parallel motion planning as MoveIt 2 plugin. SDF-based collision avoidance. Often finds trajectories when other planners fail |
 | **DNN inference** | TensorRT and Triton backends. PeopleSemSegNet: 566 fps on AGX Thor, 1570 fps on RTX 5090. Near-parity between backends |
 | **Object detection** | DetectNet, RT-DETR, YOLOv8, Grounding DINO (open-vocabulary). RT-DETR: 188 fps (AGX Thor), 444 fps (RTX 5090) at 720p |
-| **Pose estimation** | FoundationPose (novel objects without retraining), DOPE, CenterPose. FoundationPose: 6-DoF from RGB-D + cuboid dimensions |
+| **Pose estimation** | FoundationPose (novel objects without retraining, 5.5x faster in v5.0 with agent-ready inference library), DOPE, CenterPose. FoundationPose: 6-DoF from RGB-D + cuboid dimensions |
 | **Segmentation** | U-Net, SegFormer, SAM, SAM2. PeopleSemSegNet: 449 fps (AGX Thor). SAM2 enables video object tracking |
 | **Image pipeline** | Drop-in replacement for standard ROS 2 image_pipeline. Rectify: 1550 fps at 1080p (AGX Thor). Uses VIC/PVA hardware engines on Jetson |
 | **Policy deployment** | LEAPP export pipeline from Isaac Lab → ONNX → ros2_control. Real-time safe (no dynamic allocation in hot path). 60 Hz policy, 500 Hz impedance control demonstrated |
 | **Fleet management** | VDA5050-compatible mission client via MQTT bridge. Pluggable action handling framework |
+| **Agentic skills (v5.0)** | Structured multi-step workflows invocable by AI agents: setup, manipulation, FoundationStereo fine-tuning, pick-and-place. Agent-ready documentation enables AI agents to discover and invoke Isaac ROS tools autonomously. AgenticROS (RealSense) connects Isaac ROS with Nemotron + NemoClaw for agent-robot interaction |
+| **GPU memory transport (v5.0)** | Vendor-neutral GPU-accelerated data-handling interface contributed upstream to OSRA as part of ROS Lyrical. CUDA as reference implementation — standardizes GPU transport but positions CUDA as de facto |
 
 ### Lock-in Assessment
 
@@ -193,6 +195,13 @@ Isaac ROS uses a layered architecture: NITROS provides zero-copy GPU transport i
 | **FANUC / ABB / KUKA / Yaskawa** | Industrial arm integration via Omniverse + Isaac platform. Jetson in controllers (combined 2M+ installed robot base) |
 | **Segway** | Reference AMR platform (Nova Carter) ships with Isaac ROS pre-integrated |
 | **Unitree** | Humanoid robot (G1) teleoperation via isaac_ros_physical_ai (new in 4.4) |
+| **Intrinsic (Google)** | Open Machine Tending Solution using FoundationPose for CNC machine tending (v5.0) |
+| **Universal Robots** | AI Accelerator SDK for integrators, powered by Jetson at the edge (v5.0) |
+| **Mentee Robotics** | MenteeBot humanoid perception backbone across Jetson Orin and Thor (v5.0) |
+| **FieldAI** | On-device robot foundation models without cloud connectivity (v5.0) |
+| **RealSense** | AgenticROS: AI-native 3D stereo depth cameras (D585 Pro) optimized for Isaac ROS + Jetson Thor (v5.0) |
+| **ROBOTIS** | AI Worker robot with GPU-accelerated object perception for manipulation (v5.0) |
+| **Seeed Studio** | reBot Arm: perception, manipulation, pick-and-place on Jetson Thor (v5.0) |
 | **FarmX** | Agricultural robotics on Jetson + Isaac ROS |
 
 ### Build & CI
@@ -202,7 +211,7 @@ Isaac ROS uses a layered architecture: NITROS provides zero-copy GPU transport i
 | **Build system** | ament_cmake (C++), ament_python. Standard ROS 2 colcon build. package.xml format 3 |
 | **CI** | Internal NVIDIA CI (not public). No GitHub Actions. Docker-based testing via isaac_ros_common/docker |
 | **Reproducibility** | Docker-first: isaac-ros-cli manages dev environments. Pre-built Debian packages via NVIDIA apt repo. Source builds via `git clone --recursive -b release-4.4` |
-| **Platforms tested** | Jetson AGX Thor (JetPack 7.1), x86_64 + Ampere+ GPU (Ubuntu 24.04), DGX Spark. Jetson AGX Orin via 3.2.x line (JetPack 6.x) |
+| **Platforms tested** | Jetson Orin Nano → Jetson AGX Thor (JetPack 7.x), x86_64 + Ampere+ GPU (Ubuntu 24.04), DGX Spark. v5.0: ROS Lyrical + Ubuntu 24.04, expanded Jetson hardware span |
 
 ### Backlog Health
 
@@ -259,3 +268,4 @@ Isaac ROS uses a layered architecture: NITROS provides zero-copy GPU transport i
 - [NVIDIA Forums: Isaac ROS](https://forums.developer.nvidia.com/c/robotics/isaac-ros/)
 - [AMD Ryzen AI CVML + ROS 2](https://rocm.blogs.amd.com/ecosystems-and-partners/ryzenai-cvml-ros/README.html)
 - [Acceleration Robotics ROBOTCORE](https://accelerationrobotics.com/robotcore.php)
+- [NVIDIA Blog: Isaac ROS 5.0 at ROSCon 2026](https://blogs.nvidia.com/blog/isaac-ros-5-0-agentic-open-source-robotics/)

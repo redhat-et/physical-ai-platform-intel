@@ -1,7 +1,7 @@
 # Intrinsic (Google) — Deep Dive Research
 
 **Date**: 2026-06-22
-**Last updated**: 2026-06-22
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis
 
 Supporting research for the [Intrinsic competitive profile](intrinsic.md). Covers Flowstate architecture, IntrinsicOS runtime, ROS 2/Gazebo governance under Google, acquisition deep-dives, and industrial partnership details.
@@ -32,6 +32,10 @@ For foundation models (Gemini Robotics family), see [Google DeepMind deep-dive](
 | 2026-02 | Intrinsic joins Google as distinct entity (no longer independent Alphabet company) |
 | 2026-03 | Agile Robots partnership via DeepMind |
 | 2026-05 | FANUC integration: high-performance support for FANUC robots in Flowstate |
+| 2026-06 | Intelligence Cell unveiled at Automate 2026 — modular AI workcell reference design |
+| 2026-06 | AI for Industry Challenge results: 5,000+ registrations, 1,600 teams, 115 countries, 8 teams near-perfect in sim |
+| 2026-07 | Foxconn piloting customized Intelligence Cell for electronics assembly |
+| 2026-07 | MartinSystems and Trinity Automation integrating AI skills into CNC products via Flowstate |
 
 ### Leadership
 
@@ -75,6 +79,30 @@ For foundation models (Gemini Robotics family), see [Google DeepMind deep-dive](
 ---
 
 ## 2. Product Architecture Details
+
+### Intrinsic Core — Open-Source Runtime (Sep 2026)
+
+| Aspect | Details |
+| --- | --- |
+| **Type** | Open-source runtime, SDK, and hardware-agnostic real-time control framework |
+| **License** | Apache 2.0 |
+| **GitHub** | `intrinsic-ai/intrinsic-core` |
+| **Announced** | ROSCon 2026, Toronto |
+| **Components** | Control (dynamic trajectory adaptation from sensor feedback), motion planning (collision-aware auto-generated paths), grasp planning (adaptive across gripper types), pose estimation (NVIDIA FoundationPose 6DoF integration), camera calibration |
+| **Key property** | Same capabilities used daily in production manufacturing deployments — not a stripped-down edition |
+| **ROS compatibility** | ROS-compatible by design; works with standard ROS 2 middleware |
+| **Hardware support** | Hardware-agnostic; Open Machine Tending Solution supports FANUC and Universal Robots out of box |
+| **Strategic framing** | Explicit "Android playbook": open infrastructure layer to drive adoption, monetize Gemini models and Flowstate SaaS at scale |
+| **Development pattern** | Likely Copybara sync from Google monorepo (same as SDK). External contribution dynamics warrant monitoring |
+| **Competitive significance** | Commoditizes control/motion planning layer. Every robot running Intrinsic Core becomes a socket for Gemini models. Directly competes with ROS 2/MoveIt (on integrated experience) and Isaac ROS (on GPU acceleration) |
+
+### Open Machine Tending Solution
+
+- Reference design for AI-enabled CNC machine tending
+- Runs on Intrinsic Core; supports FANUC and Universal Robots out of box
+- Uses NVIDIA FoundationPose for 6DoF pose estimation
+- Released alongside Intrinsic Core at ROSCon 2026
+- Concrete entry point for integrators (turnkey, not abstract framework)
 
 ### Flowstate — Technical Architecture
 
@@ -149,7 +177,8 @@ Development pattern: Copybara sync from Google monorepo. Top "contributors" are 
 
 | Product | Primary OSS Foundation | License | Vendor Value-Add (Proprietary) |
 | --- | --- | --- | --- |
-| **Flowstate** | Gazebo (simulation), Zenoh (ROS connectivity) | Proprietary platform | Skills architecture, behavior tree IDE, sim-to-real workflow |
+| **Intrinsic Core** | ROS 2, NVIDIA FoundationPose | Apache 2.0 (Copybara sync likely) | Production-proven control, motion planning, grasp planning, pose estimation, calibration |
+| **Flowstate** | Intrinsic Core, Gazebo (simulation), Zenoh (ROS connectivity) | Proprietary platform | Skills architecture, behavior tree IDE, sim-to-real workflow |
 | **IntrinsicOS** | Linux, Kubernetes | Proprietary | Sim/real consistency, industrial protocol support |
 | **SDK** | Bazel, gRPC (inferred) | Apache 2.0 (Copybara sync) | Python/C++/Go APIs for skill development |
 | **IVM** | Unknown (likely internal vision transformer research) | Proprietary | 3PT architecture, CAD-native zero-shot |
@@ -157,9 +186,11 @@ Development pattern: Copybara sync from Google monorepo. Top "contributors" are 
 
 ### Pattern Analysis
 
-Intrinsic's OSS pattern is the inverse of NVIDIA's. Where NVIDIA builds proprietary packaging around open compute engines, Intrinsic builds a proprietary platform (Flowstate, IntrinsicOS, IVM) that consumes and stewards open standards (ROS 2, Gazebo, OpenUSD) at the ecosystem level. The platform itself is closed; the middleware and simulation layers beneath it are open.
+Intrinsic's OSS pattern shifted significantly in September 2026 with the release of Intrinsic Core. Previously, Intrinsic built a proprietary platform (Flowstate, IntrinsicOS, IVM) that consumed and stewarded open standards (ROS 2, Gazebo, OpenUSD) — the platform was closed, the middleware beneath it was open. Now, the control/motion/grasp planning layer itself is open-sourced under Apache 2.0.
 
-The SDK follows Google's standard Copybara single-vendor pattern: open-source code, but primary development happens in Google's internal monorepo. External contributions are structurally difficult.
+This is the explicit "Android playbook": commoditize the infrastructure layer to drive adoption, monetize the AI layer above (Gemini Robotics, Flowstate SaaS, IVM). The strategic question is whether Intrinsic Core's Copybara sync pattern (likely same as the SDK) allows genuine external contribution or whether this is "open-source as distribution channel."
+
+The SDK follows Google's standard Copybara single-vendor pattern: open-source code, but primary development happens in Google's internal monorepo. External contributions are structurally difficult. Intrinsic Core likely follows the same pattern.
 
 ---
 
@@ -273,15 +304,15 @@ IntrinsicOS targets standard industrial PCs (IPCs). No custom SoC or edge hardwa
 
 | Dimension | Intrinsic | NVIDIA |
 | --- | --- | --- |
-| **Platform layer** | Flowstate (application IDE) + IntrinsicOS (edge K8s) | No application platform; provides simulation + models + HW |
+| **Platform layer** | Intrinsic Core (open runtime) + Flowstate (commercial IDE) + IntrinsicOS (edge K8s) | No application platform; provides simulation + models + HW |
 | **Simulation** | Gazebo (OSS, hardware-portable, CPU physics) | Isaac Sim (GPU-locked, RTX rendering, Newton physics) |
-| **Perception** | IVM (sub-mm, CAD-native, zero-shot) | Isaac Perceptor (CUDA-accelerated, proprietary NITROS/GXF) |
-| **Developer ecosystem** | ROS 2 governance (employs most maintainers) | Isaac ROS (ROS 2 wrappers over proprietary acceleration) |
+| **Perception** | IVM (sub-mm, CAD-native, zero-shot); Intrinsic Core integrates NVIDIA FoundationPose | Isaac Perceptor (CUDA-accelerated, proprietary NITROS/GXF); FoundationPose 5.5x faster in v5.0 |
+| **Developer ecosystem** | ROS 2 governance (employs most maintainers); Intrinsic Core as open runtime | Isaac ROS 5.0 (ROS 2 wrappers + agentic skills over proprietary acceleration) |
 | **Edge** | IntrinsicOS on partner IPCs | Jetson (full SoC with L4T + all accelerators) |
-| **Business model** | Platform SaaS + cloud API | Infrastructure licensing ($4,500/GPU/yr) |
-| **Relationship** | Active integration partnership (GTC 2025 Isaac + Omniverse) | Complementary |
+| **Business model** | Android playbook: open infra (Core), monetize AI (Gemini) + SaaS (Flowstate) | Infrastructure licensing ($4,500/GPU/yr) |
+| **Relationship** | Deepening: FoundationPose in Intrinsic Core; Open Machine Tending co-development | Complementary |
 
-Key: Intrinsic owns the application layer and developer ecosystem governance. NVIDIA owns the infrastructure and simulation rendering. They need each other — and both partner with multiple robot companies.
+Key: Intrinsic now owns both the open infrastructure layer (Intrinsic Core) and the application layer (Flowstate), plus developer ecosystem governance (ROS 2). NVIDIA owns simulation rendering and GPU acceleration. The FoundationPose integration in Intrinsic Core shows deepening collaboration — NVIDIA's perception models plugging into Google's open runtime.
 
 ### vs Amazon Robotics
 
@@ -292,11 +323,11 @@ Amazon builds proprietary robotics for its own warehouse operations (Sparrow, Ro
 | Dimension | Intrinsic | Red Hat |
 | --- | --- | --- |
 | **Datacenter** | No on-prem infra (GKE cloud-only) | OpenShift, RHEL (full datacenter stack) |
-| **Edge** | IntrinsicOS (proprietary Linux + K8s) | RHEL Device Edge + MicroShift |
+| **Edge** | IntrinsicOS (proprietary Linux + K8s); Intrinsic Core (open runtime, Apache 2.0) | RHEL Device Edge + MicroShift |
 | **MLOps** | Vertex AI (cloud-only) | RHOAI (on-prem + cloud) |
 | **Fleet mgmt** | None | ACM, FlightCtl, Ansible |
-| **Robotics middleware** | ROS 2 stewardship (employs maintainers) | ROS 2 on RHEL not yet productized |
-| **Relationship** | No conflict at datacenter; IntrinsicOS competes at edge | Complement for datacenter; competitive for edge runtime |
+| **Robotics middleware** | ROS 2 stewardship + Intrinsic Core (control, motion, grasp) | ROS 2 on RHEL not yet productized |
+| **Relationship** | Intrinsic Core on RHEL Device Edge is a natural integration; IntrinsicOS is displacement target | Complement for datacenter; Intrinsic Core creates new partnership surface at edge |
 
 ---
 
@@ -316,3 +347,7 @@ Amazon builds proprietary robotics for its own warehouse operations (Sparrow, Ro
 - [FANUC integration](https://intrinsic.ai/blog/fanuc)
 - [BOP benchmark](https://bop.felk.cvut.cz/)
 - [3PT paper (CVPR 2026 Highlight)](https://www.intrinsic.ai/publications/3pt-cvpr2026)
+- [Intrinsic Core announcement blog](https://www.intrinsic.ai/blog/posts/introducing-intrinsic-core)
+- [Intrinsic Core GitHub](https://github.com/intrinsic-ai/intrinsic-core)
+- [SiliconANGLE: Intrinsic open-sources foundational infrastructure](https://siliconangle.com/2026/09/22/googles-robotics-unit-intrinsic-open-sources-its-foundational-infrastructure-for-intelligent-robots/)
+- [Forbes: Google giving away "Android of Robotics"](https://www.forbes.com/sites/johnkoetsier/2026/09/22/google-is-giving-away-the-android-of-robotics/)

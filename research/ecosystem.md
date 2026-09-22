@@ -45,14 +45,14 @@
 
 #### Isaac ROS
 
-- **What it does**: GPU-accelerated middleware for robot perception and navigation, providing hardware-accelerated ROS2 packages.
+- **What it does**: GPU-accelerated middleware for robot perception, navigation, and manipulation, providing hardware-accelerated ROS 2 packages with agentic skill interfaces.
 - **Building blocks covered**: [Robot Middleware](building-blocks.md#robot-middleware), [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime)
-- **Key features (functional)**: GPU-accelerated perception (stereo depth, visual SLAM, object detection), navigation stack, DNN inference integration
-- **Key features (non-functional)**: Jetson-optimized, real-time capable, ROS2 Humble/Iron compatible
-- **Competes with**: Standard ROS2 perception stack — on latency and throughput via GPU acceleration
-- **Complements**: ROS2 (extends, not replaces), Jetson (target hardware), Isaac Sim (sim-to-real)
+- **Key features (functional)**: GPU-accelerated perception (stereo depth via FoundationStereo, visual SLAM, object detection, FoundationPose 5.5x faster pose estimation), navigation stack, DNN inference integration, pick-and-place skill, agentic "Isaac skills" (structured multi-step workflows invocable by AI agents for setup, manipulation, perception fine-tuning)
+- **Key features (non-functional)**: Jetson Orin Nano to Jetson Thor hardware span, real-time capable (cumotion: 2–5 ms path planning), ROS 2 Lyrical + Ubuntu 24.04 compatible. Vendor-neutral GPU-accelerated memory transport interface contributed upstream to OSRA (CUDA as reference implementation)
+- **Competes with**: Standard ROS 2 perception stack — on latency and throughput via GPU acceleration
+- **Complements**: ROS 2 (extends, not replaces), Jetson (target hardware), Isaac Sim (sim-to-real), NemoClaw/Nemotron (agentic orchestration via AgenticROS)
 - **Openness**: `OSS-single-vendor`
-- **Lock-in vectors**: Jetson/NVIDIA GPU required for acceleration benefits
+- **Lock-in vectors**: Jetson/NVIDIA GPU required for acceleration benefits; contributed upstream GPU transport uses CUDA as reference, potentially entrenching CUDA as de facto standard
 - **Source**: [Isaac ROS](https://developer.nvidia.com/isaac-ros), [GitHub](https://github.com/NVIDIA-ISAAC-ROS)
 
 #### GR00T N1
@@ -1119,18 +1119,30 @@ Skild Brain and S1 deployed on Foxconn assembly lines building NVIDIA Blackwell 
 
 **Type**: `Big Tech`
 **Stage/Scale**: Alphabet X graduate (2021); folded into Google Feb 2026. Foxconn JV (Oct 2025)
-**About**: Robotics software platform building the "Android for industrial robots." Flowstate dev environment + Intrinsic Vision Model (IVM) + Model M behavioral AI. Only ~10% of factories are fully automated; Intrinsic targets the other 90% by making robot programming accessible to non-experts. Now operates under Google alongside DeepMind, leveraging Gemini models and Google Cloud.
+**About**: Robotics software platform building the "Android for industrial robots." Flowstate dev environment + Intrinsic Vision Model (IVM) + Model M behavioral AI. Only ~10% of factories are fully automated; Intrinsic targets the other 90% by making robot programming accessible to non-experts. Now operates under Google alongside DeepMind, leveraging Gemini models and Google Cloud. In Sep 2026, open-sourced Intrinsic Core (control, motion planning, grasp planning, simulation, pose estimation, calibration) under Apache 2.0 — the "Android playbook" to commoditize infrastructure and monetize Gemini models.
 
 **Solutions**:
 
+#### Intrinsic Core
+
+- **What it does**: Open-source runtime, SDK, and hardware-agnostic real-time control framework for industrial robotics. Released at ROSCon 2026. Provides the foundational infrastructure that Intrinsic uses in production — control, motion planning, grasp planning, pose estimation (via NVIDIA FoundationPose), and camera calibration.
+- **Building blocks covered**: [Robot Middleware](building-blocks.md#robot-middleware), [Sim-to-Real Transfer Pipeline](building-blocks.md#sim-to-real-transfer-pipeline)
+- **Key features (functional)**: Hardware-agnostic real-time control with dynamic trajectory adaptation from sensor feedback; collision-aware auto-generated motion paths; adaptive grasp planning across gripper types with real-time sensor feedback; 6DoF pose estimation (FoundationPose integration); camera calibration; Open Machine Tending Solution reference design (FANUC + UR supported out of box)
+- **Key features (non-functional)**: ROS-compatible by design; same capabilities used in production manufacturing deployments
+- **Competes with**: ROS 2/MoveIt (on integrated turnkey experience), NVIDIA Isaac ROS (on GPU-accelerated perception) — differentiates on production-proven integrated stack with OEM support
+- **Complements**: ROS 2 (compatible middleware), Flowstate (commercial layer on top), Gemini Robotics (AI models that plug in), NVIDIA FoundationPose (integrated for pose estimation)
+- **Openness**: `OSS-single-vendor` (Apache 2.0, GitHub `intrinsic-ai/intrinsic-core`)
+- **Lock-in vectors**: Copybara sync from Google monorepo likely continues; Intrinsic Core is the open base, Flowstate + Gemini remain the proprietary value layer
+- **Source**: [GitHub](https://github.com/intrinsic-ai/intrinsic-core), [Blog](https://www.intrinsic.ai/blog/posts/introducing-intrinsic-core)
+
 #### Flowstate
 
-- **What it does**: Hardware-agnostic, drag-and-drop developer environment for building and deploying AI-powered robot applications — from design through deployment, including sim-to-real.
+- **What it does**: Hardware-agnostic, drag-and-drop developer environment for building and deploying AI-powered robot applications — from design through deployment, including sim-to-real. Now positioned as the commercial layer above open-source Intrinsic Core.
 - **Building blocks covered**: [Robot Middleware](building-blocks.md#robot-middleware), [Sim-to-Real Transfer Pipeline](building-blocks.md#sim-to-real-transfer-pipeline)
 - **Key features (functional)**: Visual workflow builder, modular AI capabilities (perception, motion planning, sensor-based control), hardware-agnostic (any robot/camera/sensor manufacturer)
 - **Key features (non-functional)**: Web-based, sim-to-real with "a few clicks"
 - **Competes with**: ROS2/MoveIt (on ease of use), NVIDIA Isaac (on platform completeness) — differentiates on accessibility for non-roboticists
-- **Complements**: NVIDIA Isaac Sim/Omniverse (rendering/physics via GTC 2025 partnership), Google Gemini (reasoning), Google Cloud (infrastructure)
+- **Complements**: Intrinsic Core (open runtime foundation), NVIDIA Isaac Sim/Omniverse (rendering/physics), Google Gemini (reasoning), Google Cloud (infrastructure)
 - **Openness**: `Proprietary`
 - **Lock-in vectors**: Google Cloud dependency (post-integration), Flowstate workflow format, Intrinsic API
 - **Source**: [Flowstate](https://www.intrinsic.ai/flowstate)
@@ -1142,20 +1154,20 @@ Skild Brain and S1 deployed on Foxconn assembly lines building NVIDIA Blackwell 
 - **Key features (functional)**: Sub-mm pose estimation, zero-shot (no per-application training), standard RGB camera input
 - **Key features (non-functional)**: 1st place in 7/11 ICCV 2025 benchmarks
 - **Competes with**: Custom perception pipelines, Isaac Perceptor — on industrial pose estimation
-- **Complements**: Flowstate (integrated perception capability)
+- **Complements**: Flowstate (integrated perception capability), Intrinsic Core (open infrastructure layer)
 - **Openness**: `Proprietary`
 - **Lock-in vectors**: Intrinsic platform dependency
 - **Source**: [Intrinsic AI](https://www.intrinsic.ai/capabilities)
 
-**Implied reference architecture**: Flowstate as the developer layer, IVM for perception, Model M for behavior, running on Google Cloud with Gemini for reasoning. NVIDIA Omniverse/Isaac Sim for digital twins and simulation. Foxconn JV as the manufacturing integration partner for electronics assembly.
+**Implied reference architecture**: Intrinsic Core (open-source) as the runtime foundation; Flowstate as the commercial developer layer on top; IVM for perception; Model M for behavior; Gemini for reasoning. NVIDIA FoundationPose integrated for pose estimation. Google Cloud for cloud workloads. Foxconn JV as manufacturing integration partner. Strategy: open infrastructure layer (Intrinsic Core) drives adoption → Gemini models and Flowstate SaaS monetize at scale.
 
 **Platform relevance**:
 
-- **Partnership surface**: Potential integration partner — Flowstate could consume platform services (model serving, data pipelines, fleet management)
-- **Competitive surface**: Direct competitor for "robot platform" positioning; Google backing makes this a serious threat
-- **What they need from a platform**: Vendor-neutral deployment (beyond Google Cloud), safety certification, multi-vendor fleet orchestration
+- **Partnership surface**: Intrinsic Core open-sourcing creates integration opportunities — platform services (model serving, data pipelines, fleet management) can plug into the open runtime. Open Machine Tending Solution is a reference design that needs deployment infrastructure
+- **Competitive surface**: Direct competitor for "robot platform" positioning; Google backing makes this a serious threat. The Android playbook (open infrastructure, proprietary AI) is explicitly designed to commoditize the layers where other platforms compete
+- **What they need from a platform**: Vendor-neutral deployment (beyond Google Cloud), safety certification, multi-vendor fleet orchestration. Intrinsic Core on RHEL Device Edge would be a natural fit — replacing proprietary IntrinsicOS while keeping the open runtime
 
-**Links**: [Website](https://www.intrinsic.ai/), [TechCrunch (Google integration)](https://techcrunch.com/2026/02/25/alphabet-owned-robotics-software-company-intrinsic-joins-google/), [Foxconn JV](https://siliconangle.com/2025/11/20/alphabets-intrinsic-foxconn-plan-accelerate-factory-automation-smarter-robots/)
+**Links**: [Website](https://www.intrinsic.ai/), [Intrinsic Core GitHub](https://github.com/intrinsic-ai/intrinsic-core), [Intrinsic Core Blog](https://www.intrinsic.ai/blog/posts/introducing-intrinsic-core), [TechCrunch (Google integration)](https://techcrunch.com/2026/02/25/alphabet-owned-robotics-software-company-intrinsic-joins-google/), [Foxconn JV](https://siliconangle.com/2025/11/20/alphabets-intrinsic-foxconn-plan-accelerate-factory-automation-smarter-robots/), [SiliconANGLE (Core announcement)](https://siliconangle.com/2026/09/22/googles-robotics-unit-intrinsic-open-sources-its-foundational-infrastructure-for-intelligent-robots/)
 
 ---
 

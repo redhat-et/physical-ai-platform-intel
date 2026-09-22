@@ -1,7 +1,7 @@
 # AMD — Deep Dive Research
 
 **Date**: 2026-06-23
-**Last updated**: 2026-06-23
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis
 
 Supporting research for the [AMD competitive profile](amd.md). This document covers material that informs the profile's assessments but is too detailed for the exec-level read: OSS foundations analysis, acquisition deep-dives, product architectures, governance risks, and technical dependency chains.
@@ -34,7 +34,10 @@ Supporting research for the [AMD competitive profile](amd.md). This document cov
 | 2026-02 | Meta 6 GW partnership announced (~$60B est.). Custom MI450 + Venice EPYC |
 | 2026-03 | Ryzen AI Embedded P100 expanded (8-12 core variants, 80 TOPS) |
 | 2026-05 | Q1 2026 earnings: $10.3B revenue, $5.8B datacenter (57% YoY growth) |
-| 2026-H2 | MI450/Helios shipments begin (Meta, OpenAI first deployments) |
+| 2026-07 | ROCm 7.14 — SGLang on Radeon GPUs, vLLM 0.23 Docker images, performance-tuned configs |
+| 2026-08 | Q2 2026 earnings: record $11.5B revenue, $6.7B datacenter (+107% YoY). Q3 guidance ~$13B |
+| 2026-08 | Helios in full production. Anthropic deal: up to 2 GW MI450, AMD investing up to $5B equity |
+| 2026-Q3 | Oracle: 50,000 MI450-series GPUs. First Helios shipments late Q3 2026 |
 
 ### Acquisitions — What Each Brought
 
@@ -100,22 +103,24 @@ Supporting research for the [AMD competitive profile](amd.md). This document cov
 | **Extension model** | ROCm open-source stack. hipBLAS, MIOpen, RCCL for compute libraries. AITER for optimized kernels |
 | **Key limitations** | ROCm ecosystem still thinner than CUDA in tooling depth. No equivalent to TensorRT for graph optimization. FlashAttention 3 not yet fully optimized |
 
-### Instinct MI450 / Helios (CDNA 5)
+### Instinct MI455X / Helios (CDNA 5)
 
 | Aspect | Details |
 | --- | --- |
-| **Architecture** | 12 compute chiplets on TSMC N2 + 3 chiplets on 3nm. 320B transistors. 432 GB HBM4, 19.6 TB/s |
+| **Architecture** | 12 compute + I/O chiplets on 2nm/3nm mix. 4 Accelerator Complex Dies (XCDs) stacked per Fabric/Cache Die via hybrid bonding. 320B transistors. 432 GB HBM4, 19.6 TB/s. 40 PFLOPS FP4, 20 PFLOPS FP8 |
+| **Key arch changes** | Wavefront width reduced from 64→32 (improves latency, branch divergence, register pressure). Hardware tanh for transcendental functions. Tensor Data Mover (TDM) for async global↔LDS transfers without register staging |
 | **Runtime dependencies** | ROCm (next major version). Venice EPYC CPUs. Pensando Vulcano NICs for rack-scale networking |
-| **Extension model** | Helios rack-scale reference design: 72× MI455X GPUs, 31 TB aggregate HBM4, 1.4 PB/s bandwidth |
-| **Key limitations** | Not yet shipping (H2 2026). Custom variants for Meta/OpenAI may diverge from general availability product |
+| **Extension model** | Helios rack: 72× MI455X, 18× Venice EPYC, Pensando networking. 31 TB aggregate HBM4, 2.9 EFLOPS FP4. $5–5.5M/rack, ~245 kW |
+| **Status** | In full production (Aug 2026). First shipments late Q3 2026. Mass production ramp Q2 2027. MI450X (non-rack) and MI430X (HPC/FP64) variants also announced |
 
 ### ROCm Software Stack
 
 | Aspect | Details |
 | --- | --- |
 | **Architecture** | HIP (CUDA-compatible API) → hipBLAS/MIOpen/RCCL (math libs) → PyTorch/JAX/vLLM/SGLang (frameworks). AITER/ATOM as optimized kernel plugins |
-| **Runtime dependencies** | Linux kernel with amdgpu driver. Instinct MI300X/MI325X/MI350X/MI355X for datacenter. Radeon RX 7000+ for consumer |
-| **Extension model** | Fully open-source (MIT/Apache 2.0, excluding firmware). Triton compiler support. Plugin architecture for vLLM/SGLang |
+| **Runtime dependencies** | Linux kernel with amdgpu driver. Instinct MI300X/MI325X/MI350X/MI355X for datacenter. Radeon RX 7000+/9000+ for consumer (RDNA 4 support from ROCm 7.2) |
+| **Extension model** | Fully open-source (MIT/Apache 2.0, excluding firmware). Triton compiler support. Plugin architecture for vLLM/SGLang. FP4/FP6 precision support for CDNA 4+ |
+| **Current version** | ROCm 7.14 (Jul 2026): SGLang on Radeon GPUs, vLLM 0.23 Docker images, performance-tuned configs for Llama 3.1/Whisper/Qwen. Distributed inference via vLLM-d, DeepEP, SGLang |
 | **Key limitations** | OneROCm unification still in progress — embedded XDNA NPU uses separate runtime from Instinct GPU ROCm. Some frameworks still hardcode CUDA assumptions |
 
 ### Versal AI Edge Gen 2
@@ -237,10 +242,11 @@ The exception is FPGA tooling: Vivado and Vitis are proprietary development tool
 
 | Product | Timeline | Key Changes |
 | --- | --- | --- |
-| **MI450 / MI455X** | H2 2026 | CDNA 5, 432 GB HBM4, 19.6 TB/s, 320B transistors |
-| **Helios rack** | H2 2026 | 72× MI455X + Venice EPYC + Vulcano NICs |
-| **MI500 Series** | 2027 | Next-gen announced at Analyst Day |
-| **Venice EPYC** | H2 2026 | 6th Gen server CPU, AI-optimized |
+| **MI455X** | In production (Aug 2026) | CDNA 5, 432 GB HBM4, 40 PFLOPS FP4. First shipments late Q3 2026 |
+| **MI450X / MI430X** | H2 2026 | Non-rack training variant / HPC FP64 variant |
+| **Helios rack** | In production (Aug 2026) | 72× MI455X, 2.9 EFLOPS FP4, $5–5.5M/rack. Mass production Q2 2027 |
+| **MI500 Series** | 2027 | CDNA 6, advanced 2nm, HBM4E |
+| **Venice EPYC** | Shipping | 6th Gen server CPU, shipping in Helios |
 
 ### Pricing
 
@@ -254,6 +260,8 @@ AMD's datacenter GPU pricing is not publicly disclosed but is structured through
 | --- | --- | --- | --- |
 | **Meta** | Millions of EPYC CPUs, MI300/MI350 GPUs | 6 GW, multi-gen, ~$60B. 160M share warrant | Custom MI450 silicon. Co-designed Helios. Venice/Verano CPUs |
 | **OpenAI** | MI300X initial deployment | 6 GW, multi-gen. 160M share warrant | MI450 + Helios. Tied to Stargate buildout |
+| **Anthropic** | — | Up to 2 GW MI450 on Helios (first 1 GW from H1 2027). AMD investing up to $5B equity | Strategic compute + investment partnership |
+| **Oracle** | — | 50,000 MI450-series GPUs starting Q3 2026 | Cloud GPU instances |
 | **Microsoft Azure** | MI300X cloud instances | Cloud GPU instances. OpenShift AI + AMD GPU support | API-level cloud integration |
 | **Red Hat** | — | Red Hat AI 3 certified on Instinct. Joint vLLM development | AMD GPU Operator on OpenShift. RHEL AI bare-metal on MI300X |
 | **Robotec.ai** | — | Silo AI collaboration | RoSi sensor simulation optimized for ROCm |
@@ -276,15 +284,15 @@ AMD's datacenter GPU pricing is not publicly disclosed but is structured through
 
 | Dimension | AMD | NVIDIA |
 | --- | --- | --- |
-| **Datacenter GPU perf** | MI355X within single-digit % of B200 at MLPerf Inference 6.0. MI450 targets leadership | H200/B200 currently leading. Rubin (2026) next-gen |
-| **Memory capacity** | MI350: 288 GB HBM3E. MI450: 432 GB HBM4 | B200: 192 GB HBM3E. Rubin: HBM4 |
+| **Datacenter GPU perf** | MI355X within single-digit % of B200 at MLPerf. MI455X: 40 PFLOPS FP4 (claims advantage over Rubin on paper) | Rubin NVL72 shipping since Jul 2026 — production lead over Helios |
+| **Memory capacity** | MI350: 288 GB HBM3E. MI455X: 432 GB HBM4 | B200: 192 GB HBM3E. Rubin: ~288 GB HBM4 |
 | **Software ecosystem** | ROCm open-source. Thinner tooling, fewer custom kernels. No TensorRT equivalent | CUDA 15+ year ecosystem. TensorRT, NIM, NeMo, deep tooling |
 | **Simulation** | Schola (MIT, early-stage). Partner-dependent (Robotec.ai) | Isaac Sim, Newton, Omniverse — vertically integrated |
 | **Foundation models** | None (partner/OSS-dependent) | GR00T N1, Cosmos, NeMo models |
 | **Edge** | Ryzen AI Embedded (x86 + NPU) + Versal FPGA. No proprietary OS | Jetson (ARM SoC) + L4T (Ubuntu-based). Isaac ROS. Proprietary perception |
 | **Enterprise software** | None — relies on Red Hat, partners | NVAIE ($4,500/GPU/year). NIM, NeMo, NGC |
-| **Rack-scale** | Helios (ZT Systems design). 72× MI455X | DGX SuperPOD / GB200 NVL72. Liquid-cooled |
-| **Hyperscaler deals** | 12 GW (Meta 6 GW + OpenAI 6 GW) | Dominant hyperscaler supplier. Multi-GW with all major clouds |
+| **Rack-scale** | Helios: 72× MI455X, 2.9 EFLOPS FP4, $5–5.5M/rack. In production, mass ramp Q2 2027 | DGX SuperPOD / Rubin NVL72. Already shipping to hyperscalers |
+| **Hyperscaler deals** | 14+ GW (Meta 6 GW + OpenAI 6 GW + Anthropic 2 GW + Oracle 50K GPUs) | Dominant hyperscaler supplier. Multi-GW with all major clouds |
 
 ### vs Intel (Gaudi / Xeon / Altera)
 
@@ -318,3 +326,8 @@ AMD's datacenter GPU pricing is not publicly disclosed but is structured through
 - [MI400 Series Analysis](https://tech-insider.org/amd-mi400-series-ai-gpu-data-center-2026/)
 - [ROCm vs CUDA 2026](https://www.spheron.network/blog/rocm-vs-cuda-gpu-cloud-2026/)
 - [AMD Odyssey Investment](https://techfundingnews.com/odyssey-310m-series-b-nvidia-amazon-amd-ai-world-models/)
+- [AMD Q2 2026 Earnings](https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results)
+- [AMD Instinct MI455X Deep Dive — ServeTheHome](https://www.servethehome.com/amd-instinct-mi455x-deep-dive-cdna-5-marks-the-next-era-of-instinct/)
+- [AMD MI450 GPUs: Helios Ships 50,000 to Oracle](https://shattered.io/amd-helios-mi450-oracle-50000-gpus-2026/)
+- [ROCm 7.14 Blog](https://rocm.blogs.amd.com/ecosystems-and-partners/rocm-7.14-blog/README.html)
+- [AMD Advancing AI 2026 — Helios, MI455X, Venice](https://www.kad8.com/news/amd-advancing-ai-2026-venice-mi455x-helios-and-2030-roadmap/)

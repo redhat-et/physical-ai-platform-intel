@@ -1,7 +1,7 @@
 # Skild AI — Competitive Profile
 
 **Date**: 2026-06-23
-**Last updated**: 2026-06-23
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis
 
 See [deep-dive](skild-ai-deep-dive.md) for OSS foundations, acquisition details, and technical architecture.
@@ -10,12 +10,12 @@ See [deep-dive](skild-ai-deep-dive.md) for OSS foundations, acquisition details,
 
 ## At a Glance
 
-Skild AI is a $14B-valued robotics foundation model startup building the **Skild Brain** — a universal, omni-bodied policy model that controls any robot form factor (humanoids, quadrupeds, arms, AMRs) without embodiment-specific training. Founded in 2023 as a CMU spinout by Deepak Pathak and Abhinav Gupta, the company pursues a **"brain-as-a-service" platform strategy**: license the foundation model to robot OEMs rather than build hardware. Training relies heavily on NVIDIA's simulation stack (Isaac Lab, Cosmos, Omniverse). The April 2026 acquisition of Zebra's robotics division (formerly Fetch Robotics) added warehouse AMR hardware and the Symmetry fleet orchestration platform, marking a partial shift toward vertical integration in logistics.
+Skild AI is a $14B-valued robotics foundation model startup building the **Skild Brain** — a universal, omni-bodied policy model that controls any robot form factor (humanoids, quadrupeds, arms, AMRs) without embodiment-specific training. Founded in 2023 as a CMU spinout by Deepak Pathak and Abhinav Gupta, the company pursues a **"brain-as-a-service" platform strategy**: license the foundation model to robot OEMs rather than build hardware. Training relies heavily on NVIDIA's simulation stack (Isaac Lab, Cosmos, Omniverse). The April 2026 acquisition of Zebra's robotics division (formerly Fetch Robotics) added warehouse AMR hardware and the Symmetry fleet orchestration platform. Skild Brain 1.0 (500B parameters, trained on 10K robots across 200 platforms) launched May 2026; the S1 model (Aug 2026) learns unseen 10-minute tasks from a single human video. Hit $100M ARR by Sep 2026 with 60+ paying customers including Amazon Robotics (15K warehouse robots), Boston Dynamics, and Unitree.
 
 | | |
 | --- | --- |
 | **Type** | Startup |
-| **Revenue / Funding** | ~$30M revenue (first months of 2025); $1.83B total raised (Series C: $1.4B at $14B, Jan 2026) |
+| **Revenue / Funding** | $100M ARR (Sep 2026); $1.83B total raised (Series C: $1.4B at $14B, Jan 2026) |
 | **Physical AI thesis** | Universal omni-bodied foundation model as the "Android for robots" — one brain, any body |
 | **Platform coverage** | ~15% of blocks — concentrated in robot policy training, simulation (via NVIDIA), edge inference |
 | **Relationship to Red Hat** | Potential complement — Skild deploys on cloud/enterprise infrastructure but has no platform layer; could run on OpenShift for model serving and fleet management |
@@ -26,8 +26,9 @@ Skild AI is a $14B-valued robotics foundation model startup building the **Skild
 
 | Product | What It Does |
 | --- | --- |
-| **Skild Brain** | Omni-bodied robotics foundation model. Hierarchical architecture: high-level VLA policy (10 Hz reasoning) + low-level motor control (kHz reflexes). Trained on trillions of simulated episodes + real-world video. Adapts to new embodiments via in-context learning without retraining |
-| **Skild Brain API** | Cloud-based API for licensing Skild Brain to OEMs. Customers pay for robot intelligence rather than developing proprietary control |
+| **Skild Brain 1.0** | 500B-parameter omni-bodied robotics foundation model (May 2026). Trained on 10K robots across 200 hardware platforms. Hierarchical architecture: high-level VLA policy (10 Hz) + low-level motor control (kHz). Sub-millimeter precision after 15-second calibration on unseen robots |
+| **S1** | Next-gen model (Aug 2026). Learns unseen 10-minute tasks from a single human video via in-context learning — 66% success vs 9% for language-prompted models. No fine-tuning, no weight changes. Deploying with limited industrial partners; broad availability 2027 |
+| **Skild Brain API** | Cloud-based API for licensing Skild Brain to OEMs. 60+ paying customers including Amazon Robotics (15K robots), Boston Dynamics, Unitree, Zhiyuan |
 | **Symmetry Fulfillment** | Fleet orchestration platform (acquired from Zebra). Coordinates tasks between robots and human workers. Integrates with Zebra wearable devices |
 | **Fetch AMR fleet** | Autonomous mobile robots for warehouse logistics (acquired from Zebra/Fetch Robotics). Hardware base for Skild Brain deployment in logistics |
 
@@ -253,6 +254,9 @@ Skild AI is a $14B-valued robotics foundation model startup building the **Skild
 | Partner | Type | Significance |
 | --- | --- | --- |
 | **NVIDIA** | Training infra + investor | Isaac Lab, Cosmos, Omniverse for simulation/training. NVentures investor (Series A + C). Foxconn factory co-deployment |
+| **Amazon Robotics** | Logistics | 15K warehouse robots — largest foundation model deployment in robotics history |
+| **Boston Dynamics** | Robotics OEM | Skild Brain on Spot and Atlas platforms |
+| **Unitree** | Robotics OEM | Skild Brain on H1 and G1 humanoids |
 | **Foxconn** | Manufacturing | Skild Brain on dual-arm manipulators for NVIDIA Blackwell GPU assembly in Houston |
 | **ABB Robotics** | Industrial OEM | Embedding Skild Brain into ABB robot portfolio. SoftBank acquiring ABB robotics ($5.38B) |
 | **Universal Robots** | Industrial OEM | Integrating Skild Brain into UR collaborative robots |
@@ -267,7 +271,7 @@ Skild AI is a $14B-valued robotics foundation model startup building the **Skild
 
 | vs | They have | They lack |
 | --- | --- | --- |
-| **Physical Intelligence (π0)** | Omni-bodied generalization across more form factors; warehouse deployment via Fetch acquisition; stronger OEM partnership network (ABB, UR, Foxconn); 2.5× higher valuation ($14B vs $5.6B) | π0's open-source base model strategy could commoditize the foundation layer; π0.5 trained across 7 platforms, 68 tasks, 104 homes — more diverse real-world data |
+| **Physical Intelligence (π0)** | $100M ARR with 60+ customers vs PI's undisclosed revenue; S1 one-shot video learning; Amazon Robotics + Boston Dynamics deployments; 2.5× higher valuation ($14B vs $5.6B) | π0's open-source base model strategy could commoditize the foundation layer; π0.5 trained across 7 platforms, 68 tasks, 104 homes — more diverse real-world data |
 | **NVIDIA (GR00T N1)** | Hardware-agnostic software play (not tied to Jetson); OEM-neutral positioning; Zebra fleet orchestration | GR00T is vertically integrated with Isaac Sim, Newton, Jetson; NVIDIA has deeper simulation stack and 2M+ robotics developers |
 | **Figure AI** | Platform approach serves all robot makers vs Figure's single humanoid; lower capex (no manufacturing); broader form-factor coverage | Figure has $37B valuation, vertically integrated hardware-software optimization, BMW deployment; hardware control enables tighter sim-to-real loop |
 
@@ -284,7 +288,7 @@ Skild AI is a $14B-valued robotics foundation model startup building the **Skild
 
 ## Strategic Implications for Red Hat
 
-1. **Potential customer, not competitor**: Skild AI has zero platform-layer products. Their Skild Brain API needs model serving infrastructure, fleet management, and edge deployment — all Red Hat products. As Skild scales from $30M to enterprise deployments, they will need a K8s-based platform for cloud inference and fleet orchestration.
+1. **Potential customer, not competitor**: Skild AI has zero platform-layer products. Their Skild Brain API needs model serving infrastructure, fleet management, and edge deployment — all Red Hat products. At $100M ARR with 60+ customers (including Amazon Robotics at 15K robots), Skild is now at enterprise scale and needs K8s-based infrastructure for cloud inference and fleet orchestration.
 
 2. **NVIDIA dependency creates platform risk**: Skild's entire training pipeline depends on NVIDIA (Isaac Lab, Cosmos, Omniverse, CUDA GPUs). NVentures is an investor. If NVIDIA tightens its ecosystem (e.g., requiring NIM for model serving, or Jetson for edge inference), Skild may be channeled away from Red Hat's stack. Monitor whether Skild's deployment infrastructure remains hardware-neutral.
 

@@ -1,7 +1,7 @@
 # AMD — Competitive Profile
 
 **Date**: 2026-06-23
-**Last updated**: 2026-06-23
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis
 
 See [deep-dive](amd-deep-dive.md) for OSS foundations, acquisition details, and technical architecture.
@@ -15,7 +15,7 @@ AMD is a $200B+ semiconductor company pursuing a **hardware-first, open-ecosyste
 | | |
 | --- | --- |
 | **Type** | Big Tech |
-| **Revenue / Funding** | ~$10.3B Q1 2026 revenue ($5.8B datacenter); ~$200B market cap |
+| **Revenue / Funding** | $11.5B Q2 2026 revenue ($6.7B datacenter, +107% YoY); Q3 guidance ~$13B |
 | **Physical AI thesis** | Open-ecosystem compute substrate from datacenter to edge; "AI everywhere, for everyone" via hardware diversity + open software |
 | **Platform coverage** | ~25% of blocks — concentrated in hardware, drivers, math/AI libs, inference support; minimal application-layer software |
 | **Relationship to Red Hat** | Strong complement — Red Hat AI 3 certified on AMD Instinct; joint vLLM contributions; RHEL + OpenShift as AMD's recommended enterprise platform layer |
@@ -27,11 +27,11 @@ AMD is a $200B+ semiconductor company pursuing a **hardware-first, open-ecosyste
 | Product | What It Does |
 | --- | --- |
 | **Instinct MI350/MI355X** | CDNA 4 datacenter AI GPUs. 288 GB HBM3E, 8 TB/s, FP4/FP6. MI355X liquid-cooled at 1,400W. Competitive with NVIDIA B200 at MLPerf |
-| **Instinct MI450** | CDNA 5 next-gen GPU (H2 2026). 432 GB HBM4, 19.6 TB/s, 320B transistors. Custom variants for Meta and OpenAI |
-| **EPYC (Turin/Venice)** | Server CPUs. 46% x86 server revenue share. Venice (6th Gen) optimized for AI inference co-processing |
-| **ROCm** | Open-source GPU compute platform (MIT/Apache 2.0). Supports PyTorch, vLLM, SGLang, JAX. Day-0 model support for Llama, DeepSeek, Qwen |
+| **Instinct MI455X** | CDNA 5 flagship GPU (in production Aug 2026). 12 chiplets on 2nm/3nm, 320B transistors. 432 GB HBM4, 19.6 TB/s. 40 PFLOPS FP4, 20 PFLOPS FP8. Wavefront width 32 (down from 64), hardware tanh, Tensor Data Mover |
+| **EPYC (Turin/Venice)** | Server CPUs. 46% x86 server revenue share. Venice (6th Gen) shipping with Helios |
+| **ROCm** | Open-source GPU compute platform (MIT/Apache 2.0). ROCm 7.14 (Jul 2026): SGLang on Radeon GPUs, vLLM 0.23 Docker images. Supports PyTorch, vLLM, SGLang, JAX |
 | **AITER / ATOM** | ROCm-optimized inference kernels for vLLM/SGLang. Fused MoE, MLA, FlashAttention backends for Instinct GPUs |
-| **Helios** | Rack-scale AI reference design. 72× MI455X + Venice EPYC + Pensando Vulcano NICs. 31 TB HBM4, 1.4 PB/s bandwidth |
+| **Helios** | Rack-scale AI system (in production Aug 2026). 72× MI455X + Venice EPYC + Pensando Vulcano NICs. 31 TB HBM4, 2.9 EFLOPS FP4. $5–5.5M/rack, ~245 kW. First shipments late Q3 2026; mass production Q2 2027 |
 | **Ryzen AI Embedded P100** | Edge AI processors (Zen 5 + RDNA 3.5 + XDNA 2 NPU). Up to 80 TOPS. For robotics, industrial, automotive |
 | **Versal AI Edge Gen 2** | Adaptive SoCs (FPGA + AI Engine + Arm cores). Deterministic real-time control + AI inference. For robotics, ADAS, machine vision |
 | **Kria SOMs** | System-on-modules with Zynq UltraScale+. Pre-built vision AI and robotics apps. KR260 Robotics Starter Kit |
@@ -262,6 +262,8 @@ AMD is a $200B+ semiconductor company pursuing a **hardware-first, open-ecosyste
 | --- | --- | --- |
 | **Meta** | Hyperscaler | 6 GW, multi-year deal (~$60B est.). Custom MI450 + Venice EPYC + Helios racks. Largest AMD GPU deal |
 | **OpenAI** | Hyperscaler | 6 GW deal (Oct 2025). MI450-based Helios deployments starting H2 2026 |
+| **Anthropic** | Hyperscaler | Up to 2 GW of MI450 on Helios, first 1 GW from H1 2027. AMD investing up to $5B equity in Anthropic |
+| **Oracle** | Cloud | 50,000 MI450-series GPUs starting Q3 2026 |
 | **Microsoft Azure** | Cloud | MI300X instances available; MI350 instances planned. OpenShift AI + AMD GPU support |
 | **Red Hat** | Platform | Red Hat AI 3 certified on Instinct. Joint vLLM contributions. AMD GPU Operator on OpenShift |
 | **Robotec.ai** | Simulation | Open-source digital twin tools optimized for ROCm. RoSi Sensors (LiDAR/radar sim) |
@@ -274,7 +276,7 @@ AMD is a $200B+ semiconductor company pursuing a **hardware-first, open-ecosyste
 
 | vs | They have | They lack |
 | --- | --- | --- |
-| **NVIDIA** | Broadest silicon portfolio (CPU+GPU+FPGA+DPU+embedded SoC); open-source software philosophy; no edge OS lock-in; 12 GW hyperscaler commitments (Meta+OpenAI) | Integrated simulation platform (no Isaac Sim equivalent); foundation models (no GR00T/Cosmos); mature Physical AI software stack; CUDA ecosystem depth and developer tooling |
+| **NVIDIA** | Broadest silicon portfolio (CPU+GPU+FPGA+DPU+embedded SoC); open-source software philosophy; no edge OS lock-in; 14+ GW hyperscaler commitments (Meta+OpenAI+Anthropic+Oracle); MI455X on-paper memory advantage (432 GB vs ~288 GB Rubin) | Integrated simulation platform (no Isaac Sim equivalent); foundation models (no GR00T/Cosmos); mature Physical AI software stack; CUDA ecosystem depth; Rubin NVL72 already shipping (Jul 2026) while Helios mass production Q2 2027 |
 | **Intel** | Superior GPU performance trajectory (MI350/MI450 vs Gaudi); FPGA portfolio (Versal vs Altera); stronger datacenter CPU position (46% vs Intel's declining share) | Intel's embedded edge heritage; Habana Gaudi's early enterprise AI traction; Intel Foundry Services for custom silicon |
 | **Qualcomm** | Datacenter GPU scale; FPGA-based deterministic control for industrial; server CPU attach | Power-efficient mobile SoCs; cellular connectivity; automotive ADAS market share; Snapdragon edge AI maturity |
 
@@ -297,7 +299,7 @@ AMD is a $200B+ semiconductor company pursuing a **hardware-first, open-ecosyste
 
 3. **Edge silicon diversity is an opportunity**: AMD's three-tier edge portfolio (Ryzen AI Embedded x86, Versal FPGA, Kria SOM) runs standard Linux — no proprietary L4T-equivalent. RHEL Device Edge + MicroShift could be the default OS layer across all three, unlike Jetson where L4T competes with RHEL. Key question: what is XDNA NPU driver support status on RHEL?
 
-4. **12 GW hyperscaler commitments validate ROCm**: The Meta ($60B) and OpenAI deals prove ROCm has reached production-grade reliability. As these deployments scale, ROCm ecosystem maturity will accelerate — reducing the CUDA switching cost that has historically kept enterprises on NVIDIA. Red Hat should deepen ROCm certification to capture this migration wave.
+4. **14+ GW hyperscaler commitments validate ROCm**: Meta ($60B), OpenAI (6 GW), Anthropic (2 GW + $5B equity), and Oracle (50K GPUs) prove ROCm has reached production-grade reliability. As these deployments scale, ROCm ecosystem maturity will accelerate — reducing the CUDA switching cost that has historically kept enterprises on NVIDIA. Red Hat should deepen ROCm certification to capture this migration wave.
 
 5. **Simulation gap creates partner dependency**: AMD has no Isaac Sim equivalent. Schola + MuJoCo is early-stage. AMD's Physical AI simulation story depends on partners (Robotec.ai, Odyssey) and open-source engines. Red Hat could facilitate this by ensuring OpenShift supports simulation workloads (GPU-accelerated rendering, physics engines) that run on AMD hardware — positioning as the platform where AMD's partners deploy their simulation tools.
 

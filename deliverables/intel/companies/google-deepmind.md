@@ -1,7 +1,7 @@
 # Google DeepMind — Competitive Profile
 
 **Date**: 2026-06-22
-**Last updated**: 2026-06-22
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis
 
 See [deep-dive](google-deepmind-deep-dive.md) for model architecture details, RT-1/2/X lineage, and research analysis.
@@ -11,7 +11,7 @@ See [Intrinsic profile](intrinsic.md) for industrial robotics platform (Flowstat
 
 ## At a Glance
 
-Google DeepMind is Google's AI research division, responsible for the Gemini model family including the **Gemini Robotics** VLAs — currently the most capable vision-language-action models in the field. DeepMind also stewards key open-source simulation infrastructure: **MuJoCo** (physics engine) and co-founded **Newton** (Linux Foundation). Its Physical AI thesis is **foundation models as the intelligence layer for any robot** — cross-embodiment VLAs that work across robot types (industrial arms, humanoids, cobots) without per-robot training. Unlike NVIDIA (which sells infrastructure) or Intrinsic (which sells a platform), DeepMind's business model is cloud API access to proprietary models via Gemini API / Vertex AI.
+Google DeepMind is Google's AI research division, responsible for the Gemini model family including the **Gemini Robotics 2** VLAs — currently the most capable vision-language-action models in the field, now capable of whole-body humanoid control, five-finger dexterity, and multi-robot collaboration (released Jul 2026). DeepMind also stewards key open-source simulation infrastructure: **MuJoCo** (physics engine) and co-founded **Newton** (Linux Foundation, 1.0 GA at GTC 2026). Its Physical AI thesis is **foundation models as the intelligence layer for any robot** — cross-embodiment VLAs that work across robot types (industrial arms, humanoids, cobots) without per-robot training. Unlike NVIDIA (which sells infrastructure) or Intrinsic (which sells a platform), DeepMind's business model is cloud API access to proprietary models via Gemini API / Vertex AI.
 
 | | |
 | --- | --- |
@@ -27,11 +27,11 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
 
 | Product | What It Does |
 | --- | --- |
-| **Gemini Robotics** | VLA (Vision-Language-Action) foundation model. Cross-embodiment; dexterous manipulation; 2× generality vs conventional VLAs. Trusted Tester access only |
-| **Gemini Robotics-ER** | Embodied Reasoning VLM. 6D pose, trajectory/grasp prediction, spatial reasoning. Available via Gemini API |
-| **Gemini Robotics On-Device** | Edge VLA. <10ms inference, works offline, fine-tunable with 50-100 demos. Via Safari SDK |
-| **Gemini Robotics 1.5** | Advanced VLA with transparent reasoning ("thinks before acting"). Most capable. Trusted Tester |
-| **Gemini Robotics-ER 1.6** | Updated ER. Agentic capabilities, multi-view understanding. Gemini API + AI Studio |
+| **Gemini Robotics 2** | VLA for whole-body humanoid control (feet to fingertips). Controls 22-DOF hands, balances COG dynamically. Multi-robot collaboration. Demonstrated on Apollo 2, Franka Duo, Dexmate, SO101, Trossen. Jul 2026 |
+| **Gemini Robotics ER 2** | Most capable embodied reasoning model. Multi-minute task sequences (hundreds of decisions). ASIMOV-Agentic safety. Available via AI Studio + Gemini Enterprise Agent Platform |
+| **Gemini Robotics On-Device 2** | Most efficient VLA for local execution. Fast adaptation to new embodiments with few hours of data. Based on Gemma on-device models |
+| **Gemini Robotics 1.5** | Previous-gen advanced VLA with transparent reasoning ("thinks before acting"). Trusted Tester |
+| **Gemini Robotics-ER 1.6** | Previous-gen ER. Agentic capabilities, multi-view understanding. Gemini API + AI Studio |
 | **Safari SDK** | `google-deepmind/gemini-robotics-sdk`. Agent framework + `flywheel` CLI for training, serving, data management |
 | **MuJoCo** (stewarded) | Physics engine (Apache 2.0). 18K+ stars. CPU + GPU via MJX (JAX). DeepMind acquired from Emo Todorov in 2021 |
 | **MuJoCo Warp** | GPU port of MuJoCo for NVIDIA GPUs. Primary backend of Newton (Linux Foundation) |
@@ -59,8 +59,8 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
 <tr>
   <td><b>Train Workloads</b></td>
   <td>⬜</td>
-  <td>🟢 Gemini Robotics<br>
-  <small>(proprietary VLAs; most capable)</small></td>
+  <td>🟢 Gemini Robotics 2<br>
+  <small>(whole-body humanoid VLAs; most capable)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
 </tr>
@@ -151,8 +151,8 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
 
 <tr>
   <td><b>Models & Policies</b></td>
-  <td colspan="2">🟡 Gemini Robotics-ER 1.6<br>
-  <small>(embodied reasoning model, not standalone policy)</small></td>
+  <td colspan="2">🟢 Gemini Robotics ER 2<br>
+  <small>(embodied reasoning; multi-minute agentic tasks)</small></td>
   <td colspan="2">⬜</td>
   <td>⬜</td>
 </tr>
@@ -171,8 +171,8 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
   <td colspan="2">🟡 Vertex AI Prediction<br>
   <small>(cloud-only)</small></td>
   <td colspan="2">⬜</td>
-  <td>🟢 Gemini On-Device<br>
-  <small>(&lt;10ms, offline)</small></td>
+  <td>🟢 Gemini On-Device 2<br>
+  <small>(fast cross-embodiment adaptation)</small></td>
 </tr>
 
 <tr>
@@ -237,12 +237,12 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
 
 | Product | OSS Foundation |
 | --- | --- |
-| **Gemini Robotics** | Built on Gemini 2.0 (proprietary). Training uses JAX + TPU. Open-weight alternative: Gemma 4 (Apache 2.0, not robotics-specific) |
+| **Gemini Robotics 2** | Built on Gemini (proprietary). Training uses JAX + TPU. Open-weight alternative: Gemma 4 (Apache 2.0, not robotics-specific) |
 | **MuJoCo** | Apache 2.0 (since 2022). CPU + GPU (MJX via JAX). DeepMind-stewarded. 18K+ stars |
 | **Newton** | Apache 2.0, Linux Foundation. DeepMind contributed MuJoCo Warp as primary backend. Co-founded with NVIDIA, Disney Research |
 | **Open X-Embodiment** | Open dataset from 33 research labs, 22 robot types. Foundation for RT-X and cross-embodiment research |
 | **Gemini API** | Proprietary API. Client: `google-genai` Python SDK (Apache 2.0) |
-| **Gemini On-Device** | Proprietary model. Safari SDK for deployment. Fine-tunable with 50-100 demos |
+| **Gemini On-Device 2** | Proprietary model based on Gemma on-device. Safari SDK for deployment. Fast cross-embodiment adaptation |
 
 ---
 
@@ -251,8 +251,8 @@ Google DeepMind is Google's AI research division, responsible for the Gemini mod
 | Partner | Type | Significance |
 | --- | --- | --- |
 | **Agile Robots** | Industrial + humanoid (Agile ONE) | Gemini Robotics fine-tuning; 20K+ deployed systems; $270M+ raised; series production 2026 |
-| **Apptronik** | Humanoid (Apollo) | Gemini Robotics for humanoid control. Pre-production |
-| **Boston Dynamics** | Humanoid (Atlas) + quadruped (Spot) | Gemini for Atlas intelligence. ~1K+ Spot deployed |
+| **Apptronik** | Humanoid (Apollo 2/3) | Primary Gemini Robotics 2 demo platform. Robot Park (90K sqft data factory, Austin). Apollo 2 feeds training data to DeepMind. $935M+ total raised (incl. Google, Mercedes-Benz, John Deere, QIA). Apollo 3 next-gen informed by partnership data |
+| **Boston Dynamics** | Humanoid (Atlas) + quadruped (Spot) | Gemini for Atlas intelligence. All 2026 Atlas units committed (Hyundai RMAC + DeepMind). 30K humanoids/yr target by 2028 |
 | **FANUC** | Industrial (1.1M robots) | Via Intrinsic — Gemini + Flowstate integration |
 
 Note: Industrial OEM partnerships (FANUC, UR, KUKA) are primarily through [Intrinsic](intrinsic.md), which integrates Gemini Robotics models.
@@ -263,7 +263,7 @@ Note: Industrial OEM partnerships (FANUC, UR, KUKA) are primarily through [Intri
 
 | vs | They have | They lack |
 | --- | --- | --- |
-| **NVIDIA** | Most capable VLAs (Gemini Robotics); MuJoCo (best-in-class physics engine); ROS 2 ecosystem governance (via Intrinsic); open-weight models (Gemma 4) | Edge hardware (no Jetson equivalent); on-prem infrastructure; simulation rendering; GPU infrastructure stack; developer population scale |
+| **NVIDIA** | Most capable VLAs (Gemini Robotics 2 — whole-body humanoid control); MuJoCo (best-in-class physics engine); ROS 2 ecosystem governance (via Intrinsic); open-weight models (Gemma 4); "Android for robotics" platform strategy with OEM partnerships | Edge hardware (no Jetson equivalent); on-prem infrastructure; simulation rendering; GPU infrastructure stack; developer population scale |
 | **OpenAI** | Stronger robotics-specific VLAs; on-device deployment (<10ms); deeper robot OEM partnerships (via Intrinsic) | OpenAI's general model capabilities; ChatGPT's developer mindshare; potential physical AI play |
 | **Meta (FAIR)** | Gemini Robotics performance benchmarks; MuJoCo ecosystem; cross-embodiment research depth | Open-weight robotics models (if Meta releases them); Habitat-Lab sim ecosystem |
 
@@ -271,9 +271,9 @@ Note: Industrial OEM partnerships (FANUC, UR, KUKA) are primarily through [Intri
 
 ## Coverage Summary
 
-- **Strong**: Foundation models (Gemini Robotics — most capable VLAs), simulation physics (MuJoCo — de facto RL standard), cross-embodiment research (Open X-Embodiment dataset), humanoid partnerships (Agile, Apptronik, Boston Dynamics)
+- **Strong**: Foundation models (Gemini Robotics 2 — whole-body humanoid VLAs, multi-robot collaboration), simulation physics (MuJoCo — de facto RL standard, Newton 1.0 GA), cross-embodiment research (Open X-Embodiment dataset), humanoid partnerships (Agile, Apptronik Robot Park, Boston Dynamics Atlas), ASIMOV-Agentic safety benchmark
 - **Absent**: On-prem infrastructure, edge hardware, fleet management, CI/CD, MLOps, pipeline orchestration, media libs, robotics middleware (that's Intrinsic's domain)
-- **Cloud-locked**: All models proprietary, cloud API only. No on-prem inference except On-Device (edge only)
+- **Cloud-locked**: All models proprietary, cloud API only. No on-prem inference except On-Device 2 (edge only)
 - **Open-weight gap**: Gemma 4 is open-weight but not robotics-specific. No open-weight robotics VLA from Google
 
 ---

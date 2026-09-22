@@ -1,7 +1,7 @@
 # Figure AI — Deep Dive Research
 
 **Date**: 2026-06-23
-**Last updated**: 2026-06-23
+**Last updated**: 2026-09-22
 **Classification**: Internal analysis — not for public repo
 
 Supporting research for the [Figure AI competitive profile](figure-ai.md). This document covers material that informs the profile's assessments but is too detailed for the exec-level read: Helix architecture details, manufacturing strategy, deployment learnings, and competitive dynamics.
@@ -27,7 +27,11 @@ Supporting research for the [Figure AI competitive profile](figure-ai.md). This 
 | 2025-11 | BMW Spartanburg pilot completes: 11 months, 30K+ vehicles, 90K+ parts. Federal whistleblower safety lawsuit filed |
 | 2026-01 | Helix 02 released — full-body autonomy |
 | 2026-04 | BotQ producing 1 robot every 90 minutes (240/month) |
-| 2026-06 | 40 Figure 03 units deployed at BMW Spartanburg; Leipzig expansion announced for summer 2026 |
+| 2026-05 | Figure 04 design locked; $600/month consumer lease announced |
+| 2026-06 | ~740 robots operating vs ~600 human employees; BMW Spartanburg fleet at 120 units |
+| 2026-07 | 1,000th Figure 03 produced at BotQ; production rate sustained at 1 robot/hour |
+| 2026-08 | Figure 02 retired from BMW. $3.5B Nscale compute partnership (up to 100K NVIDIA GPUs on Vera Rubin, H2 2027). Index data engine launched |
+| 2026-09 | Helix 2.5 released — zero-shot generalization across 30 unseen Bay Area homes. Index generating ~35 min of human-experience data per second |
 
 ### Acquisitions — What Each Brought
 
@@ -63,7 +67,7 @@ No acquisitions to date. Figure has built its technology stack entirely in-house
 | Aspect | Details |
 | --- | --- |
 | **Architecture** | Purpose-built humanoid manufacturing facility in San Jose, CA. In-house production of robots, batteries, actuators, and control systems |
-| **Capacity** | 12K units/year, scaling to 100K. April 2026: 1 robot every 90 minutes (240/month) |
+| **Capacity** | 1 robot/hour sustained rate (up from 1/day in 4 months). 1,000th unit Jul 2026. Scaling to 100K/year |
 | **MES** | In-house Manufacturing Execution System with full traceability |
 | **Supply chain** | Designed to scale to 3M actuators over 4 years |
 | **Key limitations** | Single facility; consumer $20K price target requires manufacturing efficiencies not yet proven at scale |
@@ -140,17 +144,19 @@ Not applicable — Figure AI does not steward any OSS projects. The company is f
 
 | Product | Timeline | Key Changes |
 | --- | --- | --- |
-| **Figure 03 consumer** | 2026-2027 | $20K target price; home alpha testing announced |
-| **BotQ scale-up** | 2026-2027 | 12K → 100K units/year capacity ramp |
-| **Next-gen Helix** | Unknown | Likely increased S2 parameter count; expanded multi-robot coordination |
+| **Figure 04** | Design locked May 2026 | Next-gen humanoid; details not disclosed |
+| **Figure 03 consumer** | 2026-2027 | $600/month consumer lease announced |
+| **Nscale compute** | H2 2027 | Up to 100K NVIDIA Vera Rubin GPUs at Barstow, TX |
+| **BotQ scale-up** | 2026-2027 | Current 1/hour → 100K units/year capacity ramp |
+| **Helix evolution** | Ongoing | Helix 2.5 (Sep 2026) shows zero-shot generalization; Index data engine generating 35 min/sec of training data |
 
 ### Pricing
 
 | Model | Price | Notes |
 | --- | --- | --- |
-| **Figure 02** | ~$130K (estimated) | Commercial lease/enterprise deployment contracts |
-| **Figure 03** | $20K (target) | Consumer price target; requires BotQ manufacturing efficiencies at scale |
-| **RaaS** | TBD | Robot-as-a-Service subscription model under development |
+| **Figure 03 (commercial)** | $89K/unit | Minimum order 10 units; includes charging station + 1-year Figure Cloud subscription |
+| **Figure 03 (RaaS)** | $3,200/month | 36-month lease contract |
+| **Figure 03 (consumer)** | $600/month | Consumer lease announced May 2026; timing TBD |
 
 ---
 
@@ -158,9 +164,10 @@ Not applicable — Figure AI does not steward any OSS projects. The company is f
 
 | Partner | Installed Base | Deal Details | Integration Depth |
 | --- | --- | --- | --- |
-| **BMW** | 40 Figure 03 units | Phased expansion through 2027; Leipzig (Germany) pilot summer 2026 | Production line integration (sheet metal handling, welding prep) |
+| **BMW** | 120 Figure 03 units | Spartanburg: material handling, kitting, sub-assembly. 73% error reduction, 18% throughput increase. Evaluating Munich/Dingolfing/Regensburg expansion | Production line integration |
+| **Nscale** | Compute partner | $3.5B commitment (scaling to $6B). 100K NVIDIA Vera Rubin GPUs, H2 2027 at Barstow, TX. Equity investment in Figure | Preferred compute provider |
 | **UPS** | Unknown | Reported second major customer | Logistics/package handling |
-| **NVIDIA** | N/A | Technology + investment | Cosmos for synthetic data; NVIDIA GPUs for edge compute |
+| **NVIDIA** | N/A | Technology + investment | Cosmos for synthetic data; NVIDIA GPUs for edge compute + Nscale cluster |
 
 ### Developer Ecosystem
 
@@ -181,8 +188,9 @@ This is a strategic choice: at current scale (hundreds of units), a developer ec
 | **Manufacturing** | BotQ: 12K/year capacity, scaling to 100K | Tesla Gigafactory: manufacturing scale advantage but shared with vehicles |
 | **AI model** | Helix (proprietary VLA, System 0/1/2) | FSD-derived vision + learned control; Dojo training compute |
 | **Hands** | 16 DOF, tactile sensing, palm cameras | Simpler grippers; improving but less dexterous |
-| **Funding** | $1.9B raised, $39B valuation | Tesla corporate funds; no separate fundraising needed |
-| **Risk** | $39B valuation on negligible revenue | Optimus deprioritized vs Tesla's core auto/energy business |
+| **Funding** | ~$2.5B raised + $3.5B Nscale compute, $39B valuation | Tesla corporate funds; no separate fundraising needed |
+| **Pricing** | $89K commercial, $3,200/mo RaaS, $600/mo consumer | Not commercially priced for external customers yet |
+| **Risk** | $39B valuation on negligible revenue; $3.5B Nscale commitment far exceeds raised capital | Optimus deprioritized vs Tesla's core auto/energy business |
 
 ### vs Agility Robotics (Digit)
 
@@ -222,3 +230,7 @@ The competitive landscape includes 30+ humanoid companies (1X, Sanctuary AI, App
 - [BMW-Figure reality check — Fortune](https://fortune.com/2025/04/06/figure-ai-bmw-humanoid-robot-partnership-details-reality-exaggeration/)
 - [NVIDIA Physical AI partners — Cosmos, GR00T ecosystem](https://nvidianews.nvidia.com/news/nvidia-releases-new-physical-ai-models-as-global-partners-unveil-next-generation-robots)
 - [Figure 03 specifications — Aparobot](https://www.aparobot.com/robots/figure-03)
+- [Helix 2.5 zero-shot generalization](https://theaiinsider.tech/2026/09/17/figure-unveils-helix-2-5-with-zero-shot-humanoid-generalization-across-30-homes/)
+- [Figure–Nscale $3.5B compute deal — Forbes](https://www.forbes.com/sites/johnkoetsier/2026/09/04/how-figure-committed-35-billion-for-ai-compute-after-raising-only-19-billion/)
+- [Figure 03 at BMW 2026 deployment](https://manufacturingdigital.com/articles/how-bmw-is-using-figure-ai-humanoid-robots-in-production)
+- [Figure AI growth analysis — Forge](https://forgeglobal.com/insights/figure-ai-robotics-growth-2026/)
