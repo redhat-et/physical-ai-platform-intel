@@ -81,7 +81,7 @@ Cross-company analysis across all 45 tracked Physical AI players. Identifies cov
 
 | Company | Type | Last Updated | Relationship to Red Hat |
 | --- | --- | --- | --- |
-| [Accenture](../companies/accenture.md) | SI (consulting + implementation) | 2026-09-22 | Complement — channel partner |
+| [Accenture](../companies/accenture.md) | SI (consulting + implementation) | 2026-09-22 | Mixed — channel partner but Physical AI Orchestrator overlaps edge AI orchestration |
 | [Bastian Solutions](../companies/bastian-solutions.md) | SI (warehouse automation) | 2026-09-22 | Complement — channel partner |
 | [Capgemini](../companies/capgemini.md) | SI (consulting + implementation) | 2026-09-22 | Strong complement — RH 2026 Partner of the Year |
 | [Deloitte](../companies/deloitte.md) | SI (consulting + advisory) | 2026-09-22 | Complement — deploys on partner infra |
@@ -278,13 +278,13 @@ SoftBank's position has strengthened since last synthesis:
 
 | Relationship | Count | Companies |
 | --- | --- | --- |
-| **Complement** | 28 | AMD, Intel, Qualcomm, Archetype AI, Mistral, PI, Config, Imagine, Lightwheel, Mecka, Palatial, Physicl, Scale AI, Sunday, XDOF, Foxglove, Rerun, Staer, SteerAI, PTC, Capgemini, Deloitte, Bastian, Dematic, Accenture |
+| **Complement** | 27 | AMD, Intel, Qualcomm, Archetype AI, Mistral, PI, Config, Imagine, Lightwheel, Mecka, Palatial, Physicl, Scale AI, Sunday, XDOF, Foxglove, Rerun, Staer, SteerAI, PTC, Capgemini, Deloitte, Bastian, Dematic |
 | **Potential customer** | 5 | Skild, Figure, Agility, NEURA, Prometheus |
-| **Mixed/Coopetition** | 8 | NVIDIA, Intrinsic, Siemens, Rockwell, Dassault, Nebius, TAL, Vanderlande |
+| **Mixed/Coopetition** | 9 | NVIDIA, Intrinsic, Siemens, Rockwell, Dassault, Nebius, TAL, Vanderlande, Accenture |
 | **Conflict** | 2 | KUKA (iiQKA.OS2), FANUC (FIELD system) |
 | **None/Irrelevant** | 2 | Tesla (closed), Waymo (Alphabet-locked) |
 
-Key insight: 28 of 45 companies are pure complements. Only 2 have direct platform conflicts (KUKA, FANUC). Red Hat's platform sits in a structural gap that the ecosystem needs filled.
+Key insight: 27 of 45 companies are pure complements. Only 2 have direct platform conflicts (KUKA, FANUC). Red Hat's platform sits in a structural gap that the ecosystem needs filled.
 
 ### Alliance Blocs Forming
 
@@ -338,9 +338,18 @@ The Big 3 consulting SIs (Accenture, Capgemini, Deloitte) all have deep NVIDIA O
 - **For NVIDIA-aligned SIs**: Red Hat platform complements the NVIDIA simulation/AI layer — OpenShift underneath, vLLM-Omni for inference
 - **For logistics SIs**: Red Hat platform fills the infrastructure gap directly — edge OS for AGV/AMR fleets, container runtime for warehouse software
 
-### 5. Digital Twin Has Gone Mainstream — No Longer Differentiating
+### 5. Simulation Deployment Has Broadened — But Capability Remains Concentrated
 
-15 of 45 companies now offer simulation or digital twin capabilities. What was a differentiator in the 9-company synthesis is now table stakes. The competitive frontier has moved from "having a digital twin" to:
+15 of 45 companies appear in the Simulation Engine coverage row, but this headline number conflates four distinct categories:
+
+| Category | Companies | Count |
+| --- | --- | --- |
+| **Build simulation engines** | NVIDIA (Isaac Sim/Omniverse), DeepMind (MuJoCo), Intrinsic (Gazebo digital twin), Dassault (3DEXPERIENCE) | 4 |
+| **Build proprietary digital twin products** | Siemens (Digital Twin Composer), Rockwell (Emulate3D), ABB (RobotStudio), Dematic (iQ Digital Twin), Staer (live 3D warehouse map) | 5 |
+| **Deploy others' simulation tools** | Accenture (deploys Omniverse), Deloitte (deploys Omniverse), Bastian (uses Rockwell Emulate3D), TAL (inherits subsidiary tools) | 4 |
+| **Use simulation for internal R&D only** | Skild (training environments), Figure (synthetic data) | 2 |
+
+Simulation *deployment* has gone mainstream — even SIs now routinely deploy digital twin tooling. But simulation *capability* (building engines or products) remains concentrated in ~9 players. The competitive frontier has moved from "having a digital twin" to:
 
 - Sim-to-real transfer quality (NVIDIA Isaac, DeepMind MuJoCo, ABB RobotStudio 99% accuracy)
 - Synthetic data generation at scale (Cosmos, Skild, Figure Index)
