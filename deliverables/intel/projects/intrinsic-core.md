@@ -40,10 +40,10 @@ The `intrinsic-ai` GitHub org contains 14 repos. Intrinsic Core is the monorepo;
 
 ## Executive Summary
 
-- **What it is**: Google/Alphabet's production-proven industrial robotics runtime open-sourced under Apache 2.0 at ROSCon 2026, providing integrated real-time control (ICON), collision-free motion planning, NVIDIA FoundationPose-based perception, grasp planning, and a k3s-containerized runtime — positioned as "Android for robotics" to drive Gemini model adoption through open infrastructure.
+- **What it is**: Google/Alphabet's production-proven industrial robotics runtime open-sourced under Apache 2.0 at ROSCon 2026, providing integrated real-time control (ICON), collision-free motion planning, NVIDIA FoundationPose-based perception, grasp planning, and a k3s-containerized runtime — positioned as "Android for robotics" to drive Gemini model adoption through open infrastructure. Note: the open-source Core ships with k3s as a lightweight local runtime; the commercial IntrinsicOS uses full Kubernetes on industrial PCs — k3s is the OSS on-ramp, not an architectural commitment.
 - **Health verdict**: Watch — brand-new open-source project (Sep 8, 2026) with only 14 days of public history, 64 commits from 31 authors (all Google/Intrinsic employees), Google CLA required, and Copybara-synced from internal monorepo meaning external contributions may face friction integrating upstream.
-- **Technical verdict**: Strong — 740K+ LOC production-proven codebase with clean modular architecture (runtime, control, planning, perception, kinematics, SDK), hardware-agnostic HAL supporting ABB/FANUC/KUKA/UR, deterministic real-time control loop (ICON), 536 proto API definitions, and k3s-containerized deployment; however Bazel-only build system and heavy Google infrastructure dependencies (Abseil, gRPC, Protobuf) create integration overhead.
-- **Red Hat fit**: Neutral — Apache 2.0 license and k3s/container-native architecture align well, but Google CLA, Bazel build system (vs. CMake/colcon ROS 2 standard), CUDA dependency for perception, and Copybara-gated contribution model limit Red Hat's ability to co-develop or integrate into RHEL-based stacks.
+- **Technical verdict**: Strong — 740K+ LOC production-proven codebase with clean modular architecture (runtime, control, planning, perception, kinematics, SDK), hardware-agnostic HAL supporting ABB/FANUC/KUKA/UR, deterministic real-time control loop (ICON), 536 proto API definitions, and container-native deployment (k3s in Core, full Kubernetes in commercial IntrinsicOS — orchestration layer is swappable); however Bazel-only build system and heavy Google infrastructure dependencies (Abseil, gRPC, Protobuf) create integration overhead.
+- **Red Hat fit**: Neutral — Apache 2.0 license and container-native architecture align well (k3s in open-source Core is swappable — commercial IntrinsicOS already uses full Kubernetes), but Google CLA, Bazel build system (vs. CMake/colcon ROS 2 standard), CUDA dependency for perception, and Copybara-gated contribution model limit Red Hat's ability to co-develop or integrate into RHEL-based stacks.
 - **Recommendation**: Integrate — production-proven industrial runtime under Apache 2.0 with strong manipulation capabilities, but Google CLA, Copybara sync, Bazel build, and 14-day-old community limit co-development; monitor for genuine community formation, see [comparison](../project-comparisons/robot-middleware.md)
 
 ---
@@ -126,7 +126,7 @@ The architecture follows a layered design with clean separation between runtime 
 
 | Component | Purpose | Key Dependency |
 | --- | --- | --- |
-| **intrinsic_runtime** | k3s-containerized execution engine: process lifecycle, event scheduling, application state sync. Setup scripts for k3s cluster and real-time kernel configuration | k3s, Helm, Kubernetes |
+| **intrinsic_runtime** | Container-orchestrated execution engine: process lifecycle, event scheduling, application state sync. The open-source Core ships with k3s as a lightweight local runtime; the commercial IntrinsicOS uses full Kubernetes on industrial PCs — the orchestration layer is swappable | k3s (Core) / Kubernetes (IntrinsicOS), Helm |
 | **intrinsic_control (ICON)** | Deterministic real-time control loop with single-cycle controller switching. HAL for arms, grippers, fieldbus I/O. 161K LOC | icon-shared-memory (IPC), icon-hwm-controller (ros2_control bridge), Pinocchio, Eigen |
 | **intrinsic_motion_planning** | Collision-free path generation: Cartesian and C-space solvers, heterogeneous motion blending, multi-segment trajectory fusion. 54K LOC | OR-Tools, NLopt, Coal, CGAL, Eigen |
 | **intrinsic_perception** | Camera/point-cloud interfaces, NVIDIA FoundationPose 6-DoF pose estimation, sensor processing. 45K LOC | OpenCV, PCL, CUDA, TensorRT, FoundationPose |
@@ -159,7 +159,7 @@ The architecture follows a layered design with clean separation between runtime 
 | **TensorFlow / PyTorch / JAX** | 2.20.0 / 2.9.0 / 0.5.3 | Apache-2.0 | All three ML frameworks included in Python deps |
 | **ROS 2 (rules_ros2)** | Lyrical | Apache-2.0 | OSRA-governed. Bazel integration via `com_github_mvukov_rules_ros2` |
 | **Zenoh** | 1.7.2 | Apache-2.0 | Eclipse Foundation. Middleware transport alternative |
-| **k3s** | system install | Apache-2.0 | Rancher/SUSE-maintained. Runtime orchestration layer |
+| **k3s** | system install | Apache-2.0 | Rancher/SUSE-maintained. Used as lightweight local runtime in the open-source Core; the commercial IntrinsicOS uses full Kubernetes — orchestration layer is swappable |
 | **Go** | 1.27.1 | BSD-3-Clause | Google-maintained. Used for infrastructure services |
 | **LangChain / Google ADK / A2A** | 1.2.10 / 2.3.0 / 0.3.25 | MIT / Apache-2.0 | Agentic AI integration — LLM orchestration and Agent-to-Agent protocol |
 
@@ -172,7 +172,7 @@ The architecture follows a layered design with clean separation between runtime 
 | **6-DoF pose estimation** | Integrated NVIDIA FoundationPose for CAD-model-free 6-DoF object pose estimation. Directly feeds into grasp planning and manipulation pipelines |
 | **Grasp planning** | Built-in grasp planning capability using pose estimation output. Supports un-fixtured part manipulation |
 | **Hardware abstraction** | Unified HAL supporting ABB (EGM), FANUC (12 models), KUKA, Universal Robots. Swap robot arms without driver rewrites |
-| **Container-native runtime** | k3s-based deployment with declarative YAML manifests. Process lifecycle management, event scheduling, state sync |
+| **Container-native runtime** | k3s-based deployment in the open-source Core (lightweight local runtime); full Kubernetes in the commercial IntrinsicOS. Declarative YAML manifests, process lifecycle management, event scheduling, state sync. The orchestration layer is swappable — OpenShift/MicroShift substitution is architecturally feasible |
 | **Digital twin** | Native Gazebo-based digital twin with OpenUSD scene description. Integrated simulation for sim-to-real workflows and validation |
 | **Edge inference** | Triton-based local ML serving with multi-framework support (TensorFlow, PyTorch, JAX). CUDA/TensorRT acceleration |
 | **Behavior tree executive** | Built-in execution engine using behavior trees for task sequencing. Supports skill composition and reactive behaviors |
@@ -226,7 +226,7 @@ The project is 14 days old with no external issues or PRs filed. Internal develo
 ### Alignment Signals
 
 - Apache 2.0 license across all repos — compatible with downstream redistribution and RHEL packaging
-- k3s-containerized runtime architecture aligns with OpenShift/Kubernetes deployment model
+- Container-native runtime architecture aligns with OpenShift/Kubernetes deployment model — the open-source Core ships with k3s (lightweight local runtime) while the commercial IntrinsicOS uses full Kubernetes; the orchestration layer is swappable, making OpenShift or MicroShift substitution architecturally feasible
 - Hardware-agnostic HAL (ABB, FANUC, KUKA, UR) aligns with Red Hat's vendor-neutral strategy
 - ROS 2 Lyrical integration — compatible with existing ROS 2 ecosystem investments
 - 536 Protobuf API definitions provide clear integration surface for platform services
