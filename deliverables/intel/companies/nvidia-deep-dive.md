@@ -522,7 +522,7 @@ Combined installed base: 2M+ robots using NVIDIA Omniverse and Isaac for digital
 | --- | --- | --- | --- |
 | **GPU Operator** | Certified GPU Operator | GPU Operator + drivers | Same component — Red Hat certifies and ships |
 | **Distributed Inference** | llm-d | — | Red Hat only. No NVIDIA equivalent |
-| **Simulation** | — (workloads) | Isaac Sim, Isaac Lab, Newton | Sim engines run as training workloads. Clean boundary |
+| **Simulation** | — (workloads) | Isaac Sim, Isaac Lab, Newton | Sim engines run as workloads on the platform. Headless RL (Isaac Lab `--headless`) is a pure compute workload on any CUDA GPU. Photorealistic simulation (Isaac Sim with cameras/LiDAR) requires RT-Core-equipped GPUs (L40S, RTX PRO 6000) — different hardware pool from DGX training GPUs. Clean boundary either way. |
 | **Models** | Model catalog | Cosmos, GR00T, Nemotron | Models are content. No platform conflict |
 | **Pipeline Orchestration** | KubeFlow Pipelines + Argo (partial) | OSMO | OSMO fills the identified [GAP] |
 | **Robotics Libs** | Enterprise ROS 2 on RHEL | Isaac ROS (CUDA-accelerated) | Different layers — ROS 2 runtime vs GPU perception |
