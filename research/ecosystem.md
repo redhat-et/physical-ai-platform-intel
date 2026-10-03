@@ -1995,6 +1995,79 @@ Skild Brain and S1 deployed on Foxconn assembly lines building NVIDIA Blackwell 
 
 ---
 
+### WIRobotics
+
+**Type**: `Startup`
+**Stage/Scale**: Undisclosed funding. South Korea (KOREATECH-affiliated). Part of Physical AI Fellowship (AWS + NVIDIA + MassRobotics)
+**About**: Humanoid robot startup building ALLEX, an upper-body humanoid with 48 degrees of freedom designed to use human tools in existing workspaces rather than requiring environment redesign. Hardware emphasizes low friction, low inertia, and high backdrivability for force-sensitive manipulation. Head of AI Chris Ryu (ex-Google DeepMind, Figure, Amazon Frontier AI & Robotics). Fine-tunes NVIDIA GR00T N1.7 on real teleoperation data — achieved 100% drill grasp success and 50% bolt-tightening alignment. Key finding: data quality proved more valuable than data volume for VLA fine-tuning.
+
+**Solutions**:
+
+#### ALLEX Humanoid Platform
+
+- **What it does**: Upper-body humanoid robot with highly dexterous hands and whole-body force sensing, designed for tool use in industrial settings (assembly, maintenance, inspection). Trained via imitation learning on teleoperated demonstrations.
+- **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models)
+- **Key features (functional)**: 48-DoF upper body, tool-use manipulation (drills, wrenches), GR00T N1.7 fine-tuning, LeRobot v2 data format
+- **Key features (non-functional)**: High backdrivability for safe force interaction, continuous physical feedback
+- **Competes with**: Figure (humanoid tool use), NEURA (cognitive humanoid), 1X (general humanoid) — differentiates on force-sensitive tool manipulation
+- **Complements**: NVIDIA (GR00T VLA), AWS (GPU training), MassRobotics (fellowship)
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Proprietary hardware, proprietary training data
+- **Source**: [AWS Physical AI Blog](https://aws.amazon.com/blogs/physical-ai/how-wirobotics-is-teaching-humanoid-robots-to-use-human-tools-with-aws-and-nvidia/)
+
+**Platform relevance**:
+
+- **Partnership surface**: Uses GR00T N1.7 + LeRobot pipeline — validates the NVIDIA VLA fine-tuning workflow that Red Hat's training infra could serve
+- **Competitive surface**: None — hardware + model company, not platform
+- **What they need from a platform**: GPU training infrastructure (currently AWS EC2 g7e), model lifecycle management, edge deployment for real-time force control
+
+**Collaborations**: NVIDIA (GR00T N1.7), AWS (Physical AI Fellowship, EC2 training), MassRobotics (fellowship)
+
+**Links**: [Website](https://corp.wirobotics.com/), [AWS Physical AI Blog](https://aws.amazon.com/blogs/physical-ai/how-wirobotics-is-teaching-humanoid-robots-to-use-human-tools-with-aws-and-nvidia/)
+
+---
+
+### Telexistence
+
+**Type**: `Startup`
+**Stage/Scale**: Japanese robotics startup, 300+ robots deployed in major convenience-store chains. Participates in Physical AI Fellowship (AWS + NVIDIA + MassRobotics, 2nd cohort)
+**About**: Full-stack robotics company (hardware + AI) building robots for physical retail environments — convenience stores in Japan. Owns the entire stack from robot hardware (TX-G2) to VLA model training. Currently runs VLA models mapping observations to motor commands, trained on teleoperation data. Notable for conducting one of the first real-world evaluations of NVIDIA's DreamZero World Action Model (14B parameters) for convenience-store tasks, with mixed results: 45% sim success on place tasks but 0% real-to-sim transfer, revealing fundamental domain gaps in joint distributions and state scales. Key operational insight: inference at ~583ms/step on B200 GPU (8× faster than RTX PRO 6000 via DiT caching and reduced denoising steps).
+
+**Solutions**:
+
+#### TX-G2 Robot + VLA Stack
+
+- **What it does**: Humanoid-style robot for convenience-store tasks (cashier scanning, bag packing, shelf picking) with multi-camera VLA control (head + two wrist cameras).
+- **Building blocks covered**: [Robot Foundation Models](building-blocks.md#robot-foundation-models), [Sim-to-Real Transfer Pipeline](building-blocks.md#sim-to-real-transfer-pipeline)
+- **Key features (functional)**: VLA-based manipulation, teleoperation data collection, DreamZero WAM evaluation (NVIDIA 14B world action model)
+- **Key features (non-functional)**: 300+ robots deployed in live retail, multi-chain convenience-store operations
+- **Competes with**: Covariant (acquired by Amazon) on retail manipulation — differentiates on full-stack ownership and Japanese retail focus
+- **Complements**: NVIDIA (DreamZero, GR00T ecosystem), AWS (HyperPod training)
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Proprietary hardware, proprietary training data from 300+ deployed robots
+- **Source**: [AWS Physical AI Blog](https://aws.amazon.com/blogs/physical-ai/bringing-a-frontier-world-model-to-the-convenience-store-inside-telexistences-dreamzero-experiment-on-aws/)
+
+#### DreamZero Evaluation (PoC)
+
+- **What it does**: Evaluated NVIDIA's DreamZero WAM (14B params) as alternative to production VLA. DreamZero jointly generates action trajectories and multi-camera future video — robot "imagines" scene changes before acting.
+- **Building blocks covered**: [Latent World Models](building-blocks.md#latent-world-models), [Robot Foundation Models](building-blocks.md#robot-foundation-models)
+- **Key features (functional)**: Multi-camera video generation + action prediction, fine-tuned from DROID-AgiBot checkpoint, GenAI data curation pipeline (flagged ~39% noisy episodes)
+- **Key features (non-functional)**: Trained on EC2 p6-b200.48xlarge (8× B200), evaluated in Genie Sim 3.0. Best sim result: 45% success. Real-to-sim transfer: 0% — cross-embodiment gap between AgiBot G1 pretraining and TX-G2 deployment
+- **Openness**: `Proprietary` (NVIDIA DreamZero model, Telexistence data)
+- **Source**: [AWS Physical AI Blog](https://aws.amazon.com/blogs/physical-ai/bringing-a-frontier-world-model-to-the-convenience-store-inside-telexistences-dreamzero-experiment-on-aws/)
+
+**Platform relevance**:
+
+- **Partnership surface**: Validates real-world VLA deployment at scale (300+ robots). DreamZero evaluation provides ground-truth data on world model transfer gaps — relevant for sim2real primer
+- **Competitive surface**: None — vertical solution provider
+- **What they need from a platform**: GPU training infrastructure (currently AWS), cross-embodiment model adaptation, edge inference optimization (583ms/step too slow for real-time manipulation)
+
+**Collaborations**: NVIDIA (DreamZero evaluation, Physical AI Fellowship), AWS (Physical AI Fellowship, HyperPod training), MassRobotics (fellowship)
+
+**Links**: [Website](https://tx-inc.com/en/), [AWS Physical AI Blog — DreamZero](https://aws.amazon.com/blogs/physical-ai/bringing-a-frontier-world-model-to-the-convenience-store-inside-telexistences-dreamzero-experiment-on-aws/)
+
+---
+
 ### Tripo AI
 
 **Type**: `Startup`
