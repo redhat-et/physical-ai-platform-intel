@@ -458,6 +458,66 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 
 ---
 
+### Unity Technologies
+
+**Type**: `Big Tech`
+**About**: Publicly traded (NYSE: U, ~$2B annual revenue) real-time 3D engine company pivoting from games into industrial simulation, digital twins, and Physical AI. The same Unity engine powers both games and industrial applications — there is no separate "robotics engine." Unity's Physical AI strategy layers robotics-specific tooling (URDF import, sensor simulation, ROS 2 bridge) on the proprietary engine core via Unity Simulation Pro (Early Access Sep 2026), while open-sourcing integration libraries (ML-Agents, Perception, ROS-TCP-Connector) under Apache 2.0. Revenue is dominated by Grow Solutions (ads/monetization, 71%), with Industry/Create as a secondary revenue stream. Weathered a major trust crisis (Runtime Fee controversy, 2023) and leadership change (Matt Bromberg, ex-Zynga COO, replaced Riccitiello). Weta Digital acquisition ($1.63B, 2021) effectively unwound in 2023.
+
+**Solutions**:
+
+#### Unity Engine + Simulation Pro
+
+- **What it does**: Real-time 3D simulation platform for robotics. Simulation Pro adds URDF import, sensor simulation (LiDAR, camera, IMU), ROS 2 bridge, and headless Linux builds for cloud-scale parallel simulation.
+- **Building blocks covered**: [Simulation Engines](building-blocks.md#simulation-engines), [Digital Twin Runtime](building-blocks.md#digital-twin-runtime)
+- **Key features (functional)**: PhysX physics, cross-platform rendering (OpenGL/Vulkan/DirectX/Metal), CAD import (Pixyz), PLC/OPC UA/MQTT connectivity, VFX Graph for weather simulation
+- **Key features (non-functional)**: 6.5M+ creators, massive Asset Store ecosystem (~100M assets), cross-platform deployment (desktop, mobile, XR, WebGL)
+- **Openness**: `Proprietary`
+- **Lock-in vectors**: Proprietary engine core; IDAO usage-based fee for Industry customers (2026); Pixyz CAD import proprietary
+- **Source**: [Unity Robotics](https://unity.com/solutions/robotics), [Simulation Pro Early Access](https://unity.com/blog/unity-simulation-pro-early-access)
+
+#### Unity ML-Agents
+
+- **What it does**: PyTorch-based RL and imitation learning toolkit. Turns Unity scenes into Gymnasium-compatible training environments for robot policy training.
+- **Building blocks covered**: [Post-Training Pipeline](building-blocks.md#post-training--fine-tuning-pipeline)
+- **Key features (functional)**: PPO, SAC, GAIL, curriculum learning, self-play, multi-agent training
+- **Key features (non-functional)**: Release 22 (current), Sentis integration for ONNX inference
+- **Openness**: `OSS-single-vendor` (Apache 2.0; Unity CLA required)
+- **Lock-in vectors**: Requires Unity Engine to run; training environments not portable to other engines
+- **Source**: [GitHub](https://github.com/unity-technologies/ml-agents)
+
+#### Unity Perception
+
+- **What it does**: Synthetic data generation — bounding boxes, segmentation masks, depth maps with domain randomization for training data at scale.
+- **Building blocks covered**: [Sim-to-Real Transfer Pipeline](building-blocks.md#sim-to-real-transfer-pipeline)
+- **Key features (functional)**: Randomization of lighting, placement, textures; labeler pipeline; scenario execution
+- **Key features (non-functional)**: Apache 2.0, integrates with Unity Perception Stats for analysis
+- **Openness**: `OSS-single-vendor` (Apache 2.0)
+- **Lock-in vectors**: Requires Unity Engine for scene rendering
+- **Source**: [GitHub](https://github.com/Unity-Technologies/com.unity.perception)
+
+#### Unity Sentis
+
+- **What it does**: On-device ONNX model inference within Unity runtime. Runs pre-trained models for object recognition, pathfinding, robot motion without cloud.
+- **Building blocks covered**: [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime)
+- **Key features (functional)**: ONNX standard support, CPU/GPU inference, no cloud dependency
+- **Key features (non-functional)**: Replaced deprecated Barracuda backend
+- **Openness**: `Proprietary` (Unity package license)
+- **Lock-in vectors**: Tied to Unity runtime; cannot serve models outside Unity scenes
+
+**Implied reference architecture**: Robotics teams build simulation environments in Unity Engine, import robot models via URDF, simulate sensors (LiDAR, camera, IMU), connect to ROS 2, generate synthetic training data via Perception, train policies via ML-Agents, and deploy on-device inference via Sentis. Virtual commissioning connects PLC controllers to Unity digital twins via OPC UA/MQTT. All production use requires proprietary Unity Industry license.
+
+**Platform relevance**:
+
+- **Partnership surface**: Minimal — Unity's headless Linux simulation builds could run on OpenShift as GPU workloads, but no formal partnership exists. OSS tooling (ML-Agents, Perception) is interesting but tightly coupled to proprietary engine
+- **Competitive surface**: None — Unity operates at the simulation/application layer, not platform infrastructure. No container platform, no OS, no model serving
+- **What they need from a platform**: GPU scheduling and compute infrastructure for headless parallel simulation at scale. Unity builds are standard Linux processes — natural fit for OpenShift AI scheduling, if Unity gains industrial traction
+
+**Collaborations**: SpiraTec (virtual commissioning), TIER IV/Autoware Foundation (AWSIM open-source AV simulator), Seiko Epson (robot simulator), Medtronic (surgical robot digital twin), KITECH (synthetic data for manufacturing), SEW-EURODRIVE (PLC validation)
+
+**Links**: [Website](https://unity.com/), [Robotics](https://unity.com/solutions/robotics), [Industry](https://unity.com/industry), [GitHub](https://github.com/Unity-Technologies), [Investor Relations](https://investors.unity.com/)
+
+---
+
 ## Startups
 
 *Venture-backed companies building Physical AI products*

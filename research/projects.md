@@ -1448,6 +1448,53 @@
 | Community health       | Active       | v0.9.16 (Sep 2025); active UE5 migration; 150K+ developer community   |
 | Corporate control risk | Medium       | Unreal Engine dependency introduces Epic Games coupling               |
 
+#### AWSIM: Open-Source Autonomous Driving Simulator (Unity)
+
+**URL**: [github.com/autowarefoundation/AWSIM](https://github.com/autowarefoundation/AWSIM)
+
+**Description**: Open-source autonomous driving simulator built on Unity Engine for testing and validating Autoware AD stacks. Developed by TIER IV (Japan), transferred to Autoware Foundation governance in May 2026. Provides realistic urban environments with synchronized multi-camera, ray-traced LiDAR, GNSS, and IMU sensors. Won Grand Prize in the Innovation Award category at the 17th Unity Awards. Demonstrates the pattern of building an open-source simulator on a proprietary engine — code is Apache 2.0 but requires proprietary Unity Industry license to run.
+
+**Tech Stack**: C# (Unity), ROS 2 (native communication), Unity Engine 6.x
+
+**Dependencies**:
+
+| Layer            | Engine           | Acceleration                            |
+| ---------------- | ---------------- | --------------------------------------- |
+| Physics backend  | PhysX (via Unity)| CPU, GPU                                |
+| Rendering engine | Unity URP/HDRP   | OpenGL, Vulkan, DirectX, Metal          |
+
+**Key Features**:
+
+- 8+ synchronized cameras and ray-traced LiDAR simulation
+- Native ROS 2 communication (no bridge required)
+- Multiple scene and vehicle configurations
+- Interactive simulation UI for testing and debugging
+- Unity job system and built-in Physics for performance
+- Compatible with Autoware Universe AD stack
+
+**Status**: Active
+
+**Stats**: Apache 2.0, transferred from TIER IV to Autoware Foundation (May 2026)
+
+**Last Updated**: 2026
+
+**Building block(s)**: [Simulation Engines](building-blocks.md#simulation-engines)
+
+**Maturity**: Production-ready (for Autoware validation)
+
+**Competes with**: CARLA (Unreal Engine, broader AD research community), LGSVL (archived), NVIDIA DRIVE Sim (proprietary)
+**Complements**: Autoware (primary AD stack target), ROS 2, Unity Engine
+
+**Openness assessment**:
+
+| Dimension | Rating | Detail |
+| --- | --- | --- |
+| License | Permissive | Apache 2.0 (code); Unity Engine requires proprietary license to run |
+| Governance | Foundation | Autoware Foundation (transferred from TIER IV, May 2026) |
+| Contributor diversity | Medium | Originated from TIER IV; growing under Autoware Foundation governance |
+| Community health | Active | AWSIM Labs fork for faster feature iteration; active development |
+| Corporate control risk | Medium | Open governance, but runtime dependency on proprietary Unity engine |
+
 ### Physics Engines
 
 *Dynamics backends that simulation platforms build on. Ownership and acceleration support here determine platform lock-in risk upstream.*

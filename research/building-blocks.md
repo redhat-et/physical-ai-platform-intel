@@ -167,17 +167,18 @@
 
 **Dependency layers**: Simulation platforms compose a physics engine (dynamics) and a rendering engine (visuals). Lock-in risk and technical capability propagate from these layers:
 
-| Simulation Platform | Physics Engine     | Rendering Engine | Compute Acceleration           |
-| ------------------- | ------------------ | ---------------- | ------------------------------ |
-| Isaac Sim / Lab     | PhysX 5            | OptiX / RTX      | CUDA only                      |
-| Gazebo (Harmonic)   | Custom (DART/ODE)  | OGRE-Next        | OpenGL, Vulkan; CPU fallback   |
-| Genesis World       | Custom (Quadrants) | Nyx              | CUDA, ROCm, Metal, Vulkan, CPU |
-| Newton              | MuJoCo Warp        | (via OpenUSD)    | CUDA only                      |
-| SAPIEN / ManiSkill  | PhysX 5            | Vulkan           | CUDA, CPU                      |
-| CARLA               | PhysX (via UE)     | Unreal Engine 5.5| RTX, DirectX, Vulkan           |
-| Webots              | ODE (custom fork)  | WREN (custom)    | OpenGL; CPU only               |
-| MuJoCo Playground   | MuJoCo / MJX       | MuJoCo built-in  | CUDA (via JAX), CPU            |
-| Genie 3             | Learned            | Learned          | Google TPU/GPU (proprietary)   |
+| Simulation Platform | Physics Engine     | Rendering Engine  | Compute Acceleration                             |
+| ------------------- | ------------------ | ----------------- | ------------------------------------------------ |
+| Isaac Sim / Lab     | PhysX 5            | OptiX / RTX       | CUDA only                                        |
+| Gazebo (Harmonic)   | Custom (DART/ODE)  | OGRE-Next         | OpenGL, Vulkan; CPU fallback                     |
+| Genesis World       | Custom (Quadrants) | Nyx               | CUDA, ROCm, Metal, Vulkan, CPU                   |
+| Newton              | MuJoCo Warp        | (via OpenUSD)     | CUDA only                                        |
+| SAPIEN / ManiSkill  | PhysX 5            | Vulkan            | CUDA, CPU                                        |
+| CARLA               | PhysX (via UE)     | Unreal Engine 5.5 | RTX, DirectX, Vulkan                             |
+| Webots              | ODE (custom fork)  | WREN (custom)     | OpenGL; CPU only                                 |
+| MuJoCo Playground   | MuJoCo / MJX       | MuJoCo built-in   | CUDA (via JAX), CPU                              |
+| Unity Industry      | PhysX 4.1 (CPU)    | Unity URP/HDRP    | Multi-platform (OpenGL, Vulkan, DirectX, Metal)  |
+| Genie 3             | Learned            | Learned           | Google TPU/GPU (proprietary)                     |
 
 **Domain demand**:
 
@@ -194,14 +195,14 @@
 
 **Solution landscape**:
 
-| Category               | Solutions                                      | Maturity         | Notes                                                         |
-| ---------------------- | ---------------------------------------------- | ---------------- | ------------------------------------------------------------- |
-| OSS (community-driven) | Gazebo, MuJoCo, Genesis World, Webots, CARLA   | Production-ready | Gazebo: OSRA; MuJoCo: Google; Genesis: Apache 2.0; CARLA: MIT |
-| OSS (multi-vendor)     | Newton                                         | Early OSS        | Linux Foundation; NVIDIA + Google DeepMind + Disney Research  |
-| OSS (single-vendor)    | PhysicsNeMo, SAPIEN/ManiSkill, MuJoCo Playgnd  | Production-ready | NVIDIA; Google DeepMind; UC San Diego                         |
-| Proprietary            | Isaac Sim, Omniverse, Simulink, Genie 3        | Production-ready | NVIDIA (CUDA-locked), MathWorks, Google DeepMind              |
+| Category | Solutions | Maturity | Notes |
+| --- | --- | --- | --- |
+| OSS (community-driven) | Gazebo, MuJoCo, Genesis World, Webots, CARLA | Production-ready | Gazebo: OSRA; MuJoCo: Google; Genesis: Apache 2.0; CARLA: MIT |
+| OSS (multi-vendor) | Newton | Early OSS | Linux Foundation; NVIDIA + Google DeepMind + Disney Research |
+| OSS (single-vendor) | PhysicsNeMo, SAPIEN/ManiSkill, MuJoCo Playgnd | Production-ready | NVIDIA; Google DeepMind; UC San Diego |
+| Proprietary | Isaac Sim, Omniverse, Simulink, Unity Industry, Genie 3 | Production-ready | NVIDIA (CUDA-locked), MathWorks, Unity (multi-platform, PhysX), Google DeepMind |
 
-**Key trade-offs**: Fidelity vs. speed — physics engines (MuJoCo, PhysX) are accurate but slow; learned surrogates (PhysicsNeMo, Genie 3) are fast but approximate. Hardware portability: Isaac Sim and Newton require NVIDIA GPUs; Genesis World compiles to CUDA, ROCm, Metal, Vulkan. Rendering realism: OptiX/RTX (photorealistic, CUDA-locked) vs. OGRE-Next (functional, hardware-portable but limited photorealism) vs. Nyx (photorealistic, multi-backend). The rendering engine is the critical risk factor for sim-to-real transfer of vision-based policies.
+**Key trade-offs**: Fidelity vs. speed — physics engines (MuJoCo, PhysX) are accurate but slow; learned surrogates (PhysicsNeMo, Genie 3) are fast but approximate. Hardware portability: Isaac Sim and Newton require NVIDIA GPUs; Genesis World compiles to CUDA, ROCm, Metal, Vulkan. Rendering realism: OptiX/RTX (photorealistic, CUDA-locked) vs. OGRE-Next (functional, hardware-portable but limited photorealism) vs. Nyx (photorealistic, multi-backend). The rendering engine is the critical risk factor for sim-to-real transfer of vision-based policies. PhysX version matters: Isaac Sim and SAPIEN use PhysX 5 with GPU-accelerated solvers (TGS, articulated bodies, soft bodies, 1000s of parallel envs), while Unity and CARLA use older PhysX integrations (4.1 and UE's respectively) with CPU-only solving — "same PhysX" understates the fidelity and throughput gap.
 
 **Platform fit**: `Partner` / `Integrate`
 
@@ -443,11 +444,11 @@ This block has two sub-problems settling at different rates:
 
 **Solution landscape**:
 
-| Category               | Solutions                                                 | Maturity         | Notes                         |
-| ---------------------- | --------------------------------------------------------- | ---------------- | ----------------------------- |
-| OSS (community-driven) | Eclipse Ditto, DTDL                                       | Production-ready | Eclipse Foundation governance |
-| OSS (single-vendor)    | (none identified)                                         | —                | —                             |
-| Proprietary            | Siemens Xcelerator, NVIDIA Omniverse, Azure Digital Twins | Production-ready | Major industrial players      |
+| Category | Solutions | Maturity | Notes |
+| --- | --- | --- | --- |
+| OSS (community-driven) | Eclipse Ditto, DTDL | Production-ready | Eclipse Foundation governance |
+| OSS (single-vendor) | (none identified) | — | — |
+| Proprietary | Siemens Xcelerator, NVIDIA Omniverse, Unity Industry, Azure Digital Twins | Production-ready | Major industrial players; Unity adds CAD import (Pixyz) + PLC/OPC UA connectivity |
 
 **Key trade-offs**: Industrial digital twin platforms (Siemens, NVIDIA) are mature but proprietary and expensive. Open-source alternatives (Eclipse Ditto) handle state synchronization but lack physics simulation integration.
 
