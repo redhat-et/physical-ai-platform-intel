@@ -458,6 +458,67 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 
 ---
 
+### AWS (Amazon Web Services)
+
+**Type**: `Big Tech`
+**About**: Amazon's $105B+ cloud division, distinct from Amazon Robotics (internal, captive). Positions as **horizontal compute substrate for Physical AI** — providing GPU training infrastructure, MaaS, edge runtimes, and digital twin services that partners' simulation engines and foundation models run on. Follows "infrastructure not application" pattern: builds no simulation engines or foundation models, instead partnering with NVIDIA, Physical Intelligence, and Hugging Face. Launched Strands Agents (Apache 2.0, May 2025) as open-source agent SDK, followed by experimental Strands Robots (Aug 2026) connecting agents to physical hardware via LeRobot and GR00T. Deprecated RoboMaker (Sep 2025) and IoT FleetWise (closing Apr 2027). Structures Physical AI story around six-capability reference architecture: Connect & Digitize → Store & Structure → Segment & Understand → Simulate/Train/Optimize → Deploy & Manage → Edge Inference.
+
+**Solutions**:
+
+#### SageMaker HyperPod
+
+- **What it does**: Managed GPU cluster for distributed training on EKS. Auto-detects node failures, resumes from checkpoint. Used for VLA fine-tuning (π0), RL training (Isaac Lab), world model training (Cosmos).
+- **Building blocks covered**: [Training Infrastructure](building-blocks.md#training-infrastructure)
+- **Key features (functional)**: FSDP, DeepSpeed, NeMo integration; P5 (H100 × 8), P6 (B300 × 8), Trn2 instances
+- **Key features (non-functional)**: K8s-native (EKS), auto-healing, ~20% premium over raw EC2
+- **Openness**: `Proprietary` (managed service over OSS Kubernetes)
+
+#### Amazon Bedrock
+
+- **What it does**: Multi-provider MaaS — Claude, Llama, Titan, Mistral. Task planning for Physical AI via tool-use and function calling.
+- **Building blocks covered**: [Model Serving](building-blocks.md#model-serving)
+- **Key features (functional)**: Cross-region inference, guardrails, knowledge bases, agents
+- **Key features (non-functional)**: Pay-per-token, multi-model routing
+- **Openness**: `Proprietary`
+
+#### Strands Agents + Strands Robots
+
+- **What it does**: Open-source agent SDK (Python + TypeScript) with experimental robotics extension. Model-driven architecture — single `Agent(model, tools)` constructor. Robots extension adds `Robot()` class wrapping hardware config, LeRobot policies, GR00T VLA, MuJoCo sim, Zenoh mesh networking for multi-robot coordination.
+- **Building blocks covered**: [Agentic Framework](building-blocks.md#agentic-framework)
+- **Key features (functional)**: Multi-agent orchestration, edge-cloud System 1/System 2 split, hub-to-hardware workflow (sim → record → train → deploy), ROS 2 integration
+- **Key features (non-functional)**: Apache 2.0, runs on any LLM backend (Bedrock, Ollama, llama.cpp). Robots: 166 GitHub stars (Sep 2026), experimental
+- **Openness**: `OSS (single-vendor)` — Apache 2.0, AWS-maintained, no foundation governance
+
+#### IoT Greengrass V2
+
+- **What it does**: Edge runtime for ML inference on robots and industrial devices. Lambda-based local compute, OTA updates, fleet deployment.
+- **Building blocks covered**: [Edge Runtime](building-blocks.md#edge-runtime)
+- **Key features (functional)**: Component-based deployment, local Lambda execution, ML inference, MQTT bridge to IoT Core
+- **Key features (non-functional)**: V1 sunset Jun 2026; V2 is current
+- **Openness**: `Proprietary`
+
+#### IoT TwinMaker
+
+- **What it does**: Digital twin service — 3D scene composition, data connectors for industrial telemetry, Grafana visualization plugin.
+- **Building blocks covered**: [Digital Twin Runtime](building-blocks.md#digital-twin-runtime)
+- **Key features (functional)**: 3D scene editor, entity-component model, SiteWise + Timestream connectors
+- **Key features (non-functional)**: Cloud-only, requires AWS IoT SiteWise for data ingestion
+- **Openness**: `Proprietary` (Grafana plugin uses OSS Grafana)
+
+**Implied reference architecture**: Six-layer Physical AI stack — (1) IoT SiteWise/Core/Kinesis for data ingestion, (2) S3/Timestream/Glue for storage, (3) Bedrock VLMs for understanding, (4) SageMaker HyperPod + partner engines (Isaac Sim, MuJoCo) for training, (5) EKS + Bedrock AgentCore for deployment, (6) Greengrass V2 for edge inference. Strands Agents provides the agentic orchestration layer across tiers.
+
+**Platform relevance**:
+
+- **Partnership surface**: Joint customers run OpenShift on EC2. SageMaker HyperPod EKS validates K8s for GPU training (supports OpenShift AI positioning). Strands Agents (Apache 2.0) could integrate with Red Hat's agentic stack (Kagenti + OpenShell)
+- **Competitive surface**: EKS vs OpenShift (application runtime), Amazon Linux vs RHEL (OS), Bedrock vs self-managed inference, Greengrass vs MicroShift (edge)
+- **What they need from a platform**: Enterprise hybrid/multi-cloud deployment (their gap), real-time edge OS (Greengrass is not RT-capable), device management at scale
+
+**Collaborations**: NVIDIA (Isaac Sim on EC2, Cosmos on SageMaker), Physical Intelligence (π0 training), Hugging Face (LeRobot integration), Rockwell Automation (connected factory), Telexistence (convenience-store robots), Wayve (Trainium 2 training)
+
+**Links**: [AWS Physical AI Blog](https://aws.amazon.com/blogs/physical-ai/), [Strands Agents](https://strandsagents.com/), [Strands Robots](https://github.com/strands-labs/robots), [Competitive profile](../../../deliverables/intel/companies/aws.md)
+
+---
+
 ### Unity Technologies
 
 **Type**: `Big Tech`

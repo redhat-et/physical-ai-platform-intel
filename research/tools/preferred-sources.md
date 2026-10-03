@@ -159,6 +159,8 @@ Tier 3 — niche, useful for specific building blocks:
 - **Toyota Research Institute**: https://www.tri.global/research — Robotics, autonomous systems
 - **Siemens Technology**: https://www.siemens.com/global/en/company/stories.html — Digital twins, industrial AI
 
+- **AWS Physical AI Blog**: https://aws.amazon.com/blogs/physical-ai/ — Sim-to-real transfer, robotic manipulation, warehouse automation, Physical AI infrastructure patterns
+
 ### Company Blogs — Startups & Emerging Players
 
 - **Figure AI**: https://www.figure.ai/news — humanoid robotics
