@@ -2809,6 +2809,127 @@
 
 **Relevance to World Models**: Demonstrates that GPU-parallel simulation (Newton/MuJoCo class) can solve industrial deformable object manipulation — a category where analytical models fail and imitation learning requires impractical demonstration volumes. The localized policy decomposition is a practical pattern for the Training Infrastructure building block. Cable routing is a high-value industrial application (automotive, aerospace wire harness assembly) that validates the Simulation Engines → RL Training → Deployment pipeline.
 
+### The Reality Gap in Robotics: Challenges, Solutions, and Best Practices [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2510.20808)
+
+**Authors/Presenters**: Survey
+
+**Date**: 2025-10
+
+**Summary**: Comprehensive survey of the sim-to-real gap in robotics, covering root causes (physics inaccuracies, visual domain shift, sensor noise, actuator modeling), mitigation techniques (domain randomization, system identification, domain adaptation, sim-and-real co-training), and best practices for pipeline design. Identifies five primary gap sources: contact dynamics inaccuracy, sensor noise modeling, actuator lag, visual appearance mismatch, and incorrect object physical properties.
+
+**Key Findings**:
+
+- Contact dynamics (32%) and sensor noise (24%) together account for over half the reality gap in manipulation policy transfer
+- Low-resolution assets, simplified scene graphs, and generic materials fail to capture fine-grained perceptual cues (textures, reflectance, subtle geometry), degrading visuomotor policy transfer
+- Direct transfer from high-fidelity simulators still yields 24–30% real-world performance drops
+- Policies trained in simulation can exploit physics engine artifacts ("physics exploitation"), learning strategies that work only in the simulator
+- Manufacturing tolerances, material wear, and mechanical backlash are rarely modeled but significantly impact transfer
+
+**Relevance to World Models**: The most comprehensive 2025 survey on sim-to-real, directly informing the Simulation Engines building block. The finding that contact dynamics dominates the gap — not visual fidelity — has architectural implications: platform investments in physics engine accuracy (MuJoCo, Newton) yield higher ROI than rendering quality for contact-rich manipulation tasks. The "physics exploitation" problem also affects world model-based training (DreamZero, SILO) where policies trained in learned world models may exploit model artifacts.
+
+### Rethinking Sim2Real: Lower Fidelity Simulation Leads to Higher Sim2Real Transfer in Navigation [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2207.10821)
+
+**Authors/Presenters**: Joanne Truong, Max Rudolph, Naoki Yokoyama, Sonia Chernova, Dhruv Batra, Akshara Rai
+
+**Date**: 2022-07 (CoRL 2022)
+
+**Summary**: Challenges the assumption that higher simulation fidelity improves sim-to-real transfer. Large-scale evaluation across two simulators (Habitat, iGibson) and three quadruped robots (A1, AlienGo, Spot) on visual navigation shows that kinematic simulation (lower fidelity, faster) outperforms dynamic simulation (higher fidelity, slower). The speed advantage of lower-fidelity simulation enables more training data, which outweighs the accuracy advantage of higher-fidelity physics.
+
+**Key Findings**:
+
+- Kinematic simulation (no physics, just teleportation) outperforms full dynamic simulation for visual navigation transfer
+- Higher physics fidelity causes overfitting to simulator-specific dynamics that don't match reality
+- Simulation speed (more training experience) matters more than simulation accuracy for navigation
+- Validated across 3 real robots and 2 simulators — not a single-setup artifact
+
+**Relevance to World Models**: Foundational counterpoint to the "higher fidelity = better transfer" assumption. The result is task-specific — navigation depends primarily on visual understanding, not contact dynamics — but the broader lesson applies to world model design: match simulation fidelity to the task-relevant dimensions, don't maximize fidelity uniformly. For the Simulation Engines building block, this argues for configurable fidelity levels rather than always-maximum simulation.
+
+### SplatSim: Zero-Shot Sim2Real Transfer of RGB Manipulation Policies Using Gaussian Splatting [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2409.10161)
+
+**Authors/Presenters**: Mohammad Nomaan Qureshi, Brent Yi, Deepak Pathak, Karun Happold, David Held
+
+**Date**: 2024-09
+
+**Summary**: Replaces traditional mesh-based rendering in simulators with Gaussian Splatting to produce photorealistic synthetic training data. Expert demonstrations collected in PyBullet are re-rendered through splat models of the scene and objects, generating photorealistic RGB observations for diffusion policy training. Achieves 86.25% zero-shot real-world manipulation success vs. 97.5% with real data.
+
+**Key Findings**:
+
+- Gaussian Splatting as rendering primitive closes ~11% of the visual sim-to-real gap (86.25% vs. 97.5% real-data baseline)
+- Zero-shot transfer — no real-world fine-tuning needed
+- Decouples physics simulation (PyBullet) from visual rendering (3DGS), enabling best-of-both-worlds
+- Significantly reduces human effort for demonstration data generation by automating data collection in simulation
+
+**Relevance to World Models**: Demonstrates that photorealistic rendering via 3DGS can nearly match real-data performance for manipulation policies, validating the Synthetic Data Generation building block. The physics/rendering decoupling pattern (PyBullet for dynamics, 3DGS for visuals) is an architectural template for the Simulation Engines building block — simulators don't need to do everything well, they need composable subsystems. Directly relevant to the Real-is-Sim and VR-Robo approaches that also use Gaussian Splatting for sim-to-real.
+
+### PhysisForcing: Physics Reinforced World Simulator for Robotic Manipulation [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2606.28128)
+
+**Authors/Presenters**: Peking University, NVIDIA
+
+**Date**: 2026-06
+
+**Summary**: Training-time framework that injects physics supervision into video diffusion models used as robot world simulators. Identifies physics-informative regions (manipulators, objects, contact areas) and applies pixel-level trajectory alignment (via CoTracker3) and semantic-level relational alignment to improve physical plausibility without inference overhead. Demonstrated on Wan2.2-I2V and Cosmos3-Nano backbones.
+
+**Key Findings**:
+
+- Closed-loop manipulation success improves from 16% to 24% (50% relative improvement) with physics-injected world models
+- Physical plausibility scores improve 22.3% (Wan2.2) and 9.2% (Cosmos3-Nano) over base models
+- Region-focused supervision — targets physics-informative areas rather than all pixels uniformly
+- No inference cost — all auxiliary models used only during training, discarded at deployment
+- Plug-and-play for DiT-based video generation models
+
+**Relevance to World Models**: Addresses a fundamental limitation of video-based world models (Cosmos, Wan): they optimize for visual plausibility, not physical accuracy. PhysisForcing shows that physics can be injected post-hoc during fine-tuning rather than requiring physics-native architectures. This has direct implications for the World Model Training building block — physics alignment should be a standard training-time capability. The finding that visually plausible but physically inconsistent world models produce worse training data than cartoonish but physically accurate simulators is a key architectural insight.
+
+### Contact-Aware Neural Dynamics for Rigid and Deformable Contact Simulation [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2601.12796)
+
+**Authors/Presenters**: Arxiv
+
+**Date**: 2026-01
+
+**Summary**: Treats an off-the-shelf physics simulator as a base prior and learns a residual contact-aware neural dynamics model to refine simulated states using real-world observations. Uses tactile contact information from robotic hands to model non-smooth discontinuities inherent in contact-rich tasks, improving state prediction accuracy and policy performance for dexterous manipulation.
+
+**Key Findings**:
+
+- Residual learning on top of simulator physics improves contact prediction without replacing the simulator
+- Tactile sensing provides critical signal for modeling contact discontinuities that visual observation misses
+- Effective for both rigid and deformable object manipulation
+- Simulator serves as physics prior, neural network learns the residual gap — combining the strengths of analytical and learned models
+
+**Relevance to World Models**: Represents the "residual sim-to-real" pattern — rather than building a perfect simulator or replacing it entirely with a learned model, learn the gap between simulator and reality. This is architecturally relevant to the Simulation Engines building block: simulators should expose APIs for residual learning overlays. The approach complements system identification (calibrating sim parameters) and domain randomization (broadening sim distributions) as a third strategy for closing the physics gap.
+
+### Unreal Robotics Lab: A High-Fidelity Robotics Simulator with Advanced Physics and Rendering [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2504.14135)
+
+**Authors/Presenters**: Arxiv
+
+**Date**: 2025-04
+
+**Summary**: Combines MuJoCo's physics engine with Unreal Engine's rendering pipeline to deliver both physically accurate simulation and photorealistic visuals. Retains native MuJoCo as the sole physics backend while inheriting Unreal Engine's PBR materials, ray tracing, and advanced lighting — addressing the typical tradeoff between physics accuracy and visual fidelity in robotics simulators.
+
+**Key Findings**:
+
+- MuJoCo's contact modeling, accuracy, and stability remain unmatched even as the field shifts toward GPU-parallel simulation
+- Unreal Engine rendering provides photorealistic visuals without compromising physics accuracy
+- Decoupled architecture: physics and rendering are independent subsystems, each best-in-class
+- Enables training visuomotor policies that require both accurate physics and realistic visual input
+
+**Relevance to World Models**: Validates the decoupled physics/rendering architecture pattern (also seen in SplatSim). For the Simulation Engines building block, this suggests the platform should support composable simulation stacks — mix best-in-class physics (MuJoCo) with best-in-class rendering (Unreal, 3DGS) rather than requiring vertically integrated simulators like Isaac Sim. The choice of MuJoCo over GPU-parallel alternatives (Newton, Brax) reflects a fidelity-over-throughput tradeoff appropriate for contact-rich manipulation.
+
+### VR-Robo: A Real-to-Sim-to-Real Framework for Visual Robot Navigation and Locomotion [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2502.01536)
+
+**Authors/Presenters**: Arxiv
+
+**Date**: 2025-02
+
+**Summary**: Real-to-sim-to-real framework using 3D Gaussian Splatting to reconstruct photorealistic, physically interactive digital twin environments from multi-view images. Integrates reconstructed scenes into simulations supporting ego-centric visual perception and mesh-based physical interactions for quadruped locomotion and navigation.
+
+**Key Findings**:
+
+- 3DGS scene reconstruction from multi-view images creates photorealistic digital twins for locomotion training
+- Integrates visual perception (ego-centric RGB from 3DGS) with physical interaction (mesh-based collisions)
+- Addresses the key limitation of prior locomotion sim-to-real: simulators fail to replicate visual realism and complex real-world geometry
+- Enables RGB-based perception for high-level navigation tasks alongside low-level locomotion control
+
+**Relevance to World Models**: Demonstrates the real-to-sim-to-real pipeline using 3DGS as the scene representation — reconstruct reality, train in the reconstruction, deploy back to reality. This pattern reduces the sim-to-real gap by starting from reality rather than synthetic environments. For the Digital Twin Runtime building block, 3DGS-based scene reconstruction is emerging as a practical alternative to CAD-based digital twins, with lower authoring cost and higher visual fidelity.
+
 ---
 
 ## Digital Twins & Simulation
