@@ -2735,6 +2735,24 @@
 
 **Relevance to World Models**: Demonstrates a production-viable sim-to-real pipeline achieving >90% success with pi0. The co-training approach (jointly training on sim + real data) is a concrete pattern for platform sim-to-real infrastructure. The adversarial trajectory generation is a form of automated curriculum — a capability the Training Infrastructure building block should support.
 
+### RoboVerse: Towards a Unified Platform, Dataset and Benchmark for Scalable and Generalizable Robot Learning [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2504.18904)
+
+**Authors/Presenters**: Haoran Geng, Feishi Wang, Songlin Wei, Yuyang Li, Bangjun Wang, Boshi An, Charlie Tianyue Cheng et al. (30+ researchers across UC Berkeley, PKU, Stanford, CMU, USC, Michigan, UIUC, UCLA, BIGAI)
+
+**Date**: 2025-04
+
+**Summary**: Introduces RoboVerse, a three-part framework addressing fragmentation in robot learning: MetaSim (simulator-agnostic platform wrapping MuJoCo, Isaac Sim, SAPIEN, PyBullet, Genesis behind a unified API), a large-scale synthetic dataset with photorealistic rendering, and unified benchmarks for IL/RL/world-model evaluation across previously incompatible evaluation ecosystems.
+
+**Key Findings**:
+
+- MetaSim's handler abstraction decouples task definitions from simulator backends — write-once policies run across 5+ physics engines
+- Hybrid rendering (e.g. MuJoCo physics + Isaac Sim renderer) enables mixing best-of-breed components
+- Domain randomization across physics, visuals, sensors, and action noise improves sim-to-real transfer
+- Cross-embodiment transfer validates policies across robot morphologies
+- Synthetic data from the framework improves IL, RL, and world-model learning performance; validates sim-to-real transfer
+
+**Relevance to World Models**: Architecturally significant as the simulation equivalent of a container runtime abstraction — decouples policy training from simulator vendor. Directly addresses the lock-in risk of building exclusively on NVIDIA Isaac. The hybrid rendering capability (mixing physics and rendering backends) is a novel pattern for the Simulation Engines building block. Gaussian splatting backgrounds connect to Real-is-Sim's approach of using neural scene representations for photorealistic sim-to-real visual fidelity.
+
 ---
 
 ### Real-is-Sim: Bridging the Sim-to-Real Gap with a Dynamic Digital Twin for Real-World Robot Policy Evaluation [<img src="templates/icons/arxiv.svg" alt="arxiv" height="16">](https://arxiv.org/abs/2504.03597)

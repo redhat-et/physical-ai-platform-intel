@@ -1778,34 +1778,42 @@
 
 **Openness assessment**: Part of LeRobot — (to be assessed by oss-health skill)
 
-### RoboVerse: Unified Cross-Benchmark Evaluation Platform
+### RoboVerse: Unified Simulation Platform, Dataset, and Benchmark
 
-**URL**: [roboverse.wiki](https://roboverse.wiki/)
+**URL**: [roboverse.wiki](https://roboverse.wiki/) | [GitHub](https://github.com/RoboVerseOrg/RoboVerse)
 
-**Description**: Unified platform, dataset, and benchmark for scalable robot learning across previously fragmented evaluation ecosystems. Supports ManiSkill, RLBench, CALVIN, Meta-World, Robosuite, LIBERO, SimplerEnv, and others under a common evaluation interface. Enables cross-benchmark comparison of policies — a direct response to the fragmentation problem in robotics evaluation.
+**Description**: Multi-institution framework (UC Berkeley, PKU, Stanford, CMU, USC, Michigan, UIUC, UCLA, BIGAI) providing three components: **MetaSim** — a simulator-agnostic platform wrapping MuJoCo, Isaac Sim, SAPIEN, PyBullet, and Genesis behind a unified Gym-style API; a large-scale synthetic dataset with photorealistic rendering; and unified benchmarks for IL/RL/world-model learning across ManiSkill, RLBench, CALVIN, Meta-World, Robosuite, LIBERO, and SimplerEnv.
 
-**Tech Stack**: Python, multiple simulator backends
+**Tech Stack**: Python, Apache-2.0. Layered architecture: Training Code → Task Environment → Domain Randomization → Scenario Config → Simulator Handler. Supports hybrid rendering (e.g. MuJoCo physics + Isaac Sim renderer).
 
 **Key Features**:
 
+- Cross-simulator abstraction: write-once policies run across 5+ physics backends via handler layer
+- Domain randomization across physics, visuals, sensors, and action noise
+- Cross-embodiment transfer: policies and demonstrations transfer across robot morphologies
+- Hybrid rendering: mix physics engine from one backend with renderer from another
+- Declarative scene config: robots, objects, cameras, lights defined via typed config classes
+- Gaussian splatting backgrounds for photorealistic sim-to-real visual fidelity
 - Cross-benchmark evaluation: test one policy across LIBERO, RLBench, Robosuite, etc.
-- Unified data format and task specification across simulators
-- Addresses reproducibility issues from simulator-specific rendering and physics differences
-- Multi-institutional (SJTU, Tsinghua, UC Berkeley, etc.)
+- Parallel environment execution for scalable training
 
 **Status**: Active
 
-**Last Updated**: 2026-03
+**Stats**: 1865 stars, 168 forks (Apache-2.0)
 
-**Building block(s)**: [Evaluation & Benchmarking](building-blocks.md#evaluation--benchmarking)
+**Last Updated**: 2026-10
 
-**Maturity**: Research
+**Building block(s)**: [Simulation Engines](building-blocks.md#simulation-engines), [Evaluation & Benchmarking](building-blocks.md#evaluation--benchmarking), [Sim-to-Real Transfer Pipeline](building-blocks.md#sim-to-real-transfer-pipeline)
 
-**Competes with**: LeRobot eval harness (different approach — RoboVerse unifies simulators, LeRobot unifies the eval API)
+**Maturity**: Early OSS
 
-**Complements**: All supported benchmarks (LIBERO, RLBench, CALVIN, etc.)
+**Competes with**: LeRobot eval harness (different approach — RoboVerse unifies simulators, LeRobot unifies the eval API). MetaSim competes with NVIDIA Isaac Lab as the simulation orchestration layer but differentiates on multi-backend portability vs. Isaac Lab's single-backend depth.
 
-**Openness assessment**: (to be assessed by oss-health skill)
+**Complements**: All supported simulators (MuJoCo, Isaac Sim, SAPIEN, PyBullet, Genesis) and benchmarks (LIBERO, RLBench, CALVIN, etc.)
+
+**Openness assessment**: Apache-2.0, multi-institution governance (9 institutions, 30+ researchers). No single-vendor control. Dataset hosted on HuggingFace. Open governance is a structural differentiator vs. NVIDIA-led simulation tools.
+
+**Category**: OSS (community-driven)
 
 ### WorldPrediction: High-Level World Modeling Benchmark
 
@@ -2091,6 +2099,49 @@
 
 **Stats**: 151 stars, 20 forks, 1 contributor (Chris Matthieu — serial entrepreneur, independent). Sponsored by RealSense
 **Last Updated**: 2026-09
+
+### Isaac ROS Deploy: Policy Deployment for ROS 2 Robots
+
+**URL**: [github.com/NVIDIA-ISAAC-ROS/isaac_ros_deploy](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_deploy)
+
+**Description**: ROS 2 packages for deploying trained neural-network policies (RL from Isaac Lab, VLA from GR00T) onto physical and simulated robots. Loads LEAPP-exported model bundles, runs ONNX inference via NVIDIA Triton, and maps policy outputs to ROS 2 topics or ros2_control interfaces. Fills the "last mile" gap between NVIDIA's training stack and real robot execution. Part of NVIDIA's [E2E Reference Robotics Workflow](https://docs.nvidia.com/learning/physical-ai/gr00t-e2e-workflow/latest/index.html).
+
+**Tech Stack**: C++, ROS 2, ONNX, Triton Inference Server, LEAPP bundle format
+
+**Key Features**:
+
+- Loads LEAPP-exported policies from Isaac Lab or GR00T post-training
+- ONNX inference via Triton — supports GPU-accelerated policy execution
+- Maps policy outputs to ROS 2 topics and ros2_control interfaces
+- Optional safety controller gating between policy output and actuators
+- Debug topics for policy introspection
+- Isaac Sim deployment explicitly excluded from current release
+
+**Status**: Active (very new)
+
+**Stats**: 9 stars, 4 forks (NVIDIA)
+
+**Last Updated**: 2026-10
+
+**Building block(s)**: [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime), [Model Serving for Physical AI](building-blocks.md#model-serving-for-physical-ai)
+
+**Maturity**: Early OSS
+
+**Competes with**: LeRobot PolicyServer/RobotClient (gRPC-based, hardware-agnostic), custom ROS 2 inference nodes, OpenPI WebSocket API
+
+**Complements**: Isaac Lab (training source), GR00T (VLA model provider), Jetson Thor (target hardware), Isaac ROS (parent ecosystem)
+
+**Openness assessment**:
+
+| Dimension | Rating | Detail |
+| --- | --- | --- |
+| License | Permissive | Apache-2.0 |
+| Governance | Corporate | NVIDIA-controlled, no external governance |
+| Contributor diversity | Low | NVIDIA-only contributors |
+| Community health | Early | 9 stars, created Apr 2026, 0 open issues |
+| Corporate control risk | High | Tied to LEAPP format (NVIDIA proprietary), Triton dependency, Jetson-optimized |
+
+**Category**: OSS (single-vendor)
 
 ---
 

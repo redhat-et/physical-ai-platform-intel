@@ -47,7 +47,7 @@
 
 - **What it does**: GPU-accelerated middleware for robot perception, navigation, and manipulation, providing hardware-accelerated ROS 2 packages with agentic skill interfaces.
 - **Building blocks covered**: [Robot Middleware](building-blocks.md#robot-middleware), [Edge AI Inference Runtime](building-blocks.md#edge-ai-inference-runtime)
-- **Key features (functional)**: GPU-accelerated perception (stereo depth via FoundationStereo, visual SLAM, object detection, FoundationPose 5.5x faster pose estimation), navigation stack, DNN inference integration, pick-and-place skill, agentic "Isaac skills" (structured multi-step workflows invocable by AI agents for setup, manipulation, perception fine-tuning)
+- **Key features (functional)**: GPU-accelerated perception (stereo depth via FoundationStereo, visual SLAM, object detection, FoundationPose 5.5x faster pose estimation), navigation stack, DNN inference integration, pick-and-place skill, agentic "Isaac skills" (structured multi-step workflows invocable by AI agents for setup, manipulation, perception fine-tuning). Isaac ROS Deploy ([GitHub](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_deploy)): ROS 2 packages for deploying trained policies (from Isaac Lab or GR00T) onto physical robots — loads LEAPP-exported models, runs ONNX inference via Triton, maps policy outputs to ros2_control interfaces. Includes safety controller gating.
 - **Key features (non-functional)**: Jetson Orin Nano to Jetson Thor hardware span, real-time capable (cumotion: 2–5 ms path planning), ROS 2 Lyrical + Ubuntu 24.04 compatible. Vendor-neutral GPU-accelerated memory transport interface contributed upstream to OSRA (CUDA as reference implementation)
 - **Competes with**: Standard ROS 2 perception stack — on latency and throughput via GPU acceleration
 - **Complements**: ROS 2 (extends, not replaces), Jetson (target hardware), Isaac Sim (sim-to-real), NemoClaw/Nemotron (agentic orchestration via AgenticROS)
@@ -115,7 +115,9 @@ NVAIE is NVIDIA's end-to-end enterprise AI software platform, licensed per-GPU (
 
 **Implied reference architecture**: Full vertical integration from silicon (Jetson) through simulation (Isaac Sim/Omniverse) to foundation models (Cosmos/GR00T). Envisions a loop: Cosmos generates synthetic data, Isaac Sim provides simulation, GR00T trains robot policies, Jetson deploys at the edge, and Omniverse orchestrates digital twins. PhysicsNeMo handles physics-informed components. Every layer is GPU-accelerated and optimized for NVIDIA hardware.
 
-- **Source**: [NVIDIA Physical AI Platform](https://www.nvidia.com/en-us/ai/)
+Now validated via a concrete **[End-to-End Reference Robotics Workflow](https://docs.nvidia.com/learning/physical-ai/gr00t-e2e-workflow/latest/index.html)** (Unitree G1 + Jetson Thor, tabletop pick-and-place). Five stages: (1) teleoperation via Isaac Teleop/AGILE, (2) data collection (HDF5 in sim, MCAP on real robot), (3) conversion to LeRobot format, (4) GR00T 1.7 VLA post-training (2–4 hours), (5) LEAPP export → Isaac ROS Deploy → Jetson Thor. Sim and real paths are fully decoupled — each completable independently in 3–6 hours. Notable: adopts HuggingFace's LeRobot data format (open ecosystem alignment at the data layer) while keeping Isaac Lab-Arena, GR00T, and Jetson as the proprietary integration surface. Cosmos is not used in this workflow.
+
+- **Source**: [NVIDIA Physical AI Platform](https://www.nvidia.com/en-us/ai/), [E2E Workflow](https://docs.nvidia.com/learning/physical-ai/gr00t-e2e-workflow/latest/index.html)
 
 **Platform relevance**:
 

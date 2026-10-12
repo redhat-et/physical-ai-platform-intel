@@ -35,6 +35,7 @@ Supporting research for the [NVIDIA competitive profile](nvidia.md). Covers OSS 
 | 2026-08 | Q2 FY2027: $96.2B revenue (+106% YoY). Data Center $89B. Edge Computing $7.2B. Q3 guided $108B |
 | 2026-08 | GTC Washington: Mega Omniverse Blueprint expansion for robot fleet simulation (Siemens first partner) |
 | 2026-08 | Vera Rubin platform in full production. R100 GPU: 336B transistors, 50 PFLOPS FP4, 288 GB HBM4 |
+| 2026-09 | [E2E Reference Robotics Workflow](https://docs.nvidia.com/learning/physical-ai/gr00t-e2e-workflow/latest/index.html): first public validated pipeline from teleoperation → GR00T 1.7 post-training → Jetson Thor deployment (Unitree G1, pick-and-place). Adopts HuggingFace LeRobot data format. [Isaac ROS Deploy](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_deploy) released: LEAPP → ONNX → Triton → ros2_control policy deployment |
 
 ### Acquisitions — What Each Brought
 

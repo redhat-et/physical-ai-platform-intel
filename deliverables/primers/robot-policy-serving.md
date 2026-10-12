@@ -318,6 +318,8 @@ Neither OpenPI nor LeRobot PolicyServer ships official ROS 2 packages. However, 
 
 OpenPI has no equivalent bridges — integration requires wrapping the `openpi-client` in custom ROS 2 nodes. This asymmetry favors LeRobot for ROS 2-based production deployments.
 
+**NVIDIA Isaac ROS Deploy** ([GitHub](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_deploy)) is the first vendor-shipped ROS 2 policy deployment solution. It loads LEAPP-exported model bundles (from Isaac Lab or GR00T post-training), runs ONNX inference via Triton, and maps policy outputs to ros2_control interfaces — with optional safety controller gating. Unlike the community bridges above, it is tightly coupled to NVIDIA's training stack: policies must be exported via LEAPP, inference requires Triton on Jetson/NVIDIA GPUs. Used in NVIDIA's [E2E Reference Robotics Workflow](https://docs.nvidia.com/learning/physical-ai/gr00t-e2e-workflow/latest/index.html) (Unitree G1 + Jetson Thor). Apache-2.0, but high vendor lock-in via LEAPP format and Triton dependency.
+
 ## Security Considerations
 
 ### CVE-2026-25874: LeRobot PolicyServer RCE
@@ -390,7 +392,7 @@ vLLM-Omni's clean-room reimplementation of OpenPI sidesteps the pickle vulnerabi
 
 **What has converged**: Data format (LeRobotDataset), model distribution (HuggingFace Hub), training framework (PyTorch everywhere).
 
-**What remains fragmented**: Serving protocol (three incompatible wire formats), authentication/security (none implemented), ROS 2 integration (DIY).
+**What remains fragmented**: Serving protocol (three incompatible wire formats), authentication/security (none implemented), ROS 2 integration (DIY for OpenPI; community bridges for LeRobot; vendor-shipped but NVIDIA-locked for Isaac ROS Deploy).
 
 **Where it is heading**: vLLM-Omni's adoption of OpenPI's wire format suggests it will become the dominant serving protocol — not because Physical Intelligence governs it well (they don't), but because vLLM-Omni's infrastructure (batching, parallelism, metrics, GPU management) is what production deployments need, and they chose OpenPI as the robotics API shape. LeRobot's PolicyServer may evolve toward OpenPI compatibility or remain the preferred option for research and development workflows where the full LeRobot pipeline is in use.
 

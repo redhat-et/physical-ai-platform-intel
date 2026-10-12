@@ -179,7 +179,7 @@ The three-axis decomposition maps to simulator selection. See [Building Blocks: 
 
 No single platform leads on all axes. Isaac Sim is the most complete but CUDA-locked. MuJoCo has the best contact physics but minimal rendering. Genesis World offers the best hardware portability with competitive fidelity. The Unreal Robotics Lab pairs best-in-class physics (MuJoCo) with best-in-class rendering (UE) but sacrifices GPU-parallel throughput, since MuJoCo runs on CPU.
 
-The composable architecture pattern (SplatSim: PyBullet + 3DGS; Unreal Robotics Lab: MuJoCo + UE) suggests the right answer may be a stack pairing best-in-class subsystems per axis, not a single platform.
+The composable architecture pattern (SplatSim: PyBullet + 3DGS; Unreal Robotics Lab: MuJoCo + UE) suggests the right answer may be a stack pairing best-in-class subsystems per axis, not a single platform. [RoboVerse MetaSim](https://roboverse.wiki/metasim/) takes this further with a cross-simulator abstraction layer — a unified Gym-style API wrapping MuJoCo, Isaac Sim, SAPIEN, PyBullet, and Genesis, with hybrid rendering (e.g. MuJoCo physics + Isaac Sim renderer). This "write-once, run-anywhere" approach decouples policy training from simulator vendor, directly mitigating the lock-in risk of building exclusively on any single platform.
 
 ## Platform Implications
 
